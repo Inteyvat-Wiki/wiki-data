@@ -1,0 +1,25 @@
+{
+  "name": "intyvate-wiki-data",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "gen": "tsx index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inteyvat-Wiki/wiki-data.git"
+  },
+  "author": "Pond Ink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Inteyvat-Wiki/wiki-data/issues"
+  },
+  "homepage": "https://github.com/Inteyvat-Wiki/wiki-data#readme",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^25.3.5",
+    "genshin-db": "^5.2.9",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

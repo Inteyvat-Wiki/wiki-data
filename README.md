@@ -1,0 +1,1 @@
+Images Regex: `(UI_AvatarIcon_*)|(UI_Gacha_AvatarImg_*)|(Skill_*)|(UI_Talent_*)`
