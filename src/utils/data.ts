@@ -49,3 +49,11 @@ export const CharacterData = {
         return genshindb.voiceovers(name, {resultLanguage: language_map[lang] as Language});
     },
 }
+
+export const WeaponData = {
+
+    get_weapon: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.weapons(name, {resultLanguage: language_map[lang] as Language});
+    },
+}

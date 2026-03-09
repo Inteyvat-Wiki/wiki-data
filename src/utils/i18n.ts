@@ -1,9 +1,9 @@
 import zh_cn from '~~/i18n/locales/zh_cn.json'
 import en from '~~/i18n/locales/en.json'
 
-export type Lang = 'en' | 'zh_cn';
+export type Lang = 'zh_cn' | 'en';
 
-export const lang_list: Lang[] = ['en', 'zh_cn'];
+export const lang_list: Lang[] = ['zh_cn', 'en'];
 
 const messages = { en, zh_cn }
 

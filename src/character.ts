@@ -2,7 +2,6 @@ import { CharacterData, get_hyperlinks } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
 import { Character } from "~/types/character";
-import { StatFunction } from "genshin-db";
 
 const character_ascension_list: { min: number; max: number; step: number }[] = [
     { min: 1, max: 20, step: 1 },
@@ -27,7 +26,7 @@ export function get_character(name: string, lang: Lang): Character | null {
         return null;
     }
 
-    function get_character_stats(get_stat: StatFunction, substat_type: string, substat_name: string) {
+    function get_character_stats() {
         const hp: Record<number, string>[] = [];
         const atk: Record<number, string>[] = [];
         const def: Record<number, string>[] = [];
@@ -35,45 +34,27 @@ export function get_character(name: string, lang: Lang): Character | null {
             name: string,
             value: string[],
         } = {
-            name: substat_name,
+            name: character_data.substatText,
             value: [],
         };
 
-        let is_percent = false;
-        if ([
-            'FIGHT_PROP_ATTACK_PERCENT',
-            'FIGHT_PROP_CHARGE_EFFICIENCY',
-            'FIGHT_PROP_CRITICAL',
-            'FIGHT_PROP_CRITICAL_HURT',
-            'FIGHT_PROP_DEFENSE_PERCENT',
-            'FIGHT_PROP_ELEC_ADD_HURT',
-            // 'FIGHT_PROP_ELEMENT_MASTERY',
-            'FIGHT_PROP_FIRE_ADD_HURT',
-            'FIGHT_PROP_GRASS_ADD_HURT',
-            'FIGHT_PROP_HEAL_ADD',
-            'FIGHT_PROP_HP_PERCENT',
-            'FIGHT_PROP_ICE_ADD_HURT',
-            'FIGHT_PROP_PHYSICAL_ADD_HURT',
-            'FIGHT_PROP_ROCK_ADD_HURT',
-            'FIGHT_PROP_WATER_ADD_HURT',
-            'FIGHT_PROP_WIND_ADD_HURT'
-        ].includes(substat_type)) {
-            is_percent = true;
-        }
-
-        const initial_sub_stat = get_stat(1, 0).specialized;
+        const initial_sub_stat = character_data.stats(1, 0).specialized;
         for (let ascension = 0; ascension < character_ascension_list.length; ascension++) {
             const { min, max, step } = character_ascension_list[ascension];
             hp[ascension] = {};
             atk[ascension] = {};
             def[ascension] = {};
             for (let level = min; level <= max; level += step) {
-                const stat = get_stat(level, ascension);
+                const stat = character_data.stats(level, ascension);
                 hp[ascension][level] = stat.hp.toString();
                 atk[ascension][level] = stat.attack.toString();
                 def[ascension][level] = stat.defense.toString();
             }
-            sub_stat.value.push(((get_stat(max, ascension).specialized - initial_sub_stat) * (is_percent ? 100 : 1)).toString() + (is_percent ? '%' : ''));
+            sub_stat.value.push(((
+                character_data.stats(max, ascension).specialized - initial_sub_stat)
+                    * (ConvertRaw.is_precent_stat_type(character_data.substatType) ? 100 : 1)).toString()
+                    + (ConvertRaw.is_precent_stat_type(character_data.substatType) ? '%' : '')
+            );
         }
         return {
             hp: hp,
@@ -222,7 +203,7 @@ export function get_character(name: string, lang: Lang): Character | null {
                 description: character_data.description,
             }
         ],
-        stats: get_character_stats(character_data.stats, character_data.substatType, character_data.substatText),
+        stats: get_character_stats(),
         skills: get_character_skills(),
         talents: get_character_talents(),
         constellations: get_character_constellations(),
