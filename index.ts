@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { cp } from 'fs/promises';
 
 import { lang_list } from "~/utils/i18n";
 import character_list from "~/data/characters.json";
@@ -21,6 +22,7 @@ function main() {
         fs.writeFileSync(`./data/${lang}/character/list.json`, JSON.stringify(get_character_list(lang), null, 4), 'utf-8');
     }
 
+    cp('./assets', './data', { recursive: true, force: true });
 }
 
 main();
