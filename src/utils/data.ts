@@ -57,3 +57,11 @@ export const WeaponData = {
         return genshindb.weapons(name, {resultLanguage: language_map[lang] as Language});
     },
 }
+
+export const ArtifactData = {
+
+    get_artifact: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.artifacts(name, {resultLanguage: language_map[lang] as Language});
+    },
+}
