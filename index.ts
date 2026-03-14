@@ -11,6 +11,7 @@ import { get_weapon } from "~/weapon";
 import { get_weapon_list } from '~/weapon_list';
 import { get_artifact } from "~/artifact";
 import { get_artifact_list } from '~/artifact_list';
+import { get_menu } from '~/menu';
 
 function main() {
 
@@ -40,6 +41,8 @@ function main() {
         }
         fs.writeFileSync(`./data/${lang}/artifact/list.json`, JSON.stringify(get_artifact_list(lang), null, 4), 'utf-8');
     }
+
+    fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');
 
     cp('./assets', './data', { recursive: true, force: true });
 }
