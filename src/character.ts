@@ -76,6 +76,7 @@ export function get_character(name: string, lang: Lang): Character | null {
 
             res.push({
                 id: skill.id,
+                sub_ids: skill.proudSkillIds || null,
                 title: skill.name,
                 icon: ConvertRaw.get_images_url(talents_data.images[`filename_${skill_key}`], `character/${name}/${name}_skill_${++index}`),
                 description: skill.descriptionRaw,
@@ -102,6 +103,7 @@ export function get_character(name: string, lang: Lang): Character | null {
                 icon: ConvertRaw.get_images_url(talents_data.images[`filename_${talent_key}`], `character/${name}/${name}_talent_${++index}`),
                 description: talent.descriptionRaw,
                 unlock_ascension: talent.unlock_ascension,
+                params: talent.parameters || null,
             })
         }
         return res;
