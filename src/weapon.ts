@@ -2,6 +2,7 @@ import { WeaponData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from "~/utils/i18n";
 import { Weapon } from "~/types/weapon";
+import weapon_refine_material_list from "~/data/weapon_refine_materials";
 
 const weapon_max_acsension = {
     1: 4,
@@ -72,6 +73,21 @@ export function get_weapon(name: string, lang: Lang): Weapon {
         };
     }
 
+    function get_weapon_refine_material() {
+        const material_name = weapon_refine_material_list[name];
+        if (!material_name) {
+            return null;
+        }
+
+        const material_data = WeaponData.get_material(material_name, lang);
+
+        return {
+            name: material_data.name,
+            icon: ConvertRaw.get_images_url(material_data.images.filename_icon, `weapon/${name}/${material_name}_icon`),
+            description: material_data.description,
+        };
+    }
+
     const res: Weapon = {
         name: weapon_data.name,
         icon: ConvertRaw.get_images_url(weapon_data.images.filename_icon, `weapon/${name}/${name}_icon`),
@@ -82,6 +98,7 @@ export function get_weapon(name: string, lang: Lang): Weapon {
         effect: get_weapon_effect(),
         description: weapon_data.descriptionRaw,
         story: weapon_data.story,
+        refine_material: get_weapon_refine_material(),
     }
     return res;
 }

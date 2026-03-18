@@ -52,6 +52,11 @@ export const WeaponData = {
         name = name.replace(/_/g, '');
         return genshindb.weapons(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
     },
+
+    get_material: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.materials(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
+    },
 }
 
 export const ArtifactData = {
