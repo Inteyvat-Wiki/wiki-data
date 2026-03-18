@@ -23,6 +23,7 @@ export function get_character(name: string, lang: Lang): Character | null {
     const voiceovers_data = CharacterData.get_voiceovers(name, lang);
 
     if (!character_data) {
+        console.error(`Character ${name} not found`);
         return null;
     }
 

@@ -7,6 +7,7 @@ export function get_artifact(name: string, lang: Lang): Artifact | null {
     const artifact_data = ArtifactData.get_artifact(name, lang);
 
     if (!artifact_data) {
+        console.error(`Artifact ${name} not found`);
         return null;
     }
 

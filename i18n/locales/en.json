@@ -2,5 +2,10 @@
     "character": {
         "constellation": "Constellation",
         "description": "Description"
+    },
+    "material": {
+        "description": "Description",
+        "base_food": "Base Dish",
+        "belong_character": "Belonging Character"
     }
 }

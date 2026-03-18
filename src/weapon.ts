@@ -23,6 +23,11 @@ const weapon_ascension_list: { min: number; max: number; step: number }[] = [
 export function get_weapon(name: string, lang: Lang): Weapon {
     const weapon_data = WeaponData.get_weapon(name, lang);
 
+    if (!weapon_data) {
+        console.error(`Weapon ${name} not found`);
+        return null;
+    }
+
     function get_weapon_stats() {
         const base: Record<number, string>[] = [];
         const sub_stat: Record<number, string>[] = [];

@@ -1,7 +1,7 @@
 import { ArtifactData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from '~/utils/i18n';
-import { Artifacts } from './types/artifacts';
+import { Artifacts } from '~/types/artifacts';
 import artifact_list from "~/data/artifacts";
 
 export function get_artifact_list(lang: Lang): Artifacts {

@@ -2,5 +2,10 @@
     "character": {
         "constellation": "命之座",
         "description": "描述"
+    },
+    "material": {
+        "description": "描述",
+        "base_food": "原始料理",
+        "belong_character": "所属角色"
     }
 }

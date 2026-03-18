@@ -1,7 +1,7 @@
 import { CharacterData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from '~/utils/i18n';
-import { Characters } from './types/characters';
+import { Characters } from '~/types/characters';
 import character_list from "~/data/characters";
 
 export function get_character_list(lang: Lang): Characters {

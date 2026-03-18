@@ -1,7 +1,7 @@
 import { WeaponData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from '~/utils/i18n';
-import { Weapons } from './types/weapons';
+import { Weapons } from '~/types/weapons';
 import weapon_list from "~/data/weapons";
 
 export function get_weapon_list(lang: Lang): Weapons {
