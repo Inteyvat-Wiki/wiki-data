@@ -1024,59 +1024,6 @@ export default {
         "blue_dye",                                                     // 蓝色染料
     ],
     "fish": [
-        "medaka",                                                       // 花鳉
-        "glaze_medaka",                                                 // 琉璃花鳉
-        "sweet_flower_medaka",                                          // 甜甜花鳉
-        "aizen_medaka",                                                 // 蓝染花鳉
-        "dawncatcher",                                                  // 擒霞客
-        "crystalfish",                                                  // 水晶宴
-        "lunged_stickleback",                                           // 肺棘鱼
-        "betta",                                                        // 斗棘鱼
-        "venomspine_fish",                                              // 鸩棘鱼
-        "akai_maou",                                                    // 赤魔王
-        "snowstrider",                                                  // 雪中君
-        "golden_koi",                                                   // 金赤假龙
-        "rusty_koi",                                                    // 锖假龙
-        "brown_shirakodai",                                             // 流纹褐蝶鱼
-        "purple_shirakodai",                                            // 流纹京紫蝶鱼
-        "tea_colored_shirakodai",                                       // 流纹茶蝶鱼
-        "abiding_angelfish",                                            // 长生仙
-        "raimei_angelfish",                                             // 雷鸣仙
-        "pufferfish",                                                   // 炮鲀
-        "bitter_pufferfish",                                            // 苦炮鲀
-        "divda_ray",                                                    // 迪芙妲鳐
-        "formalo_ray",                                                  // 佛玛洛鳐
-        "true_fruit_angler",                                            // 真果角鲀
-        "peach_of_the_deep_waves",                                      // 沉波蜜桃
-        "sandstorm_angler",                                             // 吹沙角鲀
-        "sunset_cloud_angler",                                          // 暮云角鲀
-        "lazurite_axe_marlin",                                          // 青金斧枪鱼
-        "halcyon_jade_axe_marlin",                                      // 翡玉斧枪鱼
-        "streaming_axe_marlin",                                         // 海涛斧枪鱼
-        "rippling_heartfeather_bass",                                   // 波波心羽鲈
-        "blazing_heartfeather_bass",                                    // 烘烘心羽鲈
-        "jade_heartfeather_bass",                                       // 玉玉心羽鲈
-        "maintenance_mek_initial_configuration",                        // 维护机关·初始能力型
-        "maintenance_mek_water_body_cleaner",                           // 维护机关·水域清理者
-        "maintenance_mek_situation_controller",                         // 维护机关·态势控制者
-        "maintenance_mek_platinum_collection",                          // 维护机关·白金典藏型
-        "maintenance_mek_gold_leader",                                  // 维护机关·澄金领队型
-        "floral_rapidfighting_fish",                                    // 繁花斗士急流鱼
-        "diving_rapidfighting_fish",                                    // 深潜斗士急流鱼
-        "magma_rapidfighting_fish",                                     // 炽岩斗士急流鱼
-        "greenwave_sunfish",                                            // 青浪翻车鲀
-        "dusk_sunfish",                                                 // 晚霞翻车鲀
-        "phony_phlogiston_unihornfish",                                 // 拟似燃素独角鱼
-        "pseudoshark_unihornfish",                                      // 伪装鲨鲨独角鱼
-        "secret_source_scout_sweeper",                                  // 秘源机关·巡戒使
-        "common_axehead_fish",                                          // 无奇巨斧鱼
-        "frosted_axehead_fish",                                         // 冷冽巨斧鱼
-        "blazing_axehead_fish",                                         // 炽铁巨斧鱼
-        "veggie_mauler_shark",                                          // 素素凶凶鲨
-        "neon_mauler_shark",                                            // 虹光凶凶鲨
-        "azuregaze_crystal_eye",                                        // 蓝昼明眼鱼
-        "nightgaze_crystal_eye",                                        // 夜色明眼鱼
-
         "fruit_paste_bait",                                             // 果酿饵
         "redrot_bait",                                                  // 赤糜饵
         "false_worm_bait",                                              // 蠕虫假饵

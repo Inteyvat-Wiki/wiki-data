@@ -2,9 +2,7 @@ import { MaterialData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
 import { Material } from "~/types/material";
-import character_list from "~/data/characters";
 import material_list from "~/data/materials";
-import { title } from "node:process";
 
 const show_full_description: string[] = (() => {
     let res: string[] = [];

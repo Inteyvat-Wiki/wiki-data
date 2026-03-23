@@ -9,3 +9,7 @@ export type MaterialType = 'forge' | 'material'
     | 'weapon_ascension'
     | 'precious' | 'chest' | 'gadget'
     | 'wood' | 'fish' | 'food';
+
+export type LivingBeingType =
+    'enemy_elemental' | 'enemy_hilichurl' | 'enemy_abyss' | 'enemy_fatui' | 'enemy_automaton' | 'enemy_human' | 'enemy_others' | 'enemy_boss'
+    | 'animal_bird' | 'animal_beast' | 'animal_fish' | 'animal_others';

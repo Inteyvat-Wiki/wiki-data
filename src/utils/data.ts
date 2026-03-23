@@ -79,3 +79,16 @@ export const MaterialData = {
         return genshindb.foods(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
     }
 }
+
+export const LivingBeingData = {
+
+    get_enemy: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.enemies(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
+    },
+
+    get_animal: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.animals(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
+    },
+}

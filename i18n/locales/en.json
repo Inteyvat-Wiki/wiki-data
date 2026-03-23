@@ -7,5 +7,8 @@
         "description": "Description",
         "base_food": "Base Dish",
         "belong_character": "Belonging Character"
+    },
+    "living-being": {
+        "description": "Description"
     }
 }
