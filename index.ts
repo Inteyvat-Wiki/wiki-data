@@ -7,17 +7,14 @@ import weapon_list from "~/data/weapons";
 import artifact_list from "~/data/artifacts";
 import material_list from "~/data/materials";
 import living_being_list from "~/data/living_beings";
+import geography_list from "~/data/geographies";
 
-import { get_character } from "~/character";
-import { get_character_list } from '~/character_list';
-import { get_weapon } from "~/weapon";
-import { get_weapon_list } from '~/weapon_list';
-import { get_artifact } from "~/artifact";
-import { get_artifact_list } from '~/artifact_list';
-import { get_material } from "~/material";
-import { get_material_list } from '~/material_list';
-import { get_living_being } from "~/living_being";
-import { get_living_being_list } from '~/living_being_list';
+import { get_character, get_character_list } from "~/character";
+import { get_weapon, get_weapon_list } from "~/weapon";
+import { get_artifact, get_artifact_list } from "~/artifact";
+import { get_material, get_material_list } from "~/material";
+import { get_living_being, get_living_being_list } from "~/living_being";
+import { get_geography, get_geography_list } from "~/geography";
 import { get_menu } from '~/menu';
 
 function main() {
@@ -29,6 +26,7 @@ function main() {
     fs.writeFileSync('./data/artifacts.json', JSON.stringify(artifact_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/materials.json', JSON.stringify(material_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
 
     for (let lang of lang_list) {
 
@@ -77,6 +75,16 @@ function main() {
             }
         }
         fs.writeFileSync(`./data/${lang}/living_being/list.json`, JSON.stringify(get_living_being_list(lang), null, 4), 'utf-8');
+
+        fs.mkdirSync(`./data/${lang}/geography`, { recursive: true });
+        for (let type in geography_list) {
+            for (let area in geography_list[type]) {
+                for (let name of geography_list[type][area]) {
+                    fs.writeFileSync(`./data/${lang}/geography/${name}.json`, JSON.stringify(get_geography(name, lang, type, area), null, 4), 'utf-8');
+                }
+            }
+        }
+        fs.writeFileSync(`./data/${lang}/geography/list.json`, JSON.stringify(get_geography_list(lang), null, 4), 'utf-8');
     }
 
     fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');

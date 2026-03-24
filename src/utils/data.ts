@@ -92,3 +92,16 @@ export const LivingBeingData = {
         return genshindb.animals(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
     },
 }
+
+export const GeographyData = {
+
+    get_geography: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.geographies(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
+    },
+
+    get_dungeon: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        return genshindb.dungeons(name, {resultLanguage: language_map[lang] as Language, matchAliases: true});
+    },
+}

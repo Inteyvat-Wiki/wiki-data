@@ -1,7 +1,8 @@
 import { WeaponData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
-import { Lang } from "~/utils/i18n";
-import { Weapon } from "~/types/weapon";
+import { Lang, t } from "~/utils/i18n";
+import { Weapon, Weapons } from "~/types/weapon";
+import weapon_list from "~/data/weapons";
 import weapon_refine_material_list from "~/data/weapon_refine_materials";
 
 const weapon_max_acsension = {
@@ -100,5 +101,24 @@ export function get_weapon(name: string, lang: Lang): Weapon {
         story: weapon_data.story,
         refine_material: get_weapon_refine_material(),
     }
+    return res;
+}
+
+export function get_weapon_list(lang: Lang): Weapons {
+    const res: Weapons = [];
+
+    for (let name of weapon_list) {
+        const weapon_data = WeaponData.get_weapon(name, lang);
+        if (weapon_data) {
+            res.push({
+                id: name,
+                name: weapon_data.name,
+                icon: ConvertRaw.get_images_url(weapon_data.images.filename_icon, `weapon/${name}/${name}_icon`),
+                type: ConvertRaw.get_weapon_type(weapon_data.weaponType) as any,
+                star: weapon_data.rarity,
+            });
+        }
+    }
+
     return res;
 }

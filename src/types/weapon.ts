@@ -1,4 +1,4 @@
-import { WeaponType } from "~/types/common";
+import type { WeaponType } from "~/types/common";
 
 export type Weapon = {
     name: string,
@@ -24,3 +24,11 @@ export type Weapon = {
         description: string,
     } | null,
 };
+
+export type Weapons = {
+    id: string,
+    name: string,
+    icon: string,
+    type: string,
+    star: number,
+}[];

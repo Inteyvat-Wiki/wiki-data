@@ -5,6 +5,26 @@ import { Character, Weapon, Material } from 'genshin-db';
 
 import { ElementType, WeaponType, MaterialType } from '~/types/common';
 
+const image_path = (() => {
+    const res = {};
+
+    const files = fs.readdirSync('./src/images', { recursive: true }) as string[];
+    for (let file of files) {
+        if (file.endsWith('.png')) {
+            const name = path.parse(file).name;
+            if (res[name]) {
+                if (fs.statSync(`./src/images/${file}`).size > fs.statSync(`./src/images/${res[name]}`).size) {
+                    res[name] = file;
+                }
+            } else {
+                res[name] = file;
+            }
+        }
+    }
+
+    return res;
+})();
+
 export const ConvertRaw = {
 
     get_images_url: (filename: string | undefined, converted_path: string) => {
@@ -12,7 +32,7 @@ export const ConvertRaw = {
         if (filename) {
             try {
                 fs.mkdirSync(path.dirname(`./data/images/${converted_path}`), { recursive: true });
-                fs.copyFileSync(`./src/images/${filename}.png`, `./data/images/${converted_path}`);
+                fs.copyFileSync(`./src/images/${image_path[filename]}`, `./data/images/${converted_path}`);
             } catch (err) {
                 console.error(`Failed to copy image ${filename}`);
             }

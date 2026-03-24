@@ -1,7 +1,8 @@
 import { CharacterData, get_hyperlinks } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Character } from "~/types/character";
+import { Character, Characters } from "~/types/character";
+import character_list from "~/data/characters";
 
 const character_ascension_list: { min: number; max: number; step: number }[] = [
     { min: 1, max: 20, step: 1 },
@@ -215,5 +216,25 @@ export function get_character(name: string, lang: Lang): Character | null {
         voiceovers: get_character_voiceovers(),
         images: [],
     }
+    return res;
+}
+
+export function get_character_list(lang: Lang): Characters {
+    const res: Characters = [];
+
+    for (let name of character_list) {
+        const character_data = CharacterData.get_character(name, lang);
+        if (character_data) {
+            res.push({
+                id: name,
+                name: character_data.name,
+                icon: ConvertRaw.get_images_url(character_data.images.filename_icon, `character/${name}/${name}_icon`),
+                element: ConvertRaw.get_element(character_data.elementType) || name.slice(name.lastIndexOf('_') + 1) as any,
+                weapon: ConvertRaw.get_weapon_type(character_data.weaponType) as any,
+                star: character_data.rarity,
+            });
+        }
+    }
+
     return res;
 }
