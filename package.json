@@ -17,8 +17,8 @@
   "homepage": "https://github.com/Inteyvat-Wiki/wiki-data#readme",
   "description": "",
   "dependencies": {
-    "@types/node": "^25.3.5",
+    "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   }
 }

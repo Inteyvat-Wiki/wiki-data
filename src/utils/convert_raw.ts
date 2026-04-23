@@ -6,7 +6,7 @@ import { Character, Weapon, Material } from 'genshin-db';
 import { ElementType, WeaponType, MaterialType } from '~/types/common';
 
 const image_path = (() => {
-    const res = {};
+    const res: Record<string, string> = {};
 
     const files = fs.readdirSync('./src/images', { recursive: true }) as string[];
     for (let file of files) {

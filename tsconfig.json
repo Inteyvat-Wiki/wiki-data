@@ -1,17 +1,17 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
         "paths": {
             "@/*": [
-                "src/*"
+                "./src/*"
             ],
             "~/*": [
-                "src/*"
+                "./src/*"
             ],
             "~~/*": [
                 "./*"
             ]
         },
+        "types": ["node"],
         "resolveJsonModule": true,
         "esModuleInterop": true
     },
