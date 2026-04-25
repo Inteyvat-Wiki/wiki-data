@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { MaterialData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
@@ -8,6 +10,7 @@ const show_full_description: string[] = (() => {
     let res: string[] = [];
 
     for (let type in material_list) {
+        if (type == 'food') continue;
         for (let nameraw of material_list[type]) {
             if (typeof nameraw == "string") {
                 const material_data = MaterialData.get_material(nameraw, 'zh_cn');
@@ -41,7 +44,7 @@ export function get_material(name: string, lang: Lang, type: string): Material |
 
         if (food_data.foodtype == 'NORMAL') {
             for (let key of ['suspicious', 'normal', 'delicious']) {
-                if (!food_data[key]) continue;
+                if (!(food_data as any)[key]) continue;
                 res.push({
                     name: food_data.name,
                     icon: ConvertRaw.get_images_url(food_data.images.filename_icon, `material/${name}/${name}_icon`),
@@ -50,10 +53,10 @@ export function get_material(name: string, lang: Lang, type: string): Material |
                     info: [
                         {
                             title: t(`material.description`, lang),
-                            description: food_data[key].description,
+                            description: (food_data as any)[key].description,
                         },
                     ],
-                    effect: food_data[key].effect,
+                    effect: (food_data as any)[key].effect,
                     description_full: null,
                 });
             }
@@ -66,11 +69,11 @@ export function get_material(name: string, lang: Lang, type: string): Material |
                 info: [
                     {
                         title: t(`material.base_food`, lang),
-                        description: food_data.baseDishName,
+                        description: food_data.baseDishName!,
                     },
                     {
                         title: t(`material.belong_character`, lang),
-                        description: food_data.characterName,
+                        description: food_data.characterName!,
                     },
                     {
                         title: t(`material.description`, lang),
@@ -94,7 +97,7 @@ export function get_material(name: string, lang: Lang, type: string): Material |
         const res: Material = [{
             name: material_data.name,
             icon: ConvertRaw.get_images_url(material_data.images.filename_icon, `material/${name}/${name}_icon`),
-            star: material_data.rarity,
+            star: material_data.rarity!,
             type: material_data.typeText,
             info: [
                 {
@@ -137,7 +140,7 @@ export function get_material_list(lang: Lang): Materials {
                         name: material_data.name,
                         icon: ConvertRaw.get_images_url(material_data.images.filename_icon, `material/${name}/${name}_icon`),
                         type: type as any,
-                        star: material_data.rarity,
+                        star: material_data.rarity!,
                         count: typeof nameraw === 'string' ? 1 : nameraw.length,
                     });
                 }
@@ -146,4 +149,22 @@ export function get_material_list(lang: Lang): Materials {
     }
 
     return res;
+}
+
+export function gen_material(lang: Lang, path: string) {
+
+    fs.mkdirSync(`${path}`, { recursive: true });
+    for (let type in material_list) {
+        for (let nameraw of material_list[type]) {
+            if (typeof nameraw == "string") {
+                fs.writeFileSync(`${path}/${nameraw}.json`, JSON.stringify(get_material(nameraw, lang, type), null, 4), 'utf-8');
+            } else {
+                for (let name of nameraw) {
+                    fs.writeFileSync(`${path}/${name}.json`, JSON.stringify(get_material(name, lang, type), null, 4), 'utf-8');
+                }
+            }
+        }
+    }
+    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_material_list(lang), null, 4), 'utf-8');
+
 }

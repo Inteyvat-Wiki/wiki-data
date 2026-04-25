@@ -1,18 +1,15 @@
+import fs from 'fs';
+
 import { ArtifactData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
 import { Artifact, Artifacts } from "~/types/artifact";
 import artifact_list from "~/data/artifacts";
 
-export function get_artifact(name: string, lang: Lang): Artifact | null {
+export function get_artifact(name: string, lang: Lang): Artifact {
     const artifact_data = ArtifactData.get_artifact(name, lang);
 
-    if (!artifact_data) {
-        console.error(`Artifact ${name} not found`);
-        return null;
-    }
-
-    function get_artifact_item(type: string) {
+    function get_artifact_item(type: 'flower' | 'plume' | 'sands' | 'goblet' | 'circlet') {
         if (!artifact_data[type]) {
             return null;
         }
@@ -32,10 +29,10 @@ export function get_artifact(name: string, lang: Lang): Artifact | null {
         ),
         stars: artifact_data.rarityList,
         effect: {
-            "1-piece": artifact_data.effect1Pc,
-            "2-piece": artifact_data.effect2Pc,
+            "1-piece": artifact_data.effect1Pc ?? null,
+            "2-piece": artifact_data.effect2Pc ?? null,
             "3-piece": null,
-            "4-piece": artifact_data.effect4Pc,
+            "4-piece": artifact_data.effect4Pc ?? null,
             "5-piece": null,
         },
         flower: get_artifact_item("flower"),
@@ -65,4 +62,14 @@ export function get_artifact_list(lang: Lang): Artifacts {
     }
 
     return res;
+}
+
+export function gen_artifact(lang: Lang, path: string) {
+
+    fs.mkdirSync(`${path}`, { recursive: true });
+    for (let artifact_name of artifact_list) {
+        fs.writeFileSync(`${path}/${artifact_name}.json`, JSON.stringify(get_artifact(artifact_name, lang), null, 4), 'utf-8');
+    }
+    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_artifact_list(lang), null, 4), 'utf-8');
+
 }

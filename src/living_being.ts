@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { LivingBeingData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
@@ -11,13 +13,8 @@ export function get_living_being(name: string, lang: Lang, type: string): Living
         } else if (type.startsWith("animal")) {
             return LivingBeingData.get_animal(name, lang);
         }
-        return null;
+        throw new Error(`Unknown living-being type: ${type}`);
     })();
-
-    if (!living_being_data) {
-        console.error(`Living-being not found: ${name}`);
-        return null;
-    }
 
     const res: LivingBeing = [{
         name: living_being_data.name,
@@ -67,4 +64,22 @@ export function get_living_being_list(lang: Lang): LivingBeings {
     }
 
     return res;
+}
+
+export function gen_living_being(lang: Lang, path: string) {
+
+    fs.mkdirSync(`${path}`, { recursive: true });
+    for (let type in living_being_list) {
+        for (let nameraw of living_being_list[type]) {
+            if (typeof nameraw == "string") {
+                fs.writeFileSync(`${path}/${nameraw}.json`, JSON.stringify(get_living_being(nameraw, lang, type), null, 4), 'utf-8');
+            } else {
+                for (let name of nameraw) {
+                    fs.writeFileSync(`${path}/${name}.json`, JSON.stringify(get_living_being(name, lang, type), null, 4), 'utf-8');
+                }
+            }
+        }
+    }
+    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_living_being_list(lang), null, 4), 'utf-8');
+
 }

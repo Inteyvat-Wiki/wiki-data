@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { WeaponData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
@@ -25,11 +27,6 @@ const weapon_ascension_list: { min: number; max: number; step: number }[] = [
 export function get_weapon(name: string, lang: Lang): Weapon {
     const weapon_data = WeaponData.get_weapon(name, lang);
 
-    if (!weapon_data) {
-        console.error(`Weapon ${name} not found`);
-        return null;
-    }
-
     function get_weapon_stats() {
         const base: Record<number, string>[] = [];
         const sub_stat: Record<number, string>[] = [];
@@ -40,15 +37,15 @@ export function get_weapon(name: string, lang: Lang): Weapon {
             sub_stat[ascension] = {};
             for (let level = min; level <= max; level += step) {
                 const stat = weapon_data.stats(level, ascension);
-                base[ascension][level] = stat.attack.toString();
-                sub_stat[ascension][level] = (stat.specialized
-                    * (ConvertRaw.is_precent_stat_type(weapon_data.mainStatType) ? 100 : 1)).toString()
-                    + (ConvertRaw.is_precent_stat_type(weapon_data.mainStatType) ? '%' : '')
+                base[ascension][level] = stat.attack!.toString();
+                sub_stat[ascension][level] = (stat.specialized!
+                    * (ConvertRaw.is_precent_stat_type(weapon_data.mainStatType!) ? 100 : 1)).toString()
+                    + (ConvertRaw.is_precent_stat_type(weapon_data.mainStatType!) ? '%' : '')
             }
         }
         return {
             base: base,
-            substats_name: weapon_data.mainStatText,
+            substats_name: weapon_data.mainStatText ?? null,
             substats: sub_stat,
         };
     }
@@ -61,15 +58,15 @@ export function get_weapon(name: string, lang: Lang): Weapon {
         const values: string[][] = [];
 
         for (let key of ['r1', 'r2', 'r3', 'r4', 'r5']) {
-            if (!weapon_data[key]) {
+            if (!(weapon_data as any)[key]) {
                 continue;
             }
-            values.push(weapon_data[key].values);
+            values.push((weapon_data as any)[key].values);
         }
-        
+
         return {
             name: weapon_data.effectName,
-            description: weapon_data.effectTemplateRaw,
+            description: weapon_data.effectTemplateRaw ?? '',
             values: values,
         };
     }
@@ -121,4 +118,14 @@ export function get_weapon_list(lang: Lang): Weapons {
     }
 
     return res;
+}
+
+export function gen_weapon(lang: Lang, path: string) {
+
+    fs.mkdirSync(`${path}`, { recursive: true });
+    for (let weapon_name of weapon_list) {
+        fs.writeFileSync(`${path}/${weapon_name}.json`, JSON.stringify(get_weapon(weapon_name, lang), null, 4), 'utf-8');
+    }
+    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_weapon_list(lang), null, 4), 'utf-8');
+
 }

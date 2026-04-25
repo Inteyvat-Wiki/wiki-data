@@ -10,17 +10,17 @@ export type Artifact = {
     icon: string,
     stars: (1 | 2 | 3 | 4 | 5)[],
     effect: {
-        "1-piece": string,
-        "2-piece": string,
-        "3-piece": string,
-        "4-piece": string,
-        "5-piece": string,
+        "1-piece": string | null,
+        "2-piece": string | null,
+        "3-piece": string | null,
+        "4-piece": string | null,
+        "5-piece": string | null,
     },
     flower: ArtifactItem | null,
     plume: ArtifactItem | null,
     sands: ArtifactItem | null,
     goblet: ArtifactItem | null,
-    circlet: ArtifactItem,
+    circlet: ArtifactItem | null,
 };
 
 export type Artifacts = {

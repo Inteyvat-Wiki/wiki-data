@@ -9,12 +9,12 @@ import material_list from "~/data/materials";
 import living_being_list from "~/data/living_beings";
 import geography_list from "~/data/geographies";
 
-import { get_character, get_character_list } from "~/character";
-import { get_weapon, get_weapon_list } from "~/weapon";
-import { get_artifact, get_artifact_list } from "~/artifact";
-import { get_material, get_material_list } from "~/material";
-import { get_living_being, get_living_being_list } from "~/living_being";
-import { get_geography, get_geography_list } from "~/geography";
+import { gen_character } from "~/character";
+import { gen_weapon } from "~/weapon";
+import { gen_artifact } from "~/artifact";
+import { gen_material } from "~/material";
+import { gen_living_being } from "~/living_being";
+import { gen_geography } from "~/geography";
 import { get_menu } from '~/menu';
 
 function main() {
@@ -30,61 +30,12 @@ function main() {
 
     for (let lang of lang_list) {
 
-        fs.mkdirSync(`./data/${lang}/character`, { recursive: true });
-        for (let character_name of character_list) {
-            fs.writeFileSync(`./data/${lang}/character/${character_name}.json`, JSON.stringify(get_character(character_name, lang), null, 4), 'utf-8');
-        }
-        fs.writeFileSync(`./data/${lang}/character/list.json`, JSON.stringify(get_character_list(lang), null, 4), 'utf-8');
-
-        fs.mkdirSync(`./data/${lang}/weapon`, { recursive: true });
-        for (let weapon_name of weapon_list) {
-            fs.writeFileSync(`./data/${lang}/weapon/${weapon_name}.json`, JSON.stringify(get_weapon(weapon_name, lang), null, 4), 'utf-8');
-        }
-        fs.writeFileSync(`./data/${lang}/weapon/list.json`, JSON.stringify(get_weapon_list(lang), null, 4), 'utf-8');
-
-        fs.mkdirSync(`./data/${lang}/artifact`, { recursive: true });
-        for (let artifact_name of artifact_list) {
-            fs.writeFileSync(`./data/${lang}/artifact/${artifact_name}.json`, JSON.stringify(get_artifact(artifact_name, lang), null, 4), 'utf-8');
-        }
-        fs.writeFileSync(`./data/${lang}/artifact/list.json`, JSON.stringify(get_artifact_list(lang), null, 4), 'utf-8');
-
-        fs.mkdirSync(`./data/${lang}/material`, { recursive: true });
-        for (let type in material_list) {
-            for (let nameraw of material_list[type]) {
-                if (typeof nameraw == "string") {
-                    fs.writeFileSync(`./data/${lang}/material/${nameraw}.json`, JSON.stringify(get_material(nameraw, lang, type), null, 4), 'utf-8');
-                } else {
-                    for (let name of nameraw) {
-                        fs.writeFileSync(`./data/${lang}/material/${name}.json`, JSON.stringify(get_material(name, lang, type), null, 4), 'utf-8');
-                    }
-                }
-            }
-        }
-        fs.writeFileSync(`./data/${lang}/material/list.json`, JSON.stringify(get_material_list(lang), null, 4), 'utf-8');
-
-        fs.mkdirSync(`./data/${lang}/living_being`, { recursive: true });
-        for (let type in living_being_list) {
-            for (let nameraw of living_being_list[type]) {
-                if (typeof nameraw == "string") {
-                    fs.writeFileSync(`./data/${lang}/living_being/${nameraw}.json`, JSON.stringify(get_living_being(nameraw, lang, type), null, 4), 'utf-8');
-                } else {
-                    for (let name of nameraw) {
-                        fs.writeFileSync(`./data/${lang}/living_being/${name}.json`, JSON.stringify(get_living_being(name, lang, type), null, 4), 'utf-8');
-                    }
-                }
-            }
-        }
-        fs.writeFileSync(`./data/${lang}/living_being/list.json`, JSON.stringify(get_living_being_list(lang), null, 4), 'utf-8');
-
-        fs.mkdirSync(`./data/${lang}/geography`, { recursive: true });
-        for (let type in geography_list) {
-            for (let area in geography_list[type]) {
-                for (let name of geography_list[type][area]) {
-                    fs.writeFileSync(`./data/${lang}/geography/${name}.json`, JSON.stringify(get_geography(name, lang, type, area), null, 4), 'utf-8');
-                }
-            }
-        }
-        fs.writeFileSync(`./data/${lang}/geography/list.json`, JSON.stringify(get_geography_list(lang), null, 4), 'utf-8');
+        gen_character(lang, `./data/${lang}/character`);
+        gen_weapon(lang, `./data/${lang}/weapon`);
+        gen_artifact(lang, `./data/${lang}/artifact`);
+        gen_material(lang, `./data/${lang}/material`);
+        gen_living_being(lang, `./data/${lang}/living_being`);
+        gen_geography(lang, `./data/${lang}/geography`);
     }
 
     fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');
