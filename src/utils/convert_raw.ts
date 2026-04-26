@@ -25,6 +25,8 @@ const image_path = (() => {
     return res;
 })();
 
+let failed_images_list: string[] = [];
+
 export const ConvertRaw = {
 
     get_images_url: (filename: string | undefined, converted_path: string) => {
@@ -35,11 +37,18 @@ export const ConvertRaw = {
                 fs.copyFileSync(`./src/images/${image_path[filename]}`, `./data/images/${converted_path}`);
             } catch (err) {
                 console.error(`Failed to copy image ${filename}`);
+                if (!failed_images_list.includes(filename)) {
+                    failed_images_list.push(filename);
+                }
             }
         } else {
             console.warn(`Image ${converted_path} not found`);
         }
         return '/images/' + converted_path;
+    },
+
+    get_failed_images_list: () => {
+        return failed_images_list;
     },
 
     get_element: (element: Character['elementType']): ElementType | null => {

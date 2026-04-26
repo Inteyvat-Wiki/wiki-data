@@ -2,6 +2,8 @@ import fs from 'fs';
 import { cp } from 'fs/promises';
 
 import { lang_list } from "~/utils/i18n";
+import { ConvertRaw } from "~/utils/convert_raw";
+
 import character_list from "~/data/characters";
 import weapon_list from "~/data/weapons";
 import artifact_list from "~/data/artifacts";
@@ -41,6 +43,8 @@ function main() {
     fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');
 
     cp('./assets', './data', { recursive: true, force: true });
+
+    console.log(ConvertRaw.get_failed_images_list().join('|'));
 }
 
 main();
