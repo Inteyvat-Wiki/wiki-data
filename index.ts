@@ -17,6 +17,7 @@ import { gen_artifact } from "~/artifact";
 import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
+import { gen_map, get_maps } from '~/map';
 import { get_menu } from '~/menu';
 
 function main() {
@@ -29,6 +30,7 @@ function main() {
     fs.writeFileSync('./data/materials.json', JSON.stringify(material_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/maps.json', JSON.stringify(get_maps(), null, 4), 'utf-8');
 
     for (let lang of lang_list) {
 
@@ -38,6 +40,7 @@ function main() {
         gen_material(lang, `./data/${lang}/material`);
         gen_living_being(lang, `./data/${lang}/living_being`);
         gen_geography(lang, `./data/${lang}/geography`);
+        gen_map(lang, `./data/${lang}/map`);
     }
 
     fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');

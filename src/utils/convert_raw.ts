@@ -51,6 +51,24 @@ export const ConvertRaw = {
         return failed_images_list;
     },
 
+    get_images_path: (filepath: string | null, converted_path: string) => {
+        if (!converted_path.endsWith('.png')) converted_path += '.png';
+        if (filepath) {
+            try {
+                fs.mkdirSync(path.dirname(`./data/images/${converted_path}`), { recursive: true });
+                fs.copyFileSync(filepath, `./data/images/${converted_path}`);
+            } catch (err) {
+                console.error(`Failed to copy image ${filepath}`);
+                if (!failed_images_list.includes(filepath)) {
+                    failed_images_list.push(filepath);
+                }
+            }
+        } else {
+            console.warn(`Image ${converted_path} not found`);
+        }
+        return '/images/' + converted_path;
+    },
+
     get_element: (element: Character['elementType']): ElementType | null => {
 
         const element_map: Record<string, ElementType> = {

@@ -135,3 +135,13 @@ export const GeographyData = {
         return res;
     },
 }
+
+export const MapData = {
+
+    get_maplayer: (name: string, lang: Lang) => {
+        name = name.replace(/_/g, '');
+        let res = genshindb.maplayers(name, { resultLanguage: language_map[lang] as Language, matchAliases: true });
+        if (!res) throw new Error(`Map layer ${name} not found in genshindb`);
+        return res;
+    },
+}
