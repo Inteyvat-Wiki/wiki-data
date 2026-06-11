@@ -1,1 +1,1 @@
-Images Regex: `(UI_AvatarIcon_*)|(UI_Gacha_AvatarImg_*)|(Skill_*)|(UI_Talent_*)|(UI_EquipIcon_*)|(UI_RelicIcon_*)|(UI_ItemIcon_*)|(UI_MonsterIcon_*)|(UI_AnimalIcon_*)|(UI_Codex_Scenery_*)|(UI_DungeonPic_*)|(DungeonPic_*)`
+Images Regex: `(UI_AvatarIcon_*)|(UI_Gacha_AvatarImg_*)|(Skill_*)|(UI_Talent_*)|(UI_EquipIcon_*)|(UI_RelicIcon_*)|(UI_ItemIcon_*)|(UI_MonsterIcon_*)|(UI_AnimalIcon_*)|(UI_Codex_Scenery_*)|(UI_DungeonPic_*)|(DungeonPic_*)|(UI_Map_*)|(UI_BigWorld_*)`
