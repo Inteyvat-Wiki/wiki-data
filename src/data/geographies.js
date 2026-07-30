@@ -64,7 +64,7 @@ export default {
             "tenryou_inazuma_city",                                         // 稻妻城·天领
             "suburbs_inazuma_city",                                         // 稻妻城·城郊
             "the_sacred_forest_in_the_moonlight",                           // 月光下的神林
-            "grand_narukami_shrine,_mt_yougou",                             // 影向山·鸣神大社
+            "grand_narukami_shrine_mt_yougou",                              // 影向山·鸣神大社
             "tatara_islands_vantage_point",                                 // 远眺踏鞴之岛
             "front_line_kannazuka",                                         // 神无冢·阵前
             "tidal_flat_amidst_the_flames_of_war",                          // 战火中的滩涂
@@ -152,7 +152,7 @@ export default {
             "memories_of_mont_esus",                                        // 「芒索斯山麓的回忆」
             "view_from_mont_automnequi",                                    // 「于秋分山远眺」
             "fontaine_hot_springs",                                         // 「枫丹热泉」
-            "morning_in_the_beryl_mountains,_clear_weather",                // 「苍晶山地的晴朗清晨」
+            "morning_in_the_beryl_mountains_clear_weather",                 // 「苍晶山地的晴朗清晨」
             "the_seaside_village",                                          // 「边村风景」
             "graveyard_of_ships",                                           // 船之墓
             "the_remnants_of_brilliant_wisdom",                             // 璀璨才智的留遗
@@ -249,7 +249,7 @@ export default {
     "dungeon": {
         "others": [
             "spiral_abyss",                                                 // 深境螺旋
-            "fantasiatome",                                                 // 「幻剧之书」
+            "fantasia_tome",                                                // 「幻剧之书」
             "stygian_onslaught",                                            // 「幽境危战」
         ],
 
@@ -276,7 +276,7 @@ export default {
             "clear_pool_and_mountain_cavern",                               // 华池岩岫
             "domain_of_the_wayward_path",                                   // 曲径通幽之处
             "enter_the_golden_house",                                       // 进入「黄金屋」
-            "beneath_the_dragon_queller",                                   // 「伏龙树」之底
+            "beneath_the_dragonqueller",                                    // 「伏龙树」之底
             "ridge_watch",                                                  // 山脊守望
             "the_lost_valley",                                              // 岩中幽谷
         ],
@@ -287,7 +287,7 @@ export default {
             "empty_boat_of_a_thousand_gates",                               // 千门虚舟
             "palace_in_a_pool",                                             // 池中宅邸
             "formation_estate",                                             // 阵代屋敷
-            "momiji_dyed_court",                                            // 椛染之庭
+            "momijidyed_court",                                             // 椛染之庭
             "court_of_flowing_sand",                                        // 砂流之庭
             "narukami_island_tenshukaku",                                   // 鸣神岛·天守
             "moshiri_kara",                                                 // 茂知之壳

@@ -323,12 +323,12 @@ export default {
     ],
     "enemy_boss": [
         "stormterror",                                                  // 裂空的魔龙
-        "lupus_boreas,_dominator_of_wolves",                            // 北风的王狼，奔狼的领主
+        "lupus_boreas_dominator_of_wolves",                             // 北风的王狼，奔狼的领主
         "childe",                                                       // 「公子」
         "azhdaha",                                                      // 若陀龙王
         "la_signora",                                                   // 「女士」
         "magatsu_mitake_narukami_no_mikoto",                            // 祸津御建鸣神命
-        "shouki_no_kami,_the_prodigal",                                 // 「正机之神」
+        "shouki_no_kami_the_prodigal",                                  // 「正机之神」
         "guardian_of_apeps_oasis",                                      // 阿佩普的绿洲守望者
         "alldevouring_narwhal",                                         // 吞星之鲸
         "the_knave",                                                    // 「仆人」
@@ -450,7 +450,7 @@ export default {
         "golden_bass",                                                  // 黄金鲈鱼
         "medaka",                                                       // 花鳉
         "glaze_medaka",                                                 // 琉璃花鳉
-        "sweet_flower_medaka",                                          // 甜甜花鳉
+        "sweetflower_medaka",                                           // 甜甜花鳉
         "aizen_medaka",                                                 // 蓝染花鳉
         "dawncatcher",                                                  // 擒霞客
         "crystalfish",                                                  // 水晶宴
@@ -463,7 +463,7 @@ export default {
         "rusty_koi",                                                    // 锖假龙
         "brown_shirakodai",                                             // 流纹褐蝶鱼
         "purple_shirakodai",                                            // 流纹京紫蝶鱼
-        "tea_colored_shirakodai",                                       // 流纹茶蝶鱼
+        "teacolored_shirakodai",                                        // 流纹茶蝶鱼
         "abiding_angelfish",                                            // 长生仙
         "raimei_angelfish",                                             // 雷鸣仙
         "pufferfish",                                                   // 炮鲀
@@ -499,8 +499,8 @@ export default {
         "blazing_axehead_fish",                                         // 炽铁巨斧鱼
         "veggie_mauler_shark",                                          // 素素凶凶鲨
         "neon_mauler_shark",                                            // 虹光凶凶鲨
-        "azuregaze_crystal_eye",                                        // 蓝昼明眼鱼
-        "nightgaze_crystal_eye",                                        // 夜色明眼鱼
+        "azuregaze_crystaleye",                                         // 蓝昼明眼鱼
+        "nightgaze_crystaleye",                                         // 夜色明眼鱼
     ],
     "animal_others": [
         "pyro_crystalfly",                                              // 火晶蝶

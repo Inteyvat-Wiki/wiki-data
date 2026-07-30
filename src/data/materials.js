@@ -262,7 +262,7 @@ export default {
         ], [
             "ruined_hilt",                                                  // 残毁的剑柄
             "splintered_hilt",                                              // 裂断的剑柄
-            "still_smoldering_hilt",                                        // 未熄的剑柄
+            "stillsmoldering_hilt",                                         // 未熄的剑柄
         ], [
             "shard_of_a_shattered_will",                                    // 意志破碎的残片
             "locus_of_a_clear_will",                                        // 意志明晰的寄偶
@@ -280,8 +280,8 @@ export default {
             "bewildering_broadleaf",                                        // 惑光的阔叶
             "illusory_leafcoil",                                            // 迷光的蜷叶之心
         ], [
-            "cold_cracked_shellshard",                                      // 冷裂壳块
-            "warm_back_shell",                                              // 蕴热的背壳
+            "coldcracked_shellshard",                                       // 冷裂壳块
+            "warm_backshell",                                               // 蕴热的背壳
             "blazing_prismshell",                                           // 明燃的棱状壳
         ], [
             "frostnights_glimmer",                                          // 霜夜的残照
@@ -360,7 +360,7 @@ export default {
         ], [
             "sentrys_wooden_whistle",                                       // 卫从的木哨
             "warriors_metal_whistle",                                       // 战士的铁哨
-            "saurian_crowned_warriors_golden_whistle",                      // 龙冠武士的金哨
+            "sauriancrowned_warriors_golden_whistle",                       // 龙冠武士的金哨
         ], [
             "broken_drive_shaft",                                           // 毁损机轴
             "reinforced_drive_shaft",                                       // 加固机轴
@@ -368,7 +368,7 @@ export default {
         ], [
             "tattered_warrant",                                             // 磨损的执凭
             "immaculate_warrant",                                           // 精致的执凭
-            "frost_etched_warrant",                                         // 霜镌的执凭
+            "frostetched_warrant",                                          // 霜镌的执凭
         ],
     ],
     "character_develop": [
@@ -393,7 +393,7 @@ export default {
         "perpetual_caliber",                                            // 永续机芯
         "light_guiding_tetrahedron",                                    // 导光四面体
         "quelled_creeper",                                              // 灭诤草蔓
-        "pseudo_stamens",                                               // 苍砾蕊羽
+        "pseudostamens",                                                // 苍砾蕊羽
         "evergloom_ring",                                               // 常暗圆环
         "artificed_spare_clockwork_component_coppelia",                 // 奇械发条备件·歌裴莉娅
         "artificed_spare_clockwork_component_coppelius",                // 奇械发条备件·科培琉司
@@ -405,13 +405,13 @@ export default {
         "fragment_of_a_golden_melody",                                  // 金色旋律的断章
         "mark_of_the_binding_blessing",                                 // 受祝所缚之印
         "overripe_flamegranate",                                        // 过熟的火榴果
-        "gold_inscribed_secret_source_core",                            // 秘刻金纹的源核
+        "goldinscribed_secret_source_core",                             // 秘刻金纹的源核
         "ensnaring_gaze",                                               // 深邃纠缠的凝视
         "talisman_of_the_enigmatic_land",                               // 谜土的护符
         "sparkless_statue_core",                                        // 龙像的无智核
         "secret_source_airflow_accumulator",                            // 秘源积气喉
         "precision_kuuvahki_stamping_die",                              // 精密型月矩力冲鸭模具
-        "lightbearing_scale_feather",                                   // 承光的鳞羽
+        "lightbearing_scalefeather",                                    // 承光的鳞羽
         "radiant_antler",                                               // 漫光的辉角
         "cyclic_military_kuuvahki_core",                                // 循环式军用月矩核心
         "remnant_of_the_dreadwing",                                     // 魇翼枯骸
@@ -463,7 +463,7 @@ export default {
         ], [
             "eroded_horn",                                                  // 蚀灭的灵犀
             "eroded_sunfire",                                               // 蚀灭的阳焰
-            "eroded_scale_feather",                                         // 蚀灭的鳞羽
+            "eroded_scalefeather",                                          // 蚀灭的鳞羽
         ], [
             "ascended_sample_knight",                                       // 升扬样本·骑士
             "ascended_sample_rook",                                         // 升扬样本·战车
@@ -650,7 +650,7 @@ export default {
         ], [
             "mask_of_the_wicked_lieutenant",                                // 今昔剧画之恶尉
             "mask_of_the_tigers_bite",                                      // 今昔剧画之虎啮
-            "mask_of_the_one_horned",                                       // 今昔剧画之一角
+            "mask_of_the_onehorned",                                        // 今昔剧画之一角
             "mask_of_the_kijin",                                            // 今昔剧画之鬼人
         ], [
             "copper_talisman_of_the_forest_dew",                            // 谧林涓露的铜符
@@ -693,10 +693,10 @@ export default {
             "delirious_demeanor_of_the_sacred_lord",                        // 谵妄圣主的容光
             "delirious_divinity_of_the_sacred_lord",                        // 谵妄圣主的神面
         ], [
-            "night_winds_mystic_consideration",                             // 神合秘烟的思绪
-            "night_winds_mystic_premonition",                               // 神合秘烟的预感
-            "night_winds_mystic_augury",                                    // 神合秘烟的征兆
-            "night_winds_mystic_revelation",                                // 神合秘烟的启示
+            "nightwinds_mystic_consideration",                              // 神合秘烟的思绪
+            "nightwinds_mystic_premonition",                                // 神合秘烟的预感
+            "nightwinds_mystic_augury",                                     // 神合秘烟的征兆
+            "nightwinds_mystic_revelation",                                 // 神合秘烟的启示
         ], [
             "artful_device_fragment",                                       // 奇巧秘器的残件
             "artful_device_replica",                                        // 奇巧秘器的模本
@@ -708,20 +708,20 @@ export default {
             "flare_of_long_night_flint",                                    // 长夜燧火的明焰
             "blaze_of_long_night_flint",                                    // 长夜燧火的烈辉
         ], [
-            "sundered_glory_of_the_far_north_scions",                       // 终北遗嗣的哀荣
-            "unyielding_delusion_of_the_far_north_scions",                  // 终北遗嗣的迷顽
-            "oblation_of_the_far_north_scions",                             // 终北遗嗣的祷献
-            "aureate_radiance_of_the_far_north_scions",                     // 终北遗嗣的煌熠
+            "sundered_glory_of_the_farnorth_scions",                        // 终北遗嗣的哀荣
+            "unyielding_delusion_of_the_farnorth_scions",                   // 终北遗嗣的迷顽
+            "oblation_of_the_farnorth_scions",                              // 终北遗嗣的祷献
+            "aureate_radiance_of_the_farnorth_scions",                      // 终北遗嗣的煌熠
         ],
     ],
     "precious": [
         [
-            "cake_for_traveler_1",                                          // 给旅行者的小蛋糕
-            "cake_for_traveler_3",                                          // 给旅行者的小蛋糕
-            "cake_for_traveler_5",                                          // 给旅行者的小蛋糕
-            "cake_for_traveler_7",                                          // 给旅行者的小蛋糕
-            "cake_for_traveler_9",                                          // 给旅行者的小蛋糕
-            "cake_for_traveler_11",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler",                                            // 给旅行者的小蛋糕
+            "cake_for_traveler-02",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler-04",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler-06",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler-08",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler-10",                                         // 给旅行者的小蛋糕
         ],
 
         [
@@ -759,24 +759,24 @@ export default {
             "crimson_obsidian_fragment",                                    // 灼赤曜石断片
             "crimson_obsidian_ring",                                        // 灼赤曜石环
         ], [
-            "sunset_blue_obsidian_fragment",                                // 青绛曜石断片
-            "sunset_blue_obsidian_ring",                                    // 青绛曜石环
+            "sunsetblue_obsidian_fragment",                                 // 青绛曜石断片
+            "sunsetblue_obsidian_ring",                                     // 青绛曜石环
         ],
 
         [
-            "evermoon_seal_0",                                              // 恒月印磐
-            "evermoon_seal_1",                                              // 恒月印磐
-            "evermoon_seal_2",                                              // 恒月印磐
+            "evermoon_seal",                                                // 恒月印磐
+            "evermoon_seal-01",                                             // 恒月印磐
+            "evermoon_seal-02",                                             // 恒月印磐
         ], [
-            "irismoon_seal_0",                                              // 虹月印磐
-            "irismoon_seal_1",                                              // 虹月印磐
-            "irismoon_seal_2",                                              // 虹月印磐
+            "irismoon_seal",                                                // 虹月印磐
+            "irismoon_seal-01",                                             // 虹月印磐
+            "irismoon_seal-02",                                             // 虹月印磐
         ],
 
         "dust_of_azoth",                                                // 嬗变之尘
         "dream_solvent",                                                // 异梦溶媒
 
-        "ultra_hot_burner_lamp_test_model",                             // 试验型超燃灯
+        "ultrahot_burner_lamp_test_model",                              // 试验型超燃灯
 
         "silken_print",                                                 // 「绘绮之枕印」
         "natures_true_fruit",                                           // 「烟林之真果」
@@ -811,17 +811,17 @@ export default {
         "cryo_sigil",                                                   // 冰之印
         "luna_sigil",                                                   // 月之印
 
-        "gnostic_hymn___old_notes",                                     // 珍珠纪行·初稿
-        "blessing_of_the_welkin_moon___new_moon",                       // 空月祝福·新月
+        "gnostic_hymn_old_notes",                                      // 珍珠纪行·初稿
+        "blessing_of_the_welkin_moon_new_moon",                        // 空月祝福·新月
 
         "hunting_trap",                                                 // 狩猎陷阱
 
         [
-            "key_sigil_0",                                                  // 键纹
-            "key_sigil_1",                                                  // 键纹
-            "key_sigil_2",                                                  // 键纹
-            "key_sigil_3",                                                  // 键纹
-            "key_sigil_4",                                                  // 键纹
+            "key_sigil",                                                    // 键纹
+            "key_sigil-01",                                                 // 键纹
+            "key_sigil-02",                                                 // 键纹
+            "key_sigil-03",                                                 // 键纹
+            "key_sigil-04",                                                 // 键纹
         ],
 
         "light_realm_sigil",                                            // 光界之印
@@ -845,8 +845,8 @@ export default {
             "gift_egg_gifted_by_cacasha",                                   // 「咔阿夏」赠与的闪闪礼蛋
         ], [
             "gift_egg_blood_of_this_land",                                  // 闪闪礼蛋·山之血
-            "gift_egg_lets_shred,_sharky!",                                 // 闪闪礼蛋·飞澜鲨鲨
-            "gift_egg_bow_before_your_king!",                               // 闪闪礼蛋·圣龙君临
+            "gift_egg_lets_shred_sharky",                                   // 闪闪礼蛋·飞澜鲨鲨
+            "gift_egg_bow_before_your_king",                                 // 闪闪礼蛋·圣龙君临
             "gift_egg_light_of_the_blazing_sun",                            // 闪闪礼蛋·太阳的轰鸣
             "gift_egg_where_the_drinks_keep_flowing",                       // 闪闪礼蛋·献给小酒杯
             "gift_egg_fietena",                                             // 闪闪礼蛋·菲耶蒂娜
@@ -860,10 +860,10 @@ export default {
         "travel_accounts",                                              // 游逸旅账
         "the_little_witchs_dictionary",                                 // 小魔女辞典
         [
-            "treasure_seeking_seelie_0",                                    // 「寻宝仙灵」
-            "treasure_seeking_seelie_1",                                    // 「寻宝仙灵」
-            "treasure_seeking_seelie_2",                                    // 「寻宝仙灵」
-            "treasure_seeking_seelie_3",                                    // 「寻宝仙灵」
+            "treasureseeking_seelie",                                       // 「寻宝仙灵」
+            "treasureseeking_seelie-01",                                    // 「寻宝仙灵」
+            "treasureseeking_seelie-02",                                    // 「寻宝仙灵」
+            "treasureseeking_seelie-03",                                    // 「寻宝仙灵」
         ],
         "kurious_kamera",                                               // 奇特的「留影机」
         "inquisitive_endora",                                           // 好奇的嫣朵拉
@@ -886,14 +886,14 @@ export default {
         "image_sampling_kamera",                                        // 图形样本留影机
         "graffiti_kamera",                                              // 「涂鸦留影机」
         [
-            "paimons_kamera_0",                                             // 派蒙的留影机
-            "paimons_kamera_1",                                             // 派蒙的留影机
+            "paimons_kamera",                                               // 派蒙的留影机
+            "paimons_kamera-01",                                            // 派蒙的留影机
         ],
         "memento_kamera",                                               // 「回忆捕手留影机」
         "spotter_kamera",                                               // 寻迹留影机
         [
-            "inscribed_mirror_0",                                           // 铭随流镜
-            "inscribed_mirror_1",                                           // 铭随流镜
+            "inscribed_mirror",                                             // 铭随流镜
+            "inscribed_mirror-01",                                          // 铭随流镜
         ],
         "celebratory_xiao_lantern",                                     // 节庆霄灯
         "gift_xiao_lantern",                                            // 节礼霄灯
@@ -915,19 +915,19 @@ export default {
         "casket_of_tomes",                                              // 秘典之盒
         "memento_lens",                                                 // 「留念镜」
         [
-            "peculiar_pinion_0",                                            // 奇特的羽毛
-            "peculiar_pinion_1",                                            // 奇特的羽毛
+            "peculiar_pinion",                                              // 奇特的羽毛
+            "peculiar_pinion-01",                                           // 奇特的羽毛
         ],
         "lumenstone_adjuvant",                                          // 流明石触媒
         [
-            "kusava_0",                                                     // 「苦舍桓」
-            "kusava_1",                                                     // 「苦舍桓」
+            "kusava",                                                       // 「苦舍桓」
+            "kusava-01",                                                    // 「苦舍桓」
         ],
         "vintage_lyre",                                                 // 老旧的诗琴
         "jinni_in_the_magic_bottle_liloupar",                           // 魔瓶镇灵·利露帕尔
         [
-            "sorush_1",                                                     // 斯露莎
-            "sorush_0",                                                     // 斯露莎
+            "sorush-01",                                                    // 斯露莎
+            "sorush",                                                       // 斯露莎
         ],
         "anemo_treasure_compass",                                       // 风之寻宝罗盘
         "geo_treasure_compass",                                         // 岩之寻宝罗盘
@@ -940,9 +940,9 @@ export default {
         "waverider_repair_toolbox",                                     // 浪船修理工具箱
         "red_feather_fan",                                              // 红羽团扇
         "the_boon_of_the_elder_tree",                                   // 「王树瑞佑」
-        "wind_powered_wind_generator",                                  // 借动式鼓风装置
+        "windpowered_wind_generator",                                   // 借动式鼓风装置
         "windblume_festival_commemorative_balloon",                     // 风花节纪念气球
-        "wind_blessed_harpastum",                                       // 风佑之羽球
+        "windblessed_harpastum",                                        // 风佑之羽球
         "windsong_lyre",                                                // 风物之诗琴
         "floral_zither",                                                // 镜花之琴
         "aratakis_great_and_glorious_drum",                             // 荒泷·盛世豪鼓
@@ -959,7 +959,7 @@ export default {
         "rotor_hovering_daybed",                                        // 旋翼浮空憩榻
         [
             "mini_seelie_dayflower",                                        // 迷你仙灵·露草
-            "mini_seelie_ros",                                              // 迷你仙灵·薄红
+            "mini_seelie_rose",                                             // 迷你仙灵·薄红
             "mini_seelie_curcuma",                                          // 迷你仙灵·郁金
             "mini_seelie_viola",                                            // 迷你仙灵·紫苑
             "mini_seelie_moss",                                             // 迷你仙灵·苔绿
@@ -978,7 +978,7 @@ export default {
         "straight_shooter",                                             // 准准爆弹
         "floaty_splody",                                                // 飘飘爆弹
         "hot_pod",                                                      // 烫烫爆弹
-        "omni_ubiquity_net",                                            // 「四方八方之网」
+        "omniubiquity_net",                                             // 「四方八方之网」
         "anemoculus_resonance_stone",                                   // 风神瞳共鸣石
         "geoculus_resonance_stone",                                     // 岩神瞳共鸣石
         "electroculus_resonance_stone",                                 // 雷神瞳共鸣石
@@ -1100,7 +1100,7 @@ export default {
         "stirfried_fish_noodles",                                       // 干炒鱼河
         "deepfried_doublecrisp",                                        // 油爆双脆
         "teasmoked_squab",                                              // 茶熏乳鸽
-        "guhua_fish_&_lamb_soup",                                       // 古华鱼羊鲜
+        "guhua_fish_lamb_soup",                                         // 古华鱼羊鲜
         "qingxin_flower_cake",                                          // 清心花饼
         "goldentempered_jade",                                          // 淬金冷玉
         "tuna_sushi",                                                   // 金枪鱼寿司
@@ -1148,10 +1148,10 @@ export default {
         "lakkaberry_madame",                                            // 白灵果酿鸡
         "lohikeitto",                                                   // 奶油鲑鱼汤
         "calla_lily_seafood_soup",                                      // 嘟嘟莲海鲜羹
-        "sauted_matsutake",                                             // 黄油松茸
+        "sauteed_matsutake",                                            // 黄油松茸
         "cold_cut_platter",                                             // 冷肉拼盘
         "sticky_honey_roast",                                           // 蜜酱胡萝卜煎肉
-        "crab,_ham_&_veggie_bake",                                      // 蟹黄火腿焗时蔬
+        "crab_ham_veggie_bake",                                        // 蟹黄火腿焗时蔬
         "mushroom_pizza",                                               // 烤蘑菇披萨
         "mondstadt_hash_brown",                                         // 蒙德土豆饼
         "pile_em_up",                                                   // 「堆高高」
@@ -1169,7 +1169,7 @@ export default {
         "qingce_stir_fry",                                              // 轻策农家菜
         "come_and_get_it",                                              // 来来菜
         "bamboo_shoot_soup",                                            // 腌笃鲜
-        "triplelayered_consomm",                                        // 扣三丝
+        "triplelayered_consomme",                                       // 扣三丝
         "lotus_flower_crisp",                                           // 莲花酥
         "universal_peace",                                              // 四方和平
         "jueyun_guoba",                                                 // 绝云锅巴
@@ -1185,7 +1185,7 @@ export default {
         "humbly_enough",                                                // 知足常乐
         "right_at_home",                                                // 宾至如归
         "braised_meatball",                                             // 红烧肉圆
-        "fine_tea,_full_moon",                                          // 茶好月圆
+        "fine_tea_full_moon",                                           // 茶好月圆
         "crispy_spring_rolls",                                          // 香炸春卷
         "tricolor_dango",                                               // 三彩团子
         "tonkotsu_ramen",                                               // 兽骨拉面
@@ -1237,7 +1237,7 @@ export default {
         "coffee_bavarois",                                              // 咖啡芭芭露
         "tripes_du_port",                                               // 港湾牛肚
         "tomates_narbonnaises",                                         // 纳博内番茄盅
-        "consomm",                                                      // 百味一缕
+        "consomme",                                                     // 百味一缕
         "cassoulet",                                                    // 卡苏莱砂锅
         "crepes_suzette",                                               // 桔桔薄饼
         "la_lettre_a_focalors",                                         // 致水神
@@ -1253,7 +1253,7 @@ export default {
         "fried_shrimp_beanballs",                                       // 炸虾豆球
         "blazed_meat_stew",                                             // 火焰炖肉
         "xocoatl",                                                      // 苦水
-        "surf,_turf,_and_perch",                                        // 山与海与天空
+        "surf_turf_and_perch",                                          // 山与海与天空
         "volcano_cake",                                                 // 火山蛋糕
         "magmic_ode",                                                   // 炎岩之颂
         "fruits_aplenty",                                               // 沃陆果饮
@@ -1320,7 +1320,7 @@ export default {
         "fruity_skewers",                                               // 果香串烤
         "once_upon_a_time_in_mondstadt",                                // 「蒙德往事」
         "puppypaw_hash_brown",                                          // 爪爪土豆饼
-        "outriders_champion_steak!",                                    // 侦察骑士烤肉！
+        "outriders_champion_steak",                                     // 侦察骑士烤肉！
         "a_buoyant_breeze",                                             // 真·风神杂烩菜
         "wanmin_restaurants_boiled_fish",                               // 万民堂水煮鱼
         "flashfried_filet",                                             // 炝炒肉片
@@ -1337,11 +1337,11 @@ export default {
         "cold_noodles_with_mountain_delicacies",                        // 山珍凉卤面
         "prosperous_peace",                                             // 盛世太平
         "woodland_dream",                                               // 「林之梦」
-        "definitely_not_bar_food!",                                     // 绝对不是下酒菜
+        "definitely_not_bar_food",                                      // 绝对不是下酒菜
         "der_weisheit_letzter_schluss_life",                            // 至高的智慧（生活）
         "survival_grilled_fish",                                        // 绝境求生烤鱼
-        "nutritious_meal_v.593",                                        // 伍玖叁式营养餐
-        "rockin_riffin_chicken!",                                       // 摇·滚·鸡！
+        "nutritious_meal_v593",                                         // 伍玖叁式营养餐
+        "rockin_riffin_chicken",                                        // 摇·滚·鸡！
         "dinner_of_judgment",                                           // 审判的晚宴
         "ghostly_march",                                                // 幽幽大行军
         "allweather_beauty",                                            // 雨奇晴好
@@ -1349,7 +1349,7 @@ export default {
         "summer_festival_fish",                                         // 夏祭游鱼
         "warmth",                                                       // 「暖意」
         "stormcrest_pie",                                               // 骇浪派
-        "dizzinessbegone_no_jutsu_version_2.0",                         // 头晕回避术・改
+        "dizzinessbegone_no_jutsu_version_20",                          // 头晕回避术・改
         "a_stunning_stratagem",                                         // 「奇策」
         "victorious_legend",                                            // 常胜传说
         "faith_eternal",                                                // 永恒的信仰
@@ -1383,11 +1383,11 @@ export default {
         "cubic_tricks",                                                 // 方块戏法
         "seabirds_sojourn",                                             // 「海鸟的驻足」
         "secret_sauce_bbq_ribs",                                        // 秘烤肋排
-        "consomm_purete",                                               // 「缥雨一滴」
+        "consomme_purete",                                              // 「缥雨一滴」
         "exclusive_scoop_gourmet_column",                               // 独家秘闻・美食专栏
         "pour_la_justice",                                              // 「普茹斯蒂司」
         "sin_the_kind_that_doesnt_need_to_be_dealt_with",               // 罪恶·非必要处理型
-        "pick_what_you_like!",                                          // 「选你喜欢的！」
+        "pick_what_you_like",                                           // 「选你喜欢的！」
         "yummy_yum_cha",                                                // 得闲饮茶
         "encompassing_gladness",                                        // 四喜圆满
         "fashion_show",                                                 // 「时装秀」
@@ -1407,12 +1407,12 @@ export default {
         "jadecut_flowers",                                              // 玉剪着花
         "dreams_of_healing",                                            // 「一梦治愈」
         "goldstandard_healthy_meal",                                    // 金牌健康餐
-        "mt._mushroom_for_one",                                         // 菇菇山脉（单人份）
+        "mt_mushroom_for_one",                                          // 菇菇山脉（单人份）
         "gateau_debord_magnifique",                                     // 德波大蛋糕·绚丽型
         "emotional_support",                                            // 「情感支持」
         "abyssal_bounty",                                               // 「暗渊之获」
         "chatter_of_joyful_nights",                                     // 「欢夜畅谈」
-        "thunderclap_slash!",                                           // 「轰雷电光斩！」
+        "thunderclap_slash",                                            // 「轰雷电光斩！」
         "whisper_in_the_woods",                                         // 林间低语
         "long_night_alight",                                            // 长夜燃火
         "clinkclank_confectionery_cup",                                 // 嘎吱嘎吱甜甜杯

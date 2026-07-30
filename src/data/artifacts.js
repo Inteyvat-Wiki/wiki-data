@@ -35,7 +35,7 @@ export default [
     "shimenawas_reminiscence",                              // 追忆之注连
     "emblem_of_severed_fate",                               // 绝缘之旗印
     "husk_of_opulent_dreams",                               // 华馆梦醒形骸记
-    "ocean_hued_clam",                                      // 海染砗磲
+    "oceanhued_clam",                                       // 海染砗磲
     "vermillion_hereafter",                                 // 辰砂往生录
     "echoes_of_an_offering",                                // 来歆余响
     "deepwood_memories",                                    // 深林的记忆

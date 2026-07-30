@@ -86,12 +86,12 @@ export default [
     "rainslasher",                                  // 雨裁
     "rust",                                         // 弓藏
     "eye_of_perception",                            // 昭心
-    "primordial_jade_winged_spear",                 // 和璞鸢
+    "primordial_jade_wingedspear",                  // 和璞鸢
     "the_unforged",                                 // 无工之剑
     "vortex_vanquisher",                            // 贯虹之槊
     "memory_of_dust",                               // 尘世之锁
     "festering_desire",                             // 腐殖之剑
-    "snow_tombed_starsilver",                       // 雪葬的星银
+    "snowtombed_starsilver",                        // 雪葬的星银
     "dragonspine_spear",                            // 龙脊长枪
     "frostbearer",                                  // 忍冬之果
     "summit_shaper",                                // 斫峰之刃
@@ -107,7 +107,7 @@ export default [
     "song_of_broken_pines",                         // 松籁响起之时
     "mitternachts_waltz",                           // 幽夜华尔兹
     "dodoco_tales",                                 // 嘟嘟可故事集
-    "freedom_sworn",                                // 苍古自由之誓
+    "freedomsworn",                                 // 苍古自由之誓
     "amenoma_kageuchi",                             // 天目影打刀
     "katsuragikiri_nagamasa",                       // 桂木斩长正
     "kitain_cross_spear",                           // 喜多院十文字
@@ -115,7 +115,7 @@ export default [
     "hakushin_ring",                                // 白辰之环
     "mistsplitter_reforged",                        // 雾切之回光
     "thundering_pulse",                             // 飞雷之弦振
-    "luxurious_sea_lord",                           // 衔珠海皇
+    "luxurious_sealord",                            // 衔珠海皇
     "the_catch",                                    // 「渔获」
     "predator",                                     // 掠食者
     "engulfing_lightning",                          // 薙草之稻光
@@ -145,7 +145,7 @@ export default [
     "makhaira_aquamarine",                          // 玛海菈的水色
     "wandering_evenstar",                           // 流浪的晚星
     "missive_windspear",                            // 风信之锋
-    "key_of_khaj_nisut",                            // 圣显之钥
+    "key_of_khajnisut",                             // 圣显之钥
     "staff_of_the_scarlet_sands",                   // 赤沙之杖
     "a_thousand_floating_dreams",                   // 千夜浮梦
     "toukabou_shigure",                             // 东花坊时雨
@@ -156,7 +156,7 @@ export default [
     "jadefalls_splendor",                           // 碧落之珑
     "ibis_piercer",                                 // 鹮穿之喙
     "fleuve_cendre_ferryman",                       // 灰河渡手
-    "wolf_fang",                                    // 狼牙
+    "wolffang",                                     // 狼牙
     "talking_stick",                                // 聊聊棒
     "ballad_of_the_fjords",                         // 峡湾长歌
     "scion_of_the_blazing_sun",                     // 烈阳之嗣
@@ -191,13 +191,13 @@ export default [
     "footprint_of_the_rainbow",                     // 虹的行迹
     "chain_breaker",                                // 碎链
     "ring_of_yaxche",                               // 木棉之环
-    "ash_graven_drinking_horn",                     // 苍纹角杯
+    "ashgraven_drinking_horn",                      // 苍纹角杯
     "fang_of_the_mountain_king",                    // 山王长牙
     "surfs_up",                                     // 冲浪时光
     "sturdy_bone",                                  // 弥坚骨
     "fruitful_hook",                                // 硕果钩
-    "mountain_bracing_bolt",                        // 镇山之钉
-    "flower_wreathed_feathers",                     // 缀花之翎
+    "mountainbracing_bolt",                         // 镇山之钉
+    "flowerwreathed_feathers",                      // 缀花之翎
     "waveriding_whirl",                             // 乘浪的回旋
     "peak_patrol_song",                             // 岩峰巡歌
     "calamity_of_eshu",                             // 厄水之祸
@@ -205,12 +205,12 @@ export default [
     "a_thousand_blazing_suns",                      // 焚曜千阳
     "starcallers_watch",                            // 祭星者之望
     "tamayuratei_no_ohanashi",                      // 且住亭御咄
-    "sunny_morning_sleep_in",                       // 寝正月初晴
+    "sunny_morning_sleepin",                        // 寝正月初晴
     "vivid_notions",                                // 溢彩心念
     "sequence_of_solitude",                         // 冷寂迸音
     "symphonist_of_scents",                         // 香韵奏者
     "azurelight",                                   // 苍耀
-    "flame_forged_insight",                         // 拾慧铸熔
+    "flameforged_insight",                          // 拾慧铸熔
     "fractured_halo",                               // 支离轮光
     "serenitys_call",                               // 谧音吹哨
     "master_key",                                   // 万能钥匙
