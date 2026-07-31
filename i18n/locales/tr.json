@@ -1,0 +1,17 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Güller ve Silahlar",
+            "homeward_he_who_caught_the_wind": "Rüzgarla Geri Dönen",
+            "questioning_melusine_and_answering_machine": "Sorgulayan Melusina Ve Cevaplayan Makina",
+            "lost_holy_city_and_the_millennium_seeker": "Kayıp Kutsal Şehir ve Bin Yıllık Arayış",
+            "witchs_homework": "Cadının Ödevi"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Sahne|Bölüm|Sayfa)\\s*(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+|(?:[IVXLCDM]+|\\d+)\\.\\s*(?:Bölüm|Gün|Tur))$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:(?:Birinci|İkinci|Üçüncü)\\s+Bölüm|(?:İlk|İkinci|Üçüncü)\\s+(?:Hediye|Kıta|Gece|Ayak)|Kapanıştan Sonraki Gece|Son Gece)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Başlangıç|Son Bölüm|Son Söz|Ek|Final|Sonuç|İhtişamlı Bir Kapanış|Velvele|Kriz)$"
+        ]
+    }
+}

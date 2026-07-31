@@ -1,0 +1,18 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Rose e moschetti",
+            "homeward_he_who_caught_the_wind": "Il ritorno di colui che catturò il vento",
+            "questioning_melusine_and_answering_machine": "La Melusina chiede, la macchina risponde",
+            "lost_holy_city_and_the_millennium_seeker": "La sacra città perduta e il cercatore millenario",
+            "witchs_homework": "Compiti della strega"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)Capitolo\\s+finale$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Atto|Parte|Capitolo|Pagina|giorno)\\s*(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:\\d+º\\s*turno|[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:(?:Primo|Secondo|Terzo)\\s+(?:dono|movimento)|(?:Prima|Seconda|Terza|Ultima)\\s+(?:notte|strofa))$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Prologo|Epilogo|Appendice|Conclusione|Finale|Finale glorioso|Preludio|Inizio|Clamore|Crisi|Dopo la notte)$"
+        ]
+    }
+}

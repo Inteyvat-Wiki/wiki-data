@@ -13,13 +13,13 @@ const show_full_description: string[] = (() => {
         if (type == 'food') continue;
         for (let nameraw of material_list[type]) {
             if (typeof nameraw == "string") {
-                const material_data = MaterialData.get_material(nameraw, 'zh_cn');
+                const material_data = MaterialData.get_material(nameraw, 'zh_hans');
                 if (material_data && material_data.fullDescription && !res.includes(type)) {
                     res.push(type);
                 }
             } else {
                 for (let name of nameraw) {
-                    const material_data = MaterialData.get_material(name, 'zh_cn');
+                    const material_data = MaterialData.get_material(name, 'zh_hans');
                     if (material_data && material_data.fullDescription && !res.includes(type)) {
                         res.push(type);
                     }

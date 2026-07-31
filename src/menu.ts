@@ -9,13 +9,13 @@ import { Menu } from "~/types/menu";
 export function get_menu(): Menu {
     return {
         character: {
-            icon: get_character(character_list.at(-1), 'zh_cn').icon,
+            icon: get_character(character_list.at(-1), 'zh_hans').icon,
         },
         weapon: {
-            icon: get_weapon(weapon_list.at(-1), 'zh_cn').icon,
+            icon: get_weapon(weapon_list.at(-1), 'zh_hans').icon,
         },
         artifact: {
-            icon: get_artifact(artifact_list.at(-1), 'zh_cn').icon,
+            icon: get_artifact(artifact_list.at(-1), 'zh_hans').icon,
         }
     };
 }

@@ -1,0 +1,17 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Tường Vi Và Hỏa Mai",
+            "homeward_he_who_caught_the_wind": "Người Trở Về Đuổi Theo Gió",
+            "questioning_melusine_and_answering_machine": "Melusine Hỏi Và Robot Trả Lời",
+            "lost_holy_city_and_the_millennium_seeker": "Thánh Thành Thất Lạc Và Người Đến Từ Ngàn Năm",
+            "witchs_homework": "Bài Tập Của Ma Nữ"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Màn|Chương|Ngày|Trang|Hiệp|Kỳ)\\s*(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Món Quà (?:Đầu Tiên|Thứ Hai|Thứ Ba)|Đêm (?:Đầu Tiên|Kế Tiếp|Sau Đó|Cuối Cùng)|Đầu Tiên|Thứ Hai|Thứ Ba|Một|Hai|Ba)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Mở Đầu|Dạo Đầu|Kết Thúc|Lời Kết|Chương Cuối|Phụ Lục|Trận Cuối|Cuối|Cuối Cùng|Hỗn Loạn|Nguy Cơ|Chuyện Sau Đó|Sau Đó|Kế Tiếp)$"
+        ]
+    }
+}

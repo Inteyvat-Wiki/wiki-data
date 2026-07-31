@@ -2,8 +2,21 @@ import genshindb, { Language } from 'genshin-db';
 import { Lang } from '~/utils/i18n';
 
 const language_map: Record<Lang, string> = {
-    'zh_cn': 'CHS',
+    'zh_hans': 'CHS',
+    'zh_hant': 'CHT',
+    'de': 'DE',
     'en': 'EN',
+    'es': 'ES',
+    'fr': 'FR',
+    'id': 'ID',
+    'it': 'IT',
+    'ja': 'JP',
+    'ko': 'KR',
+    'pt': 'PT',
+    'ru': 'RU',
+    'th': 'TH',
+    'tr': 'TR',
+    'vi': 'VI',
 }
 
 const filename_query_options = (lang: Lang) => ({
@@ -132,6 +145,15 @@ export const MapData = {
     get_maplayer: (name: string, lang: Lang) => {
         let res = genshindb.maplayers(name, filename_query_options(lang));
         if (!res) throw new Error(`Map layer ${name} not found in genshindb`);
+        return res;
+    },
+}
+
+export const ChapterData = {
+
+    get_chapter: (name: string, lang: Lang) => {
+        let res = genshindb.chapters(name, filename_query_options(lang));
+        if (!res) throw new Error(`Chapter ${name} not found in genshindb`);
         return res;
     },
 }

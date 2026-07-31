@@ -1,0 +1,17 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "薔薇と銃士",
+            "homeward_he_who_caught_the_wind": "風を捕まえる帰郷者",
+            "questioning_melusine_and_answering_machine": "問題メリュジーヌと解決ロボ",
+            "lost_holy_city_and_the_millennium_seeker": "失われた聖地と千年の来訪者",
+            "witchs_homework": "魔女の課題"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:[·・]|\\s+)(?:第[一二三四五六七八九十零百\\d]+(?:幕|章|回|ラウンド|首)|其の[一二三四五六七八九十零百]+)$",
+            "^(.+?)(?:[·・]|\\s+)(?:[一二三四五六七八九十]日目|プレゼント\\d+|[IVXLCDM]+|\\d+)$",
+            "^(.+?[！!?？])(?:\\d+ページ目|おまけページ)$",
+            "^(.+?)(?:[·・]|\\s+)(?:序章|序曲|最終章|終章|エピローグ|後日談|始夜|中夜|後夜|終夜|騒動|危機|終局|上|中|下)$"
+        ]
+    }
+}

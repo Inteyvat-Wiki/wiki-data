@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { cp } from 'fs/promises';
 
-import { lang_list } from "~/utils/i18n";
+import { Lang, lang_list } from "~/utils/i18n";
 import { ConvertRaw } from "~/utils/convert_raw";
 
 import character_list from "~/data/characters";
@@ -10,6 +10,7 @@ import artifact_list from "~/data/artifacts";
 import material_list from "~/data/materials";
 import living_being_list from "~/data/living_beings";
 import geography_list from "~/data/geographies";
+import chapter_group_list from "~/data/chapters";
 
 import { gen_character } from "~/character";
 import { gen_weapon } from "~/weapon";
@@ -17,6 +18,7 @@ import { gen_artifact } from "~/artifact";
 import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
+import { gen_chapter_group } from "~/chapter_groups";
 import { gen_map, get_maps } from '~/map';
 import { get_menu } from '~/menu';
 
@@ -30,9 +32,11 @@ function main() {
     fs.writeFileSync('./data/materials.json', JSON.stringify(material_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(chapter_group_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/maps.json', JSON.stringify(get_maps(), null, 4), 'utf-8');
 
-    for (let lang of lang_list) {
+    // for (let lang of lang_list) {
+    for (let lang of ['zh_hans', 'en'] as Lang[]) { // test
 
         gen_character(lang, `./data/${lang}/character`);
         gen_weapon(lang, `./data/${lang}/weapon`);
@@ -40,6 +44,7 @@ function main() {
         gen_material(lang, `./data/${lang}/material`);
         gen_living_being(lang, `./data/${lang}/living_being`);
         gen_geography(lang, `./data/${lang}/geography`);
+        gen_chapter_group(lang, `./data/${lang}/chapter_group`);
         gen_map(lang, `./data/${lang}/map`);
     }
 

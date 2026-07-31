@@ -1,0 +1,16 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "장미와 화승총",
+            "homeward_he_who_caught_the_wind": "돌아온 바람 잡는 이방인",
+            "questioning_melusine_and_answering_machine": "문제 멜뤼진과 정답 로봇",
+            "lost_holy_city_and_the_millennium_seeker": "잃어버린 성과 천년의 탐색자",
+            "witchs_homework": "마녀의 과제"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:·|\\s+)(?:제\\d+[막장]|\\d+장|[IVXLCDM]+)$",
+            "^(.+?)(?:·|\\s+)(?:(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열)\\s*번째(?:\\s+(?:선물|턴))?|(?:첫째|둘째|셋째|넷째|다섯째|마지막)\\s+날)$",
+            "^(.+?)(?:·|\\s+)(?:서곡|프롤로그|종막|종장|후일담|피날레|부록|결말|마지막 장|위기|혼란|상|중|하)$"
+        ]
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Mawar dan Senapan",
+            "homeward_he_who_caught_the_wind": "Kembalinya Ia yang Menangkap Angin",
+            "questioning_melusine_and_answering_machine": "Pertanyaan Melusine dan Jawaban Si Mesin",
+            "lost_holy_city_and_the_millennium_seeker": "Kota Suci yang Hilang dan Pengunjung Ribuan Tahun",
+            "witchs_homework": "PR Penyihir"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Bag\\.?|Bagian|Chapter|Halaman)\\s*(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Hari\\s+Ke-?\\d+|[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Gerakan\\s+(?:Pertama|Kedua|Ketiga)|Pertama|Kedua|Ketiga)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Awalan|Epilog|Prolog|Pendahuluan|Lampiran|Lanjutan|Terakhir|Akhir|Final|Kericuhan|Krisis)$"
+        ]
+    }
+}

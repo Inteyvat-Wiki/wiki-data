@@ -10,5 +10,20 @@
     },
     "living-being": {
         "description": "Description"
+    },
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Roses and Muskets",
+            "homeward_he_who_caught_the_wind": "Homeward, He Who Caught the Wind",
+            "questioning_melusine_and_answering_machine": "Questioning Melusine and Answering Machine",
+            "lost_holy_city_and_the_millennium_seeker": "The Lost Holy City and the Millennium Seeker",
+            "witchs_homework": "Witch's Homework"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Act|Part|Chapter|Day|Round|Page|Volume)\\s+(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:(?:First|Second|Third|Fourth|Fifth)\\s+(?:Gift|Night|Stanza|Movement|Leg)|After-Night|Final Night)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Prologue|Epilogue|Afterword|Appendix|Conclusion|Final Chapter|Glorious Finale|Finale|Clamor|Crisis|Prelude)$"
+        ]
     }
 }

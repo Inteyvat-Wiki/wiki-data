@@ -1,0 +1,18 @@
+{
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "Rosas e Pistolas",
+            "homeward_he_who_caught_the_wind": "O Viajante que Persegue o Vento",
+            "questioning_melusine_and_answering_machine": "Melusine Perguntadora e Máquina de Respostas",
+            "lost_holy_city_and_the_millennium_seeker": "A Cidade Sagrada Perdida e os Visitantes Milenares",
+            "witchs_homework": "Tarefa da Bruxa"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)Capítulo\\s+Final$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Ato|Parte|Capítulo|Dia|Página)\\s*(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+)$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:(?:Primeiro|Segundo|Terceiro)\\s+(?:Movimento|Presente))$",
+            "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Prólogo|Epílogo|Apêndice|Conclusão|Final|Final Glorioso|Prelúdio|Início|Amanhecer|Escurecer|Após a Noite|Noite Adentro|Clamor|Crise)$"
+        ]
+    }
+}

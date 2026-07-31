@@ -1,0 +1,29 @@
+{
+    "character": {
+        "constellation": "命之座",
+        "description": "描述"
+    },
+    "material": {
+        "description": "描述",
+        "base_food": "原始料理",
+        "belong_character": "所属角色"
+    },
+    "living-being": {
+        "description": "描述"
+    },
+    "ingame": {
+        "chapter_name": {
+            "muskets_and_roses": "蔷薇与铳枪",
+            "homeward_he_who_caught_the_wind": "捕风的归客",
+            "questioning_melusine_and_answering_machine": "问题美露莘与答案机器人",
+            "lost_holy_city_and_the_millennium_seeker": "失落圣城与千年来者",
+            "witchs_homework": "魔女的课业"
+        },
+        "chapter_group_name_regex": [
+            "^(.+?)(?:[·・]|\\s+)(?:第(?:[一二三四五六七八九十零百]+|\\d+)(?:幕|章|节|回合|回|天|首|份礼物)|其[一二三四五六七八九十零百]+)[！!]?$",
+            "^(.+?[！!?？])(?:第(?:[一二三四五六七八九十零百]+|\\d+)(?:幕|章|节|回合|回|天|页)|其[一二三四五六七八九十零百]+)$",
+            "^(.+?)(?:[·・]|\\s+)(?:序章|序曲|序奏|终章|尾声|幕间|后日谈|事后|终局|附录页|始夜|继夜|后夜|终夜|纷扰|危机|上|中|下)$",
+            "^(.+?[！!?？])(?:附录页)$"
+        ]
+    }
+}
