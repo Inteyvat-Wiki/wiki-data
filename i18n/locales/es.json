@@ -7,6 +7,7 @@
             "lost_holy_city_and_the_millennium_seeker": "La Ciudad Sagrada y el buscador milenario",
             "witchs_homework": "Lecciones del Aquelarre"
         },
+        "mate_name": "{M#Éter}{F#Lumina}",
         "chapter_group_name_regex": [
             "^(.+?)\\s*\\((?:[IVX]+|\\d+)\\)$",
             "^(.+?)\\s*\\(pág\\.\\s*\\d+\\)$",

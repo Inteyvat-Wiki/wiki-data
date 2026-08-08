@@ -157,3 +157,12 @@ export const ChapterData = {
         return res;
     },
 }
+
+export const TaskData = {
+
+    get_task: (name: string, lang: Lang) => {
+        let res = genshindb.tasks(name, filename_query_options(lang));
+        if (!res) throw new Error(`Task ${name} not found in genshindb`);
+        return res;
+    },
+}

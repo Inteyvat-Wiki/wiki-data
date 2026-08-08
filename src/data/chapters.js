@@ -339,29 +339,63 @@ export default {
             "up_toward_homecoming_wings",                                       // 启喻鸟之章 第一幕 | 飞向归羽声
         ],
     },
-    // "hangout_quests": {
-    //     "tmp": [
-    //         "a_confounding_conundrum",                                          // 邀约事件·珐露珊 第一幕 | 难解之结
-    //         "a_housekeepers_daily_chores",                                      // 邀约事件·托马 第一幕 | 家政官的日常工作
-    //         "a_song_that_knows_grace",                                          // 邀约事件·云堇 第一幕 | 弦歌知雅意
-    //         "checks_cats",                                                      // 邀约事件·琳妮特 第一幕 | 猫与随机数
-    //         "chivalric_training",                                               // 邀约事件·诺艾尔 第一幕 | 骑士修行之道
-    //         "ever_silent_stars",                                                // 邀约事件·莱依拉 第一幕 | 星本无言
-    //         "fantastic_voyage",                                                 // 邀约事件·班尼特 第一幕 | 美妙旅程
-    //         "shenanigans_and_sweet_wine",                                       // 邀约事件·凯亚 第一幕 | 鬼话与甜酒
-    //         "signs_of_evil",                                                    // 邀约事件·重云 第一幕 | 寻妖觅邪记
-    //         "the_canine_generals_special_operations",                           // 邀约事件·五郎 第一幕 | 犬大将的特别行动
-    //         "the_cat_and_the_cocktail",                                         // 邀约事件·迪奥娜 第一幕 | 猫与特调酒
-    //         "the_gangs_daily_deeds",                                            // 邀约事件·久岐忍 第一幕 | 帮派的日常事务
-    //         "the_jade_chambers_returning_guest",                                // 邀约事件·凝光 第一幕 | 玉阁归客至
-    //         "the_pendulum_of_weal_and_woe",                                     // 邀约事件·卡维 第一幕 | 苦与幸的钟摆
-    //         "trap_em_by_storm",                                                 // 邀约事件·鹿野院平藏 第一幕 | 风暴捕物帐
-    //         "wellspring_of_healing",                                            // 邀约事件·芭芭拉 第一幕 | 治愈的清泉
-    //         "when_the_crux_shines_bright",                                      // 邀约事件·北斗 第一幕 | 南十字闪耀时
-    //         "yoohoo_art_seichou_no_jutsu",                                      // 邀约事件·早柚 第一幕 | 呜呼流·生长之术
-    //         "knightly_exam_prep",                                               // 邀约事件·诺艾尔 第二幕 | 骑士备考之道
-    //     ]
-    // },
+    "hangout_quests": {
+        "hangout_event_bennett": [
+            "fantastic_voyage",                                                 // 邀约事件·班尼特 第一幕 | 美妙旅程
+        ],
+        "hangout_event_chongyun": [
+            "signs_of_evil",                                                    // 邀约事件·重云 第一幕 | 寻妖觅邪记
+        ],
+        "hangout_event_barbara": [
+            "wellspring_of_healing",                                            // 邀约事件·芭芭拉 第一幕 | 治愈的清泉
+        ],
+        "hangout_event_noelle": [
+            "chivalric_training",                                               // 邀约事件·诺艾尔 第一幕 | 骑士修行之道
+            "knightly_exam_prep",                                               // 邀约事件·诺艾尔 第二幕 | 骑士备考之道
+        ],
+        "hangout_event_diona": [
+            "the_cat_and_the_cocktail",                                         // 邀约事件·迪奥娜 第一幕 | 猫与特调酒
+        ],
+        "hangout_event_thoma": [
+            "a_housekeepers_daily_chores",                                      // 邀约事件·托马 第一幕 | 家政官的日常工作
+        ],
+        "hangout_event_sayu": [
+            "yoohoo_art_seichou_no_jutsu",                                      // 邀约事件·早柚 第一幕 | 呜呼流·生长之术
+        ],
+        "hangout_event_beidou": [
+            "when_the_crux_shines_bright",                                      // 邀约事件·北斗 第一幕 | 南十字闪耀时
+        ],
+        "hangout_event_gorou": [
+            "the_canine_generals_special_operations",                           // 邀约事件·五郎 第一幕 | 犬大将的特别行动
+        ],
+        "hangout_event_yunjin": [
+            "a_song_that_knows_grace",                                          // 邀约事件·云堇 第一幕 | 弦歌知雅意
+        ],
+        "hangout_event_ningguang": [
+            "the_jade_chambers_returning_guest",                                // 邀约事件·凝光 第一幕 | 玉阁归客至
+        ],
+        "hangout_event_kuki_shinobu": [
+            "the_gangs_daily_deeds",                                            // 邀约事件·久岐忍 第一幕 | 帮派的日常事务
+        ],
+        "hangout_event_shikanoin_heizou": [
+            "trap_em_by_storm",                                                 // 邀约事件·鹿野院平藏 第一幕 | 风暴捕物帐
+        ],
+        "hangout_event_faruzan": [
+            "a_confounding_conundrum",                                          // 邀约事件·珐露珊 第一幕 | 难解之结
+        ],
+        "hangout_event_layla": [
+            "ever_silent_stars",                                                // 邀约事件·莱依拉 第一幕 | 星本无言
+        ],
+        "hangout_event_kaveh": [
+            "the_pendulum_of_weal_and_woe",                                     // 邀约事件·卡维 第一幕 | 苦与幸的钟摆
+        ],
+        "hangout_event_kaeya": [
+            "shenanigans_and_sweet_wine",                                       // 邀约事件·凯亚 第一幕 | 鬼话与甜酒
+        ],
+        "hangout_event_lynette": [
+            "checks_cats",                                                      // 邀约事件·琳妮特 第一幕 | 猫与随机数
+        ]
+    },
     "event_quests": {
         "unreconciled_stars": [
             "unknown_star",                                                     // 未归的熄星 其一 | 未知之星
@@ -380,11 +414,6 @@ export default {
             "the_origin_of_the_lanterns",                                       // 海灯节 其一 | 灯自何处来
             "currents_deep_beneath_the_lanterns",                               // 海灯节 其二 | 灯下暗流深
             "light_upon_the_sea",                                               // 海灯节 其三 | 海内有明霄
-            "lantern_rite_day_1",                                               // 海灯节 第一天 | 海灯节 第一天
-            "lantern_rite_day_2",                                               // 海灯节 第二天 | 海灯节 第二天
-            "lantern_rite_day_3",                                               // 海灯节 第三天 | 海灯节 第三天
-            "lantern_rite_day_4",                                               // 海灯节 第四天 | 海灯节 第四天
-            "lantern_rite_day_5",                                               // 海灯节 第五天 | 海灯节 第五天
         ],
         "windblume_festival": [
             "ode_to_flower_and_cloud",                                          // 风花节 其一 | 花与云之诗

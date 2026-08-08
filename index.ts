@@ -19,6 +19,7 @@ import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
 import { gen_chapter_group } from "~/chapter_groups";
+import { gen_task, get_task_index } from "~/task";
 import { gen_map, get_maps } from '~/map';
 import { get_menu } from '~/menu';
 
@@ -33,6 +34,7 @@ function main() {
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(chapter_group_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/tasks.json', JSON.stringify(get_task_index('zh_hans'), null, 4), 'utf-8');
     fs.writeFileSync('./data/maps.json', JSON.stringify(get_maps(), null, 4), 'utf-8');
 
     // for (let lang of lang_list) {
@@ -45,6 +47,7 @@ function main() {
         gen_living_being(lang, `./data/${lang}/living_being`);
         gen_geography(lang, `./data/${lang}/geography`);
         gen_chapter_group(lang, `./data/${lang}/chapter_group`);
+        gen_task(lang, `./data/${lang}/task`);
         gen_map(lang, `./data/${lang}/map`);
     }
 

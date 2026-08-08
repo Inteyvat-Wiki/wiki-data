@@ -5,7 +5,7 @@ export type ChapterGroup = {
         id: string,
         name: string,
         icon: string,
-        task_ids: number[],
+        tasks: string[],
     }[],
 };
 

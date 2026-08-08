@@ -7,6 +7,7 @@
             "lost_holy_city_and_the_millennium_seeker": "失われた聖地と千年の来訪者",
             "witchs_homework": "魔女の課題"
         },
+        "mate_name": "{M#空}{F#蛍}",
         "chapter_group_name_regex": [
             "^(.+?)(?:[·・]|\\s+)(?:第[一二三四五六七八九十零百\\d]+(?:幕|章|回|ラウンド|首)|其の[一二三四五六七八九十零百]+)$",
             "^(.+?)(?:[·・]|\\s+)(?:[一二三四五六七八九十]日目|プレゼント\\d+|[IVXLCDM]+|\\d+)$",

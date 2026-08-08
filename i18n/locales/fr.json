@@ -7,6 +7,7 @@
             "lost_holy_city_and_the_millennium_seeker": "La cité sacrée perdue et le chercheur millénaire",
             "witchs_homework": "Devoirs de la sorcière"
         },
+        "mate_name": "{M#Aether}{F#Lumine}",
         "chapter_group_name_regex": [
             "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Acte|Chapitre|Jour|Page)\\s*(?:[IVXLCDM]+|\\d+)$",
             "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+)$",

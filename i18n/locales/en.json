@@ -19,6 +19,7 @@
             "lost_holy_city_and_the_millennium_seeker": "The Lost Holy City and the Millennium Seeker",
             "witchs_homework": "Witch's Homework"
         },
+        "mate_name": "{M#Aether}{F#Lumine}",
         "chapter_group_name_regex": [
             "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:Act|Part|Chapter|Day|Round|Page|Volume)\\s+(?:[IVXLCDM]+|\\d+)$",
             "^(.+?)(?:\\s*[:\\-–—]\\s*|\\s+)(?:[IVXLCDM]+|\\d+)$",

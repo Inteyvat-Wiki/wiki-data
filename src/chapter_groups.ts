@@ -4,6 +4,7 @@ import { ChapterData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, ta, te } from "~/utils/i18n";
 import { ChapterGroup, ChapterGroups } from "~/types/chapter_group";
+import { get_task_id_filename_map } from "~/task";
 import chapter_groups_data from "~/data/chapters";
 
 function get_chapter_group_ids(data: any): Record<string, string[]> {
@@ -72,15 +73,29 @@ export function get_chapter_group(id: string, lang: Lang): ChapterGroup {
     if (!chapter_ids) throw new Error(`Chapter group ${id} not found`);
 
     const raw_chapters = chapter_ids.map(chapter_id => ChapterData.get_chapter(chapter_id, lang));
+    const task_id_map = get_task_id_filename_map();
     return {
         id,
         name: get_chapter_group_name(id, raw_chapters, lang),
-        chapters: raw_chapters.map((chapter, index) => ({
-            id: chapter_ids[index],
-            name: chapter.name,
-            icon: ConvertRaw.get_images_url(chapter.images?.filename_icon, `chapter_group/${id}/${chapter_ids[index]}_icon`),
-            task_ids: chapter.taskIds,
-        })),
+        chapters: raw_chapters.map((chapter, index) => {
+            const chapter_id = chapter_ids[index];
+            // 找不到对应导出任务的 task id 直接丢弃并输出到控制台
+            const tasks: string[] = [];
+            for (const task_id of chapter.taskIds) {
+                const filename = task_id_map.get(task_id);
+                if (!filename) {
+                    // console.log(`${id}/${chapter_id}: task id ${task_id} not found`);
+                    continue;
+                }
+                tasks.push(filename);
+            }
+            return {
+                id: chapter_id,
+                name: chapter.name,
+                icon: ConvertRaw.get_images_url(chapter.images?.filename_icon, `chapter_group/${id}/${chapter_id}_icon`),
+                tasks,
+            };
+        }),
     };
 }
 
