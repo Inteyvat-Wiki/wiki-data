@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { cp } from 'fs/promises';
 
-import { Lang, lang_list } from "~/utils/i18n";
+import { Lang } from "~/utils/i18n";
 import { ConvertRaw } from "~/utils/convert_raw";
 
 import character_list from "~/data/characters";
@@ -10,7 +10,6 @@ import artifact_list from "~/data/artifacts";
 import material_list from "~/data/materials";
 import living_being_list from "~/data/living_beings";
 import geography_list from "~/data/geographies";
-import chapter_group_list from "~/data/chapters";
 
 import { gen_character } from "~/character";
 import { gen_weapon } from "~/weapon";
@@ -18,13 +17,14 @@ import { gen_artifact } from "~/artifact";
 import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
-import { gen_chapter_group } from "~/chapter_groups";
-import { gen_task, get_task_index } from "~/task";
+import { gen_chapter_group, get_chapter_group_ids } from "~/chapter_groups";
+import { gen_task, get_task_ids } from "~/task";
 import { gen_map, get_maps } from '~/map';
 import { get_menu } from '~/menu';
 
-function main() {
+const languages: Lang[] = ['zh_hans', 'en'];
 
+function main() {
     fs.mkdirSync('./data', { recursive: true });
     fs.mkdirSync('./data/images', { recursive: true });
     fs.writeFileSync('./data/characters.json', JSON.stringify(character_list, null, 4), 'utf-8');
@@ -33,13 +33,12 @@ function main() {
     fs.writeFileSync('./data/materials.json', JSON.stringify(material_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
-    fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(chapter_group_list, null, 4), 'utf-8');
-    fs.writeFileSync('./data/tasks.json', JSON.stringify(get_task_index('zh_hans'), null, 4), 'utf-8');
     fs.writeFileSync('./data/maps.json', JSON.stringify(get_maps(), null, 4), 'utf-8');
 
-    // for (let lang of lang_list) {
-    for (let lang of ['zh_hans', 'en'] as Lang[]) { // test
+    fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(get_chapter_group_ids(), null, 4), 'utf-8');
+    fs.writeFileSync('./data/tasks.json', JSON.stringify(get_task_ids(), null, 4), 'utf-8');
 
+    for (const lang of languages) {
         gen_character(lang, `./data/${lang}/character`);
         gen_weapon(lang, `./data/${lang}/weapon`);
         gen_artifact(lang, `./data/${lang}/artifact`);

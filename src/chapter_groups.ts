@@ -3,33 +3,32 @@ import fs from 'fs';
 import { ChapterData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, ta, te } from "~/utils/i18n";
-import { ChapterGroup, ChapterGroups } from "~/types/chapter_group";
-import { get_task_id_filename_map } from "~/task";
-import chapter_groups_data from "~/data/chapters";
+import { get_task_id_map } from "~/task";
+import chapter_group_index from "~/data/chapters";
+import type {
+    ChapterGroup,
+    ChapterGroupIndex,
+    ChapterGroups,
+    ChapterGroupType,
+} from "~/types/chapter_group";
 
-function get_chapter_group_ids(data: any): Record<string, string[]> {
-    const res: Record<string, string[]> = {};
+type ChapterGroupEntry = {
+    id: string,
+    type: ChapterGroupType,
+    chapters: string[],
+};
 
-    function dfs(obj: any) {
-        for (let key in obj) {
-            if (Array.isArray(obj[key])) {
-                res[key] = obj[key];
-            } else {
-                dfs(obj[key]);
-            }
-        }
-    }
+const index = chapter_group_index as ChapterGroupIndex;
+const entries: ChapterGroupEntry[] = Object.entries(index).flatMap(([type, groups]) =>
+    Object.entries(groups).map(([id, chapters]) => ({
+        id,
+        type: type as ChapterGroupType,
+        chapters,
+    })));
+// 主线任务（魔神任务）的章节组直接用第一个章节的名字作为组名
+const archon_group_ids = new Set(Object.keys(index.archon_quests));
 
-    dfs(data);
-    return res;
-}
-
-function get_archon_quest_group_ids(data: any): Set<string> {
-    return new Set(Object.keys(data.archon_quests ?? {}));
-}
-
-const archon_quest_group_ids = get_archon_quest_group_ids(chapter_groups_data);
-
+// 从章节名中提取带分隔符前缀/后缀的组名部分，如「第一章 · 迫近的客星」→「迫近的客星」
 function trim_chapter_group_name(name: string): string {
     return name
         .replace(/^[\s:：\-–—·・.。]+|[\s:：\-–—·・.。]+$/g, '')
@@ -39,83 +38,70 @@ function trim_chapter_group_name(name: string): string {
 function match_chapter_group_name(text: string | undefined, lang: Lang): string | undefined {
     if (!text) return undefined;
 
-    for (let regex of ta('ingame.chapter_group_name_regex', lang)) {
-        const match = text.match(new RegExp(regex, 'i'));
-        if (match?.[1]) {
-            const name = trim_chapter_group_name(match[1]);
-            if (name) return name;
-        }
+    // 不同语言的章节名格式不同，逐个正则尝试，取第一个能匹配出组名的结果
+    for (const pattern of ta('ingame.chapter_group_name_regex', lang)) {
+        const match = text.match(new RegExp(pattern, 'i'));
+        const name = match?.[1] && trim_chapter_group_name(match[1]);
+        if (name) return name;
     }
-
     return undefined;
 }
 
-function get_chapter_group_name(id: string, chapters: ReturnType<typeof ChapterData.get_chapter>[], lang: Lang): string {
-    if (archon_quest_group_ids.has(id)) return chapters[0]?.name ?? id;
+function get_group_name(id: string, chapters: ReturnType<typeof ChapterData.get_chapter>[], lang: Lang): string {
+    if (archon_group_ids.has(id)) return chapters[0]?.name ?? id;
 
-    const ingame_name = te(`ingame.chapter_name.${id}`, lang);
-    if (ingame_name) return ingame_name;
+    // 优先使用翻译表里的显式译名，其次从章节的 numberName/name 中提取
+    const translated_name = te(`ingame.chapter_name.${id}`, lang);
+    if (translated_name) return translated_name;
 
-    for (let chapter of chapters) {
+    for (const chapter of chapters) {
         const name = match_chapter_group_name(chapter.numberName, lang);
         if (name) return name;
     }
-    for (let chapter of chapters) {
+    for (const chapter of chapters) {
         const name = match_chapter_group_name(chapter.name, lang);
         if (name) return name;
     }
-
     return chapters[0]?.name ?? id;
 }
 
-export function get_chapter_group(id: string, lang: Lang): ChapterGroup {
-    const chapter_ids = get_chapter_group_ids(chapter_groups_data)[id];
-    if (!chapter_ids) throw new Error(`Chapter group ${id} not found`);
+function get_chapter_group(entry: ChapterGroupEntry, lang: Lang): ChapterGroup {
+    const chapters = entry.chapters.map(id => ChapterData.get_chapter(id, lang));
+    const task_ids = get_task_id_map();
 
-    const raw_chapters = chapter_ids.map(chapter_id => ChapterData.get_chapter(chapter_id, lang));
-    const task_id_map = get_task_id_filename_map();
     return {
-        id,
-        name: get_chapter_group_name(id, raw_chapters, lang),
-        chapters: raw_chapters.map((chapter, index) => {
-            const chapter_id = chapter_ids[index];
-            // 找不到对应导出任务的 task id 直接丢弃并输出到控制台
-            const tasks: string[] = [];
-            for (const task_id of chapter.taskIds) {
-                const filename = task_id_map.get(task_id);
-                if (!filename) {
-                    // console.log(`${id}/${chapter_id}: task id ${task_id} not found`);
-                    continue;
-                }
-                tasks.push(filename);
-            }
+        id: entry.id,
+        type: entry.type,
+        name: get_group_name(entry.id, chapters, lang),
+        chapters: chapters.map((chapter, chapter_index) => {
+            const id = entry.chapters[chapter_index]!;
             return {
-                id: chapter_id,
+                id,
                 name: chapter.name,
-                icon: ConvertRaw.get_images_url(chapter.images?.filename_icon, `chapter_group/${id}/${chapter_id}_icon`),
-                tasks,
+                icon: ConvertRaw.get_images_url(
+                    chapter.images?.filename_icon,
+                    `chapter_group/${entry.id}/${id}_icon`,
+                ),
+                // 章节内的任务按原始 taskId 映射为任务文件名，映射不到的丢弃
+                tasks: chapter.taskIds.flatMap(task_id => {
+                    const task = task_ids.get(task_id);
+                    return task ? [task] : [];
+                }),
             };
         }),
     };
 }
 
-export function get_chapter_group_list(lang: Lang): ChapterGroups {
-    const res: ChapterGroups = [];
+export function get_chapter_groups(lang: Lang): ChapterGroups {
+    return entries.map(entry => get_chapter_group(entry, lang));
+}
 
-    for (let id in get_chapter_group_ids(chapter_groups_data)) {
-        const { id: _id, ...group } = get_chapter_group(id, lang);
-        res.push(group);
-    }
-
-    return res;
+export function get_chapter_group_ids(): string[] {
+    return entries.map(entry => entry.id);
 }
 
 export function gen_chapter_group(lang: Lang, path: string) {
-
-    fs.mkdirSync(`${path}`, { recursive: true });
-    for (let id in get_chapter_group_ids(chapter_groups_data)) {
-        fs.writeFileSync(`${path}/${id}.json`, JSON.stringify(get_chapter_group(id, lang), null, 4), 'utf-8');
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_chapter_group_list(lang), null, 4), 'utf-8');
-
+    fs.rmSync(path, { recursive: true, force: true });
+    fs.mkdirSync(path, { recursive: true });
+    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_chapter_groups(lang), null, 4), 'utf-8');
 }

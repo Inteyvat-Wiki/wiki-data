@@ -1,112 +1,125 @@
 // ---- 任务索引与列表 ----
 
-export type Tasks = {
+export type TaskType = 'archon_quests' | 'story_quests' | 'hangout_quests'
+    | 'event_quests' | 'world_quests' | 'commission_quests';
+
+export type TaskSummary = {
     id: string,
-    name: string,
-    description: string,
+    name: string | null,
+    description: string | null,
     chapter: string | null,
-    type: 'archon_quests' | 'story_quests' | 'hangout_quests' | 'event_quests' | 'world_quests' | 'commission_quests',
-}[];
+    type: TaskType,
+};
 
-// ---- 计算阶段：原始导出结构（值来自 genshin-db，保持原值）----
+export type Tasks = TaskSummary[];
 
-export type LegacyTask = {
-    id: number,
-    name: string,
+// ---- 任务条件：语义化后的条件表达式（供前端展示与交互）----
+// 条件统一携带 id/title/subtitle 用于前端展示；
+// type 区分 step（任务步骤）/ number（数值）/ boolean（布尔）。
+// step 条件的 task 为 null 表示本任务内部步骤，否则为外部任务 id。
+// 数值/布尔条件由各类 QUEST_COND_* 原始条件映射而来，见 src/utils/task_condition.ts。
+
+export type TaskState = 'unstarted' | 'ongoing' | 'finished' | 'failed';
+export type TaskComparison = 'equal' | 'not_equal' | 'greater' | 'greater_equal' | 'less' | 'less_equal';
+
+export type TaskConditionBase = {
+    id: string,
+    title: string,
+    subtitle: string,
+};
+
+export type TaskStepCondition = TaskConditionBase & {
+    type: 'step',
+    task: string | null,
+    step: number,
+    state?: TaskState,
+};
+
+export type TaskNumberCondition = TaskConditionBase & {
+    type: 'number',
+    value: number,
+    comparison: TaskComparison,
+};
+
+export type TaskBooleanCondition = TaskConditionBase & {
+    type: 'boolean',
+    value: boolean,
+};
+
+export type TaskCondition = TaskStepCondition | TaskNumberCondition | TaskBooleanCondition;
+export type TaskConditionToken = TaskCondition | 'and' | 'or' | 'not';
+
+// ---- 对话与触发 ----
+
+export type TaskDialogRole = 'npc' | 'select' | 'black_screen' | 'text';
+
+export type TaskDialog = {
+    content: string,
+    role: TaskDialogRole,
+    speaker?: string,
+    speaker_subtitle?: string,
+    next_dialogs: number[],
+};
+
+export type TaskTriggerPoint = {
+    scene_id: number,
+    point_id?: number,
+    position: [number, number, number],
+};
+
+export type TaskTalk = {
+    priority: number,
+    conditions: TaskConditionToken[],
+    objects: string[],
+    trigger_points: TaskTriggerPoint[],
+    dialogs: Record<string, TaskDialog>,
+};
+
+export type TaskStep = {
+    hidden: boolean,
     description: string,
-    unlock_description: string,
-    chapter: string,
-    prev_task_ids: number[],
-    suggest_task_ids: number[],
-    steps: {
-        id: number,
-        order: number,
-        description: string,
-        talk_ids: number[],
-        related_talk_ids: number[],
-    }[],
-    talks: {
-        id: number,
-        begin_conditions: {
-            logic: string,
-            conditions: {
-                stepId: number,
-                type: string,
-                state_name?: string,
-            }[],
-        },
-        trigger: {
-            begin_way: string,
-            mark: string,
-            object_names: string[],
-            points: {
-                scene_id: number,
-                point_id?: number,
-                position: [number, number, number],
-            }[],
-        },
-        dialogs: {
-            id: number,
-            content: string,
-            role_type: string,
-            speaker_title?: string,
-            speaker_subtitle?: string,
-            next_dialog_ids: number[],
-        }[],
-    }[],
+    talks: number[],
 };
 
-// ---- 整理导出（正式导出）：重命名 + 重编号 + 语义化 ----
-
-// 一个 step 条件：外部 step 的 task_name 为任务文件名，内部 step 为 null
-// state_name 已语义化；'not_equal'（条件取反）直接用后缀表达式的 'not' 运算符表达，无独立字段
-
-export type TaskStepCondition = {
-    task_name: string | null,
-    step_key: number,
-    state_name?: 'unstarted' | 'ongoing' | 'finished' | 'failed',
-};
-
-// 后缀表达式：操作数（step 条件）与运算符交替保存
-export type TaskConditionToken = TaskStepCondition | 'and' | 'or' | 'not';
+// ---- 正式导出结构 ----
 
 export type Task = {
-    name: string,
-    description: string,
-    unlock_description: string,
-    chapter: string,
-    prev_tasks: string[],
-    suggest_tasks: string[],
-    steps: Record<string, {
-        order: number,
-        description: string,
-        talk_keys: number[],
-        related_talk_keys: number[],
-    }>,
-    talks: Record<string, {
-        conditions: TaskConditionToken[],
-        trigger: {
-            object_names: string[],
-            points: {
-                scene_id: number,
-                point_id?: number,
-                position: [number, number, number],
-            }[],
-        },
-        dialogs: Record<string, {
-            content: string,
-            role_type: 'npc' | 'player' | 'black_screen',
-            speaker_title?: string,
-            speaker_subtitle?: string,
-            next_dialog_keys: number[],
-        }>,
-    }>,
+    name: string | null,
+    description: string | null,
+    unlock_description: string | null,
+    chapter: string | null,
+    previous_tasks: string[],
+    suggested_tasks: string[],
+    steps: Record<string, TaskStep>,
+    talks: Record<string, TaskTalk>,
 };
 
 export type TaskExport = {
     files: {
-        filename: string,
+        id: string,
         task: Task,
     }[],
     list: Tasks,
+};
+
+// ---- 原始数据（genshin-db）中间结构 ----
+
+export type SourceTaskCondition = {
+    type: string,
+    params: (string | number | boolean)[],
+    step_id?: number,
+    state?: string,
+};
+
+export type SourceTaskConditions = {
+    logic: string,
+    conditions: SourceTaskCondition[],
+};
+
+// step 条件的引用信息：外部任务标题/步骤描述，用于生成条件的 title/subtitle
+export type TaskStepReference = {
+    task: string,
+    step: number,
+    title: string,
+    subtitle: string,
 };

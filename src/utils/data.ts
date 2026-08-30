@@ -21,8 +21,36 @@ const language_map: Record<Lang, string> = {
 
 const filename_query_options = (lang: Lang) => ({
     resultLanguage: language_map[lang] as Language,
+    queryLanguages: [language_map[lang] as Language],
     matchFilenameOnly: true,
 });
+
+const id_query_options = (lang: Lang) => ({
+    resultLanguage: language_map[lang] as Language,
+    queryLanguages: [language_map[lang] as Language],
+    matchNames: false,
+    matchFilenames: false,
+    matchIds: true,
+    matchAltNames: false,
+    matchAliases: false,
+    matchCategories: false,
+});
+
+const id_name_cache = new Map<string, string | null>();
+
+export function find_data_name_by_id(id: number, lang: Lang, folder: string): string | null {
+    const cache_key = `${lang}:${folder}:${id}`;
+    if (id_name_cache.has(cache_key)) return id_name_cache.get(cache_key)!;
+
+    const query = (genshindb as any)[folder];
+    const result = typeof query === 'function' ? query(String(id), id_query_options(lang)) : undefined;
+    if (result && typeof result.name === 'string' && result.name) {
+        id_name_cache.set(cache_key, result.name);
+        return result.name;
+    }
+    id_name_cache.set(cache_key, null);
+    return null;
+}
 
 export function get_hyperlinks(lang: Lang) {
     let res = genshindb.hyperlinks('hyperlinks', filename_query_options(lang));
