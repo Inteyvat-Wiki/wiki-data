@@ -716,12 +716,12 @@ export default {
     ],
     "precious": [
         [
-            "cake_for_traveler",                                            // 给旅行者的小蛋糕
-            "cake_for_traveler-02",                                         // 给旅行者的小蛋糕
-            "cake_for_traveler-04",                                         // 给旅行者的小蛋糕
-            "cake_for_traveler-06",                                         // 给旅行者的小蛋糕
-            "cake_for_traveler-08",                                         // 给旅行者的小蛋糕
-            "cake_for_traveler-10",                                         // 给旅行者的小蛋糕
+            "cake_for_traveler-1",                                          // 给旅行者的小蛋糕
+            "cake_for_traveler-3",                                          // 给旅行者的小蛋糕
+            "cake_for_traveler-5",                                          // 给旅行者的小蛋糕
+            "cake_for_traveler-7",                                          // 给旅行者的小蛋糕
+            "cake_for_traveler-9",                                          // 给旅行者的小蛋糕
+            "cake_for_traveler-11",                                         // 给旅行者的小蛋糕
         ],
 
         [
@@ -764,13 +764,13 @@ export default {
         ],
 
         [
-            "evermoon_seal",                                                // 恒月印磐
-            "evermoon_seal-01",                                             // 恒月印磐
-            "evermoon_seal-02",                                             // 恒月印磐
+            "evermoon_seal-0",                                              // 恒月印磐
+            "evermoon_seal-1",                                              // 恒月印磐
+            "evermoon_seal-2",                                              // 恒月印磐
         ], [
-            "irismoon_seal",                                                // 虹月印磐
-            "irismoon_seal-01",                                             // 虹月印磐
-            "irismoon_seal-02",                                             // 虹月印磐
+            "irismoon_seal-0",                                              // 虹月印磐
+            "irismoon_seal-1",                                              // 虹月印磐
+            "irismoon_seal-2",                                              // 虹月印磐
         ],
 
         "dust_of_azoth",                                                // 嬗变之尘
@@ -817,11 +817,11 @@ export default {
         "hunting_trap",                                                 // 狩猎陷阱
 
         [
-            "key_sigil",                                                    // 键纹
-            "key_sigil-01",                                                 // 键纹
-            "key_sigil-02",                                                 // 键纹
-            "key_sigil-03",                                                 // 键纹
-            "key_sigil-04",                                                 // 键纹
+            "key_sigil-0",                                                  // 键纹
+            "key_sigil-1",                                                  // 键纹
+            "key_sigil-2",                                                  // 键纹
+            "key_sigil-3",                                                  // 键纹
+            "key_sigil-4",                                                  // 键纹
         ],
 
         "light_realm_sigil",                                            // 光界之印
@@ -860,10 +860,10 @@ export default {
         "travel_accounts",                                              // 游逸旅账
         "the_little_witchs_dictionary",                                 // 小魔女辞典
         [
-            "treasureseeking_seelie",                                       // 「寻宝仙灵」
-            "treasureseeking_seelie-01",                                    // 「寻宝仙灵」
-            "treasureseeking_seelie-02",                                    // 「寻宝仙灵」
-            "treasureseeking_seelie-03",                                    // 「寻宝仙灵」
+            "treasureseeking_seelie-0",                                     // 「寻宝仙灵」
+            "treasureseeking_seelie-1",                                     // 「寻宝仙灵」
+            "treasureseeking_seelie-2",                                     // 「寻宝仙灵」
+            "treasureseeking_seelie-3",                                     // 「寻宝仙灵」
         ],
         "kurious_kamera",                                               // 奇特的「留影机」
         "inquisitive_endora",                                           // 好奇的嫣朵拉
@@ -886,14 +886,14 @@ export default {
         "image_sampling_kamera",                                        // 图形样本留影机
         "graffiti_kamera",                                              // 「涂鸦留影机」
         [
-            "paimons_kamera",                                               // 派蒙的留影机
-            "paimons_kamera-01",                                            // 派蒙的留影机
+            "paimons_kamera-0",                                             // 派蒙的留影机
+            "paimons_kamera-1",                                             // 派蒙的留影机
         ],
         "memento_kamera",                                               // 「回忆捕手留影机」
         "spotter_kamera",                                               // 寻迹留影机
         [
-            "inscribed_mirror",                                             // 铭随流镜
-            "inscribed_mirror-01",                                          // 铭随流镜
+            "inscribed_mirror-0",                                           // 铭随流镜
+            "inscribed_mirror-1",                                           // 铭随流镜
         ],
         "celebratory_xiao_lantern",                                     // 节庆霄灯
         "gift_xiao_lantern",                                            // 节礼霄灯
@@ -915,19 +915,19 @@ export default {
         "casket_of_tomes",                                              // 秘典之盒
         "memento_lens",                                                 // 「留念镜」
         [
-            "peculiar_pinion",                                              // 奇特的羽毛
-            "peculiar_pinion-01",                                           // 奇特的羽毛
+            "peculiar_pinion-0",                                            // 奇特的羽毛
+            "peculiar_pinion-1",                                            // 奇特的羽毛
         ],
         "lumenstone_adjuvant",                                          // 流明石触媒
         [
-            "kusava",                                                       // 「苦舍桓」
-            "kusava-01",                                                    // 「苦舍桓」
+            "kusava-0",                                                     // 「苦舍桓」
+            "kusava-1",                                                     // 「苦舍桓」
         ],
         "vintage_lyre",                                                 // 老旧的诗琴
         "jinni_in_the_magic_bottle_liloupar",                           // 魔瓶镇灵·利露帕尔
         [
-            "sorush-01",                                                    // 斯露莎
-            "sorush",                                                       // 斯露莎
+            "sorush-1",                                                     // 斯露莎
+            "sorush-0",                                                     // 斯露莎
         ],
         "anemo_treasure_compass",                                       // 风之寻宝罗盘
         "geo_treasure_compass",                                         // 岩之寻宝罗盘

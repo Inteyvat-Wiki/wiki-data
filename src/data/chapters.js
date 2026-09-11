@@ -488,7 +488,7 @@ export default {
             "a_thousand_miles_for_an_enigmatic_tune",                           // 磬弦奏华夜 其一 | 千里寻音迹难觅
             "a_single_harmony_for_an_irreplaceable_soul",                       // 磬弦奏华夜 其二 | 一曲瑶琴与谁听
         ],
-        "windblume_festival-01": [
+        "windblume_festival-1": [
             "a_gathering_of_outlanders",                                        // 风花节 其一 | 聚于湖畔的外乡之客
             "a_riddle_amidst_the_crowds",                                       // 风花节 其二 | 匿于人海的预言之谜
             "joy_above_the_clouds",                                             // 风花节 其三 | 存于云天的至福之解
@@ -545,7 +545,7 @@ export default {
             "the_story_begins_in_a_forest_without_rain",                        // 欢夏！邪龙？童话国！第一页 | 故事始于无雨的森林
             "they_once_walked_the_starry_sky",                                  // 欢夏！邪龙？童话国！第二页 | 他们行过星空
             "until_the_end_of_the_world",                                       // 欢夏！邪龙？童话国！第三页 | 直至世界尽头
-            "afterword-01",                                                     // 欢夏！邪龙？童话国！附录页 | 后日谈
+            "afterword-1",                                                      // 欢夏！邪龙？童话国！附录页 | 后日谈
         ],
         "chromatic_ode_of_candies_and_roses": [
             "give_her_surprises",                                               // 彩糖与蔷薇的幻色颂 第一份礼物 | 赠予她惊喜
@@ -607,7 +607,7 @@ export default {
             "white_horses_leisurely_journey",                                   // 奔霄颂玉轮·尾声 | 白马闲游记
         ],
         "homeward_he_who_caught_the_wind": [
-            "the_outlander_who_caught_the_wind-01",                             // 序章？ 第一幕 | 捕风的异乡人
+            "the_outlander_who_caught_the_wind-1",                              // 序章？ 第一幕 | 捕风的异乡人
             "for_a_reunion_without_tears",                                      // 捕风的归客 其二 | 为了没有眼泪的重逢
             "variations_on_the_song_of_the_dragon_and_freedom",                 // 捕风的归客 其三 | 巨龙与自由的变奏
         ],
