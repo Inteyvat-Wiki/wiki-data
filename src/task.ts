@@ -1,14 +1,17 @@
 import fs from 'fs';
 
-import { TaskData } from "~/utils/data";
+import { InteractionData, TaskData } from "~/utils/data";
 import { Lang, t } from "~/utils/i18n";
 import { get_task_conditions } from "~/utils/task_condition";
+import { get_interaction_dialogs } from "~/utils/task_interaction";
+import type { InteractionDialog } from "~/utils/task_interaction";
 import task_index from "~/data/tasks";
 import type {
     SourceTaskCondition,
     SourceTaskConditions,
     Task,
     TaskDialog,
+    TaskDialogNext,
     TaskDialogRole,
     TaskExport,
     TaskStep,
@@ -49,6 +52,7 @@ type SourceTaskDialog = {
 type SourceTaskTalk = {
     id: number,
     priority: number,
+    perform_cfg?: string,
     conditions: SourceTaskConditions,
     objects: string[],
     trigger_points: TaskTriggerPoint[],
@@ -134,6 +138,7 @@ function get_source_talk(talk: any): SourceTaskTalk {
     return {
         id: talk.id,
         priority: talk.priority ?? 0,
+        ...(talk.performCfg ? { perform_cfg: talk.performCfg } : {}),
         conditions: get_source_conditions(talk.beginConditions),
         objects: talk.trigger?.objectNames || [],
         trigger_points,
@@ -145,6 +150,10 @@ function get_source_task(source: string, lang: Lang): SourceTask | undefined {
     const data: any = TaskData.get_task(source, lang);
     const hidden = get_hidden(data.showType);
     if (hidden === undefined) return undefined;
+
+    if (typeof data.name === 'string' && data.name.includes('$UNRELEASED')) {
+        console.warn(`[task] $UNRELEASED title: ${source} (${data.id}) ${data.name}`);
+    }
 
     const steps = [...data.steps]
         .map((step: any, index: number) => ({ step, index }))
@@ -265,7 +274,11 @@ function get_speaker(dialog: SourceTaskDialog, lang: Lang): string | undefined {
     return dialog.speaker_title;
 }
 
-function get_choice_dialog_ids(dialogs: SourceTaskDialog[]): Set<number> {
+function get_choice_dialog_ids(
+    dialogs: SourceTaskDialog[],
+    next_dialogs: Map<number, number[]>,
+    interaction_dialogs: Map<number, InteractionDialog>,
+): Set<number> {
     const visible_ids = new Set(dialogs
         .filter(dialog => get_dialog_role(dialog.role, dialog.show_type) !== undefined)
         .map(dialog => dialog.id));
@@ -273,29 +286,76 @@ function get_choice_dialog_ids(dialogs: SourceTaskDialog[]): Set<number> {
 
     // 选择关系由父节点的有效分支决定，不能只依据子节点的 showType。
     for (const dialog of dialogs) {
-        const next_ids = [...new Set(dialog.next_dialogs)].filter(id => visible_ids.has(id));
-        if (next_ids.length > 1) next_ids.forEach(id => choice_ids.add(id));
+        const interaction = interaction_dialogs.get(dialog.id);
+        const next_ids = interaction
+            ? interaction.next_dialogs.filter(next => next.choice).map(next => next.dialog)
+            : [...new Set(next_dialogs.get(dialog.id) || [])];
+        const visible_next_ids = next_ids.filter(id => visible_ids.has(id));
+        if (interaction || visible_next_ids.length > 1) {
+            visible_next_ids.forEach(id => choice_ids.add(id));
+        }
     }
     return choice_ids;
 }
 
-function get_dialogs(dialogs: SourceTaskDialog[], lang: Lang): Record<string, TaskDialog> {
+function get_dialogs(
+    talk: SourceTaskTalk,
+    references: Map<number, TaskStepReference>,
+    own_references: Map<number, TaskStepReference>,
+    lang: Lang,
+): { dialogs: Record<string, TaskDialog>, initial_dialogs?: TaskDialogNext[] } {
+    const dialogs = talk.dialogs;
+    const interaction = talk.perform_cfg
+        ? get_interaction_dialogs(
+            () => InteractionData.find_interaction(talk.perform_cfg!)
+                || InteractionData.find_interaction_by_dialog_ids(dialogs.map(dialog => dialog.id)),
+            dialogs.map(dialog => dialog.id),
+            conditions => get_task_conditions(conditions, references, own_references, lang),
+            talk.perform_cfg,
+        )
+        : { dialogs: new Map<number, InteractionDialog>(), initial_dialogs: [] };
+    const interaction_dialogs = interaction.dialogs;
+    const effective_next_dialogs = new Map(dialogs.map(dialog => [
+        dialog.id,
+        interaction_dialogs.get(dialog.id)?.next_dialogs.map(next => next.dialog) || dialog.next_dialogs,
+    ]));
+
     // 丢弃角色类型无法识别的对话，再统一重编号
     const visible_dialogs = dialogs.filter(dialog => get_dialog_role(dialog.role, dialog.show_type) !== undefined);
-    const choice_ids = get_choice_dialog_ids(dialogs);
+    const choice_ids = get_choice_dialog_ids(dialogs, effective_next_dialogs, interaction_dialogs);
     const keys = get_key_map(visible_dialogs);
 
-    return Object.fromEntries(visible_dialogs.map((dialog, index) => {
+    function map_next(next: InteractionDialog['next_dialogs'][number]): TaskDialogNext | undefined {
+        const key = keys.get(next.dialog);
+        if (key === undefined) return undefined;
+        return {
+            dialog: key,
+            ...(next.conditions ? { conditions: next.conditions } : {}),
+            ...(next.branches ? { branches: next.branches } : {}),
+        };
+    }
+
+    const result = Object.fromEntries(visible_dialogs.map((dialog, index) => {
         const role = get_dialog_role(dialog.role, dialog.show_type, choice_ids.has(dialog.id))!;
         const speaker = get_speaker(dialog, lang);
+        const interaction = interaction_dialogs.get(dialog.id);
+        const next_dialogs = interaction
+            ? interaction.next_dialogs.flatMap(next => map_next(next) || [])
+            : map_ids(dialog.next_dialogs, keys).map(next => ({ dialog: next as number }));
         return [String(index + 1), {
             content: dialog.content,
             role,
             ...(speaker ? { speaker } : {}),
             ...(dialog.speaker_subtitle ? { speaker_subtitle: dialog.speaker_subtitle } : {}),
-            next_dialogs: map_ids(dialog.next_dialogs, keys) as number[],
+            next_dialogs,
+            ...(interaction?.operations ? { operations: interaction.operations } : {}),
         }];
     }));
+    const initial_dialogs = interaction.initial_dialogs.flatMap(next => map_next(next) || []);
+    return {
+        dialogs: result,
+        ...(initial_dialogs.length > 0 ? { initial_dialogs } : {}),
+    };
 }
 
 function get_steps(steps: SourceTaskStep[], talk_keys: Map<number, number>): Record<string, TaskStep> {
@@ -312,13 +372,17 @@ function get_talks(
     own_references: Map<number, TaskStepReference>,
     lang: Lang,
 ): Record<string, TaskTalk> {
-    return Object.fromEntries(talks.map((talk, index) => [String(index + 1), {
-        priority: talk.priority,
-        conditions: get_task_conditions(talk.conditions, references, own_references, lang),
-        objects: talk.objects,
-        trigger_points: talk.trigger_points,
-        dialogs: get_dialogs(talk.dialogs, lang),
-    }]));
+    return Object.fromEntries(talks.map((talk, index) => {
+        const dialog_data = get_dialogs(talk, references, own_references, lang);
+        return [String(index + 1), {
+            priority: talk.priority,
+            conditions: get_task_conditions(talk.conditions, references, own_references, lang),
+            objects: talk.objects,
+            trigger_points: talk.trigger_points,
+            dialogs: dialog_data.dialogs,
+            ...(dialog_data.initial_dialogs ? { initial_dialogs: dialog_data.initial_dialogs } : {}),
+        }];
+    }));
 }
 
 function get_task(

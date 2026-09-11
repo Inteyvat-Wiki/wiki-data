@@ -53,12 +53,42 @@ export type TaskConditionToken = TaskCondition | 'and' | 'or' | 'not';
 
 export type TaskDialogRole = 'npc' | 'select' | 'black_screen' | 'text';
 
+export type TaskDialogBranch = {
+    id: string,
+    type: 'random' | 'result',
+    option: number,
+};
+
+export type TaskDialogNext = {
+    dialog: number,
+    conditions?: TaskConditionToken[],
+    branches?: TaskDialogBranch[],
+};
+
+export type TaskDialogSetOperation = {
+    type: 'set',
+    id: string,
+    value: number | boolean,
+    conditions?: TaskConditionToken[],
+    branches?: TaskDialogBranch[],
+};
+
+export type TaskDialogInputOperation = {
+    type: 'input',
+    id: string,
+    conditions?: TaskConditionToken[],
+    branches?: TaskDialogBranch[],
+};
+
+export type TaskDialogOperation = TaskDialogSetOperation | TaskDialogInputOperation;
+
 export type TaskDialog = {
     content: string,
     role: TaskDialogRole,
     speaker?: string,
     speaker_subtitle?: string,
-    next_dialogs: number[],
+    next_dialogs: TaskDialogNext[],
+    operations?: TaskDialogOperation[],
 };
 
 export type TaskTriggerPoint = {
@@ -72,6 +102,7 @@ export type TaskTalk = {
     conditions: TaskConditionToken[],
     objects: string[],
     trigger_points: TaskTriggerPoint[],
+    initial_dialogs?: TaskDialogNext[],
     dialogs: Record<string, TaskDialog>,
 };
 

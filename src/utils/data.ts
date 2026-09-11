@@ -194,3 +194,69 @@ export const TaskData = {
         return res;
     },
 }
+
+export const InteractionData = {
+
+    // perform_cfg 是 interaction 的精确源路径。genshin-db 的 interactions() 会对
+    // 全部文件名（约 2.4 万条）做模糊搜索，单次 ~100ms，14 万次调用会拖慢导出数十分钟；
+    // 这里直接用文件名精确取值（O(1)），失败再退回按对话 id 查找。
+    find_interaction: (name: string) =>
+        get_interaction_data(name) || null,
+
+    find_interaction_by_dialog_ids: (ids: number[]) => {
+        for (const id of ids) {
+            const cached = interaction_by_id_cache.get(id);
+            if (cached !== undefined) {
+                if (cached) return cached;
+                continue;
+            }
+            const result = genshindb.interactions(String(id), {
+                matchFilenameOnly: false,
+                matchFilenames: false,
+                matchIds: true,
+                matchNames: false,
+                matchAltNames: false,
+                matchAliases: false,
+                matchCategories: false,
+            }) || null;
+            interaction_by_id_cache.set(id, result);
+            if (result) return result;
+        }
+        return null;
+    },
+
+    get_interaction: (name: string) => {
+        const res = InteractionData.find_interaction(name);
+        if (!res) throw new Error(`InterAction ${name} not found in genshindb`);
+        return res;
+    },
+}
+
+// 通过 genshin-db 内部的 getdata 模块按文件名精确读取，绕过其模糊搜索
+let interaction_getdata: any;
+
+// 同一 interaction 会被多个对话引用（不同对话 id 子集），按名缓存避免重复解析
+const interaction_cache = new Map<string, any>();
+const interaction_by_id_cache = new Map<number, any | null>();
+
+function get_interaction_getdata() {
+    if (interaction_getdata === undefined) {
+        try {
+            interaction_getdata = require('genshin-db/src/getdata.js');
+        } catch {
+            interaction_getdata = null;
+        }
+    }
+    return interaction_getdata;
+}
+
+function get_interaction_data(name: string): any {
+    if (interaction_cache.has(name)) return interaction_cache.get(name);
+    const getdata = get_interaction_getdata();
+    // 内部模块不可用时退回 genshin-db 公开接口（慢但可用）
+    const result = getdata
+        ? getdata.getData('English', 'interactions', name)
+        : genshindb.interactions(name, { matchFilenameOnly: true });
+    interaction_cache.set(name, result);
+    return result;
+}
