@@ -4,11 +4,13 @@
         "description": "描述"
     },
     "material": {
+        "type": "类型",
         "description": "描述",
         "base_food": "原始料理",
         "belong_character": "所属角色"
     },
     "living-being": {
+        "type": "类型",
         "description": "描述"
     },
     "task_condition": {

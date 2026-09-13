@@ -19,12 +19,29 @@ export function get_living_being(name: string, lang: Lang, type: string): Living
     const res: LivingBeing = [{
         name: living_being_data.name,
         icon: ConvertRaw.get_images_url(living_being_data.images.filename_icon, `living_being/${name}/${name}_icon`),
-        type: living_being_data.categoryText,
-        info: (living_being_data as any).investigation ? [{
-            title: t('living-being.description', lang),
-            description: (living_being_data as any).investigation.description,
-        }] : [],
-        description_full: living_being_data.description,
+        star: null,
+        type: type as LivingBeing[0]['type'],
+        info: [
+            {
+                title: t('living-being.type', lang),
+                description: living_being_data.categoryText,
+                type: 'description' as const,
+            },
+            ...(
+                'investigation' in living_being_data && living_being_data.investigation
+                    ? [{
+                        title: t('living-being.description', lang),
+                        description: living_being_data.investigation.description,
+                        type: 'description' as const,
+                    }]
+                    : []
+            ),
+            {
+                title: null,
+                description: living_being_data.description,
+                type: 'text' as const,
+            },
+        ],
     }];
 
     return res;
@@ -44,7 +61,7 @@ export function get_living_being_list(lang: Lang): LivingBeings {
                         id: name,
                         name: enemy_data.name,
                         icon: ConvertRaw.get_images_url(enemy_data.images.filename_icon, `living_being/${name}/${name}_icon`),
-                        type: type as any,
+                        type: type as LivingBeings[0]['type'],
                         count: typeof nameraw === 'string' ? 1 : nameraw.length,
                     });
                 }
@@ -55,7 +72,7 @@ export function get_living_being_list(lang: Lang): LivingBeings {
                         id: name,
                         name: living_being_data.name,
                         icon: ConvertRaw.get_images_url(living_being_data.images.filename_icon, `living_being/${name}/${name}_icon`),
-                        type: type as any,
+                        type: type as LivingBeings[0]['type'],
                         count: typeof nameraw === 'string' ? 1 : nameraw.length,
                     });
                 }

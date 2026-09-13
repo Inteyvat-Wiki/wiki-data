@@ -43,21 +43,30 @@ export function get_material(name: string, lang: Lang, type: string): Material |
         const res: Material = [];
 
         if (food_data.foodtype == 'NORMAL') {
-            for (let key of ['suspicious', 'normal', 'delicious']) {
-                if (!(food_data as any)[key]) continue;
+            for (let key of ['suspicious', 'normal', 'delicious'] as const) {
+                if (!food_data || !food_data[key]) continue;
                 res.push({
                     name: food_data.name,
                     icon: ConvertRaw.get_images_url(food_data.images.filename_icon, `material/${name}/${name}_icon`),
                     star: food_data.rarity,
-                    type: food_data.filterText,
+                    type: type as Material[0]['type'],
                     info: [
                         {
-                            title: t(`material.description`, lang),
-                            description: (food_data as any)[key].description,
+                            title: t(`material.type`, lang),
+                            description: food_data.filterText,
+                            type: 'description' as const,
                         },
+                        {
+                            title: t(`material.description`, lang),
+                            description: food_data[key].description,
+                            type: 'description' as const,
+                        },
+                        {
+                            title: null,
+                            description: food_data[key].effect,
+                            type: 'normal' as const,
+                        }
                     ],
-                    effect: (food_data as any)[key].effect,
-                    description_full: null,
                 });
             }
         } else {
@@ -65,23 +74,34 @@ export function get_material(name: string, lang: Lang, type: string): Material |
                 name: food_data.name,
                 icon: ConvertRaw.get_images_url(food_data.images.filename_icon, `material/${name}/${name}_icon`),
                 star: food_data.rarity,
-                type: food_data.filterText,
+                type: type as Material[0]['type'],
                 info: [
+                    {
+                        title: t(`material.type`, lang),
+                        description: food_data.filterText,
+                        type: 'description' as const,
+                    },
                     {
                         title: t(`material.base_food`, lang),
                         description: food_data.baseDishName!,
+                        type: 'description' as const,
                     },
                     {
                         title: t(`material.belong_character`, lang),
                         description: food_data.characterName!,
+                        type: 'description' as const,
                     },
                     {
                         title: t(`material.description`, lang),
                         description: food_data.description,
+                        type: 'description' as const,
+                    },
+                    {
+                        title: null,
+                        description: food_data.effect,
+                        type: 'normal' as const,
                     }
                 ],
-                effect: food_data.effect,
-                description_full: null,
             });
         }
 
@@ -98,15 +118,24 @@ export function get_material(name: string, lang: Lang, type: string): Material |
             name: material_data.name,
             icon: ConvertRaw.get_images_url(material_data.images.filename_icon, `material/${name}/${name}_icon`),
             star: material_data.rarity!,
-            type: material_data.typeText,
+            type: type as Material[0]['type'],
             info: [
+                {
+                    title: t(`material.type`, lang),
+                    description: material_data.typeText,
+                    type: 'description' as const,
+                },
                 {
                     title: t('material.description', lang),
                     description: material_data.description,
-                }
+                    type: 'description' as const,
+                },
+                ...(show_full_description.includes(type) ? [{
+                    title: null,
+                    description: !material_data.fullDescription ? material_data.description : material_data.fullDescription,
+                    type: 'text' as const,
+                }] : []),
             ],
-            effect: null,
-            description_full: show_full_description.includes(type) && !material_data.fullDescription ? material_data.description : material_data.fullDescription,
         }];
 
         return res;
