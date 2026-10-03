@@ -2,8 +2,9 @@ import type {
     SourceTaskCondition,
     SourceTaskConditions,
     TaskConditionToken,
-    TaskDialogOperation,
+    TaskOperation,
 } from '~/types/task';
+import { InteractionData } from '~/utils/data';
 
 type RawAction = Record<string, any>;
 
@@ -36,7 +37,7 @@ type RawNext = {
 };
 
 type RawOperation = {
-    type: 'set' | 'input',
+    type: 'set' | 'input' | 'give',
     id: string,
     value?: number | boolean,
     conditions: ConditionPath,
@@ -55,10 +56,11 @@ export type InteractionDialog = {
         branches?: RawBranch[],
         choice?: boolean,
     }[],
-    operations?: TaskDialogOperation[],
+    operations?: TaskOperation[],
 };
 
 export type InteractionDialogs = {
+    operations?: TaskOperation[],
     dialogs: Map<number, InteractionDialog>,
     initial_dialogs: InteractionDialog['next_dialogs'],
 };
@@ -153,6 +155,10 @@ function get_jump_conditions(action: RawAction): {
 function get_operations(actions: RawAction[], conditions: ConditionPath = []): RawOperation[] {
     const operations: RawOperation[] = [];
     for (const action of actions) {
+        if (action._type === 'UI_TRIGGER' && action._contextName === 'GivenDialog') {
+            operations.push({ type: 'give', id: String(action._param || ''), conditions, branches: [] });
+            continue;
+        }
         if (action._type === 'SET_QUEST_VAR'
             && Number.isInteger(action._subQuestId)
             && Number.isInteger(action._index)) {
@@ -405,7 +411,8 @@ export function get_interaction_dialogs(
     const cache_key = source_dialog_ids.join(',');
     const named_cache_key = cache_name ? `${cache_name}\0${cache_key}` : '';
     const cached = named_cache_key ? named_raw_interaction_cache.get(named_cache_key) : undefined;
-    const data = cached ? null : typeof load_data === 'function' ? load_data() : load_data;
+    const source = cached ? null : typeof load_data === 'function' ? load_data() : load_data;
+    const data = normalize_interaction(source);
     const raw = cached || get_raw_interaction_dialogs(data, source_dialog_ids, cache_name);
 
     function get_next_dialogs(items: RawNext[]): InteractionDialog['next_dialogs'] {
@@ -420,24 +427,38 @@ export function get_interaction_dialogs(
         });
     }
 
-    const dialogs = new Map([...raw.dialogs].map(([dialog_id, result]) => {
-        const next_dialogs = get_next_dialogs(result.next);
-        const operations: TaskDialogOperation[] = result.operations.map(operation => {
+    function convert_operations(raw_operations: RawOperation[]): TaskOperation[] {
+        return raw_operations.map(operation => {
             const conditions = combine_conditions(operation.conditions, convert);
+            const common = {
+                ...(conditions.length > 0 ? { conditions } : {}),
+                ...(operation.branches.length > 0 ? { branches: operation.branches } : {}),
+            };
+            if (operation.type === 'give') {
+                const giving_id = Number(operation.id);
+                const giving = giving_id > 0 ? InteractionData.get_giving(giving_id) : undefined;
+                return { type: 'item', action: 'give', items: [],
+                    ...(giving_id > 0 ? { giving_id } : {}), ...giving, ...common };
+            }
             if (operation.type === 'set') return {
-                type: 'set',
+                type: 'variable', action: 'set',
                 id: operation.id,
                 value: operation.value ?? 0,
                 ...(conditions.length > 0 ? { conditions } : {}),
                 ...(operation.branches.length > 0 ? { branches: operation.branches } : {}),
             };
             return {
-                type: 'input',
+                type: 'variable', action: 'input',
                 id: operation.id,
                 ...(conditions.length > 0 ? { conditions } : {}),
                 ...(operation.branches.length > 0 ? { branches: operation.branches } : {}),
             };
         });
+    }
+
+    const dialogs = new Map([...raw.dialogs].map(([dialog_id, result]) => {
+        const next_dialogs = get_next_dialogs(result.next);
+        const operations = convert_operations(result.operations);
 
         return [dialog_id, {
             next_dialogs,
@@ -447,5 +468,18 @@ export function get_interaction_dialogs(
     return {
         dialogs,
         initial_dialogs: get_next_dialogs(raw.initial.next),
+        ...(raw.initial.operations.length ? { operations: convert_operations(raw.initial.operations) } : {}),
     };
+}
+
+function normalize_interaction(data: any): any {
+    if (Array.isArray(data)) return data.map(normalize_interaction);
+    if (!is_object(data)) return data;
+    const result = Object.fromEntries(Object.entries(data).map(([key, value]) => [key, normalize_interaction(value)]));
+    for (const key of ['type', 'param', 'contextName', 'subQuestId', 'index', 'value',
+        'grpId', 'nextGrpId', 'nextGrpIdList', 'jumpCond', 'jumpIndex', 'condComb']) {
+        if (result[key] !== undefined && result[`_${key}`] === undefined) result[`_${key}`] = result[key];
+    }
+    if (result._grpId !== undefined) result._index ??= 0;
+    return result;
 }

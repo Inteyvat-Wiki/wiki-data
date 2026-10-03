@@ -11,6 +11,10 @@
     "living-being": {
         "description": "Description"
     },
+    "quest_item": {
+        "description": "Description",
+        "related_tasks": "Related Quests"
+    },
     "task_condition": {
         "character": "Character",
         "item": "Item",

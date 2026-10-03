@@ -215,6 +215,10 @@ export const TaskData = {
 }
 
 export const QuestItemData = {
+    find_quest_item: (id: number, lang: Lang) => {
+        const item = genshindb.questitems(String(id), id_query_options(lang));
+        return item?.id === id ? item : undefined;
+    },
     
     get_quest_item: (name: string, lang: Lang) => {
         name = normalize_alias_query(name);
@@ -225,6 +229,11 @@ export const QuestItemData = {
 }
 
 export const InteractionData = {
+
+    get_giving: (id: number): { items: { id: number, count: number }[], choices?: { id: number }[], count?: number, remove: boolean } | undefined => {
+        const manifest = require('genshin-db/src/data/interactions.json');
+        return manifest.givings?.[id];
+    },
 
     // perform_cfg 是 interaction 的源路径，直接读取原始资源；找不到时再按对话 id 查找。
     find_interaction: (name: string) =>

@@ -5,6 +5,7 @@ import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
 import { QuestItem, QuestItems } from "~/types/quest_item";
 import quest_item_list from "~/data/quest_items";
+import { get_quest_item_tasks } from "~/task";
 
 export function get_quest_item(id: string, name: string, lang: Lang): QuestItem | null {
     const quest_item_data = QuestItemData.get_quest_item(name, lang);
@@ -21,6 +22,7 @@ export function get_quest_item(id: string, name: string, lang: Lang): QuestItem 
             `quest_item/${id}/${id}_content_${index}`
         ));
 
+    const related_tasks = get_quest_item_tasks(quest_item_data.id, lang);
     const res: QuestItem = [{
         name: quest_item_data.name,
         icon: ConvertRaw.get_images_url(quest_item_data.images.filename_icon, `quest_item/${id}/${id}_icon`),
@@ -32,6 +34,11 @@ export function get_quest_item(id: string, name: string, lang: Lang): QuestItem 
                 description: quest_item_data.description,
                 type: 'description' as const,
             },
+            ...(related_tasks.length > 0 ? [{
+                title: t('quest_item.related_tasks', lang),
+                description: related_tasks.map(id => `[[iw:task/${id}]]`).join('\n'),
+                type: 'normal' as const,
+            }] : []),
             ...(content.length > 0 ? [{
                 title: null,
                 description: content,

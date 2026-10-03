@@ -14,7 +14,8 @@
         "description": "描述"
     },
     "quest_item": {
-        "description": "描述"
+        "description": "描述",
+        "related_tasks": "相关任务"
     },
     "task_condition": {
         "character": "角色",

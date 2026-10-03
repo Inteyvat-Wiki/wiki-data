@@ -4,6 +4,7 @@ import { InteractionData, TaskData } from "~/utils/data";
 import { Lang, t } from "~/utils/i18n";
 import { get_task_conditions } from "~/utils/task_condition";
 import { get_interaction_dialogs } from "~/utils/task_interaction";
+import { get_task_item_operation, get_task_operations } from "~/utils/task_item";
 import type { InteractionDialog } from "~/utils/task_interaction";
 import task_index from "~/data/tasks";
 import type {
@@ -14,6 +15,8 @@ import type {
     TaskDialogNext,
     TaskDialogRole,
     TaskExport,
+    TaskOperation,
+    TaskItemOperation,
     TaskStep,
     TaskStepReference,
     TaskTalk,
@@ -32,6 +35,7 @@ type TaskEntry = {
 // ---- 原始数据（genshin-db）中间结构 ----
 
 type SourceTaskStep = {
+    operations: TaskItemOperation[],
     id: number,
     hidden: boolean,
     description: string,
@@ -60,6 +64,7 @@ type SourceTaskTalk = {
 };
 
 type SourceTask = {
+    operations: TaskItemOperation[],
     quest_id: number,
     hidden: boolean,
     name: string | null,
@@ -76,7 +81,21 @@ const entries = Object.entries(task_index as TaskIndex).flatMap(([type, tasks]) 
     Object.entries(tasks).map(([id, source]) => ({ id, type: type as TaskType, source })));
 const source_names = [...new Set(entries.map(entry => entry.source))];
 const task_cache = new Map<Lang, Map<string, SourceTask>>();
+const quest_item_tasks_cache = new Map<Lang, Map<number, Set<string>>>();
 let task_id_map: Map<number, string> | undefined;
+
+function get_item_operations(operations: any[] = [], lang: Lang): TaskItemOperation[] {
+    return operations.map(operation => get_task_item_operation({
+        type: 'item',
+        action: operation.action,
+        items: operation.items,
+        ...(operation.choices?.length ? { choices: operation.choices } : {}),
+        ...(operation.count === undefined ? {} : { count: operation.count }),
+        ...(operation.givingId === undefined ? {} : { giving_id: operation.givingId }),
+        ...(operation.rewardId === undefined ? {} : { reward_id: operation.rewardId }),
+        ...(operation.remove === undefined ? {} : { remove: operation.remove }),
+    }, lang));
+}
 
 // 任务/步骤的 showType 决定是否对外展示；无法判断的返回 undefined（表示丢弃该任务）
 function get_hidden(show_type: unknown): boolean | undefined {
@@ -159,6 +178,7 @@ function get_source_task(source: string, lang: Lang): SourceTask | undefined {
         .map((step: any, index: number) => ({ step, index }))
         .sort((left, right) => left.step.order - right.step.order || left.index - right.index)
         .map(({ step }) => ({
+            operations: get_item_operations(step.itemOperations, lang),
             id: step.id,
             hidden: get_hidden(step.listShowType) === true,
             description: step.description,
@@ -166,6 +186,7 @@ function get_source_task(source: string, lang: Lang): SourceTask | undefined {
         }));
 
     return {
+        operations: get_item_operations(data.itemOperations, lang),
         quest_id: data.id,
         hidden,
         name: hidden ? null : data.name,
@@ -303,7 +324,7 @@ function get_dialogs(
     references: Map<number, TaskStepReference>,
     own_references: Map<number, TaskStepReference>,
     lang: Lang,
-): { dialogs: Record<string, TaskDialog>, initial_dialogs?: TaskDialogNext[] } {
+): { dialogs: Record<string, TaskDialog>, initial_dialogs?: TaskDialogNext[], operations?: TaskOperation[] } {
     const dialogs = talk.dialogs;
     const interaction = talk.perform_cfg
         ? get_interaction_dialogs(
@@ -348,12 +369,13 @@ function get_dialogs(
             ...(speaker ? { speaker } : {}),
             ...(dialog.speaker_subtitle ? { speaker_subtitle: dialog.speaker_subtitle } : {}),
             next_dialogs,
-            ...(interaction?.operations ? { operations: interaction.operations } : {}),
+            ...(interaction?.operations ? { operations: get_task_operations(interaction.operations, lang) } : {}),
         }];
     }));
     const initial_dialogs = interaction.initial_dialogs.flatMap(next => map_next(next) || []);
     return {
         dialogs: result,
+        ...('operations' in interaction && interaction.operations?.length ? { operations: get_task_operations(interaction.operations, lang) } : {}),
         ...(initial_dialogs.length > 0 ? { initial_dialogs } : {}),
     };
 }
@@ -361,6 +383,7 @@ function get_dialogs(
 function get_steps(steps: SourceTaskStep[], talk_keys: Map<number, number>): Record<string, TaskStep> {
     return Object.fromEntries(steps.map((step, index) => [String(index + 1), {
         hidden: step.hidden,
+        ...(step.operations.length ? { operations: step.operations } : {}),
         description: step.description,
         talks: map_ids(step.talks, talk_keys) as number[],
     }]));
@@ -380,6 +403,7 @@ function get_talks(
             objects: talk.objects,
             trigger_points: talk.trigger_points,
             dialogs: dialog_data.dialogs,
+            ...(dialog_data.operations ? { operations: dialog_data.operations } : {}),
             ...(dialog_data.initial_dialogs ? { initial_dialogs: dialog_data.initial_dialogs } : {}),
         }];
     }));
@@ -400,6 +424,7 @@ function get_task(
 
     return {
         name: source.name,
+        ...(source.operations.length ? { operations: source.operations } : {}),
         description: source.description,
         unlock_description: source.unlock_description,
         chapter: source.chapter,
@@ -415,11 +440,34 @@ function get_task_export(lang: Lang): TaskExport {
     const references = get_step_references(source_tasks, lang);
     const available_entries = entries.filter(entry => source_tasks.has(entry.source));
 
+    const files = available_entries.map(entry => ({
+        id: entry.id,
+        task: get_task(entry, source_tasks.get(entry.source)!, references, lang),
+    }));
+    const related_tasks = new Map<number, Set<string>>();
+    for (const { id, task } of files) {
+        if (!task.name) continue;
+        const operations = [
+            ...(task.operations || []),
+            ...Object.values(task.steps).flatMap(step => step.operations || []),
+            ...Object.values(task.talks).flatMap(talk => [
+                ...(talk.operations || []),
+                ...Object.values(talk.dialogs).flatMap(dialog => dialog.operations || []),
+            ]),
+        ];
+        for (const operation of operations) {
+            if (operation.type !== 'item') continue;
+            for (const item of [...operation.items, ...(operation.choices || [])]) {
+                let names = related_tasks.get(item.id);
+                if (!names) related_tasks.set(item.id, names = new Set());
+                names.add(id);
+            }
+        }
+    }
+    quest_item_tasks_cache.set(lang, related_tasks);
+
     return {
-        files: available_entries.map(entry => ({
-            id: entry.id,
-            task: get_task(entry, source_tasks.get(entry.source)!, references, lang),
-        })),
+        files,
         list: available_entries.map(entry => {
             const task = source_tasks.get(entry.source)!;
             return {
@@ -431,6 +479,11 @@ function get_task_export(lang: Lang): TaskExport {
             };
         }),
     };
+}
+
+export function get_quest_item_tasks(id: number, lang: Lang): string[] {
+    if (!quest_item_tasks_cache.has(lang)) get_task_export(lang);
+    return [...(quest_item_tasks_cache.get(lang)!.get(id) || [])];
 }
 
 export function gen_task(lang: Lang, path: string) {
