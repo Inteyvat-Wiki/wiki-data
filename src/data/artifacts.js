@@ -58,4 +58,8 @@ export default [
     "silken_moons_serenade",                                // 纺月的夜歌
     "aubade_of_morningstar_and_moon",                       // 晨星与月的晓歌
     "a_day_carved_from_rising_winds",                       // 风起之日
+    "celestial_gift",                                       // 天之美赐
+    "disenchantment_in_deep_shadow",                        // 影中沉凝的幻灭
+    "scarlet_proof",                                        // 血红之证
+    "heart_of_the_furnace",                                 // 炉火融炼之心
 ]

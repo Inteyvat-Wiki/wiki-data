@@ -214,6 +214,16 @@ export const TaskData = {
     },
 }
 
+export const QuestItemData = {
+    
+    get_quest_item: (name: string, lang: Lang) => {
+        name = normalize_alias_query(name);
+        let res = genshindb.questitems(name, alias_query_options(lang));
+        if (!res) throw new Error(`Quest item ${name} not found in genshindb`);
+        return res;
+    }
+}
+
 export const InteractionData = {
 
     // perform_cfg 是 interaction 的源路径，直接读取原始资源；找不到时再按对话 id 查找。

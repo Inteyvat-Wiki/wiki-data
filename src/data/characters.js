@@ -122,4 +122,13 @@ export default [
     "columbina",
     "zibai",
     "varka",
+    "linnea",
+    "prune",
+    "nicole",
+    "lohen",
+    "sandrone",
+    "alyosha",
+    "odette",
+    "vesna",
+    "vodyanitsa"
 ]

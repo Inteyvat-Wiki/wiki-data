@@ -25,6 +25,7 @@ const image_path = (() => {
     return res;
 })();
 
+let images_to_raw: Record<string, string> = {};
 let failed_images_list: string[] = [];
 
 export const ConvertRaw = {
@@ -33,8 +34,18 @@ export const ConvertRaw = {
         if (!converted_path.endsWith('.png')) converted_path += '.png';
         if (filename) {
             try {
+                if (images_to_raw[converted_path] === filename) {
+                    return '/images/' + converted_path;
+                }
+                for (let count = 1; count < 100; count++) {
+                    if (!images_to_raw[`${converted_path.replace(/\.[^/.]+$/, '')}_${count}.png`]) {
+                        converted_path = `${converted_path.replace(/\.[^/.]+$/, '')}_${count}.png`;
+                        break;
+                    }
+                }
                 fs.mkdirSync(path.dirname(`./data/images/${converted_path}`), { recursive: true });
                 fs.copyFileSync(`./src/images/${image_path[filename]}`, `./data/images/${converted_path}`);
+                images_to_raw[converted_path] = filename;
             } catch (err) {
                 console.error(`Failed to copy image ${filename}`);
                 if (!failed_images_list.includes(filename)) {
@@ -67,6 +78,14 @@ export const ConvertRaw = {
             console.warn(`Image ${converted_path} not found`);
         }
         return '/images/' + converted_path;
+    },
+
+    process_inline_images: (text: string, converted_path: string) => {
+        let regex = /<image name=([^\/]+)\/>/g;
+        return text.replace(regex, (match, p1) => {
+            const filename = p1.trim();
+            return `<img src="${ConvertRaw.get_images_url(filename, converted_path)}" class="inline_image" />`;
+        });
     },
 
     get_element: (element: Character['elementType']): ElementType | null => {

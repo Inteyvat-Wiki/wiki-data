@@ -17,7 +17,7 @@ export type LivingBeingType =
 export type GeographyType = 'viewpoint' | 'dungeon';
 export type GeographyArea = 'mondstadt' | 'liyue' | 'inazuma' | 'sumeru' | 'fontaine' | 'natlan' | 'nod-krai';
 
-export type ItemCommon<ItemTypes extends string | never = string> = {
+export type ItemCommon<ItemTypes extends string | null = string> = {
     name: string,
     icon: string,
     star: 1 | 2 | 3 | 4 | 5 | null,
@@ -30,5 +30,9 @@ export type ItemCommon<ItemTypes extends string | never = string> = {
         title: string | null,
         description: string,
         type: 'normal' | 'text',
+    } | {
+        title: string | null,
+        description: string[],
+        type: 'text-list',
     })[],
 };

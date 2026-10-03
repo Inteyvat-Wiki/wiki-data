@@ -230,4 +230,26 @@ export default [
     "lightbearing_moonshard",                       // 朏魄含光
     "nocturnes_curtain_call",                       // 帷间夜曲
     "gest_of_the_mighty_wolf",                      // 狼的武功歌
+    "golden_frostbound_oath",                       // 霜结的誓金枝
+    "angelos_heptades",                             // 尘光七谕
+    "disaster_and_remorse",                         // 灾悔
+    "a_teaspoon_of_transcendence",                  // 超越之匙
+    "heretics_molten_blade",                        // 熔猎异端之刃
+    "forged_by_the_golden_melody",                  // 金律铸影
+    "frostbreath",                                  // 寒息
+    "jade_vista",                                   // 悬黎千钧
+    "clash_of_kings",                               // 群王局戏
+    "emberwell",                                    // 引火之源
+    "blade_of_atonement",                           // 救赎之斩
+    "song_of_the_vigil",                            // 戍望谣歌
+    "covenant_of_frost_and_snow",                   // 霜雪誓约
+    "echoes_of_the_heart",                          // 寸心余响
+    "exaiphanes_blade",                             // 星锋剑
+    "whitelake_frostfeather",                       // 白湖冬羽
+    "beyond_the_chrysalis",                         // 蝶变
+    "hymn_of_the_maelstrom",                        // 漩流颂歌
+    "new_bough",                                    // 新枝
+    "breezeborne_refrain",                          // 柔风游弦
+    "winters_heavy_heart",                          // 凝雪沉心
+    "silver_light",                                 // 银釭
 ]

@@ -17,9 +17,10 @@ import { gen_artifact } from "~/artifact";
 import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
+import { gen_map, get_maps } from '~/map';
 import { gen_chapter_group, get_chapter_group_ids } from "~/chapter_groups";
 import { gen_task, get_task_ids } from "~/task";
-import { gen_map, get_maps } from '~/map';
+import { gen_quest_item, get_quest_item_ids } from "~/quest_item";
 import { get_menu } from '~/menu';
 
 const languages: Lang[] = ['zh_hans', 'en'];
@@ -37,6 +38,7 @@ function main() {
 
     fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(get_chapter_group_ids(), null, 4), 'utf-8');
     fs.writeFileSync('./data/tasks.json', JSON.stringify(get_task_ids(), null, 4), 'utf-8');
+    fs.writeFileSync('./data/quest_items.json', JSON.stringify(get_quest_item_ids(), null, 4), 'utf-8');
 
     for (const lang of languages) {
         gen_character(lang, `./data/${lang}/character`);
@@ -45,9 +47,10 @@ function main() {
         gen_material(lang, `./data/${lang}/material`);
         gen_living_being(lang, `./data/${lang}/living_being`);
         gen_geography(lang, `./data/${lang}/geography`);
+        gen_map(lang, `./data/${lang}/map`);
         gen_chapter_group(lang, `./data/${lang}/chapter_group`);
         gen_task(lang, `./data/${lang}/task`);
-        gen_map(lang, `./data/${lang}/map`);
+        gen_quest_item(lang, `./data/${lang}/quest_item`);
     }
 
     fs.writeFileSync('./data/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');

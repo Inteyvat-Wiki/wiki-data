@@ -13,6 +13,9 @@
         "type": "类型",
         "description": "描述"
     },
+    "quest_item": {
+        "description": "描述"
+    },
     "task_condition": {
         "character": "角色",
         "item": "物品",

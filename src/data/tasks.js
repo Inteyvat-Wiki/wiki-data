@@ -3136,7 +3136,7 @@ export default {
         "pigeon_duck_and_child": "Quest 20048",                                            // 鸽子、鸭子、小孩子
         "a_little_booze_doesnt_hurt": "Quest 20049",                                       // 蒙德酒客
         "ellin_the_wannabe_knight-1": "Quest 20050",                                       // 艾琳，未来的骑士——
-        "wines_of_mondstadt": "Quest 20051",                                               // 蒙德城的酒
+        // "wines_of_mondstadt": "Quest 20051",                                               // 蒙德城的酒
         "anna_the_adventurer-3": "Quest 20052",                                            // 冒险家，安娜！
         "ellin_the_wannabe_knight-2": "Quest 20053",                                       // 艾琳，未来的骑士——
         "guy_in_the_background": "Quest 20054",                                            // 无人注意的盖伊

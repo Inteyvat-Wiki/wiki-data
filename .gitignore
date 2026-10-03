@@ -2,6 +2,8 @@
 /src/images
 /src/map-data
 
+/tmp
+
 # Logs
 logs
 *.log
