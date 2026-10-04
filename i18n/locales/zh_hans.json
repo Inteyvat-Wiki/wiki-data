@@ -1,4 +1,8 @@
 {
+    "book": {
+        "collection": "所属书籍",
+        "description": "描述"
+    },
     "character": {
         "constellation": "命之座",
         "description": "描述"

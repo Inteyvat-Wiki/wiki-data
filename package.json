@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "gen": "tsx index.ts"
+    "gen": "tsx index.ts",
+    "gen:reading-lists": "node scripts/reading_lists.cjs",
+    "gen:reading": "tsx scripts/generate_reading.ts",
+    "check:reading": "tsx scripts/check_reading.ts"
   },
   "repository": {
     "type": "git",

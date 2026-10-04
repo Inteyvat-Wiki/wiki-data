@@ -1,4 +1,8 @@
 {
+    "book": {
+        "collection": "Collection",
+        "description": "Description"
+    },
     "character": {
         "constellation": "Constellation",
         "description": "Description"

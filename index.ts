@@ -10,6 +10,8 @@ import artifact_list from "~/data/artifacts";
 import material_list from "~/data/materials";
 import living_being_list from "~/data/living_beings";
 import geography_list from "~/data/geographies";
+import book_list from "~/data/books";
+import readable_list from "~/data/readables";
 
 import { gen_character } from "~/character";
 import { gen_weapon } from "~/weapon";
@@ -17,6 +19,8 @@ import { gen_artifact } from "~/artifact";
 import { gen_material } from "~/material";
 import { gen_living_being } from "~/living_being";
 import { gen_geography } from "~/geography";
+import { gen_book } from "~/book";
+import { gen_readable } from "~/readable";
 import { gen_map, get_maps } from '~/map';
 import { gen_chapter_group, get_chapter_group_ids } from "~/chapter_groups";
 import { gen_task, get_task_ids } from "~/task";
@@ -34,6 +38,8 @@ function main() {
     fs.writeFileSync('./data/materials.json', JSON.stringify(material_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/living_beings.json', JSON.stringify(living_being_list, null, 4), 'utf-8');
     fs.writeFileSync('./data/geographies.json', JSON.stringify(geography_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/books.json', JSON.stringify(book_list, null, 4), 'utf-8');
+    fs.writeFileSync('./data/readables.json', JSON.stringify(Object.keys(readable_list), null, 4), 'utf-8');
     fs.writeFileSync('./data/maps.json', JSON.stringify(get_maps(), null, 4), 'utf-8');
 
     fs.writeFileSync('./data/chapter_groups.json', JSON.stringify(get_chapter_group_ids(), null, 4), 'utf-8');
@@ -47,6 +53,8 @@ function main() {
         gen_material(lang, `./data/${lang}/material`);
         gen_living_being(lang, `./data/${lang}/living_being`);
         gen_geography(lang, `./data/${lang}/geography`);
+        gen_book(lang, `./data/${lang}/book`);
+        gen_readable(lang, `./data/${lang}/readable`);
         gen_map(lang, `./data/${lang}/map`);
         gen_chapter_group(lang, `./data/${lang}/chapter_group`);
         gen_task(lang, `./data/${lang}/task`);

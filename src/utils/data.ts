@@ -195,6 +195,30 @@ export const MapData = {
     },
 }
 
+export const BookData = {
+    get_book: (name: string, lang: Lang) => {
+        const res = genshindb.books(name, {
+            ...alias_query_options(lang),
+            matchNames: false,
+            matchAltNames: false,
+        });
+        if (!res || !res.alias.includes(name)) throw new Error(`Book ${name} not found in genshindb`);
+        return res;
+    },
+}
+
+export const DocumentData = {
+    get_document: (name: string, lang: Lang) => {
+        const res = genshindb.documents(name, {
+            ...alias_query_options(lang),
+            matchNames: false,
+            matchAltNames: false,
+        });
+        if (!res || res.alias !== name) throw new Error(`Document ${name} not found in genshindb`);
+        return res;
+    },
+}
+
 export const ChapterData = {
 
     get_chapter: (name: string, lang: Lang) => {
