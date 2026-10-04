@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { ChapterData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
@@ -8,7 +8,7 @@ import chapter_group_index from "~/data/chapters";
 import type {
     ChapterGroup,
     ChapterGroupIndex,
-    ChapterGroups,
+    ChapterGroupPages,
     ChapterGroupType,
 } from "~/types/chapter_group";
 
@@ -92,16 +92,22 @@ function get_chapter_group(entry: ChapterGroupEntry, lang: Lang): ChapterGroup {
     };
 }
 
-export function get_chapter_groups(lang: Lang): ChapterGroups {
-    return entries.map(entry => get_chapter_group(entry, lang));
+function group_page(group: ChapterGroup) {
+    return create_page({
+        id: group.id,
+        name: group.name,
+        icon: group.chapters[0]?.icon ?? null,
+        type: group.type,
+        chapter_count: group.chapters.length,
+        task_count: group.chapters.reduce((count, chapter) => count + chapter.tasks.length, 0),
+    });
 }
 
-export function get_chapter_group_ids(): string[] {
-    return entries.map(entry => entry.id);
+export function get_chapter_groups(lang: Lang): ChapterGroupPages {
+    return entries.map(entry => group_page(get_chapter_group(entry, lang)));
 }
 
 export function gen_chapter_group(lang: Lang, path: string) {
-    fs.rmSync(path, { recursive: true, force: true });
-    fs.mkdirSync(path, { recursive: true });
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_chapter_groups(lang), null, 4), 'utf-8');
+    const objects = entries.map(entry => ({ id: entry.id, data: get_chapter_group(entry, lang) }));
+    export_category(path, objects.map(object => group_page(object.data)), objects);
 }

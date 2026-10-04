@@ -1,9 +1,9 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { WeaponData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Weapon, Weapons } from "~/types/weapon";
+import { Weapon, WeaponPages } from "~/types/weapon";
 import weapon_list from "~/data/weapons";
 import weapon_refine_material_list from "~/data/weapon_refine_materials";
 
@@ -101,19 +101,19 @@ export function get_weapon(name: string, lang: Lang): Weapon {
     return res;
 }
 
-export function get_weapon_list(lang: Lang): Weapons {
-    const res: Weapons = [];
+export function get_weapon_list(lang: Lang): WeaponPages {
+    const res: WeaponPages = [];
 
     for (let name of weapon_list) {
         const weapon_data = WeaponData.get_weapon(name, lang);
         if (weapon_data) {
-            res.push({
+            res.push(create_page({
                 id: name,
                 name: weapon_data.name,
                 icon: ConvertRaw.get_images_url(weapon_data.images.filename_icon, `weapon/${name}/${name}_icon`),
                 type: ConvertRaw.get_weapon_type(weapon_data.weaponType) as any,
                 star: weapon_data.rarity,
-            });
+            }));
         }
     }
 
@@ -121,11 +121,7 @@ export function get_weapon_list(lang: Lang): Weapons {
 }
 
 export function gen_weapon(lang: Lang, path: string) {
-
-    fs.mkdirSync(`${path}`, { recursive: true });
-    for (let weapon_name of weapon_list) {
-        fs.writeFileSync(`${path}/${weapon_name}.json`, JSON.stringify(get_weapon(weapon_name, lang), null, 4), 'utf-8');
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_weapon_list(lang), null, 4), 'utf-8');
-
+    export_category(path, get_weapon_list(lang), weapon_list.map((id: string) => ({
+        id, data: get_weapon(id, lang),
+    })));
 }

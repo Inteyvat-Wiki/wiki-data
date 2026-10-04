@@ -6,7 +6,9 @@
     "gen": "tsx index.ts",
     "gen:reading-lists": "node scripts/reading_lists.cjs",
     "gen:reading": "tsx scripts/generate_reading.ts",
-    "check:reading": "tsx scripts/check_reading.ts"
+    "check:reading": "tsx scripts/check_reading.ts",
+    "migrate:exports": "tsx scripts/migrate_exports.ts",
+    "check:exports": "tsx scripts/check_exports.ts"
   },
   "repository": {
     "type": "git",

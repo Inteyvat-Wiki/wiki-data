@@ -1,4 +1,4 @@
-import type { WeaponType } from "~/types/common";
+import type { WeaponType, PageDataTrait } from "~/types/common";
 
 export type Weapon = {
     name: string,
@@ -25,10 +25,10 @@ export type Weapon = {
     } | null,
 };
 
-export type Weapons = {
-    id: string,
-    name: string,
-    icon: string,
-    type: string,
-    star: number,
-}[];
+export interface WeaponPage extends PageDataTrait {
+    icon: string;
+    star: 1 | 2 | 3 | 4 | 5;
+    type: WeaponType;
+}
+
+export type WeaponPages = WeaponPage[];

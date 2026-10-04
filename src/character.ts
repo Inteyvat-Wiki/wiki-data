@@ -1,9 +1,9 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { CharacterData, get_hyperlinks } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Character, Characters } from "~/types/character";
+import { Character, CharacterPages } from "~/types/character";
 import character_list from "~/data/characters";
 
 const character_ascension_list: { min: number; max: number; step: number }[] = [
@@ -216,20 +216,20 @@ export function get_character(name: string, lang: Lang): Character {
     return res;
 }
 
-export function get_character_list(lang: Lang): Characters {
-    const res: Characters = [];
+export function get_character_list(lang: Lang): CharacterPages {
+    const res: CharacterPages = [];
 
     for (let name of character_list) {
         const character_data = CharacterData.get_character(name, lang);
         if (character_data) {
-            res.push({
+            res.push(create_page({
                 id: name,
                 name: character_data.name,
                 icon: ConvertRaw.get_images_url(character_data.images.filename_icon, `character/${name}/${name}_icon`),
                 element: ConvertRaw.get_element(character_data.elementType) || name.slice(name.lastIndexOf('_') + 1) as any,
                 weapon: ConvertRaw.get_weapon_type(character_data.weaponType) as any,
                 star: character_data.rarity,
-            });
+            }));
         }
     }
 
@@ -237,11 +237,7 @@ export function get_character_list(lang: Lang): Characters {
 }
 
 export function gen_character(lang: Lang, path: string) {
-
-    fs.mkdirSync(`${path}`, { recursive: true });
-    for (let character_name of character_list) {
-        fs.writeFileSync(`${path}/${character_name}.json`, JSON.stringify(get_character(character_name, lang), null, 4), 'utf-8');
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_character_list(lang), null, 4), 'utf-8');
-
+    export_category(path, get_character_list(lang), character_list.map((id: string) => ({
+        id, data: get_character(id, lang),
+    })));
 }

@@ -1,10 +1,10 @@
-import type { ItemCommon } from "~/types/common";
+import type { ItemCommon, PageDataTrait } from "~/types/common";
 
-export type Book = ItemCommon<null>[];
+export type Book = ItemCommon<null>;
 
-export type Books = {
-    id: string,
-    name: string,
-    icon: string,
-    set: string,
-}[];
+export interface BookPage extends PageDataTrait {
+    icon: string;
+    set: string;
+}
+
+export type BookPages = BookPage[];

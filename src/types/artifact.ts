@@ -1,3 +1,5 @@
+import type { PageDataTrait } from "~/types/common";
+
 export type ArtifactItem = {
     name: string,
     icon: string,
@@ -23,9 +25,9 @@ export type Artifact = {
     circlet: ArtifactItem | null,
 };
 
-export type Artifacts = {
-    id: string,
-    name: string,
-    icon: string,
-    stars: (1 | 2 | 3 | 4 | 5)[],
-}[];
+export interface ArtifactPage extends PageDataTrait {
+    icon: string;
+    stars: (1 | 2 | 3 | 4 | 5)[];
+}
+
+export type ArtifactPages = ArtifactPage[];

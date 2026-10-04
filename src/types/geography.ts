@@ -1,4 +1,4 @@
-import type { GeographyType, GeographyArea } from "~/types/common";
+import type { GeographyType, GeographyArea, PageDataTrait } from "~/types/common";
 
 export type Geography = {
     name: string,
@@ -12,10 +12,10 @@ export type Geography = {
     }[],
 };
 
-export type Geographies = {
-    id: string,
-    name: string,
-    image: string,
-    type: GeographyType,
-    area: GeographyArea,
-}[];
+export interface GeographyPage extends PageDataTrait {
+    icon: string;
+    type: GeographyType;
+    area: GeographyArea;
+}
+
+export type GeographyPages = GeographyPage[];

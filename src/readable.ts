@@ -1,9 +1,9 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { DocumentData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from "~/utils/i18n";
-import { Readable, Readables } from "~/types/readable";
+import { Readable, ReadablePages } from "~/types/readable";
 import readable_list from "~/data/readables";
 
 export function get_readable(id: string, name: string, lang: Lang): Readable {
@@ -20,21 +20,19 @@ export function get_readable(id: string, name: string, lang: Lang): Readable {
     return res;
 }
 
-export function get_readable_list(lang: Lang): Readables {
-    const res: Readables = [];
+export function get_readable_list(lang: Lang): ReadablePages {
+    const res: ReadablePages = [];
 
     for (let id in readable_list) {
         const document_data = DocumentData.get_document(readable_list[id], lang);
-        res.push({ id, name: document_data.name });
+        res.push(create_page({ id, name: document_data.name }));
     }
 
     return res;
 }
 
 export function gen_readable(lang: Lang, path: string) {
-    fs.mkdirSync(path, { recursive: true });
-    for (let id in readable_list) {
-        fs.writeFileSync(`${path}/${id}.json`, JSON.stringify(get_readable(id, readable_list[id], lang), null, 4), 'utf-8');
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_readable_list(lang), null, 4), 'utf-8');
+    export_category(path, get_readable_list(lang), Object.entries(readable_list as Record<string, string>).map(([id, name]) => ({
+        id, data: get_readable(id, name, lang),
+    })));
 }

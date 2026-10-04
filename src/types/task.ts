@@ -1,17 +1,18 @@
+import type { PageDataTrait } from "~/types/common";
+
 // ---- 任务索引与列表 ----
 
 export type TaskType = 'archon_quests' | 'story_quests' | 'hangout_quests'
     | 'event_quests' | 'world_quests' | 'commission_quests';
 
-export type TaskSummary = {
-    id: string,
-    name: string | null,
-    description: string | null,
-    chapter: string | null,
-    type: TaskType,
-};
+export interface TaskPage extends PageDataTrait {
+    hidden: boolean;
+    description: string | null;
+    chapter: string | null;
+    type: TaskType;
+}
 
-export type Tasks = TaskSummary[];
+export type TaskPages = TaskPage[];
 
 // ---- 任务条件：语义化后的条件表达式（供前端展示与交互）----
 // 条件统一携带 id/title/subtitle 用于前端展示；
@@ -140,7 +141,7 @@ export type TaskExport = {
         id: string,
         task: Task,
     }[],
-    list: Tasks,
+    list: TaskPages,
 };
 
 // ---- 原始数据（genshin-db）中间结构 ----

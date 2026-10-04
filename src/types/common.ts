@@ -17,6 +17,16 @@ export type LivingBeingType =
 export type GeographyType = 'viewpoint' | 'dungeon';
 export type GeographyArea = 'mondstadt' | 'liyue' | 'inazuma' | 'sumeru' | 'fontaine' | 'natlan' | 'nod-krai';
 
+export type PageDataTrait = {
+    id: string,
+    name: string,
+    icon: string | null,
+    star: 1 | 2 | 3 | 4 | 5 | null,
+    show: boolean,
+    items: string[],
+    related_items: string[],
+};
+
 export type ItemCommon<ItemTypes extends string | null = string> = {
     name: string,
     icon: string,

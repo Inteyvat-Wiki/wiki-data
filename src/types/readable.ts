@@ -1,9 +1,10 @@
+import type { PageDataTrait } from "~/types/common";
+
 export type Readable = {
-    name: string,
-    content: string[],
+    name: string;
+    content: string[];
 };
 
-export type Readables = {
-    id: string,
-    name: string,
-}[];
+export interface ReadablePage extends PageDataTrait {}
+
+export type ReadablePages = ReadablePage[];

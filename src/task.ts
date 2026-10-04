@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { InteractionData, TaskData } from "~/utils/data";
 import { Lang, t } from "~/utils/i18n";
@@ -470,13 +470,14 @@ function get_task_export(lang: Lang): TaskExport {
         files,
         list: available_entries.map(entry => {
             const task = source_tasks.get(entry.source)!;
-            return {
+            return create_page({
                 id: entry.id,
-                name: task.name,
+                name: task.name || '',
+                hidden: !task.name,
                 description: task.description,
                 chapter: task.chapter,
                 type: entry.type,
-            };
+            });
         }),
     };
 }
@@ -488,11 +489,5 @@ export function get_quest_item_tasks(id: number, lang: Lang): string[] {
 
 export function gen_task(lang: Lang, path: string) {
     const { files, list } = get_task_export(lang);
-
-    fs.rmSync(path, { recursive: true, force: true });
-    fs.mkdirSync(path, { recursive: true });
-    for (const file of files) {
-        fs.writeFileSync(`${path}/${file.id}.json`, JSON.stringify(file.task, null, 4), 'utf-8');
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(list, null, 4), 'utf-8');
+    export_category(path, list, files.map(file => ({ id: file.id, data: file.task })));
 }

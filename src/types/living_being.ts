@@ -1,11 +1,10 @@
-import type { LivingBeingType, ItemCommon } from "~/types/common";
+import type { LivingBeingType, ItemCommon, PageDataTrait } from "~/types/common";
 
-export type LivingBeing = ItemCommon<LivingBeingType>[];
+export type LivingBeing = ItemCommon<LivingBeingType>;
 
-export type LivingBeings = {
-    id: string,
-    name: string,
-    icon: string,
-    type: LivingBeingType,
-    count: number,
-}[];
+export interface LivingBeingPage extends PageDataTrait {
+    icon: string;
+    type: LivingBeingType;
+}
+
+export type LivingBeingPages = LivingBeingPage[];

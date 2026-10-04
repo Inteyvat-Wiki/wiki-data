@@ -1,12 +1,10 @@
-import type { MaterialType, ItemCommon } from "~/types/common";
+import type { MaterialType, ItemCommon, PageDataTrait } from "~/types/common";
 
-export type Material = ItemCommon<MaterialType>[];
+export type Material = ItemCommon<MaterialType>;
 
-export type Materials = {
-    id: string,
-    name: string,
-    icon: string,
-    star: 1 | 2 | 3 | 4 | 5 | null,
-    type: MaterialType,
-    count: number,
-}[];
+export interface MaterialPage extends PageDataTrait {
+    icon: string;
+    type: MaterialType;
+}
+
+export type MaterialPages = MaterialPage[];

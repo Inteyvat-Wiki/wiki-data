@@ -1,9 +1,9 @@
-import fs from 'fs';
+import { create_page, export_category } from '~/utils/page';
 
 import { GeographyData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Geography, Geographies } from "~/types/geography";
+import { Geography, GeographyPages } from "~/types/geography";
 import geography_list from "~/data/geographies";
 
 export function get_geography(name: string, lang: Lang, type: string, area: string): Geography | null {
@@ -39,8 +39,8 @@ export function get_geography(name: string, lang: Lang, type: string, area: stri
     return res;
 }
 
-export function get_geography_list(lang: Lang): Geographies {
-    const res: Geographies = [];
+export function get_geography_list(lang: Lang): GeographyPages {
+    const res: GeographyPages = [];
 
     for (let type in geography_list) {
         for (let area in geography_list[type]) {
@@ -54,13 +54,13 @@ export function get_geography_list(lang: Lang): Geographies {
                     throw new Error(`Unknown geography type: ${type}`);
                 })();
 
-                res.push({
+                res.push(create_page({
                     id: name,
                     name: geography_data.name?? "",
-                    image: ConvertRaw.get_images_url(geography_data.images.filename_image, `geography/${name}/${name}_image`),
+                    icon: ConvertRaw.get_images_url(geography_data.images.filename_image, `geography/${name}/${name}_image`),
                     type: type as any,
                     area: area as any,
-                })
+                }));
             }
         }
     }
@@ -70,15 +70,10 @@ export function get_geography_list(lang: Lang): Geographies {
 }
 
 export function gen_geography(lang: Lang, path: string) {
-
-    fs.mkdirSync(`${path}`, { recursive: true });
-    for (let type in geography_list) {
-        for (let area in geography_list[type]) {
-            for (let name of geography_list[type][area]) {
-                fs.writeFileSync(`${path}/${name}.json`, JSON.stringify(get_geography(name, lang, type, area), null, 4), 'utf-8');
-            }
-        }
-    }
-    fs.writeFileSync(`${path}/list.json`, JSON.stringify(get_geography_list(lang), null, 4), 'utf-8');
-
+    const pages = get_geography_list(lang);
+    export_category(path, pages, pages.map(page => {
+        const data = get_geography(page.id, lang, page.type, page.area);
+        if (!data) throw new Error(`Geography not found: ${page.id}`);
+        return { id: page.id, data };
+    }));
 }

@@ -1,11 +1,9 @@
-import type { ItemCommon } from "~/types/common";
+import type { ItemCommon, PageDataTrait } from "~/types/common";
 
-export type QuestItem = ItemCommon<null>[];
+export type QuestItem = ItemCommon<null>;
 
-export type QuestItems = {
-    id: string,
-    name: string,
-    icon: string,
-    star: 1 | 2 | 3 | 4 | 5 | null,
-    count: number,
-}[];
+export interface QuestItemPage extends PageDataTrait {
+    icon: string;
+}
+
+export type QuestItemPages = QuestItemPage[];

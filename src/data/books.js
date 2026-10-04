@@ -1,4 +1,3 @@
-// Ordered by BooksCodex.sortOrder, then codexId.
 export default [
     "teyvat_travel_guide_mondstadt",                                             // 提瓦特游览指南·蒙德篇
     "teyvat_travel_guide_liyue",                                                 // 提瓦特游览指南·璃月篇
