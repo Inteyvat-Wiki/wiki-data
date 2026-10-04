@@ -1,5 +1,7 @@
+// 以下区段保留原始分类，便于维护；实际导出分类由源数据决定。
 export default {
-    "enemy_elemental": [
+    "enemy": [
+        // #region enemy_elemental
         "pyro_slime",                                                   // 火史莱姆
         "large_pyro_slime",                                             // 大型火史莱姆
         "hydro_slime",                                                  // 水史莱姆
@@ -43,8 +45,9 @@ export default {
         "icy_crystal_frostnight_scion",                                 // 凌晶·霜夜灵嗣
         "gilded_sunshard_frostnight_scion",                             // 金礞·霜夜灵嗣
         "frostnight_herra",                                             // 霜夜巡天灵主
-    ],
-    "enemy_hilichurl": [
+        // #endregion enemy_elemental
+
+        // #region enemy_hilichurl
         "hilichurl",                                                    // 丘丘人
         "hilichurl_fighter",                                            // 打手丘丘人
         "hilichurl_berserker",                                          // 冲锋丘丘人
@@ -75,8 +78,9 @@ export default {
         "geo_samachurl",                                                // 岩丘丘萨满
         "anemo_hilichurl_rogue",                                        // 丘丘风行游侠
         "hydro_hilichurl_rogue",                                        // 丘丘水行游侠
-    ],
-    "enemy_abyss": [
+        // #endregion enemy_hilichurl
+
+        // #region enemy_abyss
         "pyro_abyss_mage",                                              // 火深渊法师
         "hydro_abyss_mage",                                             // 水深渊法师
         "electro_abyss_mage",                                           // 雷深渊法师
@@ -106,8 +110,9 @@ export default {
         "wilderness_hunter",                                            // 荒野狂狩士
         "fisher_of_hidden_depths",                                      // 深黯钓客
         "lord_of_the_hidden_depths_whisperer_of_nightmares",            // 深黯魇语之主
-    ],
-    "enemy_fatui": [
+        // #endregion enemy_abyss
+
+        // #region enemy_fatui
         "fatui_skirmisher_pyroslinger_bracer",                          // 愚人众先遣队·火铳游击兵
         "fatui_skirmisher_hydrogunner_legionnaire",                     // 愚人众先遣队·水铳重卫士
         "fatui_skirmisher_anemoboxer_vanguard",                         // 愚人众先遣队·风拳前锋军
@@ -138,8 +143,9 @@ export default {
         "cutting_edge_allpurpose_scout_landcruiser",                    // 巡陆艇·尖端全能斥候型
         "cutting_edge_fire_support_ground_effect_landcruiser",          // 巡陆艇·尖端火力地效型
         "superheavy_landrover_mechanized_fortress",                     // 超重型陆巡舰·机动战垒
-    ],
-    "enemy_automaton": [
+        // #endregion enemy_fatui
+
+        // #region enemy_automaton
         "ruin_guard",                                                   // 遗迹守卫
         "ruin_hunter",                                                  // 遗迹猎者
         "ruin_grader",                                                  // 遗迹重机
@@ -175,8 +181,9 @@ export default {
         "secret_source_automaton_configuration_device",                 // 秘源机兵·构型械
         "secret_source_automaton_overseer_device",                      // 秘源机兵·统御械
         "knuckle_duckle",                                               // 重拳出击鸭
-    ],
-    "enemy_human": [
+        // #endregion enemy_automaton
+
+        // #region enemy_human
         "treasure_hoarders_scout",                                      // 盗宝团·斥候
         "treasure_hoarders_pyro_potioneer",                             // 盗宝团·火之药剂师
         "treasure_hoarders_hydro_potioneer",                            // 盗宝团·水之药剂师
@@ -236,8 +243,9 @@ export default {
         "tatankasaurus_warrior_skybreaker",                             // 突角龙武士·破空轰动
         "tatankasaurus_warrior_spiritlight_chaser",                     // 突角龙武士·追缉灵光
         "wayward_hermetic_spiritspeaker",                               // 灵觉隐修的迷者
-    ],
-    "enemy_others": [
+        // #endregion enemy_human
+
+        // #region enemy_others
         "pyro_whopperflower",                                           // 炽热骗骗花
         "electro_whopperflower",                                        // 电气骗骗花
         "cryo_whopperflower",                                           // 冰霜骗骗花
@@ -320,8 +328,9 @@ export default {
         "radiant_glacial_wolf",                                         // 蕴光凛狼
         "radiant_moonfly",                                              // 蕴光月幻蝶
         "radiant_moongecko",                                            // 蕴光月守宫
-    ],
-    "enemy_boss": [
+        // #endregion enemy_others
+
+        // #region enemy_boss
         "stormterror",                                                  // 裂空的魔龙
         "lupus_boreas_dominator_of_wolves",                             // 北风的王狼，奔狼的领主
         "childe",                                                       // 「公子」
@@ -335,8 +344,10 @@ export default {
         "lord_of_eroded_primal_fire",                                   // 蚀灭的源焰之主
         "the_game_before_the_gate",                                     // 门扉前的弈局
         "the_doctor",                                                   // 「博士」
+        // #endregion enemy_boss
     ],
-    "animal_bird": [
+    "animal": [
+        // #region animal_bird
         "brownwing_falcon",                                             // 茶羽鹰
         "umbertail_falcon",                                             // 棕翎鹰
         "lapis_glede",                                                  // 石鸢
@@ -382,8 +393,9 @@ export default {
         "flowfire_bird",                                                // 浮燃鸟
         "dualblaze_longplume_ibis",                                     // 双辉长翎鹮
         "puffin",                                                       // 海崖鹦
-    ],
-    "animal_beast": [
+        // #endregion animal_bird
+
+        // #region animal_beast
         "snow_fox",                                                     // 雪狐
         "crimson_fox",                                                  // 红狐
         "desert_fox",                                                   // 沙狐
@@ -443,8 +455,9 @@ export default {
         "rimehorn_deer",                                                // 凛角鹿
         "blunthorn_rhino",                                              // 钝角犀
         "palefurred_wolf",                                              // 苍绒狼
-    ],
-    "animal_fish": [
+        // #endregion animal_beast
+
+        // #region animal_fish
         "blackback_bass",                                               // 黑背鲈鱼
         "bluefin_bass",                                                 // 蓝鳍鲈鱼
         "golden_bass",                                                  // 黄金鲈鱼
@@ -501,8 +514,9 @@ export default {
         "neon_mauler_shark",                                            // 虹光凶凶鲨
         "azuregaze_crystaleye",                                         // 蓝昼明眼鱼
         "nightgaze_crystaleye",                                         // 夜色明眼鱼
-    ],
-    "animal_others": [
+        // #endregion animal_fish
+
+        // #region animal_others
         "pyro_crystalfly",                                              // 火晶蝶
         "hydro_crystalfly",                                             // 水晶蝶
         "anemo_crystalfly",                                             // 风晶蝶
@@ -542,5 +556,6 @@ export default {
         "crystal_beetle",                                               // 固晶甲虫
         "atapetra_conch",                                               // 古石螺
         "rock_crab",                                                    // 岩居蟹
+        // #endregion animal_others
     ],
 }

@@ -1,4 +1,3 @@
-// Ordered by Document.id; duplicate titles use -0, -1, ... in that order.
 export default {
     "incomplete_poem_part_1": "Document 100110",                                 // 诗篇断章（上）
     "incomplete_poem_part_2": "Document 100111",                                 // 诗篇断章（中）
