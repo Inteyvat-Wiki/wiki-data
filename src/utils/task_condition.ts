@@ -203,7 +203,7 @@ function get_value_condition(
     const schema = get_condition_schema(condition);
     const base = {
         // id 用于前端按条件分组：同族 + 相同对象 id 视为同一条件的多个取值
-        id: JSON.stringify([schema.family, schema.id_indexes.map(index => condition.params[index])]),
+        id: JSON.stringify([schema.family, schema.id_indexes.map(index => String(condition.params[index] ?? ''))]),
         title: get_condition_title(schema, condition.params, references, lang),
         subtitle: schema.description.startsWith('QUEST_')
             ? schema.description
@@ -299,7 +299,18 @@ export function get_task_conditions(
         // 步骤条件：优先解析为本任务内部步骤，其次外部任务步骤
         const own_reference = own_references.get(condition.step_id);
         const reference = own_reference || references.get(condition.step_id);
-        if (!reference) continue;
+        if (!reference) {
+            // 未导出的步骤保留原始状态数字，交给通用数值条件控件处理。
+            groups.push([{
+                id: JSON.stringify(['step_state', String(condition.step_id)]),
+                title: String(condition.step_id),
+                subtitle: condition.type,
+                type: 'number',
+                value: Number(condition.params[1]) || 0,
+                comparison: condition.type.includes('NOT_EQUAL') ? 'not_equal' : 'equal',
+            }]);
+            continue;
+        }
 
         const task = own_reference ? null : reference.task;
         const operand = {

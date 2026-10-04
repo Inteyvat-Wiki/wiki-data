@@ -21,6 +21,7 @@ import type {
     TaskStepReference,
     TaskTalk,
     TaskTriggerPoint,
+    TaskFinishConditionToken,
     TaskType,
 } from "~/types/task";
 
@@ -40,6 +41,7 @@ type SourceTaskStep = {
     hidden: boolean,
     description: string,
     talks: number[],
+    finish_conditions: SourceTaskCondition[],
 };
 
 type SourceTaskDialog = {
@@ -56,6 +58,9 @@ type SourceTaskDialog = {
 type SourceTaskTalk = {
     id: number,
     priority: number,
+    begin_way: TaskTalk['begin_way'],
+    next_talks: number[],
+    trigger_ids: string[],
     perform_cfg?: string,
     conditions: SourceTaskConditions,
     objects: string[],
@@ -109,6 +114,7 @@ function get_source_conditions(data: any): SourceTaskConditions {
         type: condition.type,
         params: condition.rawParams || [],
         ...(condition.stepId === undefined ? {} : { step_id: condition.stepId }),
+        ...(condition.talkId === undefined ? {} : { talk_id: condition.talkId }),
         ...(condition.stateName ? { state: condition.stateName } : {}),
     }));
     return {
@@ -157,6 +163,13 @@ function get_source_talk(talk: any): SourceTaskTalk {
     return {
         id: talk.id,
         priority: talk.priority ?? 0,
+        begin_way: talk.beginWay === 'TALK_BEGIN_MANUAL' ? 'manual'
+            : talk.beginWay === 'TALK_BEGIN_AUTO' ? 'auto' : null,
+        next_talks: talk.nextTalks || [],
+        trigger_ids: [
+            ...(talk.trigger?.objectIds || []).map((id: number) => `npc:${id}`),
+            ...trigger_points.map(point => `point:${point.scene_id}:${point.point_id ?? point.position.join(',')}`),
+        ],
         ...(talk.performCfg ? { perform_cfg: talk.performCfg } : {}),
         conditions: get_source_conditions(talk.beginConditions),
         objects: talk.trigger?.objectNames || [],
@@ -183,6 +196,7 @@ function get_source_task(source: string, lang: Lang): SourceTask | undefined {
             hidden: get_hidden(step.listShowType) === true,
             description: step.description,
             talks: get_step_talks(step),
+            finish_conditions: get_source_conditions({ conditions: step.finishConditions }).conditions,
         }));
 
     return {
@@ -380,12 +394,42 @@ function get_dialogs(
     };
 }
 
-function get_steps(steps: SourceTaskStep[], talk_keys: Map<number, number>): Record<string, TaskStep> {
+function get_steps(
+    steps: SourceTaskStep[],
+    talk_keys: Map<number, number>,
+    references: Map<number, TaskStepReference>,
+    own_references: Map<number, TaskStepReference>,
+    lang: Lang,
+): Record<string, TaskStep> {
     return Object.fromEntries(steps.map((step, index) => [String(index + 1), {
         hidden: step.hidden,
         ...(step.operations.length ? { operations: step.operations } : {}),
         description: step.description,
         talks: map_ids(step.talks, talk_keys) as number[],
+        finish_conditions: step.finish_conditions.flatMap((condition, index): TaskFinishConditionToken[] => {
+            const talk = condition.talk_id === undefined ? undefined : talk_keys.get(condition.talk_id);
+            const semantic = /^QUEST_CONTENT_QUEST_(?:GLOBAL_)?VAR_/.test(condition.type)
+                || /^QUEST_CONTENT_QUEST_STATE_(?:NOT_)?EQUAL$/.test(condition.type);
+            let tokens: TaskFinishConditionToken[] = talk === undefined
+                ? get_task_conditions({
+                    logic: '',
+                    conditions: [{
+                        ...condition,
+                        type: semantic ? condition.type.replace(/^QUEST_CONTENT_/, 'QUEST_COND_') : condition.type,
+                        ...(/QUEST_CONTENT_QUEST_STATE_(NOT_)?EQUAL/.test(condition.type)
+                            ? { step_id: Number(condition.params[0]), state: ['QUEST_STATE_NONE',
+                                'QUEST_STATE_UNSTARTED', 'QUEST_STATE_UNFINISHED', 'QUEST_STATE_FINISHED',
+                                'QUEST_STATE_FAILED'][Number(condition.params[1])] } : {}),
+                    }],
+                }, references, own_references, lang)
+                : [{ type: 'talk', talk }];
+            if (!tokens.length) tokens = get_task_conditions({ logic: '', conditions: [condition] },
+                references, own_references, lang);
+            if (talk === undefined && !semantic) tokens = tokens.map(token => typeof token === 'string'
+                || token.type === 'talk' ? token : { ...token,
+                    id: JSON.stringify(['finish', step.id, condition.type, condition.params]) });
+            return [...tokens, ...(index > 0 ? ['or' as const] : [])];
+        }),
     }]));
 }
 
@@ -395,10 +439,14 @@ function get_talks(
     own_references: Map<number, TaskStepReference>,
     lang: Lang,
 ): Record<string, TaskTalk> {
+    const talk_keys = get_key_map(talks);
     return Object.fromEntries(talks.map((talk, index) => {
         const dialog_data = get_dialogs(talk, references, own_references, lang);
         return [String(index + 1), {
             priority: talk.priority,
+            begin_way: talk.begin_way,
+            next_talks: map_ids(talk.next_talks, talk_keys) as number[],
+            trigger_ids: talk.trigger_ids,
             conditions: get_task_conditions(talk.conditions, references, own_references, lang),
             objects: talk.objects,
             trigger_points: talk.trigger_points,
@@ -430,7 +478,7 @@ function get_task(
         chapter: source.chapter,
         previous_tasks: map_ids(source.previous_tasks, get_task_id_map()) as string[],
         suggested_tasks: map_ids(source.suggested_tasks, get_task_id_map()) as string[],
-        steps: get_steps(source.steps, talk_keys),
+        steps: get_steps(source.steps, talk_keys, references, own_references, lang),
         talks: get_talks(source.talks, references, own_references, lang),
     };
 }
