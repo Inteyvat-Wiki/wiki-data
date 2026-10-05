@@ -102,6 +102,20 @@ function get_dialog_id(action: RawAction, dialog_ids: Set<number>): number | und
     return Object.values(action).find(value => Number.isInteger(value) && dialog_ids.has(value));
 }
 
+function get_group_dialog_ids(actions: RawAction[], dialog_ids: Set<number>): number[] {
+    const dialogs = actions.filter(action => action._type === 'DIALOG')
+        .map(action => get_dialog_id(action, dialog_ids))
+        .filter((id): id is number => id !== undefined);
+    if (dialogs.length > 0) return [...new Set(dialogs)];
+
+    // FROM_BLACK fades out previously displayed text; it is not a new dialogue node.
+    return [...new Set(actions.filter(action =>
+        (action._type === 'BLACK_SCREEN' || action._type === 'SIMPLE_BLACK_SCREEN')
+        && (action.blackScreenType ?? action._blackScreenType) !== 'FROM_BLACK')
+        .map(action => get_dialog_id(action, dialog_ids))
+        .filter((id): id is number => id !== undefined))];
+}
+
 function get_number_arrays(action: RawAction): number[][] {
     return Object.values(action).filter((value): value is number[] =>
         Array.isArray(value) && value.length > 0 && value.every(Number.isInteger));
@@ -241,11 +255,10 @@ function get_raw_interaction_dialogs(
     const dialog_groups = new Map<number, InteractionGroup>();
     const selects = new Map<number, { dialogs: number[], groups: number[] }>();
     for (const group of groups.values()) {
+        for (const dialog_id of get_group_dialog_ids(group.actions, dialog_ids)) {
+            dialog_groups.set(dialog_id, group);
+        }
         for (const action of group.actions) {
-            if (action._type === 'DIALOG') {
-                const dialog_id = get_dialog_id(action, dialog_ids);
-                if (dialog_id !== undefined) dialog_groups.set(dialog_id, group);
-            }
             if (action._type === 'DIALOG_SELECT') {
                 const select = get_select(action, dialog_ids, group_ids);
                 if (select) selects.set(group.id, select);
@@ -348,10 +361,7 @@ function get_raw_interaction_dialogs(
         if (!group) return { next: [], operations: [] };
 
         resolving.add(group_id);
-        const dialogs = group.actions
-            .filter(action => action._type === 'DIALOG')
-            .map(action => get_dialog_id(action, dialog_ids))
-            .filter((id): id is number => id !== undefined);
+        const dialogs = get_group_dialog_ids(group.actions, dialog_ids);
         if (dialogs.length > 0) {
             const result = {
                 next: dialogs.map(dialog => ({ dialog, conditions: [], branches: [] })),
