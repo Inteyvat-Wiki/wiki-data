@@ -37,7 +37,7 @@ export function get_quest_item(id: string, name: string, lang: Lang): QuestItem 
             ...(related_tasks.length > 0 ? [{
                 title: t('quest_item.related_tasks', lang),
                 description: related_tasks.map(id => `[[iw:task/${id}]]`).join('\n'),
-                type: 'normal' as const,
+                type: 'description' as const,
             }] : []),
             ...(content.length > 0 ? [{
                 title: null,
