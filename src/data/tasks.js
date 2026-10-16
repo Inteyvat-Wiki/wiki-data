@@ -21,7 +21,7 @@ export default {
         "ventis_plan": "Quest 374",                                                        // 温迪的计划 | 为了没有眼泪的明天
         "ventis_new_plan": "Quest 375",                                                    // 温迪的新计划 | 为了没有眼泪的明天
         "wild_escape": "Quest 376",                                                        // 逃亡 | 为了没有眼泪的明天
-        "behind_the_scenes": "Quest 377",                                                  // 幕后谈话 | 为了没有眼泪的明天
+        "behind_the_scenes-v1.x": "Quest 377",                                             // 幕后谈话 | 为了没有眼泪的明天
         "chasing_shadows": "Quest 20101",                                                  // 追逐暗影 | 为了没有眼泪的明天
         "state_of_the_holy_lyre_der_himmel": "Quest 379",                                  // 至宝的现状 | 为了没有眼泪的明天
         "fallen_tears": "Quest 380",                                                       // 遗落之泪 | 为了没有眼泪的明天
@@ -34,7 +34,7 @@ export default {
         "hurdle": "Quest 388",                                                             // 障壁 | 巨龙与自由之歌
         "empty_abode": "Quest 389",                                                        // 无人之家 | 巨龙与自由之歌
         "light_guiding_ceremony": "Quest 390",                                             // 导光仪式 | 巨龙与自由之歌
-        "calm_before_the_storm": "Quest 393",                                              // 在终曲之前 | 巨龙与自由之歌
+        "calm_before_the_storm-v1.x-0": "Quest 393",                                       // 在终曲之前 | 巨龙与自由之歌
         "a_long_shot": "Quest 394",                                                        // 为了青色的身影 | 巨龙与自由之歌
         "when_the_wind_dies_down": "Quest 398",                                            // 尾声，风停之后 | 巨龙与自由之歌
         "ending_note": "Quest 396",                                                        // 尾声的尾声 | 巨龙与自由之歌
@@ -168,7 +168,7 @@ export default {
         "pilgrimage_of_the_return_of_the_sacred_flame": "Quest 5001",                      // 归火圣夜巡礼 | 荣花与炎日之途
         "home_of_the_hot_springs": "Quest 5002",                                           // 温泉之乡 | 荣花与炎日之途
 
-        "a_decision": "Quest 5003",                                                        // 抉择 | 黑石湮落白石下
+        "a_decision-v5.0": "Quest 5003",                                                   // 抉择 | 黑石湮落白石下
         "to_reclaim_an_ancient_name": "Quest 5004",                                        // 古名寻回之旅 | 黑石湮落白石下
         "echoes_of_life": "Quest 5005",                                                    // 生命的回响 | 黑石湮落白石下
         "into_eternal_night": "Quest 5006",                                                // 坠入永夜 | 黑石湮落白石下
@@ -213,7 +213,7 @@ export default {
 
         "hidden_in_the_shadows": "Quest 6012",                                             // 匿于阴影 | 不存在的国土
         "special_operation": "Quest 6013",                                                 // 特别行动 | 不存在的国土
-        "everlasting_as_the_moon": "Quest 6014",                                           // 如月长存 | 不存在的国土
+        "everlasting_as_the_moon-v5.7": "Quest 6014",                                      // 如月长存 | 不存在的国土
 
         "the_first_sliver_of_moonlight": "Quest 6015",                                     // 最初的那抹月光 | 真实之月
         "descending_moon": "Quest 6016",                                                   // 月之将坠 | 真实之月
@@ -321,10 +321,10 @@ export default {
         "fates_accursed_wiles": "Quest 16002",                                             // 命运的诡计 | 名为故事的魔法
         "revelation_beneath_the_stars": "Quest 16003",                                     // 星空降下的启示 | 名为故事的魔法
         "the_solution_of_fate": "Quest 16004",                                             // 命运的题解 | 名为故事的魔法
-        "interlude_a_moments_rest": "Quest 16005",                                         // 幕间小憩 | 名为故事的魔法
-        "interlude_a_moments_rest-1": "Quest 16006",                                       // 幕间小憩 | 名为故事的魔法
-        "interlude_a_moments_rest-2": "Quest 16007",                                       // 幕间小憩 | 名为故事的魔法
-        "interlude_a_moments_rest-3": "Quest 16008",                                       // 幕间小憩 | 名为故事的魔法
+        "interlude_a_moments_rest-v6.2-0": "Quest 16005",                                  // 幕间小憩 | 名为故事的魔法
+        "interlude_a_moments_rest-v6.2-1": "Quest 16006",                                  // 幕间小憩 | 名为故事的魔法
+        "interlude_a_moments_rest-v6.2-2": "Quest 16007",                                  // 幕间小憩 | 名为故事的魔法
+        "interlude_a_moments_rest-v6.2-3": "Quest 16008",                                  // 幕间小憩 | 名为故事的魔法
 
         "triumphant_warrior": "Quest 16009",                                               // 凯旋的远征者 | 致予远征之人
         "fated_warrior": "Quest 16010",                                                    // 命运的远征者 | 致予远征之人
@@ -343,7 +343,7 @@ export default {
 
         "justice_for_books_sake": "Quest 12000",                                           // 寻书巧遇江湖事 | 江湖不问出处
         "know_thyself_know_thy_enemy": "Quest 12001",                                      // 知己知彼定良策 | 江湖不问出处
-        "calm_before_the_storm-1": "Quest 12002",                                          // 山雨欲来风满楼 | 江湖不问出处
+        "calm_before_the_storm-v1.x-1": "Quest 12002",                                     // 山雨欲来风满楼 | 江湖不问出处
         "justice_is_its_own_reward": "Quest 12003",                                        // 淡泊名利侠客行 | 江湖不问出处
 
         "across_the_sea": "Quest 11010",                                                   // 远渡重洋的邂逅 | 独眼小宝总动员
@@ -438,7 +438,7 @@ export default {
         "crisis_at_the_aisa_bathhouse": "Quest 12045",                                     // 秋沙钱汤的经营危机 | 食梦者的忧郁
         "a_deceit_called_happiness": "Quest 12046",                                        // 名为快乐的谎言 | 食梦者的忧郁
         "descendant_of_nightmares": "Quest 12047",                                         // 梦魇的孑遗 | 食梦者的忧郁
-        "afterword": "Quest 12048",                                                        // 后日谈 | 食梦者的忧郁
+        "afterword-v5.4": "Quest 12048",                                                   // 后日谈 | 食梦者的忧郁
 
         "the_start_of_contamination": "Quest 13000",                                       // 污染之始 | 没有答案的课题
         "into_the_hinterland": "Quest 13001",                                              // 深入腹地 | 没有答案的课题
@@ -578,7 +578,7 @@ export default {
         "hearken_ye_who_have_returned": "Quest 5034",                                      // 聆听，归来者 | 正如那烈日
 
         "sinister_undercurrent": "Quest 15034",                                            // 暗涌 | 星与夜的低语
-        "special_training": "Quest 15035",                                                 // 特训 | 星与夜的低语
+        "special_training-v5.6": "Quest 15035",                                            // 特训 | 星与夜的低语
         "all_devouring": "Quest 15036",                                                    // 吞星 | 星与夜的低语
         "heart_and_mind": "Quest 15037",                                                   // 心相 | 星与夜的低语
         "unbounded": "Quest 15038",                                                        // 无垠 | 星与夜的低语
@@ -599,7 +599,7 @@ export default {
         "the_exorcists_path": "Quest 19023",                                               // 驱邪之行 | 寻妖觅邪记
         "popsicles_and_their_curious_uses": "Quest 19024",                                 // 冰棍的妙用 | 寻妖觅邪记
         "for_a_childs_smile": "Quest 19025",                                               // 为了小孩子的笑容 | 寻妖觅邪记
-        "test_of_courage": "Quest 19030",                                                  // 试胆大会 | 寻妖觅邪记
+        "test_of_courage-v1.x": "Quest 19030",                                             // 试胆大会 | 寻妖觅邪记
         "sudden_discomfort": "Quest 19031",                                                // 突如其来的不适 | 寻妖觅邪记
         "independent_actions": "Quest 19032",                                              // 分头行动 | 寻妖觅邪记
         "ever_deeper": "Quest 19033",                                                      // 前往更深处 | 寻妖觅邪记
@@ -622,15 +622,15 @@ export default {
         "live_practice": "Quest 19065",                                                    // 实战练习 | 骑士修行之道
         "strength_training": "Quest 19066",                                                // 力量特训 | 骑士修行之道
         "fleeting_leisure": "Quest 19067",                                                 // 片刻闲暇 | 骑士修行之道
-        "gift_and_intent": "Quest 19068",                                                  // 礼物与心意 | 骑士修行之道
-        "gift_and_intent-1": "Quest 19069",                                                // 礼物与心意 | 骑士修行之道
+        "gift_and_intent-v1.x-0": "Quest 19068",                                           // 礼物与心意 | 骑士修行之道
+        "gift_and_intent-v1.x-1": "Quest 19069",                                           // 礼物与心意 | 骑士修行之道
         "studious_maid": "Quest 19081",                                                    // 女仆与复习 | 骑士备考之道
         "journey_to_liyue": "Quest 19082",                                                 // 璃月之行 | 骑士备考之道
         "while_the_millelith_stands_guard": "Quest 19083",                                 // 千岩牢固 | 骑士备考之道
         "a_knights_journey_through_liyue": "Quest 19084",                                  // 异国骑士璃月行记 | 骑士备考之道
-        "adventurers_entrance_exam": "Quest 19085",                                        // 冒险家的入门考试 | 骑士备考之道
-        "adventurers_entrance_exam-1": "Quest 19086",                                      // 冒险家的入门考试 | 骑士备考之道
-        "adventurers_entrance_exam-2": "Quest 19087",                                      // 冒险家的入门考试 | 骑士备考之道
+        "adventurers_entrance_exam-v1.5-0": "Quest 19085",                                 // 冒险家的入门考试 | 骑士备考之道
+        "adventurers_entrance_exam-v1.5-1": "Quest 19086",                                 // 冒险家的入门考试 | 骑士备考之道
+        "adventurers_entrance_exam-v1.5-2": "Quest 19087",                                 // 冒险家的入门考试 | 骑士备考之道
         "noelle_rides_out": "Quest 19090",                                                 // 诺艾尔的侦察行动 | 骑士备考之道
         "substitute_acting_grand_master_noelle": "Quest 19091",                            // 诺艾尔的代理工作 | 骑士备考之道
         "noelle_the_intelligence_operative": "Quest 19092",                                // 诺艾尔的情报工作 | 骑士备考之道
@@ -669,7 +669,7 @@ export default {
 
         "accidental_encounter": "Quest 19018",                                             // 意外相遇 | 犬大将的特别行动
         "what_shall_we_do": "Quest 19019",                                                 // 如何对敌？ | 犬大将的特别行动
-        "special_training-1": "Quest 19020",                                               // 特别训练 | 犬大将的特别行动
+        "special_training-v2.3": "Quest 19020",                                            // 特别训练 | 犬大将的特别行动
         "secret_identity": "Quest 19026",                                                  // 秘密身份 | 犬大将的特别行动
         "a_friends_path": "Quest 19027",                                                   // 朋友之道 | 犬大将的特别行动
         "ordinary_memorial": "Quest 19028",                                                // 平凡的纪念 | 犬大将的特别行动
@@ -694,13 +694,13 @@ export default {
         "gang_bylaws": "Quest 19143",                                                      // 派中法度 | 帮派的日常事务
         "key_decision": "Quest 19144",                                                     // 重大决定 | 帮派的日常事务
         "shrine_maiden_for_a_day": "Quest 19145",                                          // 一日巫女 | 帮派的日常事务
-        "in_the_aftermath": "Quest 19146",                                                 // 善后工作 | 帮派的日常事务
+        "in_the_aftermath-v2.7": "Quest 19146",                                            // 善后工作 | 帮派的日常事务
         "thatll_learn_them": "Quest 19147",                                                // 好好学习 | 帮派的日常事务
         "temporary_escape": "Quest 19148",                                                 // 暂避一时 | 帮派的日常事务
 
         "the_missing_person": "Quest 19036",                                               // 失落之人 | 风暴捕物帐
-        "the_missing_thing": "Quest 19039",                                                // 失落之物 | 风暴捕物帐
-        "the_missing_thing-1": "Quest 19055",                                              // 失落之物 | 风暴捕物帐
+        "the_missing_thing-v2.8": "Quest 19039",                                           // 失落之物 | 风暴捕物帐
+        "the_missing_thing-v2.0": "Quest 19055",                                           // 失落之物 | 风暴捕物帐
         "report_back": "Quest 19056",                                                      // 复命 | 风暴捕物帐
         "heizou_talks_fraud": "Quest 19057",                                               // 「鹿说诈骗」 | 风暴捕物帐
         "longsealed_mystery": "Quest 19060",                                               // 尘封的疑云 | 风暴捕物帐
@@ -744,7 +744,7 @@ export default {
         "taste_of_home": "Quest 19097",                                                    // 家之味 | 鬼话与甜酒
         "all_the_worlds_a_stage": "Quest 19098",                                           // 剧中剧 | 鬼话与甜酒
 
-        "a_decision-1": "Quest 19180",                                                     // 抉择 | 猫与随机数
+        "a_decision-v4.5": "Quest 19180",                                                  // 抉择 | 猫与随机数
         "mask": "Quest 19182",                                                             // 假面 | 猫与随机数
         "break": "Quest 19184",                                                            // 小憩 | 猫与随机数
         "detectives": "Quest 19185",                                                       // 真探 | 猫与随机数
@@ -761,30 +761,30 @@ export default {
         "festering_desire": "Quest 41210",                                                 // 腐殖之剑 | 腐殖之剑
         "archons_rival": "Quest 41211",                                                    // 敌神者 | 敌神者
         "raiders_amidst_snow_mist": "Quest 41212",                                         // 雪山上的贼影 | 雪山上的贼影
-        "uninvited_guests-1": "Quest 41213",                                               // 不速之客 | 不速之客
-        "afterword-1": "Quest 40165",                                                      // 后日谈 | 后日谈
+        "uninvited_guests-v1.x": "Quest 41213",                                            // 不速之客 | 不速之客
+        "afterword-v4.8": "Quest 40165",                                                   // 后日谈 | 后日谈
 
-        "good_hunter_express": "Quest 41121",                                              // 猎鹿急送
-        "wangshu_takeaway": "Quest 41141",                                                 // 望舒外送
-        "wanmin_fresh": "Quest 41142",                                                     // 万民鲜食
-        "good_hunter_express-1": "Quest 41143",                                            // 猎鹿急送
-        "wangshu_takeaway-1": "Quest 41144",                                               // 望舒外送
-        "wanmin_fresh-1": "Quest 41145",                                                   // 万民鲜食
-        "good_hunter_express-2": "Quest 41146",                                            // 猎鹿急送
-        "wangshu_takeaway-2": "Quest 41147",                                               // 望舒外送
-        "wanmin_fresh-2": "Quest 41148",                                                   // 万民鲜食
-        "good_hunter_express-3": "Quest 41149",                                            // 猎鹿急送
-        "wangshu_takeaway-3": "Quest 41150",                                               // 望舒外送
-        "wanmin_fresh-3": "Quest 41151",                                                   // 万民鲜食
-        "good_hunter_express-4": "Quest 41152",                                            // 猎鹿急送
-        "wangshu_takeaway-4": "Quest 41153",                                               // 望舒外送
-        "wanmin_fresh-4": "Quest 41154",                                                   // 万民鲜食
-        "good_hunter_express-5": "Quest 41155",                                            // 猎鹿急送
-        "wangshu_takeaway-5": "Quest 41156",                                               // 望舒外送
-        "wanmin_fresh-5": "Quest 41157",                                                   // 万民鲜食
-        "good_hunter_express-6": "Quest 41158",                                            // 猎鹿急送
-        "wangshu_takeaway-6": "Quest 41159",                                               // 望舒外送
-        "wanmin_fresh-6": "Quest 41160",                                                   // 万民鲜食
+        "good_hunter_express-v1.x-0": "Quest 41121",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-0": "Quest 41141",                                          // 望舒外送
+        "wanmin_fresh-v1.x-0": "Quest 41142",                                              // 万民鲜食
+        "good_hunter_express-v1.x-1": "Quest 41143",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-1": "Quest 41144",                                          // 望舒外送
+        "wanmin_fresh-v1.x-1": "Quest 41145",                                              // 万民鲜食
+        "good_hunter_express-v1.x-2": "Quest 41146",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-2": "Quest 41147",                                          // 望舒外送
+        "wanmin_fresh-v1.x-2": "Quest 41148",                                              // 万民鲜食
+        "good_hunter_express-v1.x-3": "Quest 41149",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-3": "Quest 41150",                                          // 望舒外送
+        "wanmin_fresh-v1.x-3": "Quest 41151",                                              // 万民鲜食
+        "good_hunter_express-v1.x-4": "Quest 41152",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-4": "Quest 41153",                                          // 望舒外送
+        "wanmin_fresh-v1.x-4": "Quest 41154",                                              // 万民鲜食
+        "good_hunter_express-v1.x-5": "Quest 41155",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-5": "Quest 41156",                                          // 望舒外送
+        "wanmin_fresh-v1.x-5": "Quest 41157",                                              // 万民鲜食
+        "good_hunter_express-v1.x-6": "Quest 41158",                                       // 猎鹿急送
+        "wangshu_takeaway-v1.x-6": "Quest 41159",                                          // 望舒外送
+        "wanmin_fresh-v1.x-6": "Quest 41160",                                              // 万民鲜食
 
         "the_origin_of_the_lanterns": "Quest 41311",                                       // 灯自何处来 | 灯自何处来
         "currents_deep_beneath_the_lanterns": "Quest 41312",                               // 灯下暗流深 | 灯下暗流深
@@ -808,10 +808,10 @@ export default {
         "away_with_obsessions_and_falsehood": "Quest 40022",                               // 痴念虚错拂袖去 | 痴念虚错拂袖去
         "path_of_the_taishou": "Quest 40023",                                              // 大将恒遵道 | 大将恒遵道
 
-        "the_snowy_past": "Quest 40025",                                                   // 冰雪往事 | 冰雪往事
-        "the_snowy_past-1": "Quest 40026",                                                 // 冰雪往事 | 冰雪往事
-        "the_shadows_deepen": "Quest 40027",                                               // 暗影重重 | 暗影重重
-        "the_shadows_deepen-1": "Quest 40028",                                             // 暗影重重 | 暗影重重
+        "the_snowy_past-v1.x": "Quest 40025",                                              // 冰雪往事 | 冰雪往事
+        "the_snowy_past-v2.3": "Quest 40026",                                              // 冰雪往事 | 冰雪往事
+        "the_shadows_deepen-v2.3-0": "Quest 40027",                                        // 暗影重重 | 暗影重重
+        "the_shadows_deepen-v2.3-1": "Quest 40028",                                        // 暗影重重 | 暗影重重
         "a_secret_born_from_ashes": "Quest 40029",                                         // 灰中之秘 | 灰中之秘
 
         "the_blazing_stars_ring_in_fortune": "Quest 40035",                                // 吉星似火，福禄成喜 | 吉星似火，福禄成喜
@@ -834,18 +834,18 @@ export default {
         "the_five_colors_true_form": "Quest 40059",                                        // 五彩光华本相 | 宵暗御所黑染
 
         "the_golden_apple_vacation_returns": "Quest 40064",                                // 再临！金苹果假日 | 再临！金苹果假日
-        "as_the_courtyard_in_spring_once_appeared": "Quest 40065",                         // 春庭景如旧 | 春庭景如旧
-        "as_the_courtyard_in_spring_once_appeared-1": "Quest 40066",                       // 春庭景如旧 | 春庭景如旧
-        "as_the_courtyard_in_spring_once_appeared-2": "Quest 40067",                       // 春庭景如旧 | 春庭景如旧
-        "blazin_trails": "Quest 40068",                                                    // 烈火踏歌行 | 烈火踏歌行
-        "blazin_trails-1": "Quest 40069",                                                  // 烈火踏歌行 | 烈火踏歌行
-        "blazin_trails-2": "Quest 40070",                                                  // 烈火踏歌行 | 烈火踏歌行
-        "immernachtreich_apokalypse": "Quest 40071",                                       // 幽夜默示录 | 幽夜默示录
-        "immernachtreich_apokalypse-1": "Quest 40072",                                     // 幽夜默示录 | 幽夜默示录
-        "immernachtreich_apokalypse-2": "Quest 40073",                                     // 幽夜默示录 | 幽夜默示录
-        "the_ancient_azure_stars": "Quest 40074",                                          // 亘古的苍星 | 亘古的苍星
-        "the_ancient_azure_stars-1": "Quest 40075",                                        // 亘古的苍星 | 亘古的苍星
-        "the_ancient_azure_stars-2": "Quest 40076",                                        // 亘古的苍星 | 亘古的苍星
+        "as_the_courtyard_in_spring_once_appeared-v2.8-0": "Quest 40065",                  // 春庭景如旧 | 春庭景如旧
+        "as_the_courtyard_in_spring_once_appeared-v2.8-1": "Quest 40066",                  // 春庭景如旧 | 春庭景如旧
+        "as_the_courtyard_in_spring_once_appeared-v2.8-2": "Quest 40067",                  // 春庭景如旧 | 春庭景如旧
+        "blazin_trails-v2.8-0": "Quest 40068",                                             // 烈火踏歌行 | 烈火踏歌行
+        "blazin_trails-v2.8-1": "Quest 40069",                                             // 烈火踏歌行 | 烈火踏歌行
+        "blazin_trails-v2.8-2": "Quest 40070",                                             // 烈火踏歌行 | 烈火踏歌行
+        "immernachtreich_apokalypse-v2.8-0": "Quest 40071",                                // 幽夜默示录 | 幽夜默示录
+        "immernachtreich_apokalypse-v2.8-1": "Quest 40072",                                // 幽夜默示录 | 幽夜默示录
+        "immernachtreich_apokalypse-v2.8-2": "Quest 40073",                                // 幽夜默示录 | 幽夜默示录
+        "the_ancient_azure_stars-v2.8-0": "Quest 40074",                                   // 亘古的苍星 | 亘古的苍星
+        "the_ancient_azure_stars-v2.8-1": "Quest 40075",                                   // 亘古的苍星 | 亘古的苍星
+        "the_ancient_azure_stars-v2.8-2": "Quest 40076",                                   // 亘古的苍星 | 亘古的苍星
         "like_rhyme_and_song_the_summer_reverie": "Quest 40077",                           // 如诗如歌，夏之梦 | 如诗如歌，夏之梦
 
         "sounds_from_afar": "Quest 40078",                                                 // 自远方吹来的音讯 | 自远方吹来的音讯
@@ -860,7 +860,7 @@ export default {
         "farewell_my_shroom_buddies": "Quest 40086",                                       // 再见，蕈兽伙伴！ | 再见，蕈兽伙伴！
         "nilotpala_cup_beast_tamers_tournament": "Quest 40095",                            // 「月莲杯驯兽师大赛」
 
-        "test_of_courage-1": "Quest 40089",                                                // 试胆大会 | 试胆大会
+        "test_of_courage-v3.3": "Quest 40089",                                             // 试胆大会 | 试胆大会
         "haunted_tales": "Quest 40090",                                                    // 妖雾重重 | 妖雾重重
         "the_currents_of_life": "Quest 40091",                                             // 世事流水 | 世事流水
 
@@ -907,10 +907,10 @@ export default {
         "a_cloudsea_appeal_a_brilliance_revealed": "Quest 40140",                          // 描露摹晖，诉愿云海 | 描露摹晖，诉愿云海
         "the_glede_returns_to_the_pavilion": "Quest 40141",                                // 故鸢吹归，再宿堂楼 | 故鸢吹归，再宿堂楼
 
-        "potions_most_potent": "Quest 40144",                                              // 神奇药剂 | 神奇药剂
-        "potions_most_potent-1": "Quest 40160",                                            // 神奇药剂 | 神奇药剂
-        "a_breakthrough_in_craft-1": "Quest 40161",                                        // 工艺突破 | 神奇药剂
-        "a_breakthrough_in_craft": "Quest 40145",                                          // 工艺突破 | 工艺突破
+        "potions_most_potent-v4.5-0": "Quest 40144",                                       // 神奇药剂 | 神奇药剂
+        "potions_most_potent-v4.5-1": "Quest 40160",                                       // 神奇药剂 | 神奇药剂
+        "a_breakthrough_in_craft-v4.5-0": "Quest 40161",                                   // 工艺突破 | 神奇药剂
+        "a_breakthrough_in_craft-v4.5-1": "Quest 40145",                                   // 工艺突破 | 工艺突破
         "international_markets": "Quest 40146",                                            // 远销各国 | 远销各国
         "a_job_well_done": "Quest 40154",                                                  // 完满收工 | 完满收工
 
@@ -920,7 +920,7 @@ export default {
         "the_story_begins_in_a_forest_without_rain": "Quest 40162",                        // 故事始于无雨的森林 | 故事始于无雨的森林
         "they_once_walked_the_starry_sky": "Quest 40163",                                  // 他们行过星空 | 他们行过星空
         "until_the_end_of_the_world": "Quest 40164",                                       // 直至世界尽头 | 直至世界尽头
-        "afterword-2": "Quest 41214",                                                      // 后日谈 | 后日谈
+        "afterword-v1.x": "Quest 41214",                                                   // 后日谈 | 后日谈
 
         "give_her_surprises": "Quest 40166",                                               // 赠予她惊喜 | 赠予她惊喜
         "give_her_sweetness": "Quest 40167",                                               // 赠予她甜蜜 | 赠予她甜蜜
@@ -997,8 +997,8 @@ export default {
 
         "should_we_meet_again": "Quest 40244",                                             // 若我们再次相见 | 若我们再次相见
         "those_we_have_lost": "Quest 40245",                                               // 那些我们所失去的 | 那些我们所失去的
-        "those_we_have_kept": "Quest 40246",                                               // 那些我们所留驻的 | 那些我们所留驻的
-        "those_we_have_kept-1": "Quest 40247",                                             // 那些我们所留驻的 | 那些我们所留驻的
+        "those_we_have_kept-v6.7": "Quest 40246",                                          // 那些我们所留驻的 | 那些我们所留驻的
+        "those_we_have_kept-v4.3": "Quest 40247",                                          // 那些我们所留驻的 | 那些我们所留驻的
     },
     "world_quests": {
         "recruiting_new_partners": "Quest 310",                                            // 招募新伙伴
@@ -1011,17 +1011,7 @@ export default {
         "the_art_of_cooking": "Quest 467",                                                 // 烹饪的诀窍
         "the_blessings_of_the_seven": "Quest 469",                                         // 七神的赐福
         "scent_on_the_wind": "Quest 470",                                                  // 随风而来的好味道
-        "alan_smithee_author_of_fischl": "Quest 10003",                                    // 艾伦·史密西，菲谢尔的作者 | 魔女的课业·意外之题
-        "a_dry_well_doth_not_reflect_the_stars": "Quest 10004",                            // 枯井无法映星月 | 魔女的课业·干慧之题
-        "old_friends_and_new_knowledge": "Quest 10005",                                    // 旧识与新知 | 魔女的课业·题外之题
-        "a_child_wandering_the_world": "Quest 10006",                                      // 行于世间的孩子 | 魔女的课业·此世之题
-        "tales_of_time_and_wind": "Quest 10007",                                           // 时与风的故事 | 魔女的课业·风起之题
-        "with_lupical": "Quest 10008",                                                     // 和「卢皮卡」一起 | 魔女的课业·小狼众之题
-        "the_law_of_boundaries": "Quest 10009",                                            // 界限的法则 | 魔女的课业·仙境花之题
-        "the_great_mages_journey_of_trials": "Quest 10010",                                // 大魔法师的试炼之旅 | 魔女的课业·火花叶之题
-        "quest_10801-1": "Quest 10801, File b0bd37d5",                                     // (test)隐藏$HIDDEN
         "a_teapot_to_call_home_part_i": "Quest 11008",                                     // 翠石砌玉壶·其一
-        "another_home_there_may_yet_be": "Quest 13028",                                    // 若还有另一个家
         "bough_keeper_dainsleif": "Quest 18000",                                           // 拾枝者·戴因斯雷布 | 戴因斯雷布
         "welcome_to_the_adventurers_guild": "Quest 20030",                                 // 欢迎来到冒险家协会
         "every_day_a_new_adventure": "Quest 20031",                                        // 每天都是新的冒险
@@ -1034,59 +1024,31 @@ export default {
         "a_fine_opportunity": "Quest 20601",                                               // 天赐良机？
         "not_to_be_missed": "Quest 20602",                                                 // 机不可失
         "time_waits_for_no_man": "Quest 20603",                                            // 时不再来
-        "question_and_answer": "Quest 20702",                                              // 骑士团手册问答
+        "question_and_answer-v1.x-0": "Quest 20702",                                       // 骑士团手册问答
         "flighty_flora_and_flora": "Quest 20740",                                          // 轻飘飘的花与芙萝拉
         "mondstadt_and_its_archon": "Quest 20741",                                         // 风神与蒙德
         "windrise_windfall": "Quest 20743",                                                // 风起风息
         "overstretched": "Quest 21003",                                                    // 独木难支
-        "treasure_lost_treasure_found": "Quest 21004",                                     // 宝藏归离
+        "treasure_lost_treasure_found-v1.x-0": "Quest 21004",                              // 宝藏归离
         "the_tree_who_stands_alone": "Quest 21007",                                        // 孤木孑立，无林可依
         "old_tastes_die_hard": "Quest 21009",                                              // 旧味难寻
         "weather_change_at_yaoguang_shoal": "Quest 21010",                                 // 瑶光滩天气改变$HIDDEN
         "book_in_the_woods": "Quest 21015",                                                // 林中小书
         "share_not_your_treasures": "Quest 21020",                                         // 怀宝应自珍
         "the_chi_of_yore": "Quest 21021",                                                  // 古云有「螭」
-        "treasure_lost_treasure_found-1": "Quest 21022",                                   // 宝藏归离
+        "treasure_lost_treasure_found-v1.x-1": "Quest 21022",                              // 宝藏归离
         "a_provisional_arrangement": "Quest 21023",                                        // 暂行之策
         "big_business": "Quest 21024",                                                     // 大生意
         "the_yakshas_wish": "Quest 21025",                                                 // 夜叉之愿
-        "the_gourmet_supremos_the_importance_of_eating_well": "Quest 22016",               // 全能美食队·吃饱的重要性
-        "the_narukami_trail": "Quest 22050",                                               // 鸣神寻踪
         "new_horizons_of_adventure": "Quest 22111",                                        // 冒险要朝着远方
-        "next_time_on_king_of_invokations": "Quest 23035",                                 // 《召唤王·下集！是…》
         "adventure_rank_ascension_1": "Quest 25001",                                       // 冒险等阶突破·一
-        "adventure_rank_ascension_2": "Quest 25003",                                       // 冒险等阶突破·二
-        "adventure_rank_ascension_2-1": "Quest 25005",                                     // 冒险等阶突破·二
-        "adventure_rank_ascension_2-2": "Quest 25007",                                     // 冒险等阶突破·二
+        "adventure_rank_ascension_2-v1.x-0": "Quest 25003",                                // 冒险等阶突破·二
+        "adventure_rank_ascension_2-v1.x-1": "Quest 25005",                                // 冒险等阶突破·二
+        "adventure_rank_ascension_2-v1.x-2": "Quest 25007",                                // 冒险等阶突破·二
         "adventure_rank_ascension_3": "Quest 25009",                                       // 冒险等阶突破·三
         "adventure_rank_ascension_4": "Quest 25011",                                       // 冒险等阶突破·四
         "adventure_rank_ascension_7": "Quest 25013",                                       // 冒险等阶突破·七
-        "world_level_ascension": "Quest 25015",                                            // 世界等级突破
         "liyue_theater_mechanicus": "Quest 40000",                                         // 璃月·机关棋谭
-        "bantan_sango_case_file_mystery_of_the_black_shadow": "Quest 40031",               // 万端珊瑚事件簿·黑影之谜
-        "bantan_sango_case_file_stealthy_trail": "Quest 40032",                            // 万端珊瑚事件簿·隐秘踪迹
-        "bantan_sango_case_file_the_truth_just_about_comes_to_light": "Quest 40033",       // 万端珊瑚事件簿·稍欠灵光
-        "bantan_sango_case_file_recognition": "Quest 40034",                               // 万端珊瑚事件簿·它的认可
-        "the_moonbathed_deep": "Quest 40060",                                              // 月浴之渊
-        "that_which_our_ancestors_entrusted": "Quest 40061",                               // 御先祖大人的委托
-        "between_facades_and_familiar_faces": "Quest 40096",                               // 人前人后
-        "hustle_and_bustle": "Quest 40142",                                                // 人来人往
-        "receiver_of_friends_from_afar_part_i": "Quest 40143",                             // 有朋自远方来·其一
-        "receiver_of_friends_from_afar_part_ii": "Quest 40147",                            // 有朋自远方来·其二
-        "receiver_of_friends_from_afar_part_iii": "Quest 40148",                           // 有朋自远方来·其三
-        "receiver_of_friends_from_afar_part_iv": "Quest 40149",                            // 有朋自远方来·其四
-        "final_stanza_the_sanctification_of_tao_dou": "Quest 40187",                       // 终回：八奇炼桃都
-        "covert_investigation_dirty_money_misdeeds": "Quest 40199",                        // 隐行谛勘，秽金之罪
-        "an_instant_of_intoxication_a_meeting_by_moonlight": "Quest 40200",                // 余醺一瞬，月境之约
-        "covert_investigation_dirty_money_misdeeds-1": "Quest 40201",                      // 隐行谛勘，秽金之罪
-        "covert_investigation_dirty_money_misdeeds-2": "Quest 40202",                      // 隐行谛勘，秽金之罪
-        "those_strange_and_intriguing_questions": "Quest 40204",                           // 那些古怪又让人思索的问题
-        "ding_ding_dinggg_a_great_feast": "Quest 40207",                                   // 叮叮叮，大聚餐！ | 叮叮叮，大聚餐！
-        "an_adventurers_woes": "Quest 40214",                                              // 冒险家的烦恼
-        "a_mysterious_outsourced_contract": "Quest 40215",                                 // 外包的保密事项
-        "backup_plans": "Quest 40216",                                                     // 备用方案
-        "return_home_children_of_the_desert": "Quest 40239, File 40239",                   // 返乡吧，来自沙漠的孩子们
-        "return_home_children_of_the_desert-1": "Quest 40239, File cfeb7f98",              // 返乡吧，来自沙漠的孩子们
         "that_which_fell_from_the_sky": "Quest 41120",                                     // 天降的某物
         "to_each_their_duty": "Quest 41122",                                               // 各有职责
         "contingencies": "Quest 41123",                                                    // 紧急措施
@@ -1119,171 +1081,46 @@ export default {
         "windblume_research_report": "Quest 70000",                                        // 风花节研究报告
         "the_sound_of_discord": "Quest 70001",                                             // 节日里的不谐音
         "those_hardtoreach_places": "Quest 70003",                                         // 高处清理
-        "mutual_exchange": "Quest 70006",                                                  // 互通有无？
+        "mutual_exchange-v1.x-0": "Quest 70006",                                           // 互通有无？
         "quiet_please_this_is_a_library": "Quest 70007",                                   // 图书馆请安静！
         "windbrew": "Quest 70008",                                                         // 「风」味饮料
         "windblumes_and_snowflakes": "Quest 70009",                                        // 风花与雪花
         "adventurers_in_windblume": "Quest 70010",                                         // 风花节与冒险家
-        "hilichurl_justice": "Quest 70011",                                                // 替丘丘行道！
-        "mutual_exchange-1": "Quest 70012",                                                // 互通有无？
-        "hilichurl_justice-1": "Quest 70013",                                              // 替丘丘行道！
-        "hilichurl_justice-2": "Quest 70014",                                              // 替丘丘行道！
-        "mutual_exchange-2": "Quest 70015",                                                // 互通有无？
-        "hilichurl_justice-3": "Quest 70016",                                              // 替丘丘行道！
-        "hilichurl_justice-4": "Quest 70017",                                              // 替丘丘行道！
-        "mutual_exchange-3": "Quest 70018",                                                // 互通有无？
-        "mutual_exchange-4": "Quest 70019",                                                // 互通有无？
-        "hilichurl_justice-5": "Quest 70020",                                              // 替丘丘行道！
-        "mutual_exchange-5": "Quest 70021",                                                // 互通有无？
-        "hilichurl_justice-6": "Quest 70022",                                              // 替丘丘行道！
-        "mutual_exchange-6": "Quest 70023",                                                // 互通有无？
+        "hilichurl_justice-v1.x-0": "Quest 70011",                                         // 替丘丘行道！
+        "mutual_exchange-v1.x-1": "Quest 70012",                                           // 互通有无？
+        "hilichurl_justice-v1.x-1": "Quest 70013",                                         // 替丘丘行道！
+        "hilichurl_justice-v1.x-2": "Quest 70014",                                         // 替丘丘行道！
+        "mutual_exchange-v1.x-2": "Quest 70015",                                           // 互通有无？
+        "hilichurl_justice-v1.x-3": "Quest 70016",                                         // 替丘丘行道！
+        "hilichurl_justice-v1.x-4": "Quest 70017",                                         // 替丘丘行道！
+        "mutual_exchange-v1.x-3": "Quest 70018",                                           // 互通有无？
+        "mutual_exchange-v1.x-4": "Quest 70019",                                           // 互通有无？
+        "hilichurl_justice-v1.x-5": "Quest 70020",                                         // 替丘丘行道！
+        "mutual_exchange-v1.x-5": "Quest 70021",                                           // 互通有无？
+        "hilichurl_justice-v1.x-6": "Quest 70022",                                         // 替丘丘行道！
+        "mutual_exchange-v1.x-6": "Quest 70023",                                           // 互通有无？
         "mimi_tomo": "Quest 70024",                                                        // 折箭觅踪
         "the_lost_hilichurl": "Quest 70025",                                               // 迷失的丘丘
-        "journey_to_tsurumi": "Quest 70026",                                               // 鹤观之行
-        "autonomous_mechanical_energy_source_preface": "Quest 70027",                      // 自律机关能源研究·绪论
-        "autonomous_mechanical_energy_source_live_sample": "Quest 70028",                  // 自律机关能源研究·实践样例
-        "autonomous_mechanical_energy_source_conclusion": "Quest 70029",                   // 自律机关能源研究·结论
         "tuned_to_the_worlds_sounds": "Quest 70030",                                       // 镜花听世
-        "quest_70032": "Quest 70032",                                                      // (test)音游活动一阶段$HIDDEN
-        "quest_70033": "Quest 70033",                                                      // (test)音游活动二阶段$HIDDEN
-        "quest_70034": "Quest 70034",                                                      // (test)音游活动三阶段$HIDDEN
-        "quest_70035": "Quest 70035",                                                      // (test)音游活动四阶段$HIDDEN
-        "quest_70036": "Quest 70036",                                                      // (test)音游活动五阶段$HIDDEN
-        "quest_70037": "Quest 70037",                                                      // (test)音游活动六阶段$HIDDEN
-        "quest_70038": "Quest 70038",                                                      // (test)音游活动七阶段$HIDDEN
-        "a_very_fishy_encounter": "Quest 70046",                                           // 再遇异域鱼鱼？
-        "qiaoying_the_village_of_many_tales": "Quest 70050",                               // 故事繁多的翘英庄
-        "begin_adventure_zone": "Quest 70054",                                             // 开始冒险区 | 夏活beta测试任务
-        "bar_brawl": "Quest 70055",                                                        // 酒吧大战 | 夏活beta测试任务
-        "chase_the_masked_performer": "Quest 70056",                                       // 追击皮套人 | 夏活beta测试任务
-        "town_celebration": "Quest 70057",                                                 // 小镇庆典 | 夏活beta测试任务
-        "quest_70059": "Quest 70059",                                                      // (test)隐藏$HIDDEN
-        "forest_boar_pauses_for_the_bloom-1": "Quest 70061, File 57d5c9dc",                // 山有林猪粗嗅花
-        "forest_boar_pauses_for_the_bloom": "Quest 70061, File 70061",                     // 山有林猪粗嗅花
-        "the_wind_has_ceased-2": "Quest 70065, File 5145d9f3",                             // 风停了
-        "the_wind_has_ceased": "Quest 70065, File 70065",                                  // 风停了 | 魔山
-        "alan_smithee_author_of_fischl_epilogue": "Quest 70066",                           // 艾伦·史密西，菲谢尔的作者·尾声
-        "unofficial_chronicle_of_the_desert_pavilion-1": "Quest 70067, File 4675fb9a",     // 「沙上楼阁」稗记
-        "unofficial_chronicle_of_the_desert_pavilion": "Quest 70067, File 70067",          // 「沙上楼阁」稗记 | 天堂
-        "quest_70069": "Quest 70069, File 70069",                                          // (test)寻找幸存者C
-        "quest_70069-1": "Quest 70069, File 98eb3cc5",                                     // (test)寻找幸存者C
-        "unexpected_commission_epilogue": "Quest 70070",                                   // 意料之外的委托·尾声
-        "quest_70072": "Quest 70072",                                                      // (test)隐藏$HIDDEN
-        "quest_70073": "Quest 70073, File 70073",                                          // (test)隐藏$HIDDEN
-        "quest_70073-1": "Quest 70073, File e280e646",                                     // (test)隐藏$HIDDEN
         "stories_to_sate_the_glass_and_scroll": "Quest 70074",                             // 空杯与空白都要用故事来填满 | 魔女的课业·无题之题
-        "quest_70076": "Quest 70076, File 3053c93f",                                       // (test)探索区域C
-        "quest_70076-1": "Quest 70076, File 70076",                                        // (test)探索区域C
-        "quest_70077": "Quest 70077, File 70077",                                          // (test)隐藏$HIDDEN
-        "quest_70077-1": "Quest 70077, File 82dc9ebd",                                     // (test)隐藏$HIDDEN
-        "winds_beneath_the_tower_of_silence": "Quest 70078, File 70078",                   // 寂静之塔下的风向
-        "winds_beneath_the_tower_of_silence-1": "Quest 70078, File a62adfce",              // 寂静之塔下的风向
-        "quest_70079": "Quest 70079, File 70079",                                          // (test)隐藏$HIDDEN
-        "quest_70079-1": "Quest 70079, File c967c671",                                     // (test)隐藏$HIDDEN
-        "quest_70080": "Quest 70080, File 5a9e45f3",                                       // (test)隐藏$HIDDEN
-        "quest_70080-1": "Quest 70080, File 70080",                                        // (test)隐藏$HIDDEN
-        "quest_70082": "Quest 70082, File 5845f9c0",                                       // (test)隐藏$HIDDEN
-        "quest_70082-1": "Quest 70082, File 70082",                                        // (test)隐藏$HIDDEN
-        "quest_70084": "Quest 70084",                                                      // (test)隐藏$HIDDEN
-        "quest_70088": "Quest 70088, File 70088",                                          // (test)隐藏$HIDDEN
-        "quest_70088-1": "Quest 70088, File c2196aba",                                     // (test)隐藏$HIDDEN
-        "quest_70089": "Quest 70089, File 632a22eb",                                       // (test)隐藏$HIDDEN
-        "quest_70089-1": "Quest 70089, File 70089",                                        // (test)隐藏$HIDDEN
-        "tea_party_reinvitation_albedo": "Quest 70090",                                    // 茶会的再邀·阿贝多
-        "a_proposition_beyond_refutation": "Quest 70092",                                  // 无法反驳的命题 | 魔女的课业·辩驳之题
-        "proof_of_strength": "Quest 70096",                                                // 强大的象征 | 魔女的课业·诸敌之题
-        "quest_70097": "Quest 70097, File 70097",                                          // (test)隐藏$HIDDEN
-        "quest_70097-1": "Quest 70097, File d50cc5ca",                                     // (test)隐藏$HIDDEN
-        "the_wind_has_ceased-3": "Quest 70099, File 0fea756a",                             // 风停了
-        "the_wind_has_ceased-1": "Quest 70099, File 70099",                                // 风停了
-        "the_festering_fang": "Quest 70102",                                               // 腐殖之牙
+        "the_festering_fang-v1.x": "Quest 70102",                                          // 腐殖之牙
         "the_great_mountain_survey": "Quest 70104",                                        // 雪山大勘测
-        "quest_70105": "Quest 70105, File 439ab80f",                                       // (test)隐藏$HIDDEN
         "ah_fresh_meat": "Quest 70106",                                                    // 啊，新鲜的肉！
         "lowtemperature_warning": "Quest 70107",                                           // 低温预警
         "the_great_mountain_survey_ii": "Quest 70108",                                     // 雪山再勘测
-        "quest_70111": "Quest 70111, File 70111",                                          // (test)隐藏$HIDDEN
-        "quest_70111-1": "Quest 70111, File 83e91fa9",                                     // (test)隐藏$HIDDEN
-        "quest_70112": "Quest 70112, File 14a642af",                                       // (test)隐藏$HIDDEN
-        "quest_70112-1": "Quest 70112, File 70112",                                        // (test)隐藏$HIDDEN
-        "quest_70113-1": "Quest 70113, File 96e6093c",                                     // (test)隐藏$HIDDEN
-        "a_chat_in_the_snowy_mountains": "Quest 70114",                                    // 雪山小叙
-        "quest_70116": "Quest 70116",                                                      // (test)隐藏$HIDDEN
-        "quest_70117": "Quest 70117",                                                      // (test)隐藏$HIDDEN
-        "quest_70119": "Quest 70119",                                                      // (test)隐藏$HIDDEN
-        "quest_70120": "Quest 70120",                                                      // (test)隐藏$HIDDEN
         "a_land_entombed": "Quest 70121",                                                  // 覆雪之国
         "lost_in_the_snow": "Quest 70123",                                                 // 雪山迷踪
         "quest_70124": "Quest 70124",                                                      // (test)(隐藏)古代正文阅读物配置$HIDDEN
         "quest_70125": "Quest 70125",                                                      // (test)(隐藏)古代正文任务召唤派蒙引导用$HIDDEN
         "quest_70127": "Quest 70127",                                                      // (test)(隐藏)漂流瓶任务用$HIDDEN
         "quest_70128": "Quest 70128",                                                      // (test)(隐藏)漂流瓶任务用，发奖励$HIDDEN
-        "quest_70129": "Quest 70129",                                                      // (test)隐藏$HIDDEN
         "in_the_mountains": "Quest 70141",                                                 // 山中之物
         "quest_70142": "Quest 70142",                                                      // 玩家爬上天空岛大柱子顶端彩蛋任务$HIDDEN
-        "when_the_trail_goes_cold": "Quest 70143",                                         // 低温调查
-        "chilled_to_the_bone": "Quest 70144",                                              // (test)刺骨幽寒$HIDDEN
-        "quest_70153": "Quest 70153",                                                      // (test)隐藏$HIDDEN
-        "contraptioncontrived_cooking_course_part_iii": "Quest 70500",                     // 机关烹饪之法·之三
-        "contraptioncontrived_cooking_course_part_ii": "Quest 70501",                      // 机关烹饪之法·之二
-        "of_drink_adreaming": "Quest 70502",                                               // 曲生酌微梦
-        "solid_ice_soluble_in_wine": "Quest 70503",                                        // 坚冰，易溶于酒
-        "when_they_take_off_their_armor": "Quest 70504",                                   // 卸去铠甲之时
-        "fine_wine_from_yesterday": "Quest 70505",                                         // 昨日佳酿
-        "dandelion_rose_and_windwheel_aster": "Quest 70506",                               // 蒲公英、蔷薇、风车菊
-        "surrounded_by_the_aroma_of_tea": "Quest 70507",                                   // 茶香氤氲间
-        "docked_on_a_moonlit_night": "Quest 70508",                                        // 月夜，泊船码头
-        "untainted_autumn_frost": "Quest 70509",                                           // 未染尘埃的秋霜
-        "of_drink_adreaming_afterword": "Quest 70510",                                     // 曲生酌微梦·后记
         "phantom_of_the_past": "Quest 70512",                                              // 往日的谜影
         "alls_well_that_ends_well": "Quest 70513",                                         // 恰如其分的收场
-        "evermotion_mechanical_painting": "Quest 70514",                                   // 恒动械画
-        "evermotion_mechanical_painting_finale": "Quest 70515",                            // 恒动械画·终
-        "quest_70516": "Quest 70516",                                                      // (test)幻影心流活动任务_控制闲置对话$HIDDEN
-        "any_unsolved_mysteries": "Quest 70517",                                           // 残留的谜团？
-        "charity_event_securing_funds": "Quest 70518",                                     // 义卖活动？资金筹备？
-        "favonian_goodies": "Quest 70519",                                                 // 西风呼呼义卖铺！
-        "favonian_goodies_and_buddies": "Quest 70520",                                     // 西风哗哗义卖联盟！
-        "charity_event_a_great_success": "Quest 70521",                                    // 义卖活动！完满收场！
-        "beverage_shop_on_the_pier": "Quest 70522",                                        // 码头的饮品小店
-        "mountain_mixologist": "Quest 70523",                                              // 山间的饮品调配师
-        "quest_70524": "Quest 70524",                                                      //
-        "quest_70525": "Quest 70525",                                                      //
-        "come_try_genius_invokation_tcg": "Quest 70526",                                   // 来试试「七圣召唤」吧！
-        "a_visitor_from_westward_realms_the_flavor_of_freedom": "Quest 70527",             // 西域来客・自由之味
         "floral_pursuit": "Quest 70528",                                                   // 万风逐花
-        "ballads_of_breeze": "Quest 70529",                                                // 风物之歌
-        "breezy_snapshots": "Quest 70530",                                                 // 风物留影
-        "a_tour_of_wonders": "Quest 70531",                                                // 诸景巡礼
-        "zero_hour_invokation": "Quest 70532",                                             // 零时召唤
-        "evermotion_mechanical_painting_invoker": "Quest 70533",                           // 恒动械画·七圣之篇
-        "heart_of_the_dice": "Quest 70534",                                                // 妙骰战法
-        "mysterious_fish_a_booming_adventure": "Quest 70535",                              // 神秘鱼鱼？轰轰奇遇！
-        "crisis_relieved_a_happy_memento": "Quest 70536",                                  // 危机解除！开心留念！
-        "quest_70537": "Quest 70537",                                                      // (test)炸弹活动隐藏彩蛋——丢箱子$HIDDEN
-        "quest_70538": "Quest 70538",                                                      // (test)炸弹活动隐藏彩蛋——抓商人$HIDDEN
+        "ballads_of_breeze-v1.x-0": "Quest 70529",                                         // 风物之歌
         "furball_fortresss_frightful_fix": "Quest 70539",                                  // 「猫茸茸城堡」的大大危机！
-        "bulle_fruithued_interloper": "Quest 70540",                                       // 泡泡桔色的不速之客！
-        "sir_pouncelot_joins_the_lot": "Quest 70541",                                      // 「大桔骑士」入列！
-        "quest_70542": "Quest 70542",                                                      // (test)彩蛋对话1$HIDDEN
-        "quest_70543": "Quest 70543",                                                      // (test)彩蛋对话3$HIDDEN
-        "quest_70544": "Quest 70544",                                                      // (test)彩蛋对话4$HIDDEN
-        "quest_70545": "Quest 70545",                                                      // (test)彩蛋对话2$HIDDEN
-        "dodocos_boombastic_escapades": "Quest 70546",                                     // 嘟嘟可砰砰历险记！
-        "quest_70547": "Quest 70547",                                                      // (test)隐藏$HIDDEN
-        "quest_70548": "Quest 70548",                                                      // (test)隐藏$HIDDEN
-        "quest_70549": "Quest 70549",                                                      // (test)隐藏$HIDDEN
-        "quest_70550": "Quest 70550",                                                      // (test)隐藏$HIDDEN
-        "quest_70551": "Quest 70551",                                                      // (test)隐藏$HIDDEN
-        "quest_70552": "Quest 70552",                                                      // (test)隐藏$HIDDEN
-        "quest_70553": "Quest 70553",                                                      // (test)隐藏$HIDDEN
-        "honorary_knights_notes_on_mixology": "Quest 70554",                               // 荣誉骑士的调饮心得
-        "a_special_blend_a_timeless_masterpiece": "Quest 70555",                           // 特调佳作，列为经典
-        "gliding_challenge_new_heights": "Quest 70556",                                    // 飞行挑战·全新演绎
-        "a_knights_guide_to_surveying": "Quest 70558, File 70558",                         // 骑士的测绘教学
-        "a_knights_guide_to_surveying-1": "Quest 70558, File ee6a7ea5",                    // 骑士的测绘教学
-        "a_battlefield_feast_after_work": "Quest 70559, File 70559",                       // 收工时的「战地」大餐
-        "a_battlefield_feast_after_work-1": "Quest 70559, File c27fa0f0",                  // 收工时的「战地」大餐
         "knight_of_the_realm": "Quest 70650",                                              // 蒙德城的骑士
         "mine_craft": "Quest 70651",                                                       // 采矿之道
         "the_path_of_the_treasureseeker_part_i": "Quest 70652",                            // 寻宝的方法之一
@@ -1292,95 +1129,39 @@ export default {
         "mountainous_summons": "Quest 70655",                                              // 山之召唤
         "peculiar_wonderland": "Quest 70656",                                              // 奇趣秘园
         "bullseye_balloons": "Quest 70657",                                                // 百发百中
-        "ballads_of_breeze-1": "Quest 70658",                                              // 风物之歌
-        "a_timeless_classic": "Quest 70659",                                               // 经典游戏
-        "windtrace": "Quest 70660",                                                        // 风行迷踪
-        "exploding_population": "Quest 70661",                                             // 鱼群大爆发
-        "windswept_domain": "Quest 70664",                                                 // 秘境来风
-        "come_try_genius_invokation_tcg-1": "Quest 70665",                                 // 来试试「七圣召唤」吧！ | 骰子、猫与卡牌的战场
-        "ascension_challenge_i": "Quest 70666",                                            // 牌手等级突破·一
-        "ascension_challenge_ii": "Quest 70667",                                           // 牌手等级突破·二
-        "ascension_challenge_iii": "Quest 70668",                                          // 牌手等级突破·三
-        "ascension_challenge_iv": "Quest 70669",                                           // 牌手等级突破·四
-        "windtrace-1": "Quest 70670",                                                      // 风行迷踪
-        "a_guest_from_liyue": "Quest 70672",                                               // 璃月来客
-        "divine_ingenuity_collectors_chapter": "Quest 70674",                              // 神工天巧·宝录之章
-        "brandnew_invitation_board": "Quest 70675",                                        // 新鲜邀请板
-        "unbegun_unending_story": "Quest 70676",                                           // 无始无终的故事
-        "quest_70677": "Quest 70677",                                                      // (test)隐藏任务：4.7多角色挑战引导任务02$HIDDEN
-        "quest_70678": "Quest 70678",                                                      // (test)隐藏任务：4.7多角色挑战引导任务03$HIDDEN
-        "quest_70679": "Quest 70679",                                                      // (test)4.6躲猫猫隐藏任务$HIDDEN
-        "quest_70680": "Quest 70680",                                                      // (test)隐藏任务：4.8角色专精挑战引导任务$HIDDEN
-        "the_call_of_mystical_martial_arts": "Quest 70681",                                // 神秘武学的召唤
-        "quest_70683": "Quest 70683",                                                      // (test)怪物自走棋小活动引导$HIDDEN
+        "ballads_of_breeze-v1.x-1": "Quest 70658",                                         // 风物之歌
+        "come_try_genius_invokation_tcg-v1.x": "Quest 70665",                              // 来试试「七圣召唤」吧！ | 骰子、猫与卡牌的战场
         "to_the_winds_of_freedom": "Quest 70684",                                          // 致自由之风
-        "testhiddenhidden": "Quest 70687",                                                 // (test)隐藏$HIDDEN
-        "the_many_matters_learned_in_ones_travels": "Quest 70689",                         // 游逸诸地，曾听旅闻
-        "unexpected_commission": "Quest 70690",                                            // 意料之外的委托 | 魔女的课业·题解
-        "playing_in_the_snow_counts_as_training_too": "Quest 70691",                       // 雪中游戏，也是修行！
-        "lets_go_saurysaury_scout": "Quest 70692",                                         // 前哨龙龙，起航！
-        "serendipitous_encounters_and_a_curious_consensus": "Quest 70693",                 // 巧合碰面与奇趣共识
-        "strength_courage_and_trials": "Quest 70694",                                      // 体魄胆识与试炼
-        "greetings_from_the_knights_of_favonius": "Quest 70695",                           // 来自骑士团的慰问
-        "a_gift_from_yae_publishing_house": "Quest 70696",                                 // 来自八重堂的礼物
-        "a_surprise_from_a_fellow_comics_fan": "Quest 70697",                              // 来自漫画同好的惊喜
-        "an_invitation_from_the_spark_knight": "Quest 70698",                              // 来自火花骑士的邀请
-        "a_message_from_the_junior": "Quest 70699",                                        // 来自后辈的分享
         "helens_special_blend": "Quest 70700",                                             // 海伦的特效润喉茶
         "glorys_wish": "Quest 70701",                                                      // 葛罗丽的心愿
-        "connors_brew": "Quest 70702",                                                     // 康纳的酿酒材料需求
-        "connors_brew-1": "Quest 70703",                                                   // 康纳的酿酒材料需求
-        "connors_brew-2": "Quest 70704",                                                   // 康纳的酿酒材料需求
-        "connors_brew-3": "Quest 70705",                                                   // 康纳的酿酒材料需求
+        "connors_brew-v1.x-0": "Quest 70702",                                              // 康纳的酿酒材料需求
+        "connors_brew-v1.x-1": "Quest 70703",                                              // 康纳的酿酒材料需求
+        "connors_brew-v1.x-2": "Quest 70704",                                              // 康纳的酿酒材料需求
+        "connors_brew-v1.x-3": "Quest 70705",                                              // 康纳的酿酒材料需求
         "timmies_wish": "Quest 70706",                                                     // 提米的心愿
-        "alfreds_bouquet": "Quest 70707",                                                  // 阿尔弗雷德的花束
-        "alfreds_bouquet-1": "Quest 70708",                                                // 阿尔弗雷德的花束
-        "manly_jacks_manly_journey_of_manliness": "Quest 70709",                           // 男子汉杰克的男子汉之路
-        "manly_jacks_manly_journey_of_manliness-1": "Quest 70710",                         // 男子汉杰克的男子汉之路
-        "manly_jacks_manly_journey_of_manliness-2": "Quest 70711",                         // 男子汉杰克的男子汉之路
+        "alfreds_bouquet-v1.x-0": "Quest 70707",                                           // 阿尔弗雷德的花束
+        "alfreds_bouquet-v1.x-1": "Quest 70708",                                           // 阿尔弗雷德的花束
+        "manly_jacks_manly_journey_of_manliness-v1.x-0": "Quest 70709",                    // 男子汉杰克的男子汉之路
+        "manly_jacks_manly_journey_of_manliness-v1.x-1": "Quest 70710",                    // 男子汉杰克的男子汉之路
+        "manly_jacks_manly_journey_of_manliness-v1.x-2": "Quest 70711",                    // 男子汉杰克的男子汉之路
         "chloriss_flora_studies": "Quest 70712",                                           // 克罗丽丝的植物研究
-        "brook_the_carnivore": "Quest 70713",                                              // 肉食者，布洛克
-        "brook_the_carnivore-1": "Quest 70714",                                            // 肉食者，布洛克
+        "brook_the_carnivore-v1.x-0": "Quest 70713",                                       // 肉食者，布洛克
+        "brook_the_carnivore-v1.x-1": "Quest 70714",                                       // 肉食者，布洛克
         "flavor_of_the_month": "Quest 70800",                                              // 「风」味美食
-        "question_and_answer-2": "Quest 70801",                                            // 骑士团手册问答
+        "question_and_answer-v1.x-1": "Quest 70801",                                       // 骑士团手册问答
         "snowy_silhouette_hope": "Quest 70802",                                            // 白皑谜影·希望
         "snowy_silhouette_reunion": "Quest 70803",                                         // 白皑谜影·重逢
-        "quest_70805-1": "Quest 70805, File 77be4850",                                     // (test)隐藏$HIDDEN
-        "quest_70806-1": "Quest 70806, File 9a5dfc74",                                     // (test)隐藏$HIDDEN
-        "quest_70807": "Quest 70807, File 49e5557a",                                       // (test)隐藏$HIDDEN
-        "quest_70808": "Quest 70808, File 70808",                                          // (test)隐藏$HIDDEN
-        "quest_70808-1": "Quest 70808, File f283cc9a",                                     // (test)隐藏$HIDDEN
-        "quest_70809": "Quest 70809, File 70809",                                          // (test)隐藏$HIDDEN
-        "quest_70809-1": "Quest 70809, File c0061eec",                                     // (test)隐藏$HIDDEN
         "equivalent_exchange": "Quest 70810",                                              // 等量交换
         "lingering_malady": "Quest 70812",                                                 // 风暴后遗症
         "thiefcatcher": "Quest 70813",                                                     // 捕盗
         "what_do_adventurers_do_again": "Quest 70814",                                     // 冒险家…该干嘛？
         "will_of_stone": "Quest 70815",                                                    // 重岩之意
         "solo_venture": "Quest 70816",                                                     // 孤身犯险
-        "quest_70817": "Quest 70817, File 70817",                                          // (test)隐藏$HIDDEN
-        "quest_70817-1": "Quest 70817, File 9c57f025",                                     // (test)隐藏$HIDDEN
-        "quest_70818": "Quest 70818, File 0e44a145",                                       // (test)隐藏$HIDDEN
-        "quest_70819": "Quest 70819, File 70819",                                          // (test)隐藏$HIDDEN
-        "quest_70819-1": "Quest 70819, File b67dbb45",                                     // (test)隐藏$HIDDEN
-        "quest_70820": "Quest 70820, File 1c6f208c",                                       // (test)隐藏$HIDDEN
-        "quest_70820-1": "Quest 70820, File 70820",                                        // (test)隐藏$HIDDEN
         "after_the_storm": "Quest 70821",                                                  // 风后宝矿
         "a_quiet_day_in_liyue_harbor": "Quest 70822",                                      // 璃月港平静的一天
         "blackcliff_woes": "Quest 70823",                                                  // 黑岩之困
         "cleanup_at_dawn": "Quest 70824",                                                  // 酒庄大扫除
-        "in_the_aftermath-1": "Quest 70825",                                               // 善后工作
-        "quest_70826": "Quest 70826, File 70826",                                          // (test)隐藏$HIDDEN
-        "quest_70826-1": "Quest 70826, File c1a28da1",                                     // (test)隐藏$HIDDEN
-        "quest_70827": "Quest 70827, File 70827",                                          // (test)隐藏$HIDDEN
-        "quest_70827-1": "Quest 70827, File 7d865bec",                                     // (test)隐藏$HIDDEN
-        "quest_70828": "Quest 70828, File 2c0c5784",                                       // (test)隐藏$HIDDEN
-        "quest_70828-1": "Quest 70828, File 70828",                                        // (test)隐藏$HIDDEN
-        "quest_70830": "Quest 70830, File 02927243",                                       // (test)隐藏$HIDDEN
-        "quest_70831": "Quest 70831, File 180ca312",                                       // (test)隐藏$HIDDEN
-        "quest_70832": "Quest 70832, File 50298e0c",                                       // (test)隐藏$HIDDEN
-        "quest_70833-1": "Quest 70833, File 7e12e917",                                     // (test)隐藏$HIDDEN
-        "quest_70834-1": "Quest 70834, File efff4026",                                     // (test)隐藏$HIDDEN
+        "in_the_aftermath-v1.x": "Quest 70825",                                            // 善后工作
         "nine_pillars_of_peace": "Quest 71005",                                            // 靖世九柱
         "luhua_landscape": "Quest 71006",                                                  // 渌华景画
         "quest_71007": "Quest 71007",                                                      // 钙化池主题玩法彩蛋任务$HIDDEN
@@ -1397,160 +1178,29 @@ export default {
         "no_restoring_this_past_land_of_beauty": "Quest 71022",                            // 恨繁囿兮作土
         "verses_and_vistas_of_lantern_rite_part_ii": "Quest 71033",                        // 海灯节的诗与画之二
         "quest_71034": "Quest 71034",                                                      // (test)海灯节的诗与画之二结束隐藏逻辑$HIDDEN
-        "hereafter_the_trail_of_pervases": "Quest 71035",                                  // 身后事·铜雀之迹
-        "valors_afterglow": "Quest 71036",                                                 // 勇气的余晖
-        "chasm_spelunkers": "Quest 71037",                                                 // 方入巨渊初探勘 | 层岩巨渊深游记
-        "valors_afterglow_return_by_sundown": "Quest 71038",                               // 勇气的余晖·日落当归
-        "valors_afterglow_the_faint_light_remembered": "Quest 71039",                      // 勇气的余晖·谨记微芒
-        "first_miasmic_contact": "Quest 71040",                                            // 初识暗渊毒瘴现 | 层岩巨渊深游记
-        "meeting_new_people_and_foiling_some_bandits": "Quest 71041",                      // 踏破矿贼结新缘 | 层岩巨渊深游记
-        "the_heavenly_stones_debris": "Quest 71042",                                       // 九霄之石悬残片 | 层岩巨渊深游记
-        "perils_in_the_dark": "Quest 71043",                                               // 黑翳渐浓隐凶险 | 层岩巨渊深游记
-        "surreptitious_sevenstar_seal_sundering": "Quest 71044",                           // 巧瞒七星解磐键 | 层岩巨渊深游记
-        "wherefore_did_the_spiritstone_descend": "Quest 71045",                            // 灵石何故堕此间 | 层岩巨渊深游记
-        "quest_71046": "Quest 71046",                                                      // (test)(隐藏)层岩巨渊驻军控制任务$HIDDEN
-        "the_chasm_charters": "Quest 71048",                                               // 层岩巨渊寻访记 | 层岩巨渊深游记
-        "the_chasm_charters-1": "Quest 71049",                                             // 层岩巨渊寻访记 | 层岩巨渊深游记
-        "mycological_investigation_in_the_chasm": "Quest 71050",                           // 层岩菌类调查
-        "hydrological_investigation_in_the_chasm": "Quest 71051",                          // 水生环境调查
-        "paleontological_investigation_in_the_chasm": "Quest 71052",                       // 古代生物调查
-        "quest_71053": "Quest 71053",                                                      // 隐藏任务对话海迪夫$HIDDEN
-        "undetected_infiltration": "Quest 71054",                                          // 潜身敌营无人知
-        "the_chasms_bounty": "Quest 71055",                                                // 巨渊的馈赠
-        "the_missing_miner": "Quest 71057",                                                // 失踪的矿工
-        "lost_in_a_foreign_land": "Quest 71058",                                           // 他乡迷失客
-        "lost_in_a_foreign_land_seeking": "Quest 71059",                                   // 他乡迷失客·觅迹
-        "quest_71060": "Quest 71060",                                                      // 隐藏卡了琳娜失踪$HIDDEN
-        "dimming_mushrooms_call_for_help": "Quest 71061",                                  // 黯淡蘑菇的求救
-        "a_company_vanishing_into_the_deep": "Quest 71062",                                // 连队消失在深岩
-        "a_cliffside_heros_past": "Quest 71063",                                           // 岩巅大侠往事
-        "the_millennial_mountains": "Quest 71064",                                         // 千年千岩
-        "stolen_by_the_rightful_owner": "Quest 71066",                                     // 物归原主又归原主
-        "quest_71070": "Quest 71070",                                                      // test下层对话控制器$HIDDEN
-        "says_he_who_seeks_stone": "Quest 71074",                                          // 藏石者言
-        "quest_71075": "Quest 71075",                                                      // test隐藏-小轻策创建任务$HIDDEN
-        "quest_71076": "Quest 71076",                                                      // test隐藏计时补给站$HIDDEN
-        "prospecting_thieves_continued": "Quest 71077",                                    // 隐藏盗矿者续
-        "quest_71078": "Quest 71078",                                                      // test隐藏-老臭挖掘minigame$HIDDEN
-        "quest_71080": "Quest 71080",                                                      // 隐藏说书人$HIDDEN
-        "quest_71082": "Quest 71082",                                                      // test隐藏-唐无仇任务后续闲置对话和彩蛋控制$HIDDEN
-        "quest_71083": "Quest 71083",                                                      // test隐藏-层岩巨渊WQ主线第四章之前，控制沐宁的闲置对话$HIDDEN
-        "quest_71088": "Quest 71088",                                                      // test隐藏-控制塔列辛、海迪夫和瑾武在上层的闲置对话$HIDDEN
-        "quest_71089": "Quest 71089",                                                      // 隐藏志琼的信$HIDDEN
-        "quest_71096": "Quest 71096",                                                      // test隐藏-藏石者言后续1$HIDDEN
-        "quest_71097": "Quest 71097",                                                      // test隐藏-藏石者言后续2$HIDDEN
-        "garcias_paean": "Quest 71098",                                                    // 加尔恰的赞歌
+        "the_chasm_charters-v1.x": "Quest 71049",                                          // 层岩巨渊寻访记 | 层岩巨渊深游记
         "on_the_stage_behind_the_stage": "Quest 71099",                                    // 台上台下
-        "an_ancient_sacrifice_of_sacred_brocade": "Quest 71100",                           // 祀珑在昔，灵锦歆诚 | 沉玉祝珑
-        "the_tales_behind_the_fan": "Quest 71101",                                         // 扇底春秋
-        "qiaoying_of_the_sacred_mountain": "Quest 71102",                                  // 仙山有茗，名以翘英 | 沉玉祝珑
-        "floating_jade_treasure_of_chenyu": "Quest 71103",                                 // 采撷掇拾，沉玉浮琼 | 沉玉祝珑
-        "the_roaming_abode": "Quest 71105",                                                // 仙人游庄
-        "threefold_expectations": "Quest 71106",                                           // 攸望三叠
-        "a_wangshan_walk_to_remember": "Quest 71107",                                      // 哐哐锵锵王山行
-        "scrolls_and_sword_manuals_of_guhua": "Quest 71108",                               // 古华书剑谱
-        "shrouded_vale_hidden_hero": "Quest 71109",                                        // 秘谷侠隐
-        "our_chenyu_vale_trek": "Quest 71110",                                             // 沉玉之旅
-        "chili_con_cloudy": "Quest 71111",                                                 // 云云椒椒
-        "temporary_acclimatization": "Quest 71114",                                        // 水土暂服
-        "silently_the_butterfly_crosses_the_valley": "Quest 71115",                        // 彩蝶翩然过谷中
-        "the_dealing_sands": "Quest 71116",                                                // 契约之砂
-        "quest_71117": "Quest 71117",                                                      // (test)巨龟出现$HIDDEN
-        "quest_71118": "Quest 71118",                                                      // (test)（test）71114隐藏任务$HIDDEN
-        "quest_71119": "Quest 71119",                                                      // (test)(隐藏)先民遗迹POI流程$HIDDEN
-        "quest_71120": "Quest 71120",                                                      // (test)(隐藏)偷袭盗宝洞$HIDDEN
-        "quest_71121": "Quest 71121",                                                      // (test)西山一窟鬼$HIDDEN
-        "vibrocrystals_its_always_vibrocrystals": "Quest 71125",                           // 振晶，归来仍是振晶
-        "quest_71126": "Quest 71126",                                                      // (test)猫狗鸬$HIDDEN
-        "the_cloudpadded_path_to_the_chiwang_repose": "Quest 71127",                       // 赤望所居，锦落云程
-        "quest_71128": "Quest 71128",                                                      // （test）未尽的茶局$HIDDEN
-        "quest_71129": "Quest 71129",                                                      // (test)王山厅重复挑战$HIDDEN
-        "quest_71130": "Quest 71130",                                                      // (test)王山厅-试炼机关右$HIDDEN
-        "quest_71131": "Quest 71131",                                                      // (test)王山厅-试炼机关左$HIDDEN
-        "quest_71132": "Quest 71132",                                                      // (test)茶工坊进圈训话$HIDDEN
-        "quest_71134": "Quest 71134",                                                      // (test)警察故事$HIDDEN
-        "quest_71135": "Quest 71135",                                                      // （test）供奉满级监听$HIDDEN
-        "quest_71139": "Quest 71139",                                                      // (test)供奉开启后闲置$HIDDEN
-        "commanders_and_wargames": "Quest 71144",                                          // 将才与推演
-        "scenarios_for_study": "Quest 71145",                                              // 解析与想定
-        "bright_moon_lantern_glow": "Quest 71149",                                         // 月引明霄
-        "adeptuss_gift": "Quest 71163",                                                    // 仙人赠礼
-        "good_fortune_shared": "Quest 71166",                                              // 吉事共赏
-        "wishing_wonderful_wishes": "Quest 71167",                                         // 上许佳愿
-        "light_the_way_of_wishes": "Quest 71168",                                          // 灯逐良愿
-        "contraptioncontrived_cooking_course_part_i": "Quest 71500",                       // 机关烹饪之法·之一
-        "a_muddy_bizarre_adventure": "Quest 71501",                                        // 深泥奇谭
-        "spike_selfcirculation_report_abstract": "Quest 71502",                            // 光钉自循环运作报告·摘要
-        "spike_selfcirculation_report_environs_log": "Quest 71503",                        // 光钉自循环运作报告·环境记录
-        "spike_selfcirculation_report_experimental_procedure": "Quest 71504",              // 光钉自循环运作报告·实验步骤
-        "spike_selfcirculation_report_conclusion": "Quest 71505",                          // 光钉自循环运作报告·结论
-        "a_muddy_bizarre_adventure-1": "Quest 71506",                                      // 深泥奇谭
-        "spike_selfcirculation_report_abstract-1": "Quest 71507",                          // 光钉自循环运作报告·摘要
-        "spike_selfcirculation_report_environs_log-1": "Quest 71508",                      // 光钉自循环运作报告·环境记录
-        "spike_selfcirculation_report_experimental_procedure-1": "Quest 71509",            // 光钉自循环运作报告·实验步骤
-        "spike_selfcirculation_report_conclusion-1": "Quest 71510",                        // 光钉自循环运作报告·结论
-        "behind_the_scenes-1": "Quest 71512",                                              // 灯后勤绩
         "vigilance_at_sea": "Quest 71513",                                                 // 烟海梭巡
         "radiant_sparks": "Quest 71514",                                                   // 光焰蹈跃
-        "a_few_words_in_the_foreground": "Quest 71515",                                    // 幕前二三言
-        "backstage_helpers": "Quest 71516",                                                // 幕后人
-        "experiment_phase_uncontrolled_parameters": "Quest 71520",                         // 不受控的实验规模
-        "mending_painting_prospects": "Quest 71521",                                       // 寻景觅画
-        "inspiration_eruption": "Quest 71522",                                             // 灵感喷激
-        "hundredpace_hurling_rites": "Quest 71523",                                        // 百步礼掷
-        "quest_71525": "Quest 71525",                                                      // (test)斗虫二期-田铁嘴关卡$HIDDEN
-        "quest_71526": "Quest 71526",                                                      // (test)斗虫二期-畅畅关卡$HIDDEN
-        "quest_71527": "Quest 71527",                                                      // (test)斗虫二期-烟绯关卡$HIDDEN
-        "provisionally_perpetual_beetle_battle": "Quest 71528",                            // 暂无止境的斗虫之路！
-        "quest_71529": "Quest 71529",                                                      // (test)斗虫二期-岚姐关卡$HIDDEN
-        "just_wushou_dance": "Quest 71530",                                                // 碰碰舞兽戏！
-        "paper_shadow_ruminations": "Quest 71531",                                         // 寻味纸影间
-        "iridescent_cloudstriding": "Quest 71532",                                         // 熠光云行
-        "custom_gift_envelope_no_1": "Quest 71533",                                        // 如意祝柬·之一
-        "custom_gift_envelope_no_2": "Quest 71534",                                        // 如意祝柬·之二
-        "custom_gift_envelope_no_3": "Quest 71535",                                        // 如意祝柬·之三
-        "custom_gift_envelope_no_4": "Quest 71536",                                        // 如意祝柬·之四
-        "custom_gift_envelope_no_5": "Quest 71537",                                        // 如意祝柬·之五
-        "custom_gift_envelope_no_6": "Quest 71538",                                        // 如意祝柬·之六
-        "custom_gift_envelope_no_7": "Quest 71539",                                        // 如意祝柬·之七
-        "drills_by_lamplight": "Quest 71541",                                              // 灯下演武
         "and_this_treasure_goes_to": "Quest 71555",                                        // 灵矩有宝予何人
         "ministry_missions": "Quest 71650",                                                // 「总务司」的事务
         "the_vishaps_lie_dormant_but_the_enigma_lingers_still": "Quest 71651",             // 龙蜥蛰伏，谜题尚存
-        "mr_melancholy": "Quest 71652",                                                    // 忧郁先生
-        "we_meet_again_mr_melancholy": "Quest 71653",                                      // 与忧郁先生的再会
-        "a_teapot_to_call_home_part_ii": "Quest 71654",                                    // 翠石砌玉壶·其二
-        "idle_teapot_talk": "Quest 71655",                                                 // 壶中闲事
-        "floating_spirits_the_investigation_begins": "Quest 71656",                        // 飘浮之灵，调查启动
-        "floating_spirits_the_investigation_ends": "Quest 71657",                          // 飘浮之灵，调查完毕
         "elixirs_and_potions": "Quest 71659",                                              // 丹剂与魔药
         "academic_exchange": "Quest 71660",                                                // 学术的往来
-        "divine_ingenuity": "Quest 71662",                                                 // 神工天巧
-        "a_visitor_from_westward_realms": "Quest 71663",                                   // 西域来客
-        "vibrocrystal_projections": "Quest 71664",                                         // 振晶射影
-        "search_chronicle_burning_up": "Quest 71665",                                      // 参寻战记·燃起来了！
         "arataki_blazing_armor_beetle_battle_boot_camp": "Quest 71666",                    // 荒泷甲光烈烈斗虫大修行！
-        "search_chronicle_cold_round_belly": "Quest 71667",                                // 参寻战记·冷酷圆肚皮！
-        "our_animal_friends": "Quest 71668",                                               // 我们的动物朋友
-        "our_animal_friends_epilogue": "Quest 71669",                                      // 我们的动物朋友·尾声
-        "tumult_subduer": "Quest 71670",                                                   // 肃靖险乱
-        "a_defensive_strategy": "Quest 71671",                                             // 据守的规划
-        "the_moonlit_adeptuss_trail": "Quest 71672",                                       // 月映仙踪
-        "vigorous_brushstrokes": "Quest 71673",                                            // 笔腾墨跃
-        "wishes_contended_fortunes_won": "Quest 71674",                                    // 如意斗彩
         "lets_make_a_flower_garland": "Quest 71700",                                       // 畅畅想要编花环！
-        "herbalists_forage": "Quest 71701",                                                // 阿桂的药材需求
-        "herbalists_forage-1": "Quest 71702",                                              // 阿桂的药材需求
-        "herbalists_forage-2": "Quest 71703",                                              // 阿桂的药材需求
-        "herbalists_forage-3": "Quest 71704",                                              // 阿桂的药材需求
-        "smileys_selections": "Quest 71705",                                               // 言笑的食材需求
-        "smileys_selections-1": "Quest 71706",                                             // 言笑的食材需求
-        "smileys_selections-2": "Quest 71707",                                             // 言笑的食材需求
+        "herbalists_forage-v1.x-0": "Quest 71701",                                         // 阿桂的药材需求
+        "herbalists_forage-v1.x-1": "Quest 71702",                                         // 阿桂的药材需求
+        "herbalists_forage-v1.x-2": "Quest 71703",                                         // 阿桂的药材需求
+        "herbalists_forage-v1.x-3": "Quest 71704",                                         // 阿桂的药材需求
+        "smileys_selections-v1.x-0": "Quest 71705",                                        // 言笑的食材需求
+        "smileys_selections-v1.x-1": "Quest 71706",                                        // 言笑的食材需求
+        "smileys_selections-v1.x-2": "Quest 71707",                                        // 言笑的食材需求
         "hanfengs_ironmongering": "Quest 71708",                                           // 寒锋的铁块需求
-        "geris_gastronostalgia": "Quest 71709",                                            // 杰里的蒙德城美食回忆
-        "geris_gastronostalgia-1": "Quest 71710",                                          // 杰里的蒙德城美食回忆
-        "geris_gastronostalgia-2": "Quest 71711",                                          // 杰里的蒙德城美食回忆
-        "geris_gastronostalgia-3": "Quest 71712",                                          // 杰里的蒙德城美食回忆
+        "geris_gastronostalgia-v1.x-0": "Quest 71709",                                     // 杰里的蒙德城美食回忆
+        "geris_gastronostalgia-v1.x-1": "Quest 71710",                                     // 杰里的蒙德城美食回忆
+        "geris_gastronostalgia-v1.x-2": "Quest 71711",                                     // 杰里的蒙德城美食回忆
+        "geris_gastronostalgia-v1.x-3": "Quest 71712",                                     // 杰里的蒙德城美食回忆
         "master_zhangs_metal_commission": "Quest 71713",                                   // 老章的铁块需求
         "yi_zhus_snack": "Quest 71714",                                                    // 一柱的甜食需求
         "an_adeptal_summons": "Quest 71802",                                               // 承仙所托
@@ -1561,7 +1211,7 @@ export default {
         "the_secret_of_nantianmen": "Quest 71808",                                         // 南天门之谜
         "an_ode_to_yonder_city": "Quest 71809",                                            // 此诗送此城
         "endless_research": "Quest 71810",                                                 // 永无止境的研究
-        "snapshots": "Quest 71811",                                                        // 暂留此影
+        "snapshots-v1.x": "Quest 71811",                                                   // 暂留此影
         "tianqiu_treasure_trail": "Quest 71812",                                           // 天遒宝迹
         "return_of_the_jade_chamber": "Quest 71813",                                       // 群玉阁…再现？
         "fishing_for_jade": "Quest 71814",                                                 // 海上拾玉
@@ -1576,8 +1226,33 @@ export default {
         "guardians_of_the_countryside": "Quest 71823",                                     // 守乡人
         "promises_remembered_as_lanterns_rise": "Quest 71824",                             // 佳节赴旧约…？
         "a_dish_beyond_mortal_ken": "Quest 71829",                                         // 此菜不应人间有
-        "hereafter_all_is_well": "Quest 71830",                                            // 身后事·诸事平安
-        "hereafter_return_to_the_mountains": "Quest 71831",                                // 身后事·归于山中
+        "hiromis_watch": "Quest 72144",                                                    // 广海的守望
+        "quest_72271": "Quest 72271",                                                      // 食莲者后续琳琅$HIDDEN
+        "eight_locales_over_mountains_and_seas_two_cities_recommendations": "Quest 72676", // 山海八所巡礼·双城风土名迹
+        "the_other_side_of_isle_and_sea": "Quest 79004",                                   // 岛与海的彼端
+        "when_the_trail_goes_cold": "Quest 70143",                                         // 低温调查
+        "chilled_to_the_bone": "Quest 70144",                                              // (test)刺骨幽寒$HIDDEN
+        "a_timeless_classic": "Quest 70659",                                               // 经典游戏
+        "windtrace-v1.5-0": "Quest 70660",                                                 // 风行迷踪
+        "windtrace-v1.5-1": "Quest 70670",                                                 // 风行迷踪
+        "quest_70679": "Quest 70679",                                                      // (test)4.6躲猫猫隐藏任务$HIDDEN
+        "mr_melancholy": "Quest 71652",                                                    // 忧郁先生
+        "we_meet_again_mr_melancholy": "Quest 71653",                                      // 与忧郁先生的再会
+        "a_teapot_to_call_home_part_ii": "Quest 71654",                                    // 翠石砌玉壶·其二
+        "villains": "Quest 74018",                                                         // 坏蛋们
+        "idle_teapot_talk": "Quest 71655",                                                 // 壶中闲事
+        "they_who_hear_the_sea": "Quest 79000",                                            // 听海人
+        "the_winding_homeward_way": "Quest 79001",                                         // 归乡漫漫路
+        "who_wields_the_wild_wind": "Quest 79002",                                         // 狂风，听谁号令
+        "from_outer_lands": "Quest 79003",                                                 // 自外而来
+        "a_trip_through_fog_and_wind": "Quest 79005",                                      // 雾与风的旅行
+        "big_badaboom_battle": "Quest 79007",                                              // 砰砰大作战
+        "summer_gift": "Quest 79008",                                                      // 夏日赠礼
+        "the_gourmet_supremos_the_importance_of_eating_well": "Quest 22016",               // 全能美食队·吃饱的重要性
+        "bantan_sango_case_file_mystery_of_the_black_shadow": "Quest 40031",               // 万端珊瑚事件簿·黑影之谜
+        "bantan_sango_case_file_stealthy_trail": "Quest 40032",                            // 万端珊瑚事件簿·隐秘踪迹
+        "bantan_sango_case_file_the_truth_just_about_comes_to_light": "Quest 40033",       // 万端珊瑚事件簿·稍欠灵光
+        "bantan_sango_case_file_recognition": "Quest 40034",                               // 万端珊瑚事件簿·它的认可
         "cleansing_defilement": "Quest 72100",                                             // 祓行 | 神樱大祓
         "quest_72103": "Quest 72103",                                                      // 神社占卜假扮巫女常驻（test）$HIDDEN
         "quest_72104": "Quest 72104",                                                      // 神社占卜二阶段（test）$HIDDEN
@@ -1614,11 +1289,81 @@ export default {
         "quest_72137": "Quest 72137",                                                      // 幽灵控制荒神社3（test）$HIDDEN
         "treatment_on_the_island": "Quest 72138",                                          // 孤岛诊疗谭
         "quest_72139": "Quest 72139",                                                      // 孤岛诊疗谭$HIDDEN
-        "gazing_three_thousand_miles_away": "Quest 72140",                                 // 执望三千里
+        "gazing_three_thousand_miles_away-v2.0-0": "Quest 72140",                          // 执望三千里
         "sinister_instruction": "Quest 72141",                                             // 险恶的教喻
         "quest_72142": "Quest 72142",                                                      // 荒神社言灵玩法（test）$HIDDEN
+        "in_another_land": "Quest 72153",                                                  // 在他乡
+        "the_seventh_samurai": "Quest 72154",                                              // 《第七个武士》
+        "quest_72159": "Quest 72159",                                                      // （test）（隐藏）反复挑战的决斗者$HIDDEN
+        "fate_of_a_fighter-v2.0-0": "Quest 72161",                                         // 武者的宿命
+        "relics_of_seirai": "Quest 72162",                                                 // 清籁旧宝
+        "reminiscence_of_seirai": "Quest 72163",                                           // 清籁旧忆
+        "octave_of_the_maushiro": "Quest 72166",                                           // 倾听木簧笛的八音曲 | 雾海纪行
+        "gourmet_supremos_assemble": "Quest 72168",                                        // 全能美食队！
+        "the_gourmet_supremos_the_seashore_strider": "Quest 72169",                        // 全能美食队·海滩的横行者
+        "the_gourmet_supremos_the_deep_divers": "Quest 72170",                             // 全能美食队·深潜者
+        "the_gourmet_supremos_of_shrines_and_sakura": "Quest 72171",                       // 全能美食队·神社的树
+        "temaria_game": "Quest 72176",                                                     // 「手鞠游戏」
+        "quest_72178": "Quest 72178",                                                      // （test）隐藏神龛$HIDDEN
+        "quest_72179": "Quest 72179",                                                      // （test）隐藏墓碑$HIDDEN
+        "the_art_of_horticulture": "Quest 72183",                                          // 栽种之法
+        "pizza_from_another_land-v2.0-0": "Quest 72184",                                   // 异国的披萨
+        "pizza_from_another_land-v2.0-1": "Quest 72185",                                   // 异国的披萨
+        "fate_of_a_fighter-v2.0-1": "Quest 72196",                                         // 武者的宿命
+        "gazing_three_thousand_miles_away-v2.0-1": "Quest 72197",                          // 执望三千里
+        "the_farmers_treasure": "Quest 72199",                                             // 农民的宝藏
+        "neko_is_a_cat_shrine_recipe": "Quest 72211",                                      // 寝子是只猫·神社食谱
+        "shuumatsuban_operations": "Quest 72263",                                          // 终末番的任务 | 特别的御神签
+        "the_replacements_secret": "Quest 72265",                                          // 顶替者的秘密 | 特别的御神签
+        "where_the_dandelions_find_rest": "Quest 72266",                                   // 蒲公英的归宿 | 特别的御神签
+        "phantom_flow_phantasmal_blade": "Quest 72650",                                    // 幻影心流幻想剑
+        "the_path_of_the_treasureseeker_part_ii": "Quest 72651",                           // 寻宝的方法…之二？
+        "voyage_prep": "Quest 72652",                                                      // 远航的准备
+        "tracking_the_thunder": "Quest 72653",                                             // 追随鸣雷的踪迹
+        "crossing_unknown_storm_clouds": "Quest 72654",                                    // 涉过未知的雷云
+        "facing_distant_echoes": "Quest 72655",                                            // 直面悠远的回响
+        "theater_mechanicus": "Quest 72656",                                               // 机关棋谭
+        "the_commissions_commission": "Quest 72657",                                       // 社奉行的委任
+        "omniubiquity_net": "Quest 72672",                                                 // 四方八方之网
+        "the_almighty_arataki_great_and_glorious_drumalong_festival": "Quest 72684",       // 荒泷极上盛世豪鼓大祭典
+        "theater_mechanicus_stage_of_brilliance": "Quest 72685",                           // 机关棋谭·巧策之局
+        "hilichurl_hullaballoo-v2.0-0": "Quest 72701",                                     // 丘丘人引起的混乱
+        "kairagi_chaos": "Quest 72702",                                                    // 海乱鬼引起的混乱
+        "vagrant_havoc": "Quest 72705",                                                    // 浮浪人引起的混乱
+        "hilichurl_hullaballoo-v2.0-1": "Quest 72706",                                     // 丘丘人引起的混乱
+        "monster_mayhem": "Quest 72707",                                                   // 魔物引起的混乱
+        "fatuous_farce-v2.0": "Quest 72708",                                               // 愚人众引起的混乱
+        "automaton_attack": "Quest 72709",                                                 // 自律机关引起的混乱
+        "kairagivagrant_pandemonium": "Quest 72710",                                       // 海乱鬼与浮浪人引起的混乱
+        "sandens_resource_request": "Quest 72712",                                         // 三田的面具绘材需求
+        "murakamis_mealmaking": "Quest 72713",                                             // 村上的食材需求
+        "rikus_eggy_endeavor": "Quest 72714",                                              // 陆的鸟蛋需求
+        "kanras_thoughts": "Quest 72715",                                                  // 甘乐的相思之意
+        "kano_nanas_healthy_diet": "Quest 72716",                                          // 鹿野奈奈的健康饮食计划
+        "kozues_ironwork": "Quest 72717",                                                  // 梢的铁块需求
+        "matsumotos_fried_egg_fracas": "Quest 72718",                                      // 松本的煎蛋需求
+        "yata_koukis_order_of_ore": "Quest 72719",                                         // 矢田幸喜的白铁块需求
+        "the_gourmet_supremos_on_the_road": "Quest 72800",                                 // 全能美食队·寻食之旅
+        "international_travel_log": "Quest 72801",                                         // 诸国游记
+        "home_lies_over_the_ocean": "Quest 72802",                                         // 海的那头是故乡
+        "o_archon_have_i_done_right": "Quest 72803",                                       // 神明啊，我做得对吗？
+        "battle_of_revenge": "Quest 72804",                                                // 洗刷耻辱的一战
+        "yae_publishing_houses_invitation": "Quest 72806",                                 // 「八重堂」的邀约
+        "chisatos_letter": "Quest 72807",                                                  // 千里之信 | 离岛通行凭证
+        "katheryne_in_inazuma": "Quest 72808",                                             // 凯瑟琳，在稻妻
+        "the_ritou_road": "Quest 72809",                                                   // 离岛之路
+        "unexpected_battle": "Quest 73686",                                                // 意外争斗
+        "warriors_spirit": "Quest 73688",                                                  // 演武传心
+        "gourmet_supremos_within_our_duties": "Quest 73800",                               // 全能美食队·职责之内
+        "the_narukami_trail": "Quest 22050",                                               // 鸣神寻踪
+        "that_which_our_ancestors_entrusted": "Quest 40061",                               // 御先祖大人的委托
+        "contraptioncontrived_cooking_course_part_iii": "Quest 70500",                     // 机关烹饪之法·之三
+        "contraptioncontrived_cooking_course_part_ii": "Quest 70501",                      // 机关烹饪之法·之二
+        "exploding_population": "Quest 70661",                                             // 鱼群大爆发
+        "contraptioncontrived_cooking_course_part_i": "Quest 71500",                       // 机关烹饪之法·之一
+        "floating_spirits_the_investigation_begins": "Quest 71656",                        // 飘浮之灵，调查启动
+        "floating_spirits_the_investigation_ends": "Quest 71657",                          // 飘浮之灵，调查完毕
         "quest_72143": "Quest 72143",                                                      // 月浴之渊$HIDDEN
-        "hiromis_watch": "Quest 72144",                                                    // 广海的守望
         "eye_of_watatsumi": "Quest 72145",                                                 // 「海祇之眼」 | 月浴之渊
         "fang_of_watatsumi": "Quest 72146",                                                // 「海祇之牙」 | 月浴之渊
         "fin_of_watatsumi": "Quest 72147",                                                 // 「海祇之鳍」 | 月浴之渊
@@ -1627,47 +1372,58 @@ export default {
         "divine_plant_of_the_depths": "Quest 72150",                                       // 海渊仙草灵验记
         "solitary_seabeast": "Quest 72151",                                                // 孤独的海兽
         "quest_72152": "Quest 72152",                                                      // 浮浪双梦记$HIDDEN
-        "in_another_land": "Quest 72153",                                                  // 在他乡
-        "the_seventh_samurai": "Quest 72154",                                              // 《第七个武士》
         "seirai_stormchasers_part_i": "Quest 72155",                                       // 清籁逐雷记·其一 | 清籁逐雷记
         "seirai_stormchasers_part_ii": "Quest 72156",                                      // 清籁逐雷记·其二 | 清籁逐雷记
         "seirai_stormchasers_part_iii": "Quest 72157",                                     // 清籁逐雷记·其三 | 清籁逐雷记
         "seirai_stormchasers_part_iv": "Quest 72158",                                      // 清籁逐雷记·其四 | 清籁逐雷记
-        "quest_72159": "Quest 72159",                                                      // （test）（隐藏）反复挑战的决斗者$HIDDEN
-        "fate_of_a_fighter": "Quest 72161",                                                // 武者的宿命
-        "relics_of_seirai": "Quest 72162",                                                 // 清籁旧宝
-        "reminiscence_of_seirai": "Quest 72163",                                           // 清籁旧忆
         "neko_is_a_cat_shrine_cleanup": "Quest 72164",                                     // 寝子是只猫·神社大扫除
         "quest_72165": "Quest 72165",                                                      // 海渊仙草灵验记$HIDDEN
-        "octave_of_the_maushiro": "Quest 72166",                                           // 倾听木簧笛的八音曲 | 雾海纪行
-        "a_particularly_particular_author": "Quest 72167",                                 // 要求特别多的作家 | 雾海纪行
-        "gourmet_supremos_assemble": "Quest 72168",                                        // 全能美食队！
-        "the_gourmet_supremos_the_seashore_strider": "Quest 72169",                        // 全能美食队·海滩的横行者
-        "the_gourmet_supremos_the_deep_divers": "Quest 72170",                             // 全能美食队·深潜者
-        "the_gourmet_supremos_of_shrines_and_sakura": "Quest 72171",                       // 全能美食队·神社的树
-        "the_sea_of_fog_and_the_rite_of_the_trees": "Quest 72172",                         // 雾海与树之祭 | 雾海纪行
-        "the_sunwheel_and_mt_kanna": "Quest 72173",                                        // 日轮与菅名山 | 雾海纪行
-        "quest_72174": "Quest 72174",                                                      // 渡魂人(test)$HIDDEN
-        "the_saga_of_mr_forgetful": "Quest 72175",                                         // 健忘大王历险记
-        "temaria_game": "Quest 72176",                                                     // 「手鞠游戏」
         "the_subterranean_trials_of_drake_and_serpent": "Quest 72177",                     // 龙蛇洞宫试炼记 | 白夜国晨昏记
-        "quest_72178": "Quest 72178",                                                      // （test）隐藏神龛$HIDDEN
-        "quest_72179": "Quest 72179",                                                      // （test）隐藏墓碑$HIDDEN
         "quest_72181": "Quest 72181",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
-        "the_art_of_horticulture": "Quest 72183",                                          // 栽种之法
-        "pizza_from_another_land": "Quest 72184",                                          // 异国的披萨
-        "pizza_from_another_land-1": "Quest 72185",                                        // 异国的披萨
         "quest_72186": "Quest 72186",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
         "quest_72187": "Quest 72187",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
         "quest_72188": "Quest 72188",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
         "quest_72189": "Quest 72189",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
-        "the_trail_of_drake_and_serpent": "Quest 72190",                                   // 寻得龙蛇踪 | 白夜国晨昏记
-        "the_heart_of_ouroboros": "Quest 72191",                                           // 奥罗巴洛斯之心 | 白夜国晨昏记
-        "dreams_in_the_gaps": "Quest 72192",                                               // 缝隙间的梦 | 白夜国晨昏记
         "quest_72193": "Quest 72193",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
-        "fate_of_a_fighter-1": "Quest 72196",                                              // 武者的宿命
-        "gazing_three_thousand_miles_away-1": "Quest 72197",                               // 执望三千里
-        "the_farmers_treasure": "Quest 72199",                                             // 农民的宝藏
+        "neko_is_a_cat_wooden_shelf": "Quest 72209",                                       // 寝子是只猫·木头架
+        "neko_is_a_cat_the_children": "Quest 72210",                                       // 寝子是只猫·孩子们
+        "neko_is_a_cat_cat_and_stone": "Quest 72212",                                      // 寝子是只猫·石头和猫
+        "neko_is_a_cat_stone_humans_troubles": "Quest 72213",                              // 寝子是只猫·石头人类的麻烦
+        "neko_is_a_cat_shrine_canteen": "Quest 72214",                                     // 寝子是只猫·神社食堂
+        "neko_is_a_cat_dingaling_metal_ball": "Quest 72215",                               // 寝子是只猫·叮当的铁球
+        "neko_is_a_cat_a_good_turn_comes_late": "Quest 72216",                             // 寝子是只猫·迟来的「好事」
+        "quest_72219": "Quest 72219",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
+        "quest_72220": "Quest 72220",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
+        "quest_72231": "Quest 72231",                                                      // test 寝子是只猫最后 后续$HIDDEN
+        "the_still_waters_flow": "Quest 72233",                                            // 止水之潘
+        "quest_72274": "Quest 72274",                                                      // 神社地城对话$HIDDEN
+        "the_moon_has_risen": "Quest 72659",                                               // 月升之时
+        "hyakunin_ikki_the_greatest_battle": "Quest 72660",                                // 「百人一揆·最强武斗大会」
+        "to_thee_my_tender_grief_confide": "Quest 72661",                                  // 我本将心
+        "by_thy_pale_beams_i_solitary_rove": "Quest 72662",                                // 奈何明月
+        "over_the_moon": "Quest 72663",                                                    // 月盈之刻
+        "the_many_matters_of_the_moonchase_festival": "Quest 72664",                       // 逐月节的诸多事宜
+        "bait_resupply_plan-v2.1-0": "Quest 72667",                                        // 鱼饵补充计划
+        "quest_72668": "Quest 72668",                                                      // 和派蒙隐藏对话$HIDDEN
+        "bait_resupply_plan-v2.1-1": "Quest 72669",                                        // 隐藏发鱼饵$HIDDEN
+        "storytelling_method": "Quest 72812",                                              // 故事构思法
+        "fertilizer_salesperson": "Quest 72813",                                           // 肥料…推销员？
+        "journey_to_tsurumi": "Quest 70026",                                               // 鹤观之行
+        "autonomous_mechanical_energy_source_preface": "Quest 70027",                      // 自律机关能源研究·绪论
+        "autonomous_mechanical_energy_source_live_sample": "Quest 70028",                  // 自律机关能源研究·实践样例
+        "autonomous_mechanical_energy_source_conclusion": "Quest 70029",                   // 自律机关能源研究·结论
+        "quest_70032": "Quest 70032",                                                      // (test)音游活动一阶段$HIDDEN
+        "quest_70033": "Quest 70033",                                                      // (test)音游活动二阶段$HIDDEN
+        "quest_70034": "Quest 70034",                                                      // (test)音游活动三阶段$HIDDEN
+        "quest_70035": "Quest 70035",                                                      // (test)音游活动四阶段$HIDDEN
+        "quest_70036": "Quest 70036",                                                      // (test)音游活动五阶段$HIDDEN
+        "quest_70037": "Quest 70037",                                                      // (test)音游活动六阶段$HIDDEN
+        "quest_70038": "Quest 70038",                                                      // (test)音游活动七阶段$HIDDEN
+        "a_particularly_particular_author": "Quest 72167",                                 // 要求特别多的作家 | 雾海纪行
+        "the_sea_of_fog_and_the_rite_of_the_trees": "Quest 72172",                         // 雾海与树之祭 | 雾海纪行
+        "the_sunwheel_and_mt_kanna": "Quest 72173",                                        // 日轮与菅名山 | 雾海纪行
+        "quest_72174": "Quest 72174",                                                      // 渡魂人(test)$HIDDEN
+        "the_saga_of_mr_forgetful": "Quest 72175",                                         // 健忘大王历险记
         "quest_72201": "Quest 72201",                                                      // 渡-顽皮小子（test）$HIDDEN
         "quest_72202": "Quest 72202",                                                      // 渡-看守人（test）$HIDDEN
         "quest_72203": "Quest 72203",                                                      // 渡-捉迷小鬼（test）$HIDDEN
@@ -1676,22 +1432,21 @@ export default {
         "quest_72206": "Quest 72206",                                                      // 渡-蘑菇园丁（test）$HIDDEN
         "quest_72207": "Quest 72207",                                                      // 渡-海螺宝藏（test）$HIDDEN
         "quest_72208": "Quest 72208",                                                      // 渡-钓鱼小子（test）$HIDDEN
-        "neko_is_a_cat_wooden_shelf": "Quest 72209",                                       // 寝子是只猫·木头架
-        "neko_is_a_cat_the_children": "Quest 72210",                                       // 寝子是只猫·孩子们
-        "neko_is_a_cat_shrine_recipe": "Quest 72211",                                      // 寝子是只猫·神社食谱
-        "neko_is_a_cat_cat_and_stone": "Quest 72212",                                      // 寝子是只猫·石头和猫
-        "neko_is_a_cat_stone_humans_troubles": "Quest 72213",                              // 寝子是只猫·石头人类的麻烦
-        "neko_is_a_cat_shrine_canteen": "Quest 72214",                                     // 寝子是只猫·神社食堂
-        "neko_is_a_cat_dingaling_metal_ball": "Quest 72215",                               // 寝子是只猫·叮当的铁球
-        "neko_is_a_cat_a_good_turn_comes_late": "Quest 72216",                             // 寝子是只猫·迟来的「好事」
-        "quest_72219": "Quest 72219",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
-        "quest_72220": "Quest 72220",                                                      // （test）奥博伦玩法白盒任务$HIDDEN
         "quest_72225": "Quest 72225",                                                      // (test)神殿栖木$HIDDEN
         "quest_72226": "Quest 72226",                                                      // (test)山洞栖木$HIDDEN
         "quest_72227": "Quest 72227",                                                      // (test)后山栖木$HIDDEN
-        "quest_72231": "Quest 72231",                                                      // test 寝子是只猫最后 后续$HIDDEN
         "clean_house": "Quest 72232",                                                      // 门户清理
-        "the_still_waters_flow": "Quest 72233",                                            // 止水之潘
+        "quest_72246": "Quest 72246",                                                      // （test）鹤観彩蛋任务$HIDDEN
+        "quest_72251": "Quest 72251",                                                      // （test）鹤观壁画对话$HIDDEN
+        "quest_72252": "Quest 72252",                                                      // （test）迷雾灯指引$HIDDEN
+        "dreams_of_bloom": "Quest 72658",                                                  // 梦里生花
+        "i_researcher": "Quest 72670",                                                     // 我，游学者
+        "hereafter_the_trail_of_pervases": "Quest 71035",                                  // 身后事·铜雀之迹
+        "hereafter_all_is_well": "Quest 71830",                                            // 身后事·诸事平安
+        "hereafter_return_to_the_mountains": "Quest 71831",                                // 身后事·归于山中
+        "the_trail_of_drake_and_serpent": "Quest 72190",                                   // 寻得龙蛇踪 | 白夜国晨昏记
+        "the_heart_of_ouroboros": "Quest 72191",                                           // 奥罗巴洛斯之心 | 白夜国晨昏记
+        "dreams_in_the_gaps": "Quest 72192",                                               // 缝隙间的梦 | 白夜国晨昏记
         "quest_72234": "Quest 72234",                                                      // 寻找坐点玩法$HIDDEN
         "collection_of_dragons_and_snakes": "Quest 72235",                                 // 龙蛇藏归辑录
         "tricolor_file": "Quest 72236",                                                    // 三色档案
@@ -1704,13 +1459,10 @@ export default {
         "lotus_eater_epilogue_marjorie": "Quest 72243",                                    // 食莲者后续玛乔丽$HIDDEN
         "the_phaethons_syrtos": "Quest 72244",                                             // 法厄同们全跳舞
         "the_phaetons_syrtos_epilogue": "Quest 72245",                                     // 法厄同们全跳舞后续$HIDDEN
-        "quest_72246": "Quest 72246",                                                      // （test）鹤観彩蛋任务$HIDDEN
         "narrow_inquiry": "Quest 72247",                                                   // 狭间的叩问 | 许伯利翁哀歌
         "temple_inquiry": "Quest 72248",                                                   // 庙前的叩问 | 许伯利翁哀歌
         "serpents_heart_inquiry": "Quest 72249",                                           // 蛇心的叩问 | 许伯利翁哀歌
         "quest_72250": "Quest 72250",                                                      // 许伯利翁哀歌常驻NPC提示$HIDDEN
-        "quest_72251": "Quest 72251",                                                      // （test）鹤观壁画对话$HIDDEN
-        "quest_72252": "Quest 72252",                                                      // （test）迷雾灯指引$HIDDEN
         "quest_72253": "Quest 72253",                                                      // A$HIDDEN
         "quest_72254": "Quest 72254",                                                      // B$HIDDEN
         "quest_72255": "Quest 72255",                                                      // C$HIDDEN
@@ -1720,57 +1472,83 @@ export default {
         "quest_72259": "Quest 72259",                                                      // G$HIDDEN
         "eight_locales_over_mountains_and_seas_the_wonders_of_adeptal_amber": "Quest 72261", // 山海八所巡礼·琥珀仙岳绮语
         "eight_locales_over_mountains_and_seas_one_hundred_sights_of_dihua": "Quest 72262", // 山海八所巡礼·荻原川狩百景
-        "shuumatsuban_operations": "Quest 72263",                                          // 终末番的任务 | 特别的御神签
         "eight_locales_over_mountains_and_seas_snowswept_fairytale": "Quest 72264",        // 山海八所巡礼·大雪隐御伽话
-        "the_replacements_secret": "Quest 72265",                                          // 顶替者的秘密 | 特别的御神签
-        "where_the_dandelions_find_rest": "Quest 72266",                                   // 蒲公英的归宿 | 特别的御神签
         "yachimatahikos_trial": "Quest 72268",                                             // 八衢彦之试炼 | 厄瑞玻斯的秘密
         "yachimatahimes_trial": "Quest 72269",                                             // 八衢姬之试炼 | 厄瑞玻斯的秘密
         "kunados_trial": "Quest 72270",                                                    // 歧之试炼 | 厄瑞玻斯的秘密
-        "quest_72271": "Quest 72271",                                                      // 食莲者后续琳琅$HIDDEN
         "quest_72272": "Quest 72272",                                                      // 食莲者后续源一郎$HIDDEN
-        "quest_72274": "Quest 72274",                                                      // 神社地城对话$HIDDEN
         "the_three_great_martial_trials": "Quest 72275",                                   // 三隅道大演武 | 厄瑞玻斯的秘密
+        "quest_72283": "Quest 72283",                                                      //
+        "eight_locales_over_mountains_and_seas": "Quest 72674",                            // 山海八所巡礼
+        "eight_locales_over_mountains_and_seas_soliloquy_of_distant_island_peaks": "Quest 72675", // 山海八所巡礼·远岛孤山独语
+        "eight_locales_over_mountains_and_seas_blazing_poetry": "Quest 72677",             // 山海八所巡礼·炎炎连歌百韵
+        "eight_locales_over_mountains_and_seas_wanderers_appraisal": "Quest 72678",        // 山海八所巡礼·风来坊内鉴录
+        "quest_72679": "Quest 72679",                                                      //
+        "the_moonbathed_deep": "Quest 40060",                                              // 月浴之渊
+        "of_drink_adreaming": "Quest 70502",                                               // 曲生酌微梦
+        "solid_ice_soluble_in_wine": "Quest 70503",                                        // 坚冰，易溶于酒
+        "when_they_take_off_their_armor": "Quest 70504",                                   // 卸去铠甲之时
+        "fine_wine_from_yesterday": "Quest 70505",                                         // 昨日佳酿
+        "dandelion_rose_and_windwheel_aster": "Quest 70506",                               // 蒲公英、蔷薇、风车菊
+        "surrounded_by_the_aroma_of_tea": "Quest 70507",                                   // 茶香氤氲间
+        "docked_on_a_moonlit_night": "Quest 70508",                                        // 月夜，泊船码头
+        "untainted_autumn_frost": "Quest 70509",                                           // 未染尘埃的秋霜
+        "of_drink_adreaming_afterword": "Quest 70510",                                     // 曲生酌微梦·后记
+        "windswept_domain": "Quest 70664",                                                 // 秘境来风
+        "divine_ingenuity_collectors_chapter": "Quest 70674",                              // 神工天巧·宝录之章
+        "divine_ingenuity": "Quest 71662",                                                 // 神工天巧
         "the_bunkoku_enigma": "Quest 72276",                                               // 文谷疑云
+        "hyakunin_ikki_golden_whirlwind": "Quest 72682",                                   // 「百人一揆·黄金旋风」
+        "alan_smithee_author_of_fischl": "Quest 10003",                                    // 艾伦·史密西，菲谢尔的作者 | 魔女的课业·意外之题
+        "a_visitor_from_westward_realms_the_flavor_of_freedom": "Quest 70527",             // 西域来客・自由之味
+        "valors_afterglow": "Quest 71036",                                                 // 勇气的余晖
+        "chasm_spelunkers": "Quest 71037",                                                 // 方入巨渊初探勘 | 层岩巨渊深游记
+        "valors_afterglow_return_by_sundown": "Quest 71038",                               // 勇气的余晖·日落当归
+        "valors_afterglow_the_faint_light_remembered": "Quest 71039",                      // 勇气的余晖·谨记微芒
+        "first_miasmic_contact": "Quest 71040",                                            // 初识暗渊毒瘴现 | 层岩巨渊深游记
+        "meeting_new_people_and_foiling_some_bandits": "Quest 71041",                      // 踏破矿贼结新缘 | 层岩巨渊深游记
+        "the_heavenly_stones_debris": "Quest 71042",                                       // 九霄之石悬残片 | 层岩巨渊深游记
+        "perils_in_the_dark": "Quest 71043",                                               // 黑翳渐浓隐凶险 | 层岩巨渊深游记
+        "surreptitious_sevenstar_seal_sundering": "Quest 71044",                           // 巧瞒七星解磐键 | 层岩巨渊深游记
+        "wherefore_did_the_spiritstone_descend": "Quest 71045",                            // 灵石何故堕此间 | 层岩巨渊深游记
+        "quest_71046": "Quest 71046",                                                      // (test)(隐藏)层岩巨渊驻军控制任务$HIDDEN
+        "the_chasm_charters-v2.6": "Quest 71048",                                          // 层岩巨渊寻访记 | 层岩巨渊深游记
+        "mycological_investigation_in_the_chasm": "Quest 71050",                           // 层岩菌类调查
+        "hydrological_investigation_in_the_chasm": "Quest 71051",                          // 水生环境调查
+        "paleontological_investigation_in_the_chasm": "Quest 71052",                       // 古代生物调查
+        "quest_71053": "Quest 71053",                                                      // 隐藏任务对话海迪夫$HIDDEN
+        "undetected_infiltration": "Quest 71054",                                          // 潜身敌营无人知
+        "the_chasms_bounty": "Quest 71055",                                                // 巨渊的馈赠
+        "the_missing_miner": "Quest 71057",                                                // 失踪的矿工
+        "lost_in_a_foreign_land": "Quest 71058",                                           // 他乡迷失客
+        "lost_in_a_foreign_land_seeking": "Quest 71059",                                   // 他乡迷失客·觅迹
+        "quest_71060": "Quest 71060",                                                      // 隐藏卡了琳娜失踪$HIDDEN
+        "dimming_mushrooms_call_for_help": "Quest 71061",                                  // 黯淡蘑菇的求救
+        "a_company_vanishing_into_the_deep": "Quest 71062",                                // 连队消失在深岩
+        "a_cliffside_heros_past": "Quest 71063",                                           // 岩巅大侠往事
+        "the_millennial_mountains": "Quest 71064",                                         // 千年千岩
+        "stolen_by_the_rightful_owner": "Quest 71066",                                     // 物归原主又归原主
+        "quest_71070": "Quest 71070",                                                      // test下层对话控制器$HIDDEN
+        "says_he_who_seeks_stone": "Quest 71074",                                          // 藏石者言
+        "quest_71075": "Quest 71075",                                                      // test隐藏-小轻策创建任务$HIDDEN
+        "quest_71076": "Quest 71076",                                                      // test隐藏计时补给站$HIDDEN
+        "prospecting_thieves_continued": "Quest 71077",                                    // 隐藏盗矿者续
+        "quest_71078": "Quest 71078",                                                      // test隐藏-老臭挖掘minigame$HIDDEN
+        "quest_71080": "Quest 71080",                                                      // 隐藏说书人$HIDDEN
+        "quest_71082": "Quest 71082",                                                      // test隐藏-唐无仇任务后续闲置对话和彩蛋控制$HIDDEN
+        "quest_71083": "Quest 71083",                                                      // test隐藏-层岩巨渊WQ主线第四章之前，控制沐宁的闲置对话$HIDDEN
+        "quest_71088": "Quest 71088",                                                      // test隐藏-控制塔列辛、海迪夫和瑾武在上层的闲置对话$HIDDEN
+        "quest_71089": "Quest 71089",                                                      // 隐藏志琼的信$HIDDEN
+        "quest_71096": "Quest 71096",                                                      // test隐藏-藏石者言后续1$HIDDEN
+        "quest_71097": "Quest 71097",                                                      // test隐藏-藏石者言后续2$HIDDEN
+        "vibrocrystals_its_always_vibrocrystals": "Quest 71125",                           // 振晶，归来仍是振晶
+        "a_visitor_from_westward_realms": "Quest 71663",                                   // 西域来客
+        "vibrocrystal_projections": "Quest 71664",                                         // 振晶射影
         "a_story_for_you": "Quest 72278",                                                  // 「送给你的故事」
         "about_that_time_we_saved_the_tanuki_photo_board": "Quest 72279",                  // 关于拯救狸猫合影板这件事
         "buyers_guide_to_the_statue_of_her_excellency_the_almighty_narukami_ogosho_god_of_thunder": "Quest 72280", // 「御建鸣神主尊大御所大人像」购入须知
         "pen_pals_book_reviews_and_the_super_lucky_general": "Quest 72281",                // 笔友、小说鉴赏会与超幸运的大将
-        "quest_72283": "Quest 72283",                                                      //
-        "outlander_brigade": "Quest 72286",                                                // 《异邦人喧哗旅！！》 | 映影书写札记
-        "mushounin": "Quest 72287",                                                        // 《无生忍》 | 映影书写札记
-        "festival_afterword": "Quest 72500",                                               // 祭典后话
-        "outside_the_canvas_inside_the_lens_greenery_chapter": "Quest 72501",              // 画外旅照·青植之篇
-        "phantom_flow_phantasmal_blade": "Quest 72650",                                    // 幻影心流幻想剑
-        "the_path_of_the_treasureseeker_part_ii": "Quest 72651",                           // 寻宝的方法…之二？
-        "voyage_prep": "Quest 72652",                                                      // 远航的准备
-        "tracking_the_thunder": "Quest 72653",                                             // 追随鸣雷的踪迹
-        "crossing_unknown_storm_clouds": "Quest 72654",                                    // 涉过未知的雷云
-        "facing_distant_echoes": "Quest 72655",                                            // 直面悠远的回响
-        "theater_mechanicus": "Quest 72656",                                               // 机关棋谭
-        "the_commissions_commission": "Quest 72657",                                       // 社奉行的委任
-        "dreams_of_bloom": "Quest 72658",                                                  // 梦里生花
-        "the_moon_has_risen": "Quest 72659",                                               // 月升之时
-        "hyakunin_ikki_the_greatest_battle": "Quest 72660",                                // 「百人一揆·最强武斗大会」
-        "to_thee_my_tender_grief_confide": "Quest 72661",                                  // 我本将心
-        "by_thy_pale_beams_i_solitary_rove": "Quest 72662",                                // 奈何明月
-        "over_the_moon": "Quest 72663",                                                    // 月盈之刻
-        "the_many_matters_of_the_moonchase_festival": "Quest 72664",                       // 逐月节的诸多事宜
-        "bait_resupply_plan": "Quest 72667",                                               // 鱼饵补充计划
-        "quest_72668": "Quest 72668",                                                      // 和派蒙隐藏对话$HIDDEN
-        "bait_resupply_plan-1": "Quest 72669",                                             // 隐藏发鱼饵$HIDDEN
-        "i_researcher": "Quest 72670",                                                     // 我，游学者
-        "omniubiquity_net": "Quest 72672",                                                 // 四方八方之网
-        "eight_locales_over_mountains_and_seas": "Quest 72674",                            // 山海八所巡礼
-        "eight_locales_over_mountains_and_seas_soliloquy_of_distant_island_peaks": "Quest 72675", // 山海八所巡礼·远岛孤山独语
-        "eight_locales_over_mountains_and_seas_two_cities_recommendations": "Quest 72676", // 山海八所巡礼·双城风土名迹
-        "eight_locales_over_mountains_and_seas_blazing_poetry": "Quest 72677",             // 山海八所巡礼·炎炎连歌百韵
-        "eight_locales_over_mountains_and_seas_wanderers_appraisal": "Quest 72678",        // 山海八所巡礼·风来坊内鉴录
-        "quest_72679": "Quest 72679",                                                      //
-        "hyakunin_ikki_golden_whirlwind": "Quest 72682",                                   // 「百人一揆·黄金旋风」
         "outside_the_canvas_inside_the_lens": "Quest 72683",                               // 画外旅照
-        "the_almighty_arataki_great_and_glorious_drumalong_festival": "Quest 72684",       // 荒泷极上盛世豪鼓大祭典
-        "theater_mechanicus_stage_of_brilliance": "Quest 72685",                           // 机关棋谭·巧策之局
         "go_forth_golden_whirlwind": "Quest 72686",                                        // 去吧！黄金旋风！
         "the_floral_courtyard_part_i": "Quest 72687",                                      // 花影瑶庭·其一
         "the_floral_courtyard_part_ii": "Quest 72688",                                     // 花影瑶庭·其二
@@ -1779,53 +1557,55 @@ export default {
         "irodori_poetry_part_i": "Quest 72691",                                            // 容彩诗镜·其一
         "irodori_poetry_part_ii": "Quest 72692",                                           // 容彩诗镜·其二
         "irodori_poetry_part_iii": "Quest 72693",                                          // 容彩诗镜·其三
+        "versus_ookubo_sanzaemon": "Quest 72698",                                          // 与大久保三左卫门之战
+        "versus_yasuhiko_tarou": "Quest 72699",                                            // 与安彦太郎之战
+        "versus_mishima_michitoshi": "Quest 72720",                                        // 与三岛道世之战
+        "versus_taroumaru": "Quest 72721",                                                 // 与太郎丸之战
+        "snapshots-v2.6": "Quest 72724",                                                   // 暂留此影
+        "purbirunis_commandment": "Quest 73348",                                           // 普尔比鲁尼之诫
+        "the_sight_of_the_divine_emissary": "Quest 73687",                                 // 御神使的风姿
+        "garcias_paean": "Quest 71098",                                                    // 加尔恰的赞歌
+        "the_tales_behind_the_fan": "Quest 71101",                                         // 扇底春秋
+        "a_muddy_bizarre_adventure-v2.7-0": "Quest 71501",                                 // 深泥奇谭
+        "spike_selfcirculation_report_abstract-v2.7-0": "Quest 71502",                     // 光钉自循环运作报告·摘要
+        "spike_selfcirculation_report_environs_log-v2.7-0": "Quest 71503",                 // 光钉自循环运作报告·环境记录
+        "spike_selfcirculation_report_experimental_procedure-v2.7-0": "Quest 71504",       // 光钉自循环运作报告·实验步骤
+        "spike_selfcirculation_report_conclusion-v2.7-0": "Quest 71505",                   // 光钉自循环运作报告·结论
+        "a_muddy_bizarre_adventure-v2.7-1": "Quest 71506",                                 // 深泥奇谭
+        "spike_selfcirculation_report_abstract-v2.7-1": "Quest 71507",                     // 光钉自循环运作报告·摘要
+        "spike_selfcirculation_report_environs_log-v2.7-1": "Quest 71508",                 // 光钉自循环运作报告·环境记录
+        "spike_selfcirculation_report_experimental_procedure-v2.7-1": "Quest 71509",       // 光钉自循环运作报告·实验步骤
+        "spike_selfcirculation_report_conclusion-v2.7-1": "Quest 71510",                   // 光钉自循环运作报告·结论
+        "festival_afterword": "Quest 72500",                                               // 祭典后话
         "atoymaking_we_shall_go": "Quest 72694",                                           // 进军玩具市场
         "atoymaking_we_shall_go_energy_storage": "Quest 72695",                            // 进军玩具市场·能源储备
         "atoymaking_we_shall_go_core_propulsion": "Quest 72696",                           // 进军玩具市场·核心动力
         "atoymaking_we_shall_go_mass_production": "Quest 72697",                           // 进军玩具市场·大量生产
-        "versus_ookubo_sanzaemon": "Quest 72698",                                          // 与大久保三左卫门之战
-        "versus_yasuhiko_tarou": "Quest 72699",                                            // 与安彦太郎之战
-        "hilichurl_hullaballoo": "Quest 72701",                                            // 丘丘人引起的混乱
-        "kairagi_chaos": "Quest 72702",                                                    // 海乱鬼引起的混乱
-        "vagrant_havoc": "Quest 72705",                                                    // 浮浪人引起的混乱
-        "hilichurl_hullaballoo-1": "Quest 72706",                                          // 丘丘人引起的混乱
-        "monster_mayhem": "Quest 72707",                                                   // 魔物引起的混乱
-        "fatuous_farce": "Quest 72708",                                                    // 愚人众引起的混乱
-        "automaton_attack": "Quest 72709",                                                 // 自律机关引起的混乱
-        "kairagivagrant_pandemonium": "Quest 72710",                                       // 海乱鬼与浮浪人引起的混乱
-        "sandens_resource_request": "Quest 72712",                                         // 三田的面具绘材需求
-        "murakamis_mealmaking": "Quest 72713",                                             // 村上的食材需求
-        "rikus_eggy_endeavor": "Quest 72714",                                              // 陆的鸟蛋需求
-        "kanras_thoughts": "Quest 72715",                                                  // 甘乐的相思之意
-        "kano_nanas_healthy_diet": "Quest 72716",                                          // 鹿野奈奈的健康饮食计划
-        "kozues_ironwork": "Quest 72717",                                                  // 梢的铁块需求
-        "matsumotos_fried_egg_fracas": "Quest 72718",                                      // 松本的煎蛋需求
-        "yata_koukis_order_of_ore": "Quest 72719",                                         // 矢田幸喜的白铁块需求
-        "versus_mishima_michitoshi": "Quest 72720",                                        // 与三岛道世之战
-        "versus_taroumaru": "Quest 72721",                                                 // 与太郎丸之战
-        "snapshots-1": "Quest 72724",                                                      // 暂留此影
-        "hyakunin_ikki_narukami_arena": "Quest 72727",                                     // 「百人一揆·鸣神擂台」
-        "akitsu_yuugei": "Quest 72728",                                                    // 秋津游艺
-        "dreamlike": "Quest 72729",                                                        // 如梦似幻
-        "almighty_arataki_extraordinary_and_exhilarating_extreme_beetle_brawl": "Quest 72730", // 荒泷极意堂堂斗虫大试合！
-        "the_beetle_battles_will_never_end": "Quest 72731",                                // 永无止境的斗虫较量！
-        "quest_72732": "Quest 72732",                                                      // (test)第一天的怪力三十三对话$HIDDEN
-        "quest_72733": "Quest 72733",                                                      // (test)第三天的造笼师对话$HIDDEN
-        "quest_72734": "Quest 72734",                                                      // (test)第二天的金龟对话$HIDDEN
-        "quest_72735": "Quest 72735",                                                      // (test)第四天的大飞车对话$HIDDEN
-        "quest_72736": "Quest 72736",                                                      // (test)花椒鱼对话$HIDDEN
-        "travelers_tales_destiny_drawn": "Quest 72738",                                    // 游逸旅闻·相缘绘愿
-        "the_gourmet_supremos_on_the_road": "Quest 72800",                                 // 全能美食队·寻食之旅
-        "international_travel_log": "Quest 72801",                                         // 诸国游记
-        "home_lies_over_the_ocean": "Quest 72802",                                         // 海的那头是故乡
-        "o_archon_have_i_done_right": "Quest 72803",                                       // 神明啊，我做得对吗？
-        "battle_of_revenge": "Quest 72804",                                                // 洗刷耻辱的一战
-        "yae_publishing_houses_invitation": "Quest 72806",                                 // 「八重堂」的邀约
-        "chisatos_letter": "Quest 72807",                                                  // 千里之信 | 离岛通行凭证
-        "katheryne_in_inazuma": "Quest 72808",                                             // 凯瑟琳，在稻妻
-        "the_ritou_road": "Quest 72809",                                                   // 离岛之路
-        "storytelling_method": "Quest 72812",                                              // 故事构思法
-        "fertilizer_salesperson": "Quest 72813",                                           // 肥料…推销员？
+        "evermotion_mechanical_painting": "Quest 70514",                                   // 恒动械画
+        "evermotion_mechanical_painting_finale": "Quest 70515",                            // 恒动械画·终
+        "quest_70516": "Quest 70516",                                                      // (test)幻影心流活动任务_控制闲置对话$HIDDEN
+        "any_unsolved_mysteries": "Quest 70517",                                           // 残留的谜团？
+        "evermotion_mechanical_painting_invoker": "Quest 70533",                           // 恒动械画·七圣之篇
+        "outlander_brigade": "Quest 72286",                                                // 《异邦人喧哗旅！！》 | 映影书写札记
+        "mushounin": "Quest 72287",                                                        // 《无生忍》 | 映影书写札记
+        "thus_was_the_work_done_in_vain": "Quest 79013",                                   // 正因其徒劳
+        "where_the_treasure_dwells": "Quest 79020",                                        // 秘宝所藏 | 四礁觅宝记
+        "treasure_voyage": "Quest 79021",                                                  // 寻物航行
+        "the_misplaced_photo": "Quest 79022",                                              // 被丢失的合照 | 溯及以往
+        "the_discarded_insignia": "Quest 79023",                                           // 被抛出的徽记 | 溯及以往
+        "a_misplaced_conch": "Quest 79024",                                                // 被错置的海螺 | 溯及以往
+        "bakedanuki_wanderlust": "Quest 79025",                                            // 渴望旅行的妖狸
+        "drama_phantasmagoria_tale_of_the_swordwielding_princess": "Quest 79026",          // 极夜幻想剧·王女执剑记！
+        "the_final_treasure": "Quest 79027",                                               // 最后的宝藏
+        "treasure_clue_broken_isle": "Quest 79028",                                        // 宝藏线索·破破岛 | 四礁觅宝记
+        "treasure_clue_twinning_isle": "Quest 79029",                                      // 宝藏线索·双双岛 | 四礁觅宝记
+        "treasure_clue_minacious_isle": "Quest 79030",                                     // 宝藏线索·危危岛 | 四礁觅宝记
+        "treasure_clue_pudding_isle": "Quest 79031",                                       // 宝藏线索·布丁岛 | 四礁觅宝记
+        "quest_79033": "Quest 79033",                                                      // 监听3个海螺是否被拾取$HIDDEN
+        "quest_79034": "Quest 79034",                                                      // (test)狸猫WQ隐藏$HIDDEN
+        "the_bakedanukis_gift": "Quest 79035",                                             // 妖狸的赠礼
+        "next_time_on_king_of_invokations": "Quest 23035",                                 // 《召唤王·下集！是…》
+        "experiment_phase_uncontrolled_parameters": "Quest 71520",                         // 不受控的实验规模
         "vimana_agama_first_chapter": "Quest 73000",                                       // 吉祥具书·初篇 | 吉祥具书
         "the_children_of_vimara_village": "Quest 73001",                                   // 维摩庄的孩子 | 林中奇遇
         "into_the_woods": "Quest 73002",                                                   // 远足 | 林中奇遇
@@ -1872,10 +1652,6 @@ export default {
         "the_foolish_fatuus": "Quest 73049",                                               // 愚人者人愚之
         "quest_73050": "Quest 73050",                                                      // (test)无忧节其它一级WQ对话$HIDDEN
         "quest_73051": "Quest 73051",                                                      // (test)死域观测站失落1（隐藏任务）$HIDDEN
-        "lost_in_the_sands": "Quest 73052",                                                // 沙海迷踪 | 黄金梦乡
-        "an_introduction_to_indoor_archaeology": "Quest 73053",                            // 室内派考古入门 | 黄金梦乡
-        "the_secret_of_alahmar": "Quest 73054",                                            // 阿赫玛尔的秘密 | 黄金梦乡
-        "dreams_beneath_the_searing_sand": "Quest 73055",                                  // 热砂之梦 | 黄金梦乡
         "aranagas_memory": "Quest 73056",                                                  // 兰纳迦的回忆
         "aranakins_old_friend": "Quest 73057",                                             // 兰纳真的老友
         "aragarus_drawing": "Quest 73058",                                                 // 兰迦鲁的涂鸦
@@ -1900,10 +1676,8 @@ export default {
         "quest_73078": "Quest 73078",                                                      // (test)兰那罗交付01$HIDDEN
         "quest_73079": "Quest 73079",                                                      // (test)兰那罗打怪01$HIDDEN
         "a_child_from_beyond_the_forest": "Quest 73080",                                   // 不属于森林的孩子$HIDDEN
-        "encounter_in_the_woods": "Quest 73081",                                           // 林中小曲 | 梦中的苗圃
+        "encounter_in_the_woods-v3.0-0": "Quest 73081",                                    // 林中小曲 | 梦中的苗圃
         "quest_73082": "Quest 73082",                                                      // (test)兰那罗音乐01$HIDDEN
-        "dual_evidence": "Quest 73083",                                                    // 二重证据 | 旧语新知
-        "afratus_dilemma": "Quest 73084",                                                  // 阿弗拉图之惑
         "quest_73085": "Quest 73085",                                                      // (test)(隐藏)兰纳罗小游戏2$HIDDEN
         "quest_73086": "Quest 73086",                                                      // test隐藏-兰那罗小游戏-木箱下的东西1$HIDDEN
         "quest_73087": "Quest 73087",                                                      // test隐藏-兰那罗小游戏-顺序击破1$HIDDEN
@@ -1912,11 +1686,9 @@ export default {
         "static_views_part_2": "Quest 73099",                                              // 静态风景·后篇
         "quest_73100": "Quest 73100",                                                      // (test)检测兰那罗回家数量开宝箱$HIDDEN
         "quest_73101": "Quest 73101",                                                      // （test）十三机兵隐藏挑战4个boss$HIDDEN
-        "duneentombed_fecundity_part_iii": "Quest 73103",                                  // 埋葬丰饶的沙丘·下 | 比勒琪丝的哀歌
         "costeffective_hook": "Quest 73104",                                               // 鱼钩的物尽其用
         "the_path_of_papers": "Quest 73105",                                               // 求学漫漫路
         "for_a_dream_i_tarry": "Quest 73109",                                              // 趁梦想气息逗留
-        "soheils_wish": "Quest 73110",                                                     // 索赫尔的心愿 | 旧语新知
         "quest_73111": "Quest 73111",                                                      // (test)死域观测站唤雨1（隐藏任务）$HIDDEN
         "quest_73112": "Quest 73112",                                                      // (test)死域观测站唤雨2（隐藏任务）$HIDDEN
         "quest_73113": "Quest 73113",                                                      // (test)死域观测站凋零1（隐藏任务）$HIDDEN
@@ -1978,13 +1750,7 @@ export default {
         "quest_73183": "Quest 73183",                                                      // (test)兰那罗打怪13$HIDDEN
         "quest_73184": "Quest 73184",                                                      // (test)兰那罗打怪14$HIDDEN
         "even_beasts_stumble": "Quest 73185",                                              // 兽有失蹄
-        "duneentombed_fecundity_part_i": "Quest 73186",                                    // 埋葬丰饶的沙丘·上 | 比勒琪丝的哀歌
-        "duneentombed_fecundity_part_ii": "Quest 73187",                                   // 埋葬丰饶的沙丘·中 | 比勒琪丝的哀歌
         "quest_73188": "Quest 73188",                                                      // （test）学院越野彩蛋控制任务$HIDDEN
-        "invisible_barrier": "Quest 73189",                                                // 无形壁障 | 旧语新知
-        "hidden_mercenaries": "Quest 73190",                                               // 隐匿的佣兵 | 旧语新知
-        "deserts_remembrance": "Quest 73191",                                              // 记忆中的沙丘 | 旧语新知
-        "the_exile_sprouting": "Quest 73193",                                              // 流放者·萌芽
         "quest_73194": "Quest 73194",                                                      // （test）须弥告示牌港口$HIDDEN
         "quest_73195": "Quest 73195",                                                      // （test）须弥告示牌宝商街$HIDDEN
         "quest_73196": "Quest 73196",                                                      // （test）须弥告示牌交易所$HIDDEN
@@ -1994,6 +1760,80 @@ export default {
         "quest_73200": "Quest 73200",                                                      // （test）须弥告示牌珠宝店$HIDDEN
         "quest_73201": "Quest 73201",                                                      // （test）须弥告示牌咖啡厅$HIDDEN
         "quest_73202": "Quest 73202",                                                      // （test）须弥告示牌铁匠$HIDDEN
+        "quest_73215": "Quest 73215",                                                      // 正法炬书彩蛋$HIDDEN
+        "quest_73217": "Quest 73217",                                                      // （test）须弥告示牌奥莫斯杠$HIDDEN
+        "quest_73218": "Quest 73218",                                                      // （test）须弥告示牌驿站$HIDDEN
+        "quest_73226": "Quest 73226",                                                      // (test)移动水母（隐藏任务）$HIDDEN
+        "trees_and_dreams": "Quest 73229",                                                 // 梦境与树
+        "sprouting_seedlings": "Quest 73239",                                              // 新蓓萌生 | 梦中的苗圃
+        "quest_73242": "Quest 73242",                                                      // (test)七天神像演出-二净甸$HIDDEN
+        "quest_73243": "Quest 73243",                                                      // （test）须弥告示牌教令院$HIDDEN
+        "quest_73245": "Quest 73245",                                                      // (test)(隐藏)兰纳罗小游戏$HIDDEN
+        "an_unwavering_culinary_dream": "Quest 73246",                                     // 愿为一炊之梦
+        "quest_73247": "Quest 73247",                                                      // (test)(隐藏)兰纳罗小游戏$HIDDEN
+        "encounter_in_the_woods-v3.0-1": "Quest 73248",                                    // 林中小曲
+        "quest_73249": "Quest 73249",                                                      // (test)(隐藏)兰纳罗小游戏2$HIDDEN
+        "quest_73250": "Quest 73250",                                                      // (test)(隐藏)兰纳罗小游戏2$HIDDEN
+        "quest_73258": "Quest 73258",                                                      // (test)兰罗摩日记$HIDDEN
+        "quest_73259": "Quest 73259",                                                      // test隐藏-兰那罗小游戏-木箱下的东西2$HIDDEN
+        "quest_73260": "Quest 73260",                                                      // test隐藏-兰那罗小游戏-木箱下的东西3$HIDDEN
+        "quest_73261": "Quest 73261",                                                      // test隐藏-兰那罗小游戏-顺序击破2$HIDDEN
+        "quest_73262": "Quest 73262",                                                      // test隐藏-兰那罗小游戏-顺序击破3$HIDDEN
+        "quest_73263": "Quest 73263",                                                      // 林中小曲隐藏监听$HIDDEN
+        "quest_73268": "Quest 73268",                                                      // (test)无忧节后部分常驻组对话任务实现$HIDDEN
+        "quest_73277": "Quest 73277",                                                      // (test)战胜无留陀后常驻$HIDDEN
+        "the_unappreciated_carving": "Quest 73500",                                        // 被嫌弃的木刻
+        "selling_like_hot_carvings": "Quest 73501",                                        // 热销的木刻
+        "quest_73502": "Quest 73502",                                                      // （test）学院越野一阶段隐藏环$HIDDEN
+        "treasure_of_wisdom_a_new_plan": "Quest 73503",                                    // 智中之宝·新计划
+        "a_librarians_long_and_carefree_vacation": "Quest 73506",                          // 图书管理员的悠长假期
+        "fight_for_academic_reputation": "Quest 73530",                                    // 为学术声誉而战
+        "report_the_experimental_data": "Quest 73531",                                     // 汇报实验数据
+        "thesis_proposal_he_shall_not_pass": "Quest 73650",                                // 无止境的开题报告
+        "the_cliffside_weirdo_and_a_risky_study": "Quest 73651",                           // 崖边怪人与危险的研究？
+        "controllable_explosion": "Quest 73652",                                           // 可控性爆炸
+        "amirs_raw_meat_commission": "Quest 73653",                                        // 阿米尔的兽肉需求
+        "pesengs_zaytun_peaches": "Quest 73654",                                           // 帕森的墩墩桃需求
+        "kamlas_berries": "Quest 73655",                                                   // 卡姆拉的树莓需求
+        "houseins_harra_fruits": "Quest 73656",                                            // 侯赛因的香辛果需求
+        "dwarkanaths_white_iron_chunks": "Quest 73657",                                    // 妲卡玛忒的白铁块需求
+        "kouroshs_sumeru_roses": "Quest 73658",                                            // 库洛什的鲜花需求
+        "yavananis_apples": "Quest 73659",                                                 // 雅瓦娜尼的苹果需求
+        "arinas_nilotpala_lotuses": "Quest 73660",                                         // 阿里娜的月莲需求
+        "jahans_sugar": "Quest 73661",                                                     // 贾汉的调味料需求
+        "arayeshs_jam": "Quest 73662",                                                     // 阿拉耶什的果酱需求
+        "eremite_mayhem-v3.0-0": "Quest 73663",                                            // 镀金旅团引起的混乱
+        "fatuous_farce-v3.0": "Quest 73664",                                               // 愚人众引起的混乱
+        "eremite_mayhem-v3.0-1": "Quest 73665",                                            // 镀金旅团引起的混乱
+        "fungal_fracas-v3.0-0": "Quest 73666",                                             // 蕈兽引起的混乱
+        "fungal_fracas-v3.0-1": "Quest 73667",                                             // 蕈兽引起的混乱
+        "hilichurl_hullaballoo-v3.0": "Quest 73668",                                       // 丘丘人引起的混乱
+        "eremite_mayhem-v3.0-2": "Quest 73670",                                            // 镀金旅团引起的混乱
+        "fungal_fracas-v3.0-2": "Quest 73672",                                             // 蕈兽引起的混乱
+        "corps_of_thirty_recruitment": "Quest 73673",                                      // 「三十人团」的招募
+        "treasures_beneath_the_vines": "Quest 73674",                                      // 蔓下秘宝
+        "the_price": "Quest 73801",                                                        // 代价
+        "adventure_takes_courage-v3.0": "Quest 73802",                                     // 冒险就要大步向前
+        "garcias_paean_a_gift_of_compatibility": "Quest 73803",                            // 加尔恰的赞歌·适配性赠礼
+        "the_gourmet_supremos_cleanup": "Quest 73805",                                     // 全能美食队·收束
+        "charity_event_securing_funds": "Quest 70518",                                     // 义卖活动？资金筹备？
+        "favonian_goodies": "Quest 70519",                                                 // 西风呼呼义卖铺！
+        "favonian_goodies_and_buddies": "Quest 70520",                                     // 西风哗哗义卖联盟！
+        "charity_event_a_great_success": "Quest 70521",                                    // 义卖活动！完满收场！
+        "beverage_shop_on_the_pier": "Quest 70522",                                        // 码头的饮品小店
+        "mountain_mixologist": "Quest 70523",                                              // 山间的饮品调配师
+        "hyakunin_ikki_narukami_arena": "Quest 72727",                                     // 「百人一揆·鸣神擂台」
+        "lost_in_the_sands": "Quest 73052",                                                // 沙海迷踪 | 黄金梦乡
+        "an_introduction_to_indoor_archaeology": "Quest 73053",                            // 室内派考古入门 | 黄金梦乡
+        "the_secret_of_alahmar": "Quest 73054",                                            // 阿赫玛尔的秘密 | 黄金梦乡
+        "dreams_beneath_the_searing_sand": "Quest 73055",                                  // 热砂之梦 | 黄金梦乡
+        "dual_evidence": "Quest 73083",                                                    // 二重证据 | 旧语新知
+        "afratus_dilemma": "Quest 73084",                                                  // 阿弗拉图之惑
+        "soheils_wish": "Quest 73110",                                                     // 索赫尔的心愿 | 旧语新知
+        "invisible_barrier": "Quest 73189",                                                // 无形壁障 | 旧语新知
+        "hidden_mercenaries": "Quest 73190",                                               // 隐匿的佣兵 | 旧语新知
+        "deserts_remembrance": "Quest 73191",                                              // 记忆中的沙丘 | 旧语新知
+        "the_exile_sprouting": "Quest 73193",                                              // 流放者·萌芽
         "the_exile_blooming": "Quest 73203",                                               // 流放者·花期
         "a_gifted_rose_prickly_as_thorns": "Quest 73204",                                  // 献给某人的蔷薇·如荆棘一般多刺
         "a_gifted_rose_long_day_ahead": "Quest 73205",                                     // 献给某人的蔷薇·度过长日的方式
@@ -2001,98 +1841,102 @@ export default {
         "a_gifted_rose_ballad_of_days_gone_by": "Quest 73207",                             // 献给某人的蔷薇·来自往日的歌谣
         "a_gifted_rose_some_people_never_fade_away": "Quest 73209",                        // 献给某人的蔷薇·曾有人战胜消逝
         "quest_73210": "Quest 73210",                                                      // (test)*隐藏*探索魔鳞医院$HIDDEN
+        "quest_73223": "Quest 73223",                                                      // (test)沙漠苗圃后续玩法1第1天$HIDDEN
+        "blooming_sands": "Quest 73233",                                                   // 沙上花
+        "quest_73236": "Quest 73236",                                                      // (test)*隐藏*魔鳞医院隐形NPC对话
+        "join_the_eremites_and_embrace_a_wonderful_new_life": "Quest 73267",               // 加入镀金旅团，拥抱美好生活！
+        "quest_73275": "Quest 73275",                                                      // (test)沙漠苗圃后续总和$HIDDEN
+        "quest_73306": "Quest 73306",                                                      // (test)圣显厅后控制NPC$HIDDEN
+        "where_the_future_stars_fall": "Quest 73675",                                      // 未来星坠落的地方
+        "great_future_star": "Quest 73676",                                                // 大未来星
+        "secret_forest_shadow": "Quest 73677",                                             // 林中秘影
+        "farmland_fugitives": "Quest 73678",                                               // 农园逸犯
+        "target_master_of_the_snowy_peaks": "Quest 73679",                                 // 目标，雪山之主！
+        "fecund_hamper": "Quest 73680",                                                    // 丰饶之箱
+        "good_as_new": "Quest 73681",                                                      // 装点一新
+        "exemplary_adventurer": "Quest 73682",                                             // 榜样冒险家！
+        "outside_the_canvas_inside_the_lens_greenery_chapter": "Quest 72501",              // 画外旅照·青植之篇
+        "quest_70524": "Quest 70524",                                                      //
+        "quest_70525": "Quest 70525",                                                      //
+        "come_try_genius_invokation_tcg-v3.3": "Quest 70526",                              // 来试试「七圣召唤」吧！
+        "ascension_challenge_i": "Quest 70666",                                            // 牌手等级突破·一
+        "ascension_challenge_ii": "Quest 70667",                                           // 牌手等级突破·二
+        "ascension_challenge_iii": "Quest 70668",                                          // 牌手等级突破·三
+        "ascension_challenge_iv": "Quest 70669",                                           // 牌手等级突破·四
+        "brandnew_invitation_board": "Quest 70675",                                        // 新鲜邀请板
+        "akitsu_yuugei": "Quest 72728",                                                    // 秋津游艺
+        "dreamlike": "Quest 72729",                                                        // 如梦似幻
+        "ruin_drake_maelstrom-v3.3": "Quest 73671",                                        // 遗迹龙兽引起的混乱
+        "across_the_wilderness": "Quest 73684",                                            // 跨野寻踪
+        "quest_75121": "Quest 75121",                                                      // (test)茜特菈莉彩蛋任务$HIDDEN
+        "between_facades_and_familiar_faces": "Quest 40096",                               // 人前人后
+        "behind_the_scenes-v3.4": "Quest 71512",                                           // 灯后勤绩
+        "a_few_words_in_the_foreground": "Quest 71515",                                    // 幕前二三言
+        "backstage_helpers": "Quest 71516",                                                // 幕后人
+        "almighty_arataki_extraordinary_and_exhilarating_extreme_beetle_brawl": "Quest 72730", // 荒泷极意堂堂斗虫大试合！
+        "the_beetle_battles_will_never_end": "Quest 72731",                                // 永无止境的斗虫较量！
+        "quest_72732": "Quest 72732",                                                      // (test)第一天的怪力三十三对话$HIDDEN
+        "quest_72733": "Quest 72733",                                                      // (test)第三天的造笼师对话$HIDDEN
+        "quest_72734": "Quest 72734",                                                      // (test)第二天的金龟对话$HIDDEN
+        "quest_72735": "Quest 72735",                                                      // (test)第四天的大飞车对话$HIDDEN
+        "quest_72736": "Quest 72736",                                                      // (test)花椒鱼对话$HIDDEN
+        "duneentombed_fecundity_part_iii": "Quest 73103",                                  // 埋葬丰饶的沙丘·下 | 比勒琪丝的哀歌
+        "duneentombed_fecundity_part_i": "Quest 73186",                                    // 埋葬丰饶的沙丘·上 | 比勒琪丝的哀歌
+        "duneentombed_fecundity_part_ii": "Quest 73187",                                   // 埋葬丰饶的沙丘·中 | 比勒琪丝的哀歌
         "behold_the_sign_comes_like_a_thief": "Quest 73212",                               // 预兆如窃贼到来… | 仇敌仿佛众水翻腾…
-        "quest_73215": "Quest 73215",                                                      // 正法炬书彩蛋$HIDDEN
-        "quest_73217": "Quest 73217",                                                      // （test）须弥告示牌奥莫斯杠$HIDDEN
-        "quest_73218": "Quest 73218",                                                      // （test）须弥告示牌驿站$HIDDEN
         "the_temple_where_sand_flows_like_tears": "Quest 73219",                           // 流沙如泪的神殿 | 比勒琪丝的哀歌
         "the_eternal_dream_ever_lush": "Quest 73220",                                      // 永恒的葱茏之梦 | 比勒琪丝的哀歌
-        "quest_73223": "Quest 73223",                                                      // (test)沙漠苗圃后续玩法1第1天$HIDDEN
         "for_her_judgment_reaches_to_the_skies": "Quest 73225",                            // 因为她的罪恶滔天… | 仇敌仿佛众水翻腾…
-        "quest_73226": "Quest 73226",                                                      // (test)移动水母（隐藏任务）$HIDDEN
-        "trees_and_dreams": "Quest 73229",                                                 // 梦境与树
-        "asipattravana_itihasa": "Quest 73231",                                            // 锋刃林游增记 | 善恶的赫瓦雷纳
-        "the_hymn_of_tir_yazad": "Quest 73232",                                            // 蒂尔·亚什特的赞歌 | 善恶的赫瓦雷纳
-        "blooming_sands": "Quest 73233",                                                   // 沙上花
-        "awakenings_real_sound": "Quest 73235",                                            // 觉醒的正声 | 善恶的赫瓦雷纳
-        "quest_73236": "Quest 73236",                                                      // (test)*隐藏*魔鳞医院隐形NPC对话
-        "the_splendorous_sky_that_day": "Quest 73238",                                     // 彼时漫天异彩 | 善恶的赫瓦雷纳
-        "sprouting_seedlings": "Quest 73239",                                              // 新蓓萌生 | 梦中的苗圃
-        "quest_73242": "Quest 73242",                                                      // (test)七天神像演出-二净甸$HIDDEN
-        "quest_73243": "Quest 73243",                                                      // （test）须弥告示牌教令院$HIDDEN
         "rejoice_with_me_for_what_was_lost_is_now_found": "Quest 73244",                   // 失而复得者一同欢喜
-        "quest_73245": "Quest 73245",                                                      // (test)(隐藏)兰纳罗小游戏$HIDDEN
-        "an_unwavering_culinary_dream": "Quest 73246",                                     // 愿为一炊之梦
-        "quest_73247": "Quest 73247",                                                      // (test)(隐藏)兰纳罗小游戏$HIDDEN
-        "encounter_in_the_woods-1": "Quest 73248",                                         // 林中小曲
-        "quest_73249": "Quest 73249",                                                      // (test)(隐藏)兰纳罗小游戏2$HIDDEN
-        "quest_73250": "Quest 73250",                                                      // (test)(隐藏)兰纳罗小游戏2$HIDDEN
+        "make_bright_the_arrows_gather_the_shields": "Quest 73264",                        // 磨尖箭头，抓住盾牌… | 仇敌仿佛众水翻腾…
+        "tadhla_the_falcon": "Quest 73279",                                                // 「猎鹰」塔德菈
+        "the_falcons_hunt": "Quest 73281",                                                 // 「鹰猎」
+        "the_fallen_falcon": "Quest 73282",                                                // 折翼的猎鹰
+        "wisdom_has_built_her_house_she_has_hewn_out_her_seven_pillars": "Quest 73287",    // 智慧筑屋，凿成七柱 | 比勒琪丝的哀歌
+        "quest_73298": "Quest 73298",                                                      // (test)镀金旅团的覆灭$HIDDEN
+        "memories_of_gurabad": "Quest 73305",                                              // 居尔城的记忆 | 已逝去的末日
+        "quest_73327": "Quest 73327",                                                      // (test)永恒绿洲后续璃月篇$HIDDEN
+        "quest_73328": "Quest 73328",                                                      // (test)永恒绿洲后续稻妻篇$HIDDEN
+        "quest_73338": "Quest 73338",                                                      // (test)隐藏任务打牌学者$HIDDEN
+        "breezy_snapshots": "Quest 70530",                                                 // 风物留影
+        "old_friends_new_game": "Quest 73507",                                             // 老朋友和新游戏
+        "parting_arrangement": "Quest 73508",                                              // 暂别时的约定
+        "vibrocrystal_reharmonization": "Quest 73689",                                     // 振晶，映射二度
+        "another_home_there_may_yet_be": "Quest 13028",                                    // 若还有另一个家
+        "asipattravana_itihasa": "Quest 73231",                                            // 锋刃林游增记 | 善恶的赫瓦雷纳
+        "the_hymn_of_tir_yazad-v3.6-0": "Quest 73232",                                     // 蒂尔·亚什特的赞歌 | 善恶的赫瓦雷纳
+        "awakenings_real_sound": "Quest 73235",                                            // 觉醒的正声 | 善恶的赫瓦雷纳
+        "the_splendorous_sky_that_day": "Quest 73238",                                     // 彼时漫天异彩 | 善恶的赫瓦雷纳
         "as_the_khvarenas_light_shows": "Quest 73251",                                     // 如是灵光悉示现 | 善恶的赫瓦雷纳
         "as_the_khvarenas_light_shows_samudaya": "Quest 73253",                            // 如是灵光悉示现·集 | 善恶的赫瓦雷纳
         "as_the_khvarenas_light_shows_dukkha": "Quest 73254",                              // 如是灵光悉示现·苦 | 善恶的赫瓦雷纳
         "as_the_khvarenas_light_shows_nirodha": "Quest 73256",                             // 如是灵光悉示现·灭 | 善恶的赫瓦雷纳
-        "the_hymn_of_tir_yazad-1": "Quest 73257",                                          // 蒂尔·亚什特的赞歌 | 善恶的赫瓦雷纳
-        "quest_73258": "Quest 73258",                                                      // (test)兰罗摩日记$HIDDEN
-        "quest_73259": "Quest 73259",                                                      // test隐藏-兰那罗小游戏-木箱下的东西2$HIDDEN
-        "quest_73260": "Quest 73260",                                                      // test隐藏-兰那罗小游戏-木箱下的东西3$HIDDEN
-        "quest_73261": "Quest 73261",                                                      // test隐藏-兰那罗小游戏-顺序击破2$HIDDEN
-        "quest_73262": "Quest 73262",                                                      // test隐藏-兰那罗小游戏-顺序击破3$HIDDEN
-        "quest_73263": "Quest 73263",                                                      // 林中小曲隐藏监听$HIDDEN
-        "make_bright_the_arrows_gather_the_shields": "Quest 73264",                        // 磨尖箭头，抓住盾牌… | 仇敌仿佛众水翻腾…
-        "join_the_eremites_and_embrace_a_wonderful_new_life": "Quest 73267",               // 加入镀金旅团，拥抱美好生活！
-        "quest_73268": "Quest 73268",                                                      // (test)无忧节后部分常驻组对话任务实现$HIDDEN
-        "quest_73275": "Quest 73275",                                                      // (test)沙漠苗圃后续总和$HIDDEN
-        "quest_73277": "Quest 73277",                                                      // (test)战胜无留陀后常驻$HIDDEN
-        "tadhla_the_falcon": "Quest 73279",                                                // 「猎鹰」塔德菈
-        "the_falcons_hunt": "Quest 73281",                                                 // 「鹰猎」
-        "the_fallen_falcon": "Quest 73282",                                                // 折翼的猎鹰
+        "the_hymn_of_tir_yazad-v3.6-1": "Quest 73257",                                     // 蒂尔·亚什特的赞歌 | 善恶的赫瓦雷纳
         "monumental_study": "Quest 73285",                                                 // 碑铭的研究 | 碑铭的研究
-        "wisdom_has_built_her_house_she_has_hewn_out_her_seven_pillars": "Quest 73287",    // 智慧筑屋，凿成七柱 | 比勒琪丝的哀歌
-        "an_artist_adrift": "Quest 73294",                                                 // 画家漂流记
-        "an_artist_adrift-1": "Quest 73295",                                               // 画家漂流记
-        "an_artist_adrift-2": "Quest 73296",                                               // 画家漂流记
+        "an_artist_adrift-v3.6-0": "Quest 73294",                                          // 画家漂流记
+        "an_artist_adrift-v3.6-1": "Quest 73295",                                          // 画家漂流记
+        "an_artist_adrift-v3.6-2": "Quest 73296",                                          // 画家漂流记
         "quest_73297": "Quest 73297",                                                      // (test)枫丹画家第四天$HIDDEN
-        "quest_73298": "Quest 73298",                                                      // (test)镀金旅团的覆灭$HIDDEN
-        "memories_of_gurabad": "Quest 73305",                                              // 居尔城的记忆 | 已逝去的末日
-        "quest_73306": "Quest 73306",                                                      // (test)圣显厅后控制NPC$HIDDEN
         "pale_fire": "Quest 73307",                                                        // 微暗之火 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees": "Quest 73309",                   // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-1": "Quest 73310",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-2": "Quest 73312",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-3": "Quest 73314",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-4": "Quest 73315",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-5": "Quest 73316",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-6": "Quest 73317",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-7": "Quest 73318",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-0": "Quest 73309",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-1": "Quest 73310",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-2": "Quest 73312",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-3": "Quest 73314",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-4": "Quest 73315",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-5": "Quest 73316",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-6": "Quest 73317",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-7": "Quest 73318",            // 唤醒「灵谷木」中的残灵 | 微暗之火
         "lightcall_resonance": "Quest 73319",                                              // 浮光鸣召
         "quest_73322": "Quest 73322",                                                      // (test)净觉花$HIDDEN
-        "quest_73327": "Quest 73327",                                                      // (test)永恒绿洲后续璃月篇$HIDDEN
-        "quest_73328": "Quest 73328",                                                      // (test)永恒绿洲后续稻妻篇$HIDDEN
         "search_for_the_lost_monument_fragments": "Quest 73329",                           // 搜寻散失的碑文残片 | 碑铭的研究
         "investigate_the_fatui_camps_marked_by_sosi": "Quest 73330",                       // 调查索希标记的愚人众营地 | 碑铭的研究
-        "awaken_the_residual_pari_in_the_fravashi_trees-8": "Quest 73332",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
-        "awaken_the_residual_pari_in_the_fravashi_trees-9": "Quest 73334",                 // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-8": "Quest 73332",            // 唤醒「灵谷木」中的残灵 | 微暗之火
+        "awaken_the_residual_pari_in_the_fravashi_trees-v3.6-9": "Quest 73334",            // 唤醒「灵谷木」中的残灵 | 微暗之火
         "quest_73335": "Quest 73335",                                                      // (test)净觉花-花田1$HIDDEN
-        "quest_73338": "Quest 73338",                                                      // (test)隐藏任务打牌学者$HIDDEN
         "heart_of_amrita": "Quest 73341",                                                  // 甘露之心
         "quest_73342": "Quest 73342",                                                      // (test)净觉花-花田2$HIDDEN
         "quest_73343": "Quest 73343",                                                      // (test)净觉花-花田3$HIDDEN
         "quest_73345": "Quest 73345",                                                      // (test)(隐藏)完成灵光绝唱后找毕洛对话$HIDDEN
-        "purbirunis_commandment": "Quest 73348",                                           // 普尔比鲁尼之诫
-        "recollections_of_a_fontainian": "Quest 73350",                                    // 一个枫丹人的回忆
-        "rocking_carriage": "Quest 73352",                                                 // 花车摇曳
-        "mapping_dreams_and_reality": "Quest 73353",                                       // 梦与现实的映射
-        "shadow_of_the_knights_blade": "Quest 73354",                                      // 骑士的剑影
-        "reunite_my_shroom_buddies": "Quest 73355",                                        // 重逢，蕈兽伙伴！
-        "a_meeting_of_puppets": "Quest 73356",                                             // 「人偶」的相会
-        "tea_party_reinvitation_hat_guy": "Quest 73357",                                   // 茶会的再邀·阿帽
-        "the_unappreciated_carving": "Quest 73500",                                        // 被嫌弃的木刻
-        "selling_like_hot_carvings": "Quest 73501",                                        // 热销的木刻
-        "quest_73502": "Quest 73502",                                                      // （test）学院越野一阶段隐藏环$HIDDEN
-        "treasure_of_wisdom_a_new_plan": "Quest 73503",                                    // 智中之宝·新计划
-        "a_librarians_long_and_carefree_vacation": "Quest 73506",                          // 图书管理员的悠长假期
-        "old_friends_new_game": "Quest 73507",                                             // 老朋友和新游戏
-        "parting_arrangement": "Quest 73508",                                              // 暂别时的约定
         "boiling_over": "Quest 73509",                                                     // 爆震沸腾！
         "an_abundant_estimation": "Quest 73510",                                           // 「丰厚」的预算
         "the_culling_of_the_worms_proposal": "Quest 73511",                                // 沙漠虫害·开题
@@ -2109,53 +1953,6 @@ export default {
         "the_contestant": "Quest 73522",                                                   // 「当初那位参赛者」
         "quest_73523": "Quest 73523",                                                      //
         "when_the_curtains_close": "Quest 73524",                                          // 落幕时分
-        "complex_cartography": "Quest 73525",                                              // 复杂地图测绘法
-        "the_phantom_toy_master_and_the_barking_fox": "Quest 73526",                       // 「幻之玩具王」和「吼吼小狐」
-        "crocs_water_cannons_its_war": "Quest 73527",                                      // 鳄鱼？水炮？大作战！
-        "arent_finches_the_cutest": "Quest 73528",                                         // 团雀是否最可爱！
-        "determined_and_elegant_battle_dance": "Quest 73529",                              // 锐意与优雅的战舞？
-        "fight_for_academic_reputation": "Quest 73530",                                    // 为学术声誉而战
-        "report_the_experimental_data": "Quest 73531",                                     // 汇报实验数据
-        "an_odd_textual_mystery": "Quest 73532",                                           // 奇书疑云
-        "quest_73534": "Quest 73534",                                                      // (test)5.1梦境玩法3隐藏任务$HIDDEN
-        "thesis_proposal_he_shall_not_pass": "Quest 73650",                                // 无止境的开题报告
-        "the_cliffside_weirdo_and_a_risky_study": "Quest 73651",                           // 崖边怪人与危险的研究？
-        "controllable_explosion": "Quest 73652",                                           // 可控性爆炸
-        "amirs_raw_meat_commission": "Quest 73653",                                        // 阿米尔的兽肉需求
-        "pesengs_zaytun_peaches": "Quest 73654",                                           // 帕森的墩墩桃需求
-        "kamlas_berries": "Quest 73655",                                                   // 卡姆拉的树莓需求
-        "houseins_harra_fruits": "Quest 73656",                                            // 侯赛因的香辛果需求
-        "dwarkanaths_white_iron_chunks": "Quest 73657",                                    // 妲卡玛忒的白铁块需求
-        "kouroshs_sumeru_roses": "Quest 73658",                                            // 库洛什的鲜花需求
-        "yavananis_apples": "Quest 73659",                                                 // 雅瓦娜尼的苹果需求
-        "arinas_nilotpala_lotuses": "Quest 73660",                                         // 阿里娜的月莲需求
-        "jahans_sugar": "Quest 73661",                                                     // 贾汉的调味料需求
-        "arayeshs_jam": "Quest 73662",                                                     // 阿拉耶什的果酱需求
-        "eremite_mayhem": "Quest 73663",                                                   // 镀金旅团引起的混乱
-        "fatuous_farce-1": "Quest 73664",                                                  // 愚人众引起的混乱
-        "eremite_mayhem-1": "Quest 73665",                                                 // 镀金旅团引起的混乱
-        "fungal_fracas": "Quest 73666",                                                    // 蕈兽引起的混乱
-        "fungal_fracas-1": "Quest 73667",                                                  // 蕈兽引起的混乱
-        "hilichurl_hullaballoo-2": "Quest 73668",                                          // 丘丘人引起的混乱
-        "ruin_drake_maelstrom": "Quest 73669",                                             // 遗迹龙兽引起的混乱
-        "eremite_mayhem-2": "Quest 73670",                                                 // 镀金旅团引起的混乱
-        "ruin_drake_maelstrom-1": "Quest 73671",                                           // 遗迹龙兽引起的混乱
-        "fungal_fracas-2": "Quest 73672",                                                  // 蕈兽引起的混乱
-        "corps_of_thirty_recruitment": "Quest 73673",                                      // 「三十人团」的招募
-        "treasures_beneath_the_vines": "Quest 73674",                                      // 蔓下秘宝
-        "where_the_future_stars_fall": "Quest 73675",                                      // 未来星坠落的地方
-        "great_future_star": "Quest 73676",                                                // 大未来星
-        "secret_forest_shadow": "Quest 73677",                                             // 林中秘影
-        "farmland_fugitives": "Quest 73678",                                               // 农园逸犯
-        "target_master_of_the_snowy_peaks": "Quest 73679",                                 // 目标，雪山之主！
-        "fecund_hamper": "Quest 73680",                                                    // 丰饶之箱
-        "good_as_new": "Quest 73681",                                                      // 装点一新
-        "exemplary_adventurer": "Quest 73682",                                             // 榜样冒险家！
-        "across_the_wilderness": "Quest 73684",                                            // 跨野寻踪
-        "unexpected_battle": "Quest 73686",                                                // 意外争斗
-        "the_sight_of_the_divine_emissary": "Quest 73687",                                 // 御神使的风姿
-        "warriors_spirit": "Quest 73688",                                                  // 演武传心
-        "vibrocrystal_reharmonization": "Quest 73689",                                     // 振晶，映射二度
         "project_connectivity": "Quest 73690",                                             // 通路计划
         "gathering_of_stars": "Quest 73691",                                               // 明星聚画
         "mimetic_replication": "Quest 73692",                                              // 仿生摹行
@@ -2163,28 +1960,49 @@ export default {
         "antiquity_hunt": "Quest 73694",                                                   // 究古考察
         "antiquity_hunt_conclusion": "Quest 73695",                                        // 究古考察·收尾
         "in_truths_steps": "Quest 73696",                                                  // 追溯求真
-        "the_recollectors_path": "Quest 73697",                                            // 忆昔诸途巡历
-        "the_recollectors_path-1": "Quest 73698",                                          // 忆昔诸途巡历
-        "the_recollectors_path-2": "Quest 73699",                                          // 忆昔诸途巡历
-        "the_recollectors_path-3": "Quest 73700",                                          // 忆昔诸途巡历
-        "the_recollectors_path-4": "Quest 73701",                                          // 忆昔诸途巡历
-        "the_recollectors_path-5": "Quest 73702",                                          // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-0": "Quest 73697",                                     // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-1": "Quest 73698",                                     // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-2": "Quest 73699",                                     // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-3": "Quest 73700",                                     // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-4": "Quest 73701",                                     // 忆昔诸途巡历
+        "the_recollectors_path-v3.6-5": "Quest 73702",                                     // 忆昔诸途巡历
+        "receiver_of_friends_from_afar_part_i": "Quest 40143",                             // 有朋自远方来·其一
+        "receiver_of_friends_from_afar_part_ii": "Quest 40147",                            // 有朋自远方来·其二
+        "receiver_of_friends_from_afar_part_iii": "Quest 40148",                           // 有朋自远方来·其三
+        "receiver_of_friends_from_afar_part_iv": "Quest 40149",                            // 有朋自远方来·其四
+        "a_tour_of_wonders": "Quest 70531",                                                // 诸景巡礼
+        "zero_hour_invokation": "Quest 70532",                                             // 零时召唤
+        "heart_of_the_dice": "Quest 70534",                                                // 妙骰战法
+        "a_guest_from_liyue": "Quest 70672",                                               // 璃月来客
+        "recollections_of_a_fontainian": "Quest 73350",                                    // 一个枫丹人的回忆
+        "complex_cartography": "Quest 73525",                                              // 复杂地图测绘法
+        "the_phantom_toy_master_and_the_barking_fox": "Quest 73526",                       // 「幻之玩具王」和「吼吼小狐」
+        "crocs_water_cannons_its_war": "Quest 73527",                                      // 鳄鱼？水炮？大作战！
+        "arent_finches_the_cutest": "Quest 73528",                                         // 团雀是否最可爱！
+        "determined_and_elegant_battle_dance": "Quest 73529",                              // 锐意与优雅的战舞？
         "tell_me_mirror_mirror": "Quest 73703",                                            // 镜子镜子告诉我
-        "search_chronicle_for_childhood_dreams": "Quest 73704",                            // 参寻战记·为了儿时梦想！
-        "fieldwise_mastery_unyielding_progress": "Quest 73705",                            // 稳健知行，完备冲刺！
-        "crisis_management_unit_fully_operational": "Quest 73706",                         // 抗险机构，全量就绪！
-        "reunite_my_shroom_buddies-1": "Quest 73708",                                      // 重逢，蕈兽伙伴！
-        "behold_the_grandeur_seize_the_splendor": "Quest 73709",                           // 胜地共览，亮点觅捕
-        "a_new_day_at_the_lil_fungi_playground": "Quest 73710",                            // 小小灵蕈乐园，准备开张
-        "sightseeing_with_friends_a_trip_to_fontaine": "Quest 73711",                      // 灵蕈旅记：枫丹之行
-        "sightseeing_with_friends_back_to_sumeru": "Quest 73712",                          // 灵蕈旅记：须弥重游
-        "sightseeing_with_friends_underwater_fun": "Quest 73713",                          // 灵蕈旅记：水下趣览
-        "sightseeing_with_friends_scenic_highlights": "Quest 73714",                       // 灵蕈旅记：综景一览
-        "gourmet_supremos_within_our_duties": "Quest 73800",                               // 全能美食队·职责之内
-        "the_price": "Quest 73801",                                                        // 代价
-        "adventure_takes_courage-1": "Quest 73802",                                        // 冒险就要大步向前
-        "garcias_paean_a_gift_of_compatibility": "Quest 73803",                            // 加尔恰的赞歌·适配性赠礼
-        "the_gourmet_supremos_cleanup": "Quest 73805",                                     // 全能美食队·收束
+        "returning_curios": "Quest 79041",                                                 // 千奇澴回
+        "quest_79043": "Quest 79043",                                                      // 壁画区阅读物2$HIDDEN
+        "daiyas_threeday_reverie": "Quest 79044",                                          // 黛依阿的三日遐想 | 黛依阿的三日遐想
+        "the_black_nacre_and_the_alldevouring_kraken": "Quest 79045",                      // 黑水晶号与吞金海怪 | 黛依阿的三日遐想
+        "petrifying_gaze": "Quest 79046",                                                  // 瞳孔里的固形魔咒 | 黛依阿的三日遐想
+        "skycastle_saviors": "Quest 79047",                                                // 天空高城救守记 | 黛依阿的三日遐想
+        "quest_79048": "Quest 79048",                                                      // 壁画区阅读物1$HIDDEN
+        "quest_79049": "Quest 79049",                                                      // 壁画区阅读物3$HIDDEN
+        "capturing_light_and_shadow": "Quest 79050",                                       // 捕获我的光影与线条
+        "quest_79051": "Quest 79051",                                                      // 壁画区阅读物4$HIDDEN
+        "quest_79052": "Quest 79052",                                                      // 哈多后续对话$HIDDEN
+        "quest_79053": "Quest 79053",                                                      // （test)之后的隐藏任务$HIDDEN
+        "a_starry_night_as_remembered": "Quest 79054",                                     // 如留旧时的星影
+        "quest_79055": "Quest 79055",                                                      // (test)纯水片场1$HIDDEN
+        "domain_adventures": "Quest 79056",                                                // 秘境冒险的征途
+        "quest_79057": "Quest 79057",                                                      // (test)隐藏父任务，创建奇影闲置NPC$HIDDEN
+        "quest_79058": "Quest 79058",                                                      // (test)纯水片场2$HIDDEN
+        "quest_79059": "Quest 79059",                                                      // (test)纯水片场3$HIDDEN
+        "qiaoying_the_village_of_many_tales": "Quest 70050",                               // 故事繁多的翘英庄
+        "temporary_acclimatization": "Quest 71114",                                        // 水土暂服
+        "quest_71118": "Quest 71118",                                                      // (test)（test）71114隐藏任务$HIDDEN
+        "ruin_drake_maelstrom-v4.0-0": "Quest 73669",                                      // 遗迹龙兽引起的混乱
         "upon_a_flowery_field_of_grass": "Quest 74000",                                    // 在开满鲜花的草地上
         "the_narzissenkreuz_adventure": "Quest 74001",                                     // 「水仙十字大冒险」 | 「水仙十字大冒险」
         "the_story_of_the_princess_and_the_adventure_team": "Quest 74002",                 // 「公主」与「冒险团」的故事 | 「水仙十字大冒险」
@@ -2197,25 +2015,14 @@ export default {
         "a_fontainian_message": "Quest 74009",                                             // 一条枫丹信息
         "quest_74010": "Quest 74010",                                                      // 芬芳的憧憬$HIDDEN
         "book_of_esoteric_revelations": "Quest 74011",                                     // 秘诲揭示之书
-        "in_search_of_lost_time_west": "Quest 74012",                                      // 往事追迹·西
-        "in_search_of_lost_time_south": "Quest 74014",                                     // 往事追迹·南
-        "good_stuff_but_terrible_taste": "Quest 74015",                                    // 好东西，坏品味
-        "quest_74017": "Quest 74017",                                                      // (test)悠饭每日发放$HIDDEN
-        "villains": "Quest 74018",                                                         // 坏蛋们
-        "good_stuff_but_terrible_taste-1": "Quest 74019",                                  // 好东西，坏品味
-        "good_stuff_but_terrible_taste-2": "Quest 74020",                                  // 好东西，坏品味
-        "good_stuff_but_terrible_taste-3": "Quest 74021",                                  // 好东西，坏品味
-        "good_stuff_but_terrible_taste-4": "Quest 74022",                                  // 好东西，坏品味
+        "good_stuff_but_terrible_taste-v4.0-0": "Quest 74015",                             // 好东西，坏品味
+        "good_stuff_but_terrible_taste-v4.0-1": "Quest 74019",                             // 好东西，坏品味
+        "good_stuff_but_terrible_taste-v4.0-2": "Quest 74020",                             // 好东西，坏品味
+        "good_stuff_but_terrible_taste-v4.0-3": "Quest 74021",                             // 好东西，坏品味
+        "good_stuff_but_terrible_taste-v4.0-4": "Quest 74022",                             // 好东西，坏品味
         "good_stuff_but_terrible_taste_continued": "Quest 74023",                          // 好东西，坏品味·续
         "quest_74024": "Quest 74024",                                                      // 日冕的三原色$HIDDEN
-        "game_of_the_rich": "Quest 74025",                                                 // 富豪游戏 | 未完成的喜剧
-        "an_eye_for_an_eye": "Quest 74026",                                                // 一报还一报 | 未完成的喜剧
-        "hereafter": "Quest 74028",                                                        // 从此以后… | 未完成的喜剧
         "quest_74029": "Quest 74029",                                                      // 钓鱼游戏$HIDDEN
-        "scenes_from_life_in_meropide_dead_end": "Quest 74030",                            // 梅洛彼得生活场景·此路不通 | 梅洛彼得生活场景
-        "scenes_from_life_in_meropide_fists_of_fury": "Quest 74031",                       // 梅洛彼得生活场景·有拳有勇 | 梅洛彼得生活场景
-        "scenes_from_life_in_meropide_treat_the_symptoms": "Quest 74032",                  // 梅洛彼得生活场景·头痛医头 | 梅洛彼得生活场景
-        "scenes_from_life_in_meropide_safe_operation": "Quest 74033",                      // 梅洛彼得生活场景·安全操作 | 梅洛彼得生活场景
         "a_certain_notice": "Quest 74034",                                                 // 一份通知
         "a_certain_trifle": "Quest 74035",                                                 // 一件小事
         "a_certain_stamp": "Quest 74036",                                                  // 一枚印章
@@ -2223,21 +2030,90 @@ export default {
         "echoes_of_the_ancient_world": "Quest 74038",                                      // 旧世遗音
         "hey_this_isnt_pumpkin_soup": "Quest 74039",                                       // 「这可不是南瓜汤…」
         "the_lone_phantom_sail": "Quest 74040",                                            // 孤帆幽影
-        "in_search_of_lost_time": "Quest 74041",                                           // 往事追迹
         "quest_74042": "Quest 74042",                                                      // （test）空军钓鱼佬$HIDDEN
         "still_mouthwatering": "Quest 74043",                                              // 依旧让人垂涎欲滴！
         "quest_74044": "Quest 74044",                                                      // （test）瑟琳对话控制$HIDDEN
-        "strange_stone_chronicle": "Quest 74045",                                          // 奇石历险记
-        "quest_74046": "Quest 74046",                                                      // (test)入狱后探照灯传送$HIDDEN
-        "quest_74047": "Quest 74047",                                                      // (test)入狱后堵门前守卫劝退$HIDDEN
+        "strange_stone_chronicle-v4.0-0": "Quest 74045",                                   // 奇石历险记
         "were_it_so_easy": "Quest 74049",                                                  // 好事多磨
         "quest_74050": "Quest 74050",                                                      // （test）水族馆$HIDDEN
         "in_expert_company_i": "Quest 74051",                                              // 三人行…先寻明师·之一
+        "unfinished_story": "Quest 74056",                                                 // 尚未结束的故事
+        "strange_stone_chronicle-v4.0-1": "Quest 74058",                                   // 奇石历险记
+        "strange_stone_chronicle-v4.0-2": "Quest 74059",                                   // 奇石历险记
+        "search_in_the_algae_sea": "Quest 74072",                                          // 藻海的寻踪 | 藻海的寻踪
+        "within_the_depths_of_erinnyes": "Quest 74085",                                    // 在伊黎耶深处 | 伊黎耶的野精灵
+        "quest_74092": "Quest 74092",                                                      // (test)枫科院一级后续$HIDDEN
+        "quest_74099": "Quest 74099",                                                      // （test）钓鱼佬后续1天$HIDDEN
+        "quest_74100": "Quest 74100",                                                      // (test)隐藏-泪水线小助手$HIDDEN
+        "quest_74107": "Quest 74107",                                                      // （test）渔夫和白手套$HIDDEN
+        "quest_74109": "Quest 74109",                                                      // （test）水族馆后续$HIDDEN
+        "vagrants_and_scamps": "Quest 74113",                                              // 流浪汉与小屁孩 | 问题美露莘与答案机器人 第一幕
+        "in_expert_company_ii": "Quest 74114",                                             // 三人行…先寻明师·之二
+        "questions_and_answers": "Quest 74116",                                            // 问题与答案 | 问题美露莘与答案机器人 第三幕
+        "where_his_life_lies": "Quest 74118",                                              // 他的生命在那边
+        "the_final_question": "Quest 74120",                                               // 最后的问题
+        "truly_mouthwatering": "Quest 74121",                                              // 真是让人垂涎欲滴！
+        "a_letter": "Quest 74127",                                                         // 一份信函
+        "radiant_harvest_cause_and_effect": "Quest 74137",                                 // 集光撷彩·因果
+        "quest_74139": "Quest 74139",                                                      //
+        "happy_birthday": "Quest 74143",                                                   // 生日快乐
+        "leroy_dying_flash": "Quest 74149",                                                // 勒鲁瓦·回光返照
+        "leroy_high_noon": "Quest 74153",                                                  // 勒鲁瓦·午时已至
+        "daydreams_beyond_space_and_time": "Quest 74217",                                  // 超越时空之空想
+        "quest_74224": "Quest 74224",                                                      // (test)雷穆斯乐谱$HIDDEN
+        "a_gift_from_the_sea_spirits": "Quest 74228",                                      // 海精灵们的礼物
+        "the_toy_war_shots_fired": "Quest 74500",                                          // 开火！玩具战争
+        "the_toy_war_heating_up": "Quest 74501",                                           // 白热化！玩具战争
+        "the_toy_war_an_armistice": "Quest 74502",                                         // 停战协议！玩具战争
+        "simulation_azure_dash": "Quest 74503",                                            // 模拟！蔚蓝冲锋
+        "simulation_sweeping_the_wilds": "Quest 74504",                                    // 模拟！荒野扫荡
+        "tabletop_adventurer": "Quest 74505",                                              // 桌上冒险家
+        "steambird_interview": "Quest 74650",                                              // 「蒸汽鸟报」的面试
+        "bruneaus_flower_request": "Quest 74651",                                          // 布吕诺的鲜花需求
+        "muirnes_better_butter": "Quest 74652",                                            // 缪妮的黄油需求
+        "sylvies_beryl_conch_commission": "Quest 74653",                                   // 希尔维娅的苍晶螺需求
+        "prunieres_white_iron_impetration": "Quest 74654",                                 // 普吕尼埃的白铁块需求
+        "pabans_milk_run": "Quest 74655",                                                  // 帕班的牛奶需求
+        "ismenors_bulle_fruit_bulletin": "Quest 74656",                                    // 伊斯梅诺的泡泡桔需求
+        "galathees_salt_solicitation": "Quest 74657",                                      // 伽拉蒂雅的盐需求
+        "etiennes_raw_meat_request": "Quest 74658",                                        // 安托万的兽肉需求
+        "meka_mess-v4.0-0": "Quest 74659",                                                 // 发条机关引起的混乱
+        "ruin_drake_maelstrom-v4.0-1": "Quest 74660",                                      // 遗迹龙兽引起的混乱
+        "crabby_chaos-v4.0-0": "Quest 74661",                                              // 重甲蟹引起的混乱
+        "meka_mess-v4.0-1": "Quest 74662",                                                 // 发条机关引起的混乱
+        "meka_mess-v4.0-2": "Quest 74663",                                                 // 发条机关引起的混乱
+        "crabby_chaos-v4.0-1": "Quest 74664",                                              // 重甲蟹引起的混乱
+        "meka_mess-v4.0-3": "Quest 74665",                                                 // 发条机关引起的混乱
+        "hydro_phantasm_havoc": "Quest 74666",                                             // 浊水幻灵引起的混乱
+        "another_horizon_of_adventure-v4.0-0": "Quest 74667",                              // 冒险就要朝着远方
+        "another_horizon_of_adventure-v4.0-1": "Quest 74667",                              // 冒险就要朝着远方
+        "quest_74668": "Quest 74668",                                                      // (test)获得水下能力隐藏任务$HIDDEN
+        "studies_in_light_and_shadow_a_fontaine_of_enchantment": "Quest 74669",            // 光影研学·旖旎水界
+        "semiautomatic_forging": "Quest 74670",                                            // 半自动锤锻
+        "danger_lurks_everywhere_in_fontaine": "Quest 74800",                              // 危机四伏的枫丹廷
+        "an_honest_promotion": "Quest 75651",                                              // 善良促销
+        "mysterious_fish_a_booming_adventure": "Quest 70535",                              // 神秘鱼鱼？轰轰奇遇！
+        "crisis_relieved_a_happy_memento": "Quest 70536",                                  // 危机解除！开心留念！
+        "quest_70537": "Quest 70537",                                                      // (test)炸弹活动隐藏彩蛋——丢箱子$HIDDEN
+        "quest_70538": "Quest 70538",                                                      // (test)炸弹活动隐藏彩蛋——抓商人$HIDDEN
+        "mending_painting_prospects": "Quest 71521",                                       // 寻景觅画
+        "inspiration_eruption": "Quest 71522",                                             // 灵感喷激
+        "hundredpace_hurling_rites": "Quest 71523",                                        // 百步礼掷
+        "in_search_of_lost_time_west": "Quest 74012",                                      // 往事追迹·西
+        "in_search_of_lost_time_south": "Quest 74014",                                     // 往事追迹·南
+        "quest_74017": "Quest 74017",                                                      // (test)悠饭每日发放$HIDDEN
+        "game_of_the_rich": "Quest 74025",                                                 // 富豪游戏 | 未完成的喜剧
+        "an_eye_for_an_eye": "Quest 74026",                                                // 一报还一报 | 未完成的喜剧
+        "hereafter": "Quest 74028",                                                        // 从此以后… | 未完成的喜剧
+        "scenes_from_life_in_meropide_dead_end": "Quest 74030",                            // 梅洛彼得生活场景·此路不通 | 梅洛彼得生活场景
+        "scenes_from_life_in_meropide_fists_of_fury": "Quest 74031",                       // 梅洛彼得生活场景·有拳有勇 | 梅洛彼得生活场景
+        "scenes_from_life_in_meropide_treat_the_symptoms": "Quest 74032",                  // 梅洛彼得生活场景·头痛医头 | 梅洛彼得生活场景
+        "scenes_from_life_in_meropide_safe_operation": "Quest 74033",                      // 梅洛彼得生活场景·安全操作 | 梅洛彼得生活场景
+        "in_search_of_lost_time": "Quest 74041",                                           // 往事追迹
+        "quest_74046": "Quest 74046",                                                      // (test)入狱后探照灯传送$HIDDEN
+        "quest_74047": "Quest 74047",                                                      // (test)入狱后堵门前守卫劝退$HIDDEN
         "fontaine_research_institute_stagnating_in_the_rubble": "Quest 74053",             // 枫丹科学院，停滞于一片废墟上 | 枫丹科学院纪事
         "in_search_of_lost_time_north": "Quest 74054",                                     // 往事追迹·北
-        "unfinished_story": "Quest 74056",                                                 // 尚未结束的故事
-        "strange_stone_chronicle-1": "Quest 74058",                                        // 奇石历险记
-        "strange_stone_chronicle-2": "Quest 74059",                                        // 奇石历险记
         "both_brains_and_brawn": "Quest 74060",                                            // 智勇双拳
         "scenes_from_life_in_meropide_a_raw_deal": "Quest 74061",                          // 梅洛彼得生活场景·坏买卖 | 梅洛彼得生活场景
         "scenes_from_life_in_meropide_chitchat": "Quest 74062",                            // 梅洛彼得生活场景·与某人的交谈 | 梅洛彼得生活场景
@@ -2247,7 +2123,6 @@ export default {
         "scenes_from_life_in_meropide_the_art_of_negotiation": "Quest 74066",              // 梅洛彼得生活场景·交涉的艺术 | 梅洛彼得生活场景
         "scenes_from_life_in_meropide_memories": "Quest 74067",                            // 梅洛彼得生活场景·一段回忆 | 梅洛彼得生活场景
         "scenes_from_life_in_meropide_an_actors_training": "Quest 74068",                  // 梅洛彼得生活场景·演员的修养 | 梅洛彼得生活场景
-        "search_in_the_algae_sea": "Quest 74072",                                          // 藻海的寻踪 | 藻海的寻踪
         "muses_mother": "Quest 74073",                                                     // 缪斯的母亲 | 藻海的寻踪
         "meteoric_lance": "Quest 74074",                                                   // 流星的投矛 | 藻海的寻踪
         "cupids_lover": "Quest 74075",                                                     // 丘比特的爱人 | 藻海的寻踪
@@ -2258,48 +2133,26 @@ export default {
         "foggy_forest_path": "Quest 74082",                                                // 幽林雾道 | 伊黎耶的野精灵
         "wilting_weeping_willow": "Quest 74083",                                           // 枯萎垂柳 | 伊黎耶的野精灵
         "furious_mouth_of_the_spring": "Quest 74084",                                      // 愤怒泉眼 | 伊黎耶的野精灵
-        "within_the_depths_of_erinnyes": "Quest 74085",                                    // 在伊黎耶深处 | 伊黎耶的野精灵
         "go_to_the_institute_dormitories_and_retrieve_the_anchor": "Quest 74087",          // 前往「科学院宿舍」取回桩锚 | 枫丹科学院纪事
         "go_to_the_institute_of_clockwork_applications_and_retrieve_the_anchor": "Quest 74088", // 前往「发条应用研究院」取回桩锚 | 枫丹科学院纪事
         "our_purpose_is_in_another_canal": "Quest 74091",                                  // 我们的目标在另一条管道
-        "quest_74092": "Quest 74092",                                                      // (test)枫科院一级后续$HIDDEN
         "quest_74094": "Quest 74094",                                                      // (test)隐藏填充情景任务-清理垃圾$HIDDEN
         "quest_74097": "Quest 74097",                                                      // (test)隐藏填充情景任务-清理传单$HIDDEN
         "quest_74098": "Quest 74098",                                                      // (test)隐藏填充情景任务-拳击切磋$HIDDEN
-        "quest_74099": "Quest 74099",                                                      // （test）钓鱼佬后续1天$HIDDEN
-        "quest_74100": "Quest 74100",                                                      // (test)隐藏-泪水线小助手$HIDDEN
         "road_to_the_singularity": "Quest 74104",                                          // 通往奇点之路
-        "quest_74107": "Quest 74107",                                                      // （test）渔夫和白手套$HIDDEN
-        "quest_74109": "Quest 74109",                                                      // （test）水族馆后续$HIDDEN
-        "vagrants_and_scamps": "Quest 74113",                                              // 流浪汉与小屁孩 | 问题美露莘与答案机器人 第一幕
-        "in_expert_company_ii": "Quest 74114",                                             // 三人行…先寻明师·之二
         "the_red_and_the_black": "Quest 74115",                                            // 红与黑 | 问题美露莘与答案机器人 第二幕
-        "questions_and_answers": "Quest 74116",                                            // 问题与答案 | 问题美露莘与答案机器人 第三幕
-        "where_his_life_lies": "Quest 74118",                                              // 他的生命在那边
-        "the_final_question": "Quest 74120",                                               // 最后的问题
-        "truly_mouthwatering": "Quest 74121",                                              // 真是让人垂涎欲滴！
-        "a_letter": "Quest 74127",                                                         // 一份信函
         "an_expected_plan": "Quest 74131",                                                 // 一份预期内的计划
         "riddles_awaiting_answers": "Quest 74134",                                         // 待揭晓的谜底
         "initial_facts": "Quest 74135",                                                    // 最初的事实
         "an_expected_lie": "Quest 74136",                                                  // 一场预期内的谎言
-        "radiant_harvest_cause_and_effect": "Quest 74137",                                 // 集光撷彩·因果
         "radiant_harvest_compensation": "Quest 74138",                                     // 集光撷彩·报偿
-        "quest_74139": "Quest 74139",                                                      //
         "through_the_looking_glass": "Quest 74140",                                        // 穿过谜镜
-        "pursuit": "Quest 74141",                                                          // 追寻
-        "pursuit-1": "Quest 74142",                                                        // 追寻
-        "happy_birthday": "Quest 74143",                                                   // 生日快乐
+        "pursuit-v4.2-0": "Quest 74141",                                                   // 追寻
+        "pursuit-v4.2-1": "Quest 74142",                                                   // 追寻
         "free_verse": "Quest 74144",                                                       // 无格律自由诗
         "quest_74146": "Quest 74146",                                                      // (test)水仙十字结社闲置控制任务$HIDDEN
         "quest_74148": "Quest 74148",                                                      // (test)4.2藏宝图任务$HIDDEN
-        "leroy_dying_flash": "Quest 74149",                                                // 勒鲁瓦·回光返照
-        "leroy_firing_squad": "Quest 74150",                                               // 勒鲁瓦·行刑队
-        "leroy_under_guard": "Quest 74151",                                                // 勒鲁瓦·押解
-        "leroy_high_noon": "Quest 74153",                                                  // 勒鲁瓦·午时已至
-        "leroy_hangmans_noose": "Quest 74154",                                             // 勒鲁瓦·绞索
         "leroy_queen_of_the_nights_aria": "Quest 74156",                                   // 勒鲁瓦·夜后咏叹调
-        "leroy_beautiful_friends": "Quest 74157",                                          // 勒鲁瓦·漂亮朋友
         "wishfulfilling_treasure_hunt": "Quest 74164",                                     // 得偿所愿的寻宝之旅
         "waking_from_the_great_dream": "Quest 74165",                                      // 大梦的醒转 | 大梦的醒转
         "a_free_lunch": "Quest 74166",                                                     // 免费的午餐 | 免费的午餐
@@ -2312,151 +2165,137 @@ export default {
         "quest_74179": "Quest 74179",                                                      // (test)水池对话切荒光+换精炼材料$HIDDEN
         "quest_74180": "Quest 74180",                                                      // (test)异种章鱼掉落买卖$HIDDEN
         "quest_74181": "Quest 74181",                                                      // (test)蒸汽鸟后日谈$HIDDEN
-        "the_last_day_of_remuria": "Quest 74183",                                          // 雷穆利亚的最后一日 | 被缚的囚徒
-        "the_shadow_over_petrichor": "Quest 74184",                                        // 佩特莉可的阴霾 | 诡镇之梦
-        "for_yesterday_and_tomorrow": "Quest 74185",                                       // 为了旧日与明天
-        "quest_74186": "Quest 74186",                                                      // (test)4.6WQ-马其莫斯-解锁竞技场外围锁链$HIDDEN
-        "quest_74187": "Quest 74187",                                                      // (test)4.6WQ-马其莫斯-解锁大钟区域锁链$HIDDEN
         "quest_74189": "Quest 74189",                                                      // (test)涌泉窟大炮开门$HIDDEN
-        "quest_74190": "Quest 74190",                                                      // (test）八音盒隐藏任务$HIDDEN
-        "quest_74191": "Quest 74191",                                                      // (test)破碎海域闪回$HIDDEN
         "quest_74192": "Quest 74192",                                                      // (test)用来控制隐形npc$HIDDEN
         "quest_74193": "Quest 74193",                                                      // （test）大喷泉树后日谈$HIDDEN
-        "gradus_ad_capitolium": "Quest 74194",                                             // 通往卡皮托林的阶梯 | 法沙利亚狂想曲
-        "underwater_nocturne": "Quest 74195",                                              // 水下夜想曲 | 海魔王的宫殿
-        "fortune_plango_vulnera": "Quest 74196",                                           // 哀悼命运之疮 | 安魂曲
-        "golden_aqueduct_reconstruction_part_i": "Quest 74202",                            // 重建金色水道·其之一 | 法沙利亚狂想曲
-        "golden_aqueduct_reconstruction_part_ii": "Quest 74206",                           // 重建金色水道·其之二 | 法沙利亚狂想曲
         "quest_74207": "Quest 74207",                                                      // (test)异种章鱼掉落$HIDDEN
         "quest_74208": "Quest 74208",                                                      // (test)异种章鱼掉落$HIDDEN
         "quest_74210": "Quest 74210",                                                      //
-        "latecoming_homecoming": "Quest 74216",                                            // 迟来的归乡
-        "daydreams_beyond_space_and_time": "Quest 74217",                                  // 超越时空之空想
-        "quest_74220": "Quest 74220",                                                      // (test)植物园隐藏父任务$HIDDEN
-        "quest_74222": "Quest 74222",                                                      // (test)父亲孩子捡树枝$HIDDEN
-        "quest_74223": "Quest 74223",                                                      // (test)成为肌肉男$HIDDEN
-        "quest_74224": "Quest 74224",                                                      // (test)雷穆斯乐谱$HIDDEN
-        "quest_74225": "Quest 74225",                                                      // (test)运输物资$HIDDEN
-        "quest_74226": "Quest 74226",                                                      // (test)4.6WQ-石像埃斯特剧情后闲置$HIDDEN
-        "quest_74227": "Quest 74227",                                                      // (test)克洛琳德线完成后彩蛋交互$HIDDEN
-        "a_gift_from_the_sea_spirits": "Quest 74228",                                      // 海精灵们的礼物
-        "quest_74245": "Quest 74245",                                                      // (test)4.6三级骨笛闲置对话$HIDDEN
-        "quest_74246": "Quest 74246",                                                      // (test)隐藏$HIDDEN
-        "quest_74247": "Quest 74247",                                                      // (test)隐藏$HIDDEN
-        "stories_make_the_best_pastries": "Quest 74248",                                   // 故事乃最好的茶点
-        "for_fontaine": "Quest 74249",                                                     // 为了枫丹！
-        "whispers_by_the_hearth": "Quest 74250",                                           // 壁炉畔的絮语
-        "stories_of_the_past": "Quest 74251",                                              // 过去的故事
-        "ann_maryann_and_marionette": "Quest 74253",                                       // 安与玛丽安与小玛丽安
-        "narcissuss_waltz": "Quest 74254",                                                 // 水仙的圆舞曲
-        "tea_party_reinvitation_tabletop_troupe": "Quest 74255",                           // 茶会的再邀·桌上剧团
-        "tea_party_reinvitation_furina": "Quest 74256",                                    // 茶会的再邀·芙宁娜
-        "tea_party_reinvitation_house_of_the_hearth": "Quest 74257",                       // 茶会的再邀·壁炉之家
-        "tea_party_reinvitation_neuvillette": "Quest 74258",                               // 茶会的再邀·那维莱特
-        "tea_party_reinvitation_narzissenkreuz_reunion": "Quest 74259",                    // 茶会的再邀·水仙的重聚
-        "tea_party_reinvitation_narzissenkreuz_reunion-1": "Quest 74260",                  // 茶会的再邀·水仙的重聚
-        "tea_party_reinvitation_narzissenkreuz_reunion-2": "Quest 74261",                  // 茶会的再邀·水仙的重聚
-        "the_toy_war_shots_fired": "Quest 74500",                                          // 开火！玩具战争
-        "the_toy_war_heating_up": "Quest 74501",                                           // 白热化！玩具战争
-        "the_toy_war_an_armistice": "Quest 74502",                                         // 停战协议！玩具战争
-        "simulation_azure_dash": "Quest 74503",                                            // 模拟！蔚蓝冲锋
-        "simulation_sweeping_the_wilds": "Quest 74504",                                    // 模拟！荒野扫荡
-        "tabletop_adventurer": "Quest 74505",                                              // 桌上冒险家
         "goal_counter_the_phantom_blubberbeast": "Quest 74506",                            // 目标，反制「膨膨兽怪盗」！
         "lil_fungis_funtastic_fiesta": "Quest 74507",                                      // 小小灵蕈大幻戏！
         "fungi_are_not_tidalga": "Quest 74508",                                            // 蕈兽可不是汐藻！
         "a_clash_between_the_first_and_the_latest": "Quest 74509",                         // 最初与最新的对决！
         "a_notsodistant_farewell": "Quest 74510",                                          // 不遥远的分别
-        "the_gardes_inventor": "Quest 74511",                                              // 警备队的发明家
-        "for_the_futures_sake_experiment": "Quest 74512",                                  // 奔赴未来的实验
-        "finches_are_still_the_cutest": "Quest 74513",                                     // 团雀依然最可爱
-        "outside_the_canvas_inside_the_lens_dewkissed_chapter": "Quest 74514",             // 画外旅照·浮露之章
-        "quest_74515": "Quest 74515",                                                      // （test）4.7导能圆盘隐藏任务$HIDDEN
-        "an_invasion_on_hold": "Quest 74516",                                              // 暂时止息的生物入侵…
-        "operation_downpour_simulation": "Quest 74517",                                    // 雨阵奔流之述演
-        "thinking_outside_every_box": "Quest 74518",                                       // 灵活调度的思考…
-        "quest_74519": "Quest 74519",                                                      // (test)隐藏$HIDDEN
-        "quest_74520": "Quest 74520",                                                      // (test)隐藏$HIDDEN
-        "quest_74523": "Quest 74523",                                                      // (test)隐藏$HIDDEN
-        "quest_74524": "Quest 74524",                                                      // (test)隐藏$HIDDEN
-        "quest_74525": "Quest 74525",                                                      // (test)隐藏$HIDDEN
-        "quest_74526": "Quest 74526",                                                      // (test)隐藏$HIDDEN
-        "quest_74527": "Quest 74527",                                                      // (test)隐藏$HIDDEN
-        "quest_74528": "Quest 74528",                                                      // (test)隐藏$HIDDEN
-        "quest_74529": "Quest 74529",                                                      // (test)隐藏$HIDDEN
-        "quest_74530": "Quest 74530",                                                      // (test)隐藏$HIDDEN
-        "well_done_whats_the_next_big_plan": "Quest 74531",                                // 圆满收工！下一个大计划？
-        "popular_entertainment": "Quest 74532, File 74532",                                // 大众化的结局构想
-        "popular_entertainment-1": "Quest 74532, File a54481d0",                           // 大众化的结局构想
-        "steambird_interview": "Quest 74650",                                              // 「蒸汽鸟报」的面试
-        "bruneaus_flower_request": "Quest 74651",                                          // 布吕诺的鲜花需求
-        "muirnes_better_butter": "Quest 74652",                                            // 缪妮的黄油需求
-        "sylvies_beryl_conch_commission": "Quest 74653",                                   // 希尔维娅的苍晶螺需求
-        "prunieres_white_iron_impetration": "Quest 74654",                                 // 普吕尼埃的白铁块需求
-        "pabans_milk_run": "Quest 74655",                                                  // 帕班的牛奶需求
-        "ismenors_bulle_fruit_bulletin": "Quest 74656",                                    // 伊斯梅诺的泡泡桔需求
-        "galathees_salt_solicitation": "Quest 74657",                                      // 伽拉蒂雅的盐需求
-        "etiennes_raw_meat_request": "Quest 74658",                                        // 安托万的兽肉需求
-        "meka_mess": "Quest 74659",                                                        // 发条机关引起的混乱
-        "ruin_drake_maelstrom-2": "Quest 74660",                                           // 遗迹龙兽引起的混乱
-        "crabby_chaos": "Quest 74661",                                                     // 重甲蟹引起的混乱
-        "meka_mess-1": "Quest 74662",                                                      // 发条机关引起的混乱
-        "meka_mess-2": "Quest 74663",                                                      // 发条机关引起的混乱
-        "crabby_chaos-1": "Quest 74664",                                                   // 重甲蟹引起的混乱
-        "meka_mess-3": "Quest 74665",                                                      // 发条机关引起的混乱
-        "hydro_phantasm_havoc": "Quest 74666",                                             // 浊水幻灵引起的混乱
-        "another_horizon_of_adventure": "Quest 74667",                                     // 冒险就要朝着远方
-        "another_horizon_of_adventure-1": "Quest 74667",                                   // 冒险就要朝着远方
-        "quest_74668": "Quest 74668",                                                      // (test)获得水下能力隐藏任务$HIDDEN
-        "studies_in_light_and_shadow_a_fontaine_of_enchantment": "Quest 74669",            // 光影研学·旖旎水界
-        "semiautomatic_forging": "Quest 74670",                                            // 半自动锤锻
         "the_peaks_and_troughs_of_life": "Quest 74671",                                    // 人生的波峰与波谷
         "the_longfailed_graph_adversarial_technology": "Quest 74672",                      // 早早失败的「图形对抗学」…
+        "quest_71525": "Quest 71525",                                                      // (test)斗虫二期-田铁嘴关卡$HIDDEN
+        "quest_71526": "Quest 71526",                                                      // (test)斗虫二期-畅畅关卡$HIDDEN
+        "quest_71527": "Quest 71527",                                                      // (test)斗虫二期-烟绯关卡$HIDDEN
+        "provisionally_perpetual_beetle_battle": "Quest 71528",                            // 暂无止境的斗虫之路！
+        "quest_71529": "Quest 71529",                                                      // (test)斗虫二期-岚姐关卡$HIDDEN
+        "leroy_firing_squad": "Quest 74150",                                               // 勒鲁瓦·行刑队
+        "leroy_under_guard": "Quest 74151",                                                // 勒鲁瓦·押解
+        "leroy_hangmans_noose": "Quest 74154",                                             // 勒鲁瓦·绞索
+        "leroy_beautiful_friends": "Quest 74157",                                          // 勒鲁瓦·漂亮朋友
         "treasures_under_the_sea": "Quest 74673",                                          // 水中秘宝
         "treasures_under_the_sea_epilogue": "Quest 74674",                                 // 水中秘宝·尾声
         "the_arrival_of_a": "Quest 74675",                                                 // 进站！
-        "imaginary_maze_of_true_heroes": "Quest 74676",                                    // 拟想！强者与迷宫！
         "the_art_of_the_elegant_blade_dance": "Quest 74677",                               // 优雅剑舞的艺术？
         "blade_dances_unexpected_end": "Quest 74678",                                      // 剑舞的意外谢幕！
         "spread_out_less_than_an_arcminute": "Quest 74679",                                // 散布小于一角分！
         "rescue_the_poor_contract_employee": "Quest 74680",                                // 救救可怜的乙方员工！
         "special_lighting_and_the_stars_of_tomorrow": "Quest 74681",                       // 特技光效与明日之星！
+        "the_festering_fang-v4.3": "Quest 75197",                                          // 腐殖之牙
+        "hustle_and_bustle": "Quest 40142",                                                // 人来人往
+        "final_stanza_the_sanctification_of_tao_dou": "Quest 40187",                       // 终回：八奇炼桃都
+        "an_ancient_sacrifice_of_sacred_brocade": "Quest 71100",                           // 祀珑在昔，灵锦歆诚 | 沉玉祝珑
+        "qiaoying_of_the_sacred_mountain": "Quest 71102",                                  // 仙山有茗，名以翘英 | 沉玉祝珑
+        "floating_jade_treasure_of_chenyu": "Quest 71103",                                 // 采撷掇拾，沉玉浮琼 | 沉玉祝珑
+        "the_roaming_abode": "Quest 71105",                                                // 仙人游庄
+        "threefold_expectations": "Quest 71106",                                           // 攸望三叠
+        "a_wangshan_walk_to_remember": "Quest 71107",                                      // 哐哐锵锵王山行
+        "scrolls_and_sword_manuals_of_guhua": "Quest 71108",                               // 古华书剑谱
+        "shrouded_vale_hidden_hero": "Quest 71109",                                        // 秘谷侠隐
+        "our_chenyu_vale_trek": "Quest 71110",                                             // 沉玉之旅
+        "chili_con_cloudy": "Quest 71111",                                                 // 云云椒椒
+        "silently_the_butterfly_crosses_the_valley": "Quest 71115",                        // 彩蝶翩然过谷中
+        "the_dealing_sands": "Quest 71116",                                                // 契约之砂
+        "quest_71117": "Quest 71117",                                                      // (test)巨龟出现$HIDDEN
+        "quest_71119": "Quest 71119",                                                      // (test)(隐藏)先民遗迹POI流程$HIDDEN
+        "quest_71120": "Quest 71120",                                                      // (test)(隐藏)偷袭盗宝洞$HIDDEN
+        "quest_71121": "Quest 71121",                                                      // (test)西山一窟鬼$HIDDEN
+        "quest_71126": "Quest 71126",                                                      // (test)猫狗鸬$HIDDEN
+        "the_cloudpadded_path_to_the_chiwang_repose": "Quest 71127",                       // 赤望所居，锦落云程
+        "quest_71128": "Quest 71128",                                                      // （test）未尽的茶局$HIDDEN
+        "quest_71129": "Quest 71129",                                                      // (test)王山厅重复挑战$HIDDEN
+        "quest_71130": "Quest 71130",                                                      // (test)王山厅-试炼机关右$HIDDEN
+        "quest_71131": "Quest 71131",                                                      // (test)王山厅-试炼机关左$HIDDEN
+        "quest_71132": "Quest 71132",                                                      // (test)茶工坊进圈训话$HIDDEN
+        "quest_71134": "Quest 71134",                                                      // (test)警察故事$HIDDEN
+        "quest_71135": "Quest 71135",                                                      // （test）供奉满级监听$HIDDEN
+        "quest_71139": "Quest 71139",                                                      // (test)供奉开启后闲置$HIDDEN
+        "just_wushou_dance": "Quest 71530",                                                // 碰碰舞兽戏！
+        "paper_shadow_ruminations": "Quest 71531",                                         // 寻味纸影间
+        "iridescent_cloudstriding": "Quest 71532",                                         // 熠光云行
+        "quest_74246": "Quest 74246",                                                      // (test)隐藏$HIDDEN
+        "bulle_fruithued_interloper": "Quest 70540",                                       // 泡泡桔色的不速之客！
+        "sir_pouncelot_joins_the_lot": "Quest 70541",                                      // 「大桔骑士」入列！
+        "quest_70542": "Quest 70542",                                                      // (test)彩蛋对话1$HIDDEN
+        "quest_70543": "Quest 70543",                                                      // (test)彩蛋对话3$HIDDEN
+        "quest_70544": "Quest 70544",                                                      // (test)彩蛋对话4$HIDDEN
+        "quest_70545": "Quest 70545",                                                      // (test)彩蛋对话2$HIDDEN
+        "the_gardes_inventor": "Quest 74511",                                              // 警备队的发明家
+        "for_the_futures_sake_experiment": "Quest 74512",                                  // 奔赴未来的实验
+        "search_chronicle_burning_up": "Quest 71665",                                      // 参寻战记·燃起来了！
+        "search_chronicle_cold_round_belly": "Quest 71667",                                // 参寻战记·冷酷圆肚皮！
+        "search_chronicle_for_childhood_dreams": "Quest 73704",                            // 参寻战记·为了儿时梦想！
+        "the_last_day_of_remuria": "Quest 74183",                                          // 雷穆利亚的最后一日 | 被缚的囚徒
+        "the_shadow_over_petrichor": "Quest 74184",                                        // 佩特莉可的阴霾 | 诡镇之梦
+        "for_yesterday_and_tomorrow": "Quest 74185",                                       // 为了旧日与明天
+        "quest_74186": "Quest 74186",                                                      // (test)4.6WQ-马其莫斯-解锁竞技场外围锁链$HIDDEN
+        "quest_74187": "Quest 74187",                                                      // (test)4.6WQ-马其莫斯-解锁大钟区域锁链$HIDDEN
+        "quest_74190": "Quest 74190",                                                      // (test）八音盒隐藏任务$HIDDEN
+        "quest_74191": "Quest 74191",                                                      // (test)破碎海域闪回$HIDDEN
+        "gradus_ad_capitolium": "Quest 74194",                                             // 通往卡皮托林的阶梯 | 法沙利亚狂想曲
+        "underwater_nocturne": "Quest 74195",                                              // 水下夜想曲 | 海魔王的宫殿
+        "fortune_plango_vulnera": "Quest 74196",                                           // 哀悼命运之疮 | 安魂曲
+        "golden_aqueduct_reconstruction_part_i": "Quest 74202",                            // 重建金色水道·其之一 | 法沙利亚狂想曲
+        "golden_aqueduct_reconstruction_part_ii": "Quest 74206",                           // 重建金色水道·其之二 | 法沙利亚狂想曲
+        "latecoming_homecoming": "Quest 74216",                                            // 迟来的归乡
+        "quest_74222": "Quest 74222",                                                      // (test)父亲孩子捡树枝$HIDDEN
+        "quest_74223": "Quest 74223",                                                      // (test)成为肌肉男$HIDDEN
+        "quest_74225": "Quest 74225",                                                      // (test)运输物资$HIDDEN
+        "quest_74226": "Quest 74226",                                                      // (test)4.6WQ-石像埃斯特剧情后闲置$HIDDEN
+        "quest_74245": "Quest 74245",                                                      // (test)4.6三级骨笛闲置对话$HIDDEN
         "search_chronicle_audience_with_the_solitary_king": "Quest 74682",                 // 参寻战记·觐见孤王！
-        "filmmaking_notes": "Quest 74683",                                                 // 映影制作札记
         "search_chronicle_afterword": "Quest 74684",                                       // 参寻战记·后日谈
+        "unbegun_unending_story": "Quest 70676",                                           // 无始无终的故事
+        "quest_70677": "Quest 70677",                                                      // (test)隐藏任务：4.7多角色挑战引导任务02$HIDDEN
+        "quest_70678": "Quest 70678",                                                      // (test)隐藏任务：4.7多角色挑战引导任务03$HIDDEN
+        "quest_70680": "Quest 70680",                                                      // (test)隐藏任务：4.8角色专精挑战引导任务$HIDDEN
+        "testhiddenhidden-v4.7": "Quest 70687",                                            // (test)隐藏$HIDDEN
+        "commanders_and_wargames": "Quest 71144",                                          // 将才与推演
+        "scenarios_for_study": "Quest 71145",                                              // 解析与想定
+        "quest_74227": "Quest 74227",                                                      // (test)克洛琳德线完成后彩蛋交互$HIDDEN
+        "imaginary_maze_of_true_heroes": "Quest 74676",                                    // 拟想！强者与迷宫！
         "we_meet_again_cannon": "Quest 74685",                                             // 炮炮，又见炮炮。
-        "a_timetested_friendship": "Quest 74686",                                          // 友谊地久天长
-        "the_cannon_has_ears": "Quest 74687",                                              // 重炮在聆听
-        "prepackaged_solution": "Quest 74688",                                             // 打包解决方案
-        "hot_in_a_flash_or_cold_just_as_fast": "Quest 74689",                              // 「瞬影」镜头！瞬间遇冷？
-        "a_robust_theoretical_discussion": "Quest 74690, File 74690",                      // 激烈的开端理论
-        "a_robust_theoretical_discussion-1": "Quest 74690, File e4a6f284",                 // 激烈的开端理论
-        "revelations_by_chance": "Quest 74691",                                            // 偶发的谕示
-        "witchs_revelation_special_blends_instruction": "Quest 74692",                     // 魔女的谕示·特调之谕
-        "witchs_revelation_dutys_instruction": "Quest 74693",                              // 魔女的谕示·履职之谕
-        "witchs_revelation_voyaging_instruction": "Quest 74694",                           // 魔女的谕示·舶来之谕
-        "witchs_revelation_wardens_instruction": "Quest 74695",                            // 魔女的谕示·监守之谕
-        "witchs_revelation_instruction_of_curious_form": "Quest 74696",                    // 魔女的谕示·奇躯之谕
-        "witchs_revelation_instruction_beyond_dreams": "Quest 74697",                      // 魔女的谕示·梦外之谕
-        "witchs_revelation_great_youkais_instruction": "Quest 74698",                      // 魔女的谕示·大妖怪之谕
-        "elegance_safety_first": "Quest 74700",                                            // 优雅？安全第一！
-        "danger_keep_away": "Quest 74701",                                                 // 危险？请勿靠近！
-        "fisharium_open_for_business": "Quest 74702",                                      // 水族馆？开业！
-        "just_a_30_cut": "Quest 74703",                                                    // 营业额？只拿三成！
-        "friends_in_the_aquarium": "Quest 74704",                                          // 水族箱里的…朋友？
-        "us_in_the_aquarium": "Quest 74705",                                               // 水族箱里的…我们？
-        "a_superstar_in_the_aquarium": "Quest 74706",                                      // 水族箱里的…明星？
-        "an_actor_in_the_aquarium": "Quest 74707",                                         // 水族箱里的…演员？
-        "the_emergence_of_irate_fish": "Quest 74708",                                      // 暴躁鱼儿在出没？
-        "the_cantankerous_fish_have_their_circumstances": "Quest 74709",                   // 暴躁鱼儿的隐情？
-        "tons_of_tons_of_furious_fish": "Quest 74710",                                     // 暴躁鱼儿还不少…
-        "rapid_restitution_to_the_raging_fish": "Quest 74711",                             // 暴躁鱼儿快痊愈…
-        "a_warning_from_the_wrathful_fish": "Quest 74712",                                 // 暴躁鱼儿的警告！
-        "somethings_wrong_with_the_water": "Quest 74713",                                  // 水域状况不太妙？
-        "underwater_restoration_in_progress": "Quest 74714",                               // 水域修复进行中…
-        "the_underwater_salvage_commandments": "Quest 74715",                              // 水域打捞有原则？
-        "betterments_in_aquatic_circumstances": "Quest 74716",                             // 水域状况已好转…
-        "danger_lurks_everywhere_in_fontaine": "Quest 74800",                              // 危机四伏的枫丹廷
+        "an_odd_textual_mystery": "Quest 73532",                                           // 奇书疑云
+        "finches_are_still_the_cutest-v4.8": "Quest 74513",                                // 团雀依然最可爱
+        "outside_the_canvas_inside_the_lens_dewkissed_chapter": "Quest 74514",             // 画外旅照·浮露之章
+        "quest_74515": "Quest 74515",                                                      // （test）4.7导能圆盘隐藏任务$HIDDEN
+        "towards_the_lighthouse_or_far_away": "Quest 79060",                               // 向着灯塔，或是远方
+        "quest_79061": "Quest 79061",                                                      // (test)灯塔后日谈$HIDDEN
+        "narration_footnotes": "Quest 79062",                                              // 旁白的注脚
+        "quest_79063": "Quest 79063",                                                      // （test）圆桌会议阅读物$HIDDEN
+        "quest_79064": "Quest 79064",                                                      // （test）被巨人赶出去的任务$HIDDEN
+        "the_lotus_leaf_and_the_champion": "Quest 79065",                                  // 荷叶与冠军
+        "the_forest_and_the_princess": "Quest 79066",                                      // 森林与公主
+        "the_answer_of_the_lotus_leaves_and_forest": "Quest 79067",                        // 荷叶与森林的答案
+        "quest_79068": "Quest 79068",                                                      // （test）123木头人关卡1$HIDDEN
+        "quest_79069": "Quest 79069",                                                      // （test）123木头人关卡2$HIDDEN
+        "quest_79070": "Quest 79070",                                                      // (test)折纸系列WQ完成后的闲置对话$HIDDEN
+        "owl_musician": "Quest 79071",                                                     // 《猫头鹰乐师》
+        "flying_hatter": "Quest 79072",                                                    // 《飞帽匠》
+        "good_shelf": "Quest 79073",                                                       // 《好架子》
+        "brave_northerly_wind": "Quest 79074",                                             // 《勇敢的北风》
+        "quest_79075": "Quest 79075",                                                      // (test)小花隐藏任务$HIDDEN
+        "texts_coda": "Quest 79079",                                                       // 正文的尾声
+        "quest_79080": "Quest 79080",                                                      // (test)摄影呀哈哈$HIDDEN
+        "explore_this_world": "Quest 79081",                                               // 探索这个世界
+        "quest_79082": "Quest 79082",                                                      // (test)拯救矿工$HIDDEN
+        "world_level_ascension": "Quest 25015",                                            // 世界等级突破
+        "dodocos_boombastic_escapades": "Quest 70546",                                     // 嘟嘟可砰砰历险记！
+        "the_call_of_mystical_martial_arts": "Quest 70681",                                // 神秘武学的召唤
         "lost_in_the_woods": "Quest 75000",                                                // 迷林之子 | 在应许与遗忘之间
         "beneath_the_crystal_rock": "Quest 75001",                                         // 在晶岩下 | 群山的影子
         "revelations_from_the_past": "Quest 75002",                                        // 自过往的启示 | 在应许与遗忘之间
@@ -2468,10 +2307,8 @@ export default {
         "special_friends": "Quest 75010",                                                  // 特别的朋友 | 龙选者的旅迹
         "seeker_no_finding": "Quest 75011",                                                // 溯寻者不可得 | 火中取梦的故事
         "quest_75013": "Quest 75013",                                                      // （test）燃素开采中心NPC用任务$HIDDEN
-        "beat_the_clock_24_hours": "Quest 75014",                                          // 时限二十四小时 | 从一案到另一案
         "feeling_like_fish_today": "Quest 75015",                                          // 今天是吃鱼的心情！ | 龙选者的旅迹
         "quest_75016": "Quest 75016",                                                      // (test)初见大木$HIDDEN
-        "open_your_heart_to_me": "Quest 75017",                                            // 为我敞开心扉
         "saurovets_dilemma": "Quest 75018",                                                // 龙医生的困境 | 龙选者的旅迹
         "rite_of_the_bold": "Quest 75019",                                                 // 勇敢者的仪式 | 在应许与遗忘之间
         "ripe_for_trouble": "Quest 75020",                                                 // 熟是生非
@@ -2481,24 +2318,54 @@ export default {
         "a_saurian_lovers_ordinary_days": "Quest 75024",                                   // 爱龙人的平凡生活 | 龙选者的旅迹
         "tepetlisaurus_hideandseek": "Quest 75025",                                        // 嵴锋龙躲猫猫 | 龙选者的旅迹
         "weighty_wings": "Quest 75028",                                                    // 沉重的翅膀 | 龙选者的旅迹
+        "the_case_of_the_crafting_bench": "Quest 75034",                                   // 合成台疑案
+        "gifts_and_gifts_in_return": "Quest 75035",                                        // 赠礼与回礼 | 龙选者的旅迹
+        "waiting_for_seeds_to_sprout": "Quest 75036",                                      // 待种子萌出新芽 | 龙选者的旅迹
+        "quest_75040": "Quest 75040",                                                      // test飞鼠喂食$HIDDEN
+        "quest_75042": "Quest 75042",                                                      // (test)大木在前哨站闲置$HIDDEN
+        "quest_75047": "Quest 75047",                                                      // (test)隐藏-小恐龙营地内对话$HIDDEN
+        "quest_75049": "Quest 75049",                                                      // (test)夜之竞技场隐藏$HIDDEN
+        "quest_75057": "Quest 75057",                                                      // (test)挂前哨站常驻对话talk$HIDDEN
+        "quest_75080": "Quest 75080",                                                      // (test)小恐龙花田后续$HIDDEN
+        "quest_75088": "Quest 75088",                                                      // (test)龙铭刻碎片$HIDDEN
+        "quest_75091": "Quest 75091",                                                      // (test)养石$HIDDEN
+        "the_lone_isle_named_night": "Quest 75094",                                        // 名为夜的孤岛 | 龙选者的旅迹
+        "quest_75096": "Quest 75096",                                                      // (test)火棉后续任务$HIDDEN
+        "quest_75097": "Quest 75097",                                                      // (test)第一次与火神像交互任务$HIDDEN
+        "quest_75103": "Quest 75103",                                                      // (test)企鹅岛$HIDDEN
+        "stride_on_rainbows_split_the_waves": "Quest 75104",                               // 踏虹破浪！
+        "stones_coconuts_and_saurian_traffickers": "Quest 75107",                          // 石子、椰子、龙贩子 | 龙选者的旅迹
+        "friends_of_fire_and_water": "Quest 75108",                                        // 火与水的好友 | 龙选者的旅迹
+        "quest_75111": "Quest 75111",                                                      //
+        "quest_75112": "Quest 75112",                                                      // test龙挑战NPC合集$HIDDEN
+        "someday_we_all_must_walk_alone": "Quest 75177",                                   // 终有独行之日 | 龙选者的旅迹
+        "is_intensity_really_the_key": "Quest 75178",                                      // 「烈度」，有用吗 | 龙选者的旅迹
+        "adventure_at_wavey_bay": "Quest 75214",                                           // 游玩浪浪湾 | 夏活beta测试任务
+        "avantgarde_graffiti_visionary": "Quest 75500",                                    // 前卫理念与涂鸦先锋！
+        "on_the_graffiti_road": "Quest 75504",                                             // 涂鸦之路的方向标
+        "toward_redhot_adventure": "Quest 75650",                                          // 朝着炽热的冒险！
+        "quest_75657": "Quest 75657",                                                      //
+        "rocking_carriage": "Quest 73352",                                                 // 花车摇曳
+        "mapping_dreams_and_reality": "Quest 73353",                                       // 梦与现实的映射
+        "shadow_of_the_knights_blade": "Quest 73354",                                      // 骑士的剑影
+        "quest_73534": "Quest 73534",                                                      // (test)5.1梦境玩法3隐藏任务$HIDDEN
+        "aphid_treasure": "Quest 75505",                                                   // 蜜虫之宝
+        "last_ride_of_the_bugbuster_squad": "Quest 75506",                                 // 捉虫小队最后出击
+        "quest_70683": "Quest 70683",                                                      // (test)怪物自走棋小活动引导$HIDDEN
+        "our_animal_friends": "Quest 71668",                                               // 我们的动物朋友
+        "our_animal_friends_epilogue": "Quest 71669",                                      // 我们的动物朋友·尾声
+        "quest_74220": "Quest 74220",                                                      // (test)植物园隐藏父任务$HIDDEN
+        "beat_the_clock_24_hours": "Quest 75014",                                          // 时限二十四小时 | 从一案到另一案
+        "open_your_heart_to_me": "Quest 75017",                                            // 为我敞开心扉
         "charge_forward_go_go_go": "Quest 75029",                                          // 向前冲！冲！冲！
         "molting_season": "Quest 75030",                                                   // 换羽时节
         "a_saurian_returns_to_the_nest": "Quest 75032",                                    // 龙的归巢
         "every_aspect_of_a_warrior": "Quest 75033",                                        // 勇士的每一面
-        "the_case_of_the_crafting_bench": "Quest 75034",                                   // 合成台疑案
-        "gifts_and_gifts_in_return": "Quest 75035",                                        // 赠礼与回礼 | 龙选者的旅迹
-        "waiting_for_seeds_to_sprout": "Quest 75036",                                      // 待种子萌出新芽 | 龙选者的旅迹
         "quest_75039": "Quest 75039",                                                      // (test)小恐龙手办-拯救晕倒侏儒$HIDDEN
-        "quest_75040": "Quest 75040",                                                      // test飞鼠喂食$HIDDEN
         "quest_75041": "Quest 75041",                                                      // (test)拟态营地一$HIDDEN
-        "quest_75042": "Quest 75042",                                                      // (test)大木在前哨站闲置$HIDDEN
         "quest_75044": "Quest 75044",                                                      // (test)5.2阅读物$HIDDEN
-        "quest_75046": "Quest 75046",                                                      // (test)牧龙场$HIDDEN
-        "quest_75047": "Quest 75047",                                                      // (test)隐藏-小恐龙营地内对话$HIDDEN
         "vaulting_the_wall_of_morning_mist": "Quest 75048",                                // 翻越朝霭之墙 | 被灰烬掩埋的城市
-        "quest_75049": "Quest 75049",                                                      // (test)夜之竞技场隐藏$HIDDEN
         "quest_75053": "Quest 75053",                                                      // (test)大鸟转转转$HIDDEN
-        "quest_75057": "Quest 75057",                                                      // (test)挂前哨站常驻对话talk$HIDDEN
         "quest_75062": "Quest 75062",                                                      // (test)拟态营地二$HIDDEN
         "dancin_in_the_moonlight": "Quest 75064",                                          // 月光中共舞
         "quest_75066": "Quest 75066",                                                      // (test)拟态营地三$HIDDEN
@@ -2510,32 +2377,16 @@ export default {
         "quest_75073": "Quest 75073",                                                      // （test）怎么又是你-龙坏人好$HIDDEN
         "the_mystery_of_tecoloapan_beach": "Quest 75076",                                  // 浮羽之滨的迷局
         "incidents_are_ever_sudden": "Quest 75079",                                        // 事件总是突如其来 | 从一案到另一案
-        "quest_75080": "Quest 75080",                                                      // (test)小恐龙花田后续$HIDDEN
         "an_air_race_and_an_alibi": "Quest 75086",                                         // 飞行竞赛与不在场证明 | 从一案到另一案
         "farewell_final_saurus_cracker": "Quest 75087",                                    // 再见了，最后的龙龙饼干 | 从一案到另一案
-        "quest_75088": "Quest 75088",                                                      // (test)龙铭刻碎片$HIDDEN
-        "quest_75091": "Quest 75091",                                                      // (test)养石$HIDDEN
-        "the_lone_isle_named_night": "Quest 75094",                                        // 名为夜的孤岛 | 龙选者的旅迹
-        "quest_75096": "Quest 75096",                                                      // (test)火棉后续任务$HIDDEN
-        "quest_75097": "Quest 75097",                                                      // (test)第一次与火神像交互任务$HIDDEN
         "quest_75098": "Quest 75098",                                                      // (test)隐藏：灵视龙教学情景$HIDDEN
-        "quest_75101": "Quest 75101",                                                      // (test)主线后与神像交互$HIDDEN
-        "quest_75103": "Quest 75103",                                                      // (test)企鹅岛$HIDDEN
-        "stride_on_rainbows_split_the_waves": "Quest 75104",                               // 踏虹破浪！
-        "stones_coconuts_and_saurian_traffickers": "Quest 75107",                          // 石子、椰子、龙贩子 | 龙选者的旅迹
-        "friends_of_fire_and_water": "Quest 75108",                                        // 火与水的好友 | 龙选者的旅迹
-        "quest_75111": "Quest 75111",                                                      //
-        "quest_75112": "Quest 75112",                                                      // test龙挑战NPC合集$HIDDEN
-        "quest_75113": "Quest 75113",                                                      // (test)牧龙场赛跑$HIDDEN
         "quest_75119": "Quest 75119",                                                      // (test)龙医生-隐藏第二天$HIDDEN
         "quest_75120": "Quest 75120",                                                      // test5.2灵视龙挑战$HIDDEN
-        "quest_75121": "Quest 75121",                                                      // (test)茜特菈莉彩蛋任务$HIDDEN
         "quest_75122": "Quest 75122",                                                      // test5.2翼手龙挑战$HIDDEN
         "quest_75124": "Quest 75124",                                                      // (test)（test）拍照企鹅$HIDDEN
         "quest_75127": "Quest 75127",                                                      // (test)父任务 1$HIDDEN
         "quest_75129": "Quest 75129",                                                      // (test)大奖猜猜猜$HIDDEN
         "quest_75130": "Quest 75130",                                                      // (test)救救可怜的小灵视龙$HIDDEN
-        "quest_75131": "Quest 75131",                                                      // (test)火山企鹅雨$HIDDEN
         "quest_75132": "Quest 75132",                                                      // (test)灵视龙部落大涂鸦$HIDDEN
         "adventure_in_the_land_of_mists": "Quest 75133",                                   // 雾之国的冒险 | 遥望苍天之梦
         "palace_of_the_vision_serpent": "Quest 75134",                                     // 幻蛇的宫殿 | 遥望苍天之梦
@@ -2543,6 +2394,35 @@ export default {
         "the_other_side_of_the_sky": "Quest 75136",                                        // 天空的另一侧 | 天蛇颤动
         "moment_of_awakening": "Quest 75137",                                              // 梦醒时分 | 天蛇颤动
         "the_chosen_ones_promise": "Quest 75138",                                          // 受选者的诺言 | 受选者的诺言
+        "quest_75156": "Quest 75156",                                                      // （test）怎么又是你—羊驼$HIDDEN
+        "quest_75157": "Quest 75157",                                                      // （test）怎么又是你-部落冲突$HIDDEN
+        "quest_75167": "Quest 75167",                                                      // (test)test我在纳塔很想你$HIDDEN
+        "the_flowing_primal_flame-v5.2-0": "Quest 75170",                                  // 流燃的源火 | 天蛇颤动
+        "the_flowing_primal_flame-v5.2-1": "Quest 75171",                                  // 流燃的源火 | 天蛇颤动
+        "the_flowing_primal_flame-v5.2-2": "Quest 75172",                                  // 流燃的源火 | 天蛇颤动
+        "quest_75173": "Quest 75173",                                                      // (test)驾校三个挑战隐藏父任务$HIDDEN
+        "custom_gift_envelope_no_1": "Quest 71533",                                        // 如意祝柬·之一
+        "custom_gift_envelope_no_2": "Quest 71534",                                        // 如意祝柬·之二
+        "custom_gift_envelope_no_3": "Quest 71535",                                        // 如意祝柬·之三
+        "custom_gift_envelope_no_4": "Quest 71536",                                        // 如意祝柬·之四
+        "custom_gift_envelope_no_5": "Quest 71537",                                        // 如意祝柬·之五
+        "custom_gift_envelope_no_6": "Quest 71538",                                        // 如意祝柬·之六
+        "custom_gift_envelope_no_7": "Quest 71539",                                        // 如意祝柬·之七
+        "drills_by_lamplight": "Quest 71541",                                              // 灯下演武
+        "quest_75101": "Quest 75101",                                                      // (test)主线后与神像交互$HIDDEN
+        "whither_shall_a_member_of_a_secret_organization_go": "Quest 75507",               // 「秘密组织」的成员将要去向何方
+        "why_did_a_member_of_a_secret_organization_come_here": "Quest 75658",              // 「秘密组织」的成员为什么来到这里
+        "a_heros_approval": "Quest 75659",                                                 // 来自英雄的认证！
+        "quest_75660": "Quest 75660",                                                      // (test)希诺宁彩蛋$HIDDEN
+        "quest_75661": "Quest 75661",                                                      // (test)恰斯卡彩蛋$HIDDEN
+        "quest_75662": "Quest 75662",                                                      // (test)基尼奇彩蛋$HIDDEN
+        "a_very_fishy_encounter": "Quest 70046",                                           // 再遇异域鱼鱼？
+        "an_invasion_on_hold": "Quest 74516",                                              // 暂时止息的生物入侵…
+        "filmmaking_notes": "Quest 74683",                                                 // 映影制作札记
+        "a_timetested_friendship": "Quest 74686",                                          // 友谊地久天长
+        "quest_75046": "Quest 75046",                                                      // (test)牧龙场$HIDDEN
+        "quest_75113": "Quest 75113",                                                      // (test)牧龙场赛跑$HIDDEN
+        "quest_75131": "Quest 75131",                                                      // (test)火山企鹅雨$HIDDEN
         "quest_75142": "Quest 75142",                                                      // (test)部落引入任务$HIDDEN
         "quest_75145": "Quest 75145",                                                      // (test)5.5幻想1$HIDDEN
         "a_brief_history_of_rocks": "Quest 75146",                                         // 碎岩及其往事
@@ -2551,20 +2431,11 @@ export default {
         "the_frozen_rekindling_land": "Quest 75149",                                       // 冷薪与重燃之地 | 荒落之城的记述人
         "in_search_of_a_hidden_heart": "Quest 75150",                                      // 追寻深藏之心 | 荒落之城的记述人
         "an_omen_of_annihilation_and_the_final_entreaty": "Quest 75151",                   // 毁灭预兆与最后的通牒 | 溯火而归的终局
-        "quest_75156": "Quest 75156",                                                      // （test）怎么又是你—羊驼$HIDDEN
-        "quest_75157": "Quest 75157",                                                      // （test）怎么又是你-部落冲突$HIDDEN
         "sing_ho_for_the_greatness_of_fat": "Quest 75165",                                 // 哦！伟大的脂肪！
         "as_the_burning_sun_sears_shadows": "Quest 75166",                                 // 如烈日彻照阴霾 | 荒落之城的记述人
-        "quest_75167": "Quest 75167",                                                      // (test)test我在纳塔很想你$HIDDEN
         "the_way_into_the_mountain": "Quest 75169",                                        // 觐山之路
-        "the_flowing_primal_flame": "Quest 75170",                                         // 流燃的源火 | 天蛇颤动
-        "the_flowing_primal_flame-1": "Quest 75171",                                       // 流燃的源火 | 天蛇颤动
-        "the_flowing_primal_flame-2": "Quest 75172",                                       // 流燃的源火 | 天蛇颤动
-        "quest_75173": "Quest 75173",                                                      // (test)驾校三个挑战隐藏父任务$HIDDEN
         "the_forsaken_sea_of_wisdom": "Quest 75175",                                       // 荒弃的智海 | 荒落之城的记述人
         "the_end_of_the_road": "Quest 75176",                                              // 终途的道路 | 荒落之城的记述人
-        "someday_we_all_must_walk_alone": "Quest 75177",                                   // 终有独行之日 | 龙选者的旅迹
-        "is_intensity_really_the_key": "Quest 75178",                                      // 「烈度」，有用吗 | 龙选者的旅迹
         "the_attack_of_the_purple_tepetlisaurus": "Quest 75179",                           // 紫色嵴锋龙，来袭？
         "quest_75180": "Quest 75180",                                                      // (test)果园龙员工$HIDDEN
         "sealed_site_of_sacrifice": "Quest 75181",                                         // 祭验封绝之所 | 荒落之城的记述人
@@ -2578,32 +2449,58 @@ export default {
         "quest_75192": "Quest 75192",                                                      // (test)知识库金盘C$HIDDEN
         "quest_75194": "Quest 75194",                                                      // (test)父任务 1$HIDDEN
         "quest_75195": "Quest 75195",                                                      // (test)需要清理的农田$HIDDEN
-        "quest_75196": "Quest 75196",                                                      // (test)隐藏$HIDDEN
-        "the_festering_fang-1": "Quest 75197",                                             // 腐殖之牙
         "quest_75199": "Quest 75199",                                                      // (test)审议之庭
         "where_once_there_was_a_calculation_array": "Quest 75200",                         // 昔时演算阵列之处 | 荒落之城的记述人
         "where_once_force_was_reversed": "Quest 75201",                                    // 昔时逆转力向之处 | 荒落之城的记述人
         "where_once_there_were_arms_aplenty": "Quest 75202",                               // 昔时武备充盈之处 | 荒落之城的记述人
         "quest_75204": "Quest 75204",                                                      // (test)穿山隧道隐藏任务$HIDDEN
         "quest_75205": "Quest 75205",                                                      // (test)突教练破案彩蛋$HIDDEN
-        "foamflower_fields": "Quest 75209",                                                // 「沫彩花海」 | 夏活beta测试任务
-        "airborne_asha": "Quest 75210",                                                    // 「飘飘巡风阿夏」 | 夏活beta测试任务
-        "entering_the_carnival_zone": "Quest 75211",                                       // 初入狂欢区 | 夏活beta测试任务
-        "traces_of_chroma": "Quest 75212",                                                 // 流彩的踪迹
-        "quest_75213": "Quest 75213",                                                      // (test)隐藏$HIDDEN
-        "adventure_at_wavey_bay": "Quest 75214",                                           // 游玩浪浪湾 | 夏活beta测试任务
         "quest_75215": "Quest 75215",                                                      // (test)伊安珊训练营$HIDDEN
         "quest_75216": "Quest 75216",                                                      // (test)相框礼物-男主未做水神线$HIDDEN
         "quest_75217": "Quest 75217",                                                      // (test)相框礼物-女主未做水神线$HIDDEN
         "quest_75218": "Quest 75218",                                                      // (test)相框礼物-男主已做水神线$HIDDEN
         "quest_75219": "Quest 75219",                                                      // (test)相框礼物-女主已做水神线$HIDDEN
         "quest_75225": "Quest 75225",                                                      // (test)父任务 1$HIDDEN
+        "rhythm_ball_revolution": "Quest 75508",                                           // 撞球迸碰，摇摆律动！
+        "a_stylefusion_symposium": "Quest 75509",                                          // 风格融合的思考
+        "let_the_bloomflower_trials_begin": "Quest 75664",                                 // 荣花演武，开幕！
+        "go_go_saurian_expedition": "Quest 75665",                                         // 龙龙远征，出发！
+        "quest_70059": "Quest 70059",                                                      // (test)隐藏$HIDDEN
+        "alan_smithee_author_of_fischl_epilogue": "Quest 70066",                           // 艾伦·史密西，菲谢尔的作者·尾声
+        "honorary_knights_notes_on_mixology": "Quest 70554",                               // 荣誉骑士的调饮心得
+        "tumult_subduer": "Quest 71670",                                                   // 肃靖险乱
+        "a_defensive_strategy": "Quest 71671",                                             // 据守的规划
+        "operation_downpour_simulation": "Quest 74517",                                    // 雨阵奔流之述演
+        "thinking_outside_every_box": "Quest 74518",                                       // 灵活调度的思考…
+        "quest_75196": "Quest 75196",                                                      // (test)隐藏$HIDDEN
+        "a_scrollbound_skirmish": "Quest 75510",                                           // 织卷上的挑战
+        "those_strange_and_intriguing_questions": "Quest 40204",                           // 那些古怪又让人思索的问题
+        "whispers_by_the_hearth": "Quest 74250",                                           // 壁炉畔的絮语
+        "tea_party_reinvitation_house_of_the_hearth": "Quest 74257",                       // 茶会的再邀·壁炉之家
+        "the_cannon_has_ears": "Quest 74687",                                              // 重炮在聆听
+        "prepackaged_solution": "Quest 74688",                                             // 打包解决方案
+        "covert_investigation_dirty_money_misdeeds-v5.8-0": "Quest 40199",                 // 隐行谛勘，秽金之罪
+        "an_instant_of_intoxication_a_meeting_by_moonlight": "Quest 40200",                // 余醺一瞬，月境之约
+        "covert_investigation_dirty_money_misdeeds-v5.8-1": "Quest 40201",                 // 隐行谛勘，秽金之罪
+        "covert_investigation_dirty_money_misdeeds-v5.8-2": "Quest 40202",                 // 隐行谛勘，秽金之罪
+        "begin_adventure_zone": "Quest 70054",                                             // 开始冒险区 | 夏活beta测试任务
+        "bar_brawl": "Quest 70055",                                                        // 酒吧大战 | 夏活beta测试任务
+        "chase_the_masked_performer": "Quest 70056",                                       // 追击皮套人 | 夏活beta测试任务
+        "town_celebration": "Quest 70057",                                                 // 小镇庆典 | 夏活beta测试任务
+        "somethings_wrong_with_the_water": "Quest 74713",                                  // 水域状况不太妙？
+        "underwater_restoration_in_progress": "Quest 74714",                               // 水域修复进行中…
+        "the_underwater_salvage_commandments": "Quest 74715",                              // 水域打捞有原则？
+        "betterments_in_aquatic_circumstances": "Quest 74716",                             // 水域状况已好转…
+        "foamflower_fields": "Quest 75209",                                                // 「沫彩花海」 | 夏活beta测试任务
+        "airborne_asha": "Quest 75210",                                                    // 「飘飘巡风阿夏」 | 夏活beta测试任务
+        "entering_the_carnival_zone": "Quest 75211",                                       // 初入狂欢区 | 夏活beta测试任务
+        "traces_of_chroma": "Quest 75212",                                                 // 流彩的踪迹
+        "quest_75213": "Quest 75213",                                                      // (test)隐藏$HIDDEN
         "quest_75229": "Quest 75229",                                                      // (test)隐藏$HIDDEN
         "the_last_survivor_of_tenochtzitoc": "Quest 75230",                                // 最后的特诺奇兹托克人
         "quest_75231": "Quest 75231",                                                      // (test)隐藏$HIDDEN
         "dreamy_paititi": "Quest 75232",                                                   // 美梦帕依提提
         "shine_on_pipilpan_idol": "Quest 75233",                                           // 闪耀！皮皮潘偶像大赛！
-        "a_small_token": "Quest 75238",                                                    // 小小的心意
         "quest_75239": "Quest 75239",                                                      // (test)隐藏$HIDDEN
         "quest_75240": "Quest 75240",                                                      // (test)隐藏$HIDDEN
         "quest_75241": "Quest 75241",                                                      // (test)隐藏$HIDDEN
@@ -2628,7 +2525,6 @@ export default {
         "quest_75263": "Quest 75263",                                                      // (test)隐藏$HIDDEN
         "quest_75264": "Quest 75264",                                                      // (test)隐藏$HIDDEN
         "quest_75265": "Quest 75265",                                                      // (test)隐藏$HIDDEN
-        "tea_party_reinvitation_citlali": "Quest 75266",                                   // 茶会的再邀·茜特菈莉
         "quest_75268": "Quest 75268",                                                      // (test)隐藏$HIDDEN
         "quest_75270": "Quest 75270",                                                      // (test)隐藏$HIDDEN
         "quest_75271": "Quest 75271",                                                      // (test)隐藏$HIDDEN
@@ -2636,37 +2532,19 @@ export default {
         "quest_75278": "Quest 75278",                                                      // (test)隐藏$HIDDEN
         "quest_75280": "Quest 75280",                                                      // (test)隐藏$HIDDEN
         "quest_75281": "Quest 75281",                                                      // (test)隐藏$HIDDEN
-        "quest_75282": "Quest 75282",                                                      // (test)隐藏$HIDDEN
         "quest_75284": "Quest 75284",                                                      // (test)隐藏$HIDDEN
-        "avantgarde_graffiti_visionary": "Quest 75500",                                    // 前卫理念与涂鸦先锋！
-        "on_the_graffiti_road": "Quest 75504",                                             // 涂鸦之路的方向标
-        "aphid_treasure": "Quest 75505",                                                   // 蜜虫之宝
-        "last_ride_of_the_bugbuster_squad": "Quest 75506",                                 // 捉虫小队最后出击
-        "whither_shall_a_member_of_a_secret_organization_go": "Quest 75507",               // 「秘密组织」的成员将要去向何方
-        "rhythm_ball_revolution": "Quest 75508",                                           // 撞球迸碰，摇摆律动！
-        "a_stylefusion_symposium": "Quest 75509",                                          // 风格融合的思考
-        "a_scrollbound_skirmish": "Quest 75510",                                           // 织卷上的挑战
-        "toward_redhot_adventure": "Quest 75650",                                          // 朝着炽热的冒险！
-        "an_honest_promotion": "Quest 75651",                                              // 善良促销
-        "quest_75657": "Quest 75657",                                                      //
-        "why_did_a_member_of_a_secret_organization_come_here": "Quest 75658",              // 「秘密组织」的成员为什么来到这里
-        "a_heros_approval": "Quest 75659",                                                 // 来自英雄的认证！
-        "quest_75660": "Quest 75660",                                                      // (test)希诺宁彩蛋$HIDDEN
-        "quest_75661": "Quest 75661",                                                      // (test)恰斯卡彩蛋$HIDDEN
-        "quest_75662": "Quest 75662",                                                      // (test)基尼奇彩蛋$HIDDEN
         "strikers_through_the_storm": "Quest 75663",                                       // 急风狙击
-        "let_the_bloomflower_trials_begin": "Quest 75664",                                 // 荣花演武，开幕！
-        "go_go_saurian_expedition": "Quest 75665",                                         // 龙龙远征，出发！
         "with_flying_graffiti_colors": "Quest 75666",                                      // 飞漆溅彩
         "travels_are_fuller_with_friends": "Quest 75667",                                  // 遥遥同旅
         "a_feast_for_the_senses": "Quest 75668",                                           // 炫音爆光
         "wayfarers_whispers": "Quest 75669",                                               // 行者絮语
-        "saurian_sojourn": "Quest 75670",                                                  // 龙龙同游
-        "finches_are_still_the_cutest-1": "Quest 75671",                                   // 团雀还会最可爱
-        "dont_let_the_colors_escape": "Quest 75672",                                       // 斑斓色彩不许逃！
-        "a_splash_of_color_on_the_plate": "Quest 75673",                                   // 斑斓色彩在盘中！
-        "disco_in_motion_holiday_emotion": "Quest 75674",                                  // 跃跃律动，假日再临！
-        "a_lighthearted_feast_of_magic": "Quest 75675",                                    // 不留负担的美味魔法！
+        "ding_ding_dinggg_a_great_feast": "Quest 40207",                                   // 叮叮叮，大聚餐！ | 叮叮叮，大聚餐！
+        "an_adventurers_woes": "Quest 40214",                                              // 冒险家的烦恼
+        "a_mysterious_outsourced_contract": "Quest 40215",                                 // 外包的保密事项
+        "backup_plans": "Quest 40216",                                                     // 备用方案
+        "quest_70547": "Quest 70547",                                                      // (test)隐藏$HIDDEN
+        "the_many_matters_learned_in_ones_travels": "Quest 70689",                         // 游逸诸地，曾听旅闻
+        "travelers_tales_destiny_drawn": "Quest 72738",                                    // 游逸旅闻·相缘绘愿
         "priorities_first": "Quest 76000",                                                 // 要事优先
         "the_bell_of_mourning_echoes": "Quest 76001",                                      // 哀铃的余响
         "quest_76002": "Quest 76002",                                                      // (test)隐藏$HIDDEN
@@ -2709,54 +2587,24 @@ export default {
         "the_vanishing_bounty_target": "Quest 76044",                                      // 销声匿迹的悬赏对象
         "quest_76046": "Quest 76046",                                                      // (test)隐藏$HIDDEN
         "the_spurious_cannot_be_made_genuine": "Quest 76047",                              // 假的真不了
-        "testhiddenhidden-2": "Quest 76048",                                               // (test)隐藏$HIDDEN
-        "moonlight_sonata_lingering_resonance": "Quest 76049",                             // 月光奏鸣曲·遐音
-        "shifting_moonlight": "Quest 76050",                                               // 月色千变
-        "the_artist_by_the_moons_side_ii": "Quest 76051",                                  // 伴月的小画家·其二
-        "a_toast_beneath_the_moon": "Quest 76052",                                         // 月下小酌
-        "the_moon_adorning_the_night": "Quest 76054",                                      // 夜空中的月亮
+        "testhiddenhidden-v6.0-0": "Quest 76048",                                          // (test)隐藏$HIDDEN
         "quest_76055": "Quest 76055",                                                      // (test)隐藏$HIDDEN
-        "testhiddenhidden-3": "Quest 76056",                                               // (test)隐藏$HIDDEN
+        "testhiddenhidden-v6.0-1": "Quest 76056",                                          // (test)隐藏$HIDDEN
         "quest_76057": "Quest 76057",                                                      // (test)隐藏$HIDDEN
         "priorities_first_afterword": "Quest 76058",                                       // 要事优先·后日谈
-        "the_artist_by_the_moons_side_iii": "Quest 76060",                                 // 伴月的小画家·其三
-        "visitors_from_the_stars": "Quest 76062",                                          // 星空访客 | 天外来客
-        "quest_76065": "Quest 76065",                                                      // (test)隐藏$HIDDEN
-        "quest_76068": "Quest 76068",                                                      // (test)隐藏$HIDDEN
-        "nameless_bloodstained_monument": "Quest 76069",                                   // 无铭染血之碑
-        "quest_76071": "Quest 76071",                                                      // (test)隐藏$HIDDEN
         "quest_76073": "Quest 76073",                                                      // (test)隐藏$HIDDEN
-        "echoes_of_a_forsaken_song": "Quest 76074",                                        // 放逐者的荒歌
         "lightkeepers_oath": "Quest 76076",                                                // 执灯人誓言
-        "the_man_who_once_lied": "Quest 76077",                                            // 曾许出谎言的人
         "quest_76078": "Quest 76078",                                                      // (test)隐藏$HIDDEN
         "quest_76079": "Quest 76079",                                                      // (test)隐藏$HIDDEN
         "quest_76080": "Quest 76080",                                                      // (test)隐藏$HIDDEN
         "quest_76081": "Quest 76081",                                                      // (test)隐藏$HIDDEN
         "quest_76082": "Quest 76082",                                                      // (test)隐藏$HIDDEN
-        "shifting_moonlight-1": "Quest 76083",                                             // 月色千变
-        "moonlight_sonata_lingering_resonance-1": "Quest 76084",                           // 月光奏鸣曲·遐音
-        "a_toast_beneath_the_moon-1": "Quest 76085",                                       // 月下小酌
-        "the_moon_adorning_the_night-1": "Quest 76086",                                    // 夜空中的月亮
         "the_lost_childs_tale": "Quest 76087",                                             // 迷路孩童的诉说
-        "long_live_life-1": "Quest 76089, File 11611d08",                                  // 生命万岁
-        "long_live_life": "Quest 76089, File 76089",                                       // 生命万岁 | 天堂
-        "to_turn_each_sin_against_the_sinner": "Quest 76090",                              // 以罪行惩戒罪人
         "quest_76091": "Quest 76091",                                                      // (test)隐藏$HIDDEN
         "quest_76092": "Quest 76092",                                                      // (test)隐藏$HIDDEN
-        "windstirred_ripples": "Quest 76093",                                              // 风起微澜 | 夜巡的先声
-        "quest_76094": "Quest 76094",                                                      // (test)隐藏$HIDDEN
-        "a_day_the_grand_temple_inscribed_with_ages-1": "Quest 76095, File 2b923e7e",      // 圣殿的一日春秋
-        "a_day_the_grand_temple_inscribed_with_ages": "Quest 76095, File 76095",           // 圣殿的一日春秋 | 天堂
-        "the_final_judgment": "Quest 76096, File 76096",                                   // 最后的审判 | 审判
-        "the_final_judgment-1": "Quest 76096, File 7a0ac9a9",                              // 最后的审判
-        "quest_76097": "Quest 76097",                                                      // (test)隐藏$HIDDEN
         "return_to_sender": "Quest 76098",                                                 // 物归原主 | 月之东，日之西
-        "tower_of_inversion": "Quest 76099",                                               // 逆位之塔 | 夜巡的先声
-        "when_war_songs_rise": "Quest 76100",                                              // 战歌吟唱时 | 多鲁德的长诗
-        "the_last_night_the_first_light": "Quest 76101",                                   // 终至破晓 | 异时的流星
         "quest_76104": "Quest 76104",                                                      // (test)隐藏$HIDDEN
-        "testhiddenhidden-4": "Quest 76105",                                               // (test)隐藏$HIDDEN
+        "testhiddenhidden-v6.0-2": "Quest 76105",                                          // (test)隐藏$HIDDEN
         "quest_76106": "Quest 76106",                                                      // (test)隐藏$HIDDEN
         "quest_76107": "Quest 76107",                                                      // (test)隐藏$HIDDEN
         "the_ravens_legacy": "Quest 76110",                                                // 寒鸦的系谱 | 月之东，日之西
@@ -2764,118 +2612,15 @@ export default {
         "the_suspicious_hermit": "Quest 76114",                                            // 形迹反常的隐士
         "the_dust_settles": "Quest 76115",                                                 // 尘埃落定
         "quest_76116": "Quest 76116",                                                      // (test)隐藏$HIDDEN
-        "they_who_abandoned_the_past": "Quest 76117",                                      // 曾抛弃过去的人
         "the_homebound_moon": "Quest 76118",                                               // 归家的月亮
         "where_does_the_moon_hide": "Quest 76119",                                         // 月亮藏在哪
-        "the_artist_by_the_moons_side_iv": "Quest 76120",                                  // 伴月的小画家·其四
-        "the_moon_adorning_the_night_the_three_moons": "Quest 76121",                      // 夜空中的月亮·三月
         "come_play_with_the_moon": "Quest 76122",                                          // 与月嬉戏
         "a_gift_from_her": "Quest 76123",                                                  // 她的礼赠
-        "quest_76124": "Quest 76124, File 76124",                                          // (test)隐藏$HIDDEN
-        "quest_76124-1": "Quest 76124, File 86f8dc6b",                                     // (test)隐藏$HIDDEN
         "the_empty_courtyard": "Quest 76125",                                              // 无人的庭园
-        "chance_commission": "Quest 76126",                                                // 偶现之委托
-        "pioneers": "Quest 76127",                                                         // 先驱 | 天外来客
-        "collaborative_commission": "Quest 76129",                                         // 协力之委托
-        "project_moongazer": "Quest 76131",                                                // 望月者计划 | 望月者计划
-        "pioneers-1": "Quest 76132",                                                       // 先驱 | 先驱
-        "visitors_from_the_stars-1": "Quest 76133",                                        // 星空访客 | 天外来客
         "quest_76135": "Quest 76135",                                                      // (test)隐藏$HIDDEN
-        "quest_76136": "Quest 76136",                                                      // (test)隐藏$HIDDEN
-        "research_spillover": "Quest 76138",                                               // 外溢之研究
         "a_small_venture": "Quest 76139",                                                  // 小生意
-        "a_window_into_the_world": "Quest 76141",                                          // 眺望世界之窗
-        "reverberation_of_heroic_spirits": "Quest 76142",                                  // 英灵的残响
-        "project_moongazer-1": "Quest 76143",                                              // 望月者计划 | 望月者计划
-        "quest_76145": "Quest 76145",                                                      // (test)隐藏$HIDDEN
-        "counterfeit_classics": "Quest 76147, File 76147",                                 // 赝作古典 | 天堂
-        "counterfeit_classics-1": "Quest 76147, File 775751de",                            // 赝作古典
-        "lions_celerity-2": "Quest 76148, File 4f7b9828",                                  // 狮子奋迅
-        "lions_celerity": "Quest 76148, File 76148",                                       // 狮子奋迅 | 地狱
-        "quest_76149": "Quest 76149, File 302aa252",                                       // (test)隐藏$HIDDEN
-        "quest_76149-1": "Quest 76149, File 76149",                                        // (test)隐藏$HIDDEN
-        "quest_76150": "Quest 76150, File 0bcd3b08",                                       // (test)隐藏$HIDDEN
-        "quest_76150-1": "Quest 76150, File 76150",                                        // (test)隐藏$HIDDEN
-        "lions_celerity-3": "Quest 76152, File 2a18a2c5",                                  // 狮子奋迅
-        "lions_celerity-1": "Quest 76152, File 76152",                                     // 狮子奋迅 | 地狱
         "minor_commission": "Quest 76153",                                                 // 小委托
-        "witchs_homework_the_role_of_a_guide": "Quest 76159",                              // 魔女的课业·导引之职…？ | 魔女的课业·导引之职…？
-        "focal_point_of_ancient_array_i": "Quest 76160",                                   // 古老的阵眼·其一 | 多鲁德的长诗
-        "focal_point_of_ancient_array_ii": "Quest 76161",                                  // 古老的阵眼·其二 | 多鲁德的长诗
-        "focal_point_of_ancient_array_iii": "Quest 76162",                                 // 古老的阵眼·其三 | 多鲁德的长诗
-        "quest_76163": "Quest 76163",                                                      // (test)隐藏$HIDDEN
-        "quest_76165": "Quest 76165",                                                      // (test)隐藏$HIDDEN
-        "quest_76166": "Quest 76166",                                                      // (test)隐藏$HIDDEN
-        "quest_76167": "Quest 76167",                                                      // (test)隐藏$HIDDEN
-        "quest_76168": "Quest 76168",                                                      // (test)隐藏$HIDDEN
-        "quest_76169": "Quest 76169",                                                      // (test)隐藏$HIDDEN
-        "flora_investigation_special_lecture": "Quest 76170, File 76170",                  // 植物调查特别授课
-        "flora_investigation_special_lecture-1": "Quest 76170, File a203e016",             // 植物调查特别授课
-        "mineral_investigation_special_lecture-1": "Quest 76171, File 5c103ffd",           // 矿物调查特别授课
-        "mineral_investigation_special_lecture": "Quest 76171, File 76171",                // 矿物调查特别授课
-        "fauna_investigation_special_lecture-1": "Quest 76172, File 289424c2",             // 动物调查特别授课
-        "fauna_investigation_special_lecture": "Quest 76172, File 76172",                  // 动物调查特别授课
-        "quest_76174-1": "Quest 76174, File ac3d7cf3",                                     // (test)隐藏$HIDDEN
-        "quest_76176": "Quest 76176",                                                      // (test)隐藏$HIDDEN
-        "beneath_the_lunar_sea": "Quest 76177",                                            // 月海之下
-        "where_the_white_dove_rests": "Quest 76180",                                       // 白鸽的栖处
-        "a_garden_gathering": "Quest 76182",                                               // 花园小聚
-        "fire_and_ice": "Quest 76183",                                                     // 火与冰
-        "just_like_old_times": "Quest 76184",                                              // 一如往日
-        "cat_and_cog": "Quest 76185",                                                      // 猫咪与齿轮
-        "a_small_overture": "Quest 76186",                                                 // 小小的尝试
-        "tea_or_bulle_fruit": "Quest 76187",                                               // 茶叶还是泡泡桔？
-        "animal_research_chic_badgers": "Quest 76189, File 76189",                         // 动物调查·帔髦獾
-        "animal_research_chic_badgers-1": "Quest 76189, File 7f72246c",                    // 动物调查·帔髦獾
-        "animal_research_golden_loaches": "Quest 76190, File 76190",                       // 动物调查·金鳅鳅
-        "animal_research_golden_loaches-1": "Quest 76190, File bdc24e43",                  // 动物调查·金鳅鳅
-        "animal_research_capybaras": "Quest 76191, File 76191",                            // 动物调查·豚兽
-        "animal_research_capybaras-1": "Quest 76191, File 8b6e97de",                       // 动物调查·豚兽
-        "animal_research_frostfin_whales": "Quest 76192, File 76192",                      // 动物调查·霜鳍鲸
-        "animal_research_frostfin_whales-1": "Quest 76192, File 855bfcbd",                 // 动物调查·霜鳍鲸
-        "special_research_melusine": "Quest 76193, File 76193",                            // 特别调查·美露莘？
-        "special_research_melusine-1": "Quest 76193, File b814e279",                       // 特别调查·美露莘？
-        "mineral_research_rainbowdrop_crystals": "Quest 76194, File 76194",                // 矿物调查·虹滴晶
-        "mineral_research_rainbowdrop_crystals-1": "Quest 76194, File c2c83828",           // 矿物调查·虹滴晶
-        "mineral_research_pine_amber-1": "Quest 76195, File 34e63c81",                     // 矿物调查·松珀香
-        "mineral_research_pine_amber": "Quest 76195, File 76195",                          // 矿物调查·松珀香
-        "mineral_research_moonfall_silver-1": "Quest 76196, File 498f8f51",                // 矿物调查·月落银
-        "mineral_research_moonfall_silver": "Quest 76196, File 76196",                     // 矿物调查·月落银
-        "mineral_research_icy_pebbles-1": "Quest 76197, File 4aec9d52",                    // 矿物调查·寒涌石
         "mineral_research_icy_pebbles": "Quest 76197, File 76197",                         // 矿物调查·寒涌石
-        "plant_research_winter_icelea-1": "Quest 76198, File 5865b64f",                    // 植物调查·冬凌草
-        "plant_research_winter_icelea": "Quest 76198, File 76198",                         // 植物调查·冬凌草
-        "plant_research_frostlamp_flowers": "Quest 76199, File 76199",                     // 植物调查·霜盏花
-        "plant_research_frostlamp_flowers-1": "Quest 76199, File ac893054",                // 植物调查·霜盏花
-        "plant_research_twinleaf_pitcher_plants": "Quest 76200, File 76200",               // 植物调查·双叶笼草
-        "plant_research_twinleaf_pitcher_plants-1": "Quest 76200, File dea21637",          // 植物调查·双叶笼草
-        "plant_research_nocturnal_blossoms-1": "Quest 76201, File 1c45d631",               // 植物调查·宿影花
-        "plant_research_nocturnal_blossoms": "Quest 76201, File 76201",                    // 植物调查·宿影花
-        "the_joyous_floating_island": "Quest 76202",                                       // 欢腾浮岛 | 胜过白银与精金
-        "the_silent_theater": "Quest 76203",                                               // 无声剧场 | 胜过白银与精金
-        "the_lost_palace": "Quest 76204",                                                  // 遗失宫殿 | 胜过白银与精金
-        "the_forgotten_lighthouse": "Quest 76205",                                         // 忘忧灯塔 | 胜过白银与精金
-        "quest_76206": "Quest 76206, File 07f0ffa1",                                       // (test)隐藏$HIDDEN
-        "quest_76206-1": "Quest 76206, File 76206",                                        // (test)隐藏$HIDDEN
-        "quest_76207": "Quest 76207, File 5329cac8",                                       // (test)隐藏$HIDDEN
-        "quest_76207-1": "Quest 76207, File 76207",                                        // (test)隐藏$HIDDEN
-        "testhiddenhidden-5": "Quest 76208",                                               // (test)隐藏$HIDDEN
-        "submerged_dragon_soaring_phoenix-1": "Quest 76210, File 24679e39",                // 潜龙飞凤
-        "submerged_dragon_soaring_phoenix": "Quest 76210, File 76210",                     // 潜龙飞凤
-        "quest_76211-1": "Quest 76211, File 9158a984",                                     // (test)隐藏$HIDDEN
-        "quest_76212": "Quest 76212, File 76212",                                          // (test)隐藏$HIDDEN
-        "quest_76212-1": "Quest 76212, File 86ef5a4d",                                     // (test)隐藏$HIDDEN
-        "quest_76213": "Quest 76213, File 76213",                                          // (test)隐藏$HIDDEN
-        "quest_76213-1": "Quest 76213, File aa062bf1",                                     // (test)隐藏$HIDDEN
-        "quest_76214": "Quest 76214, File 76214",                                          // (test)隐藏$HIDDEN
-        "quest_76214-1": "Quest 76214, File 8184dfd3",                                     // (test)隐藏$HIDDEN
-        "a_ladys_invitation": "Quest 76218",                                               // 淑女之邀
-        "tea_party_reinvitation_arlecchino": "Quest 76220",                                // 茶会的再邀·阿蕾奇诺
-        "tea_party_reinvitation_tartaglia": "Quest 76221",                                 // 茶会的再邀·达达利亚
-        "tea_party_reinvitation_nefer": "Quest 76222",                                     // 茶会的再邀·奈芙尔
-        "tea_party_reinvitation_lauma": "Quest 76223",                                     // 茶会的再邀·菈乌玛
-        "tea_party_reinvitation_columbina": "Quest 76225",                                 // 茶会的再邀·哥伦比娅
-        "quest_76226": "Quest 76226",                                                      // (test)隐藏$HIDDEN
         "a_gift_of_memories": "Quest 76500",                                               // 定格回忆的赠礼
         "quest_76501": "Quest 76501",                                                      // (test)隐藏$HIDDEN
         "quest_76502": "Quest 76502",                                                      // (test)隐藏$HIDDEN
@@ -2884,16 +2629,11 @@ export default {
         "quest_76505": "Quest 76505",                                                      // (test)隐藏$HIDDEN
         "quest_76506": "Quest 76506",                                                      // (test)隐藏$HIDDEN
         "a_warm_promise": "Quest 76507",                                                   // 定格温暖的约定
-        "dance_exchanges_a_beautiful_start": "Quest 76508",                                // 「舞力交流」的开幕
-        "moonlit_patrol_exercise": "Quest 76509",                                          // 月引周巡之述演
-        "end_of_a_leisurely_holiday": "Quest 76510",                                       // 悠闲假日的尾声
-        "technical_martial_challenge": "Quest 76511",                                      // 「有限制冷静格斗赛」
-        "final_match_concludes_champion_decided": "Quest 76512",                           // 赛事终场，冠军落定
-        "blessings_of_the_frost_moon": "Quest 76650",                                      // 霜月的祝祷
+        "blessings_of_the_frost_moon-v6.0-0": "Quest 76650",                               // 霜月的祝祷
         "to_the_lighthouse": "Quest 76651",                                                // 到灯塔去
         "problemsorting_robot": "Quest 76652",                                             // 问题分拣机器人
         "misplaced_creativity": "Quest 76653",                                             // 走失的创意
-        "blessings_of_the_frost_moon-1": "Quest 76654",                                    // 霜月的祝祷
+        "blessings_of_the_frost_moon-v6.0-1": "Quest 76654",                               // 霜月的祝祷
         "the_sun_rises_once_more": "Quest 76655",                                          // 太阳照常升起
         "new_idea": "Quest 76656",                                                         // 新的想法
         "a_whole_new_craftshop": "Quest 76657",                                            // 焕然一新的工坊
@@ -2904,33 +2644,278 @@ export default {
         "quest_76668": "Quest 76668",                                                      //
         "quest_76669": "Quest 76669",                                                      //
         "quest_76670": "Quest 76670",                                                      //
-        "the_moonlit_watcher": "Quest 76671",                                              // 月下的守望者
-        "the_moonlit_watcher-1": "Quest 76672",                                            // 月下的守望者
+        "fieldwise_mastery_unyielding_progress": "Quest 73705",                            // 稳健知行，完备冲刺！
+        "crisis_management_unit_fully_operational": "Quest 73706",                         // 抗险机构，全量就绪！
+        "saurian_sojourn": "Quest 75670",                                                  // 龙龙同游
+        "moonlight_sonata_lingering_resonance-v6.1-0": "Quest 76049",                      // 月光奏鸣曲·遐音
+        "shifting_moonlight-v6.1-0": "Quest 76050",                                        // 月色千变
+        "the_artist_by_the_moons_side_ii": "Quest 76051",                                  // 伴月的小画家·其二
+        "a_toast_beneath_the_moon-v6.1-0": "Quest 76052",                                  // 月下小酌
+        "the_moon_adorning_the_night-v6.1-0": "Quest 76054",                               // 夜空中的月亮
+        "the_artist_by_the_moons_side_iii": "Quest 76060",                                 // 伴月的小画家·其三
+        "the_man_who_once_lied": "Quest 76077",                                            // 曾许出谎言的人
+        "shifting_moonlight-v6.1-1": "Quest 76083",                                        // 月色千变
+        "moonlight_sonata_lingering_resonance-v6.1-1": "Quest 76084",                      // 月光奏鸣曲·遐音
+        "a_toast_beneath_the_moon-v6.1-1": "Quest 76085",                                  // 月下小酌
+        "the_moon_adorning_the_night-v6.1-1": "Quest 76086",                               // 夜空中的月亮
+        "to_turn_each_sin_against_the_sinner": "Quest 76090",                              // 以罪行惩戒罪人
+        "the_moon_adorning_the_night_the_three_moons": "Quest 76121",                      // 夜空中的月亮·三月
+        "quest_76136": "Quest 76136",                                                      // (test)隐藏$HIDDEN
+        "research_spillover": "Quest 76138",                                               // 外溢之研究
+        "dance_exchanges_a_beautiful_start": "Quest 76508",                                // 「舞力交流」的开幕
+        "well_dance_together_again": "Quest 76676",                                        // 下回再舞！
+        "everlasting_as_the_moon-v6.1": "Quest 76678",                                     // 如月之恒
+        "a_dry_well_doth_not_reflect_the_stars": "Quest 10004",                            // 枯井无法映星月 | 魔女的课业·干慧之题
+        "old_friends_and_new_knowledge": "Quest 10005",                                    // 旧识与新知 | 魔女的课业·题外之题
+        "a_child_wandering_the_world": "Quest 10006",                                      // 行于世间的孩子 | 魔女的课业·此世之题
+        "tales_of_time_and_wind": "Quest 10007",                                           // 时与风的故事 | 魔女的课业·风起之题
+        "with_lupical": "Quest 10008",                                                     // 和「卢皮卡」一起 | 魔女的课业·小狼众之题
+        "the_law_of_boundaries": "Quest 10009",                                            // 界限的法则 | 魔女的课业·仙境花之题
+        "the_great_mages_journey_of_trials": "Quest 10010",                                // 大魔法师的试炼之旅 | 魔女的课业·火花叶之题
+        "unexpected_commission_epilogue": "Quest 70070",                                   // 意料之外的委托·尾声
+        "unexpected_commission": "Quest 70690",                                            // 意料之外的委托 | 魔女的课业·题解
+        "playing_in_the_snow_counts_as_training_too": "Quest 70691",                       // 雪中游戏，也是修行！
+        "lets_go_saurysaury_scout": "Quest 70692",                                         // 前哨龙龙，起航！
+        "serendipitous_encounters_and_a_curious_consensus": "Quest 70693",                 // 巧合碰面与奇趣共识
+        "strength_courage_and_trials": "Quest 70694",                                      // 体魄胆识与试炼
+        "greetings_from_the_knights_of_favonius": "Quest 70695",                           // 来自骑士团的慰问
+        "a_gift_from_yae_publishing_house": "Quest 70696",                                 // 来自八重堂的礼物
+        "a_surprise_from_a_fellow_comics_fan": "Quest 70697",                              // 来自漫画同好的惊喜
+        "an_invitation_from_the_spark_knight": "Quest 70698",                              // 来自火花骑士的邀请
+        "a_message_from_the_junior": "Quest 70699",                                        // 来自后辈的分享
+        "finches_are_still_the_cutest-v6.2": "Quest 75671",                                // 团雀还会最可爱
+        "they_who_abandoned_the_past": "Quest 76117",                                      // 曾抛弃过去的人
+        "chance_commission": "Quest 76126",                                                // 偶现之委托
+        "collaborative_commission": "Quest 76129",                                         // 协力之委托
+        "plant_research_nocturnal_blossoms": "Quest 76201, File 76201",                    // 植物调查·宿影花
+        "proof_of_strength": "Quest 70096",                                                // 强大的象征 | 魔女的课业·诸敌之题
+        "bright_moon_lantern_glow": "Quest 71149",                                         // 月引明霄
+        "adeptuss_gift": "Quest 71163",                                                    // 仙人赠礼
+        "good_fortune_shared": "Quest 71166",                                              // 吉事共赏
+        "wishing_wonderful_wishes": "Quest 71167",                                         // 上许佳愿
+        "light_the_way_of_wishes": "Quest 71168",                                          // 灯逐良愿
+        "the_moonlit_adeptuss_trail": "Quest 71672",                                       // 月映仙踪
+        "vigorous_brushstrokes": "Quest 71673",                                            // 笔腾墨跃
+        "wishes_contended_fortunes_won": "Quest 71674",                                    // 如意斗彩
+        "quest_74247": "Quest 74247",                                                      // (test)隐藏$HIDDEN
+        "quest_74519": "Quest 74519",                                                      // (test)隐藏$HIDDEN
+        "quest_74520": "Quest 74520",                                                      // (test)隐藏$HIDDEN
+        "quest_74523": "Quest 74523",                                                      // (test)隐藏$HIDDEN
+        "quest_74524": "Quest 74524",                                                      // (test)隐藏$HIDDEN
+        "quest_74525": "Quest 74525",                                                      // (test)隐藏$HIDDEN
+        "quest_74526": "Quest 74526",                                                      // (test)隐藏$HIDDEN
+        "quest_74527": "Quest 74527",                                                      // (test)隐藏$HIDDEN
+        "quest_74528": "Quest 74528",                                                      // (test)隐藏$HIDDEN
+        "quest_74529": "Quest 74529",                                                      // (test)隐藏$HIDDEN
+        "quest_74530": "Quest 74530",                                                      // (test)隐藏$HIDDEN
+        "well_done_whats_the_next_big_plan": "Quest 74531",                                // 圆满收工！下一个大计划？
+        "hot_in_a_flash_or_cold_just_as_fast": "Quest 74689",                              // 「瞬影」镜头！瞬间遇冷？
+        "quest_76071": "Quest 76071",                                                      // (test)隐藏$HIDDEN
+        "echoes_of_a_forsaken_song": "Quest 76074",                                        // 放逐者的荒歌
+        "windstirred_ripples": "Quest 76093",                                              // 风起微澜 | 夜巡的先声
+        "quest_76094": "Quest 76094",                                                      // (test)隐藏$HIDDEN
+        "tower_of_inversion": "Quest 76099",                                               // 逆位之塔 | 夜巡的先声
+        "when_war_songs_rise": "Quest 76100",                                              // 战歌吟唱时 | 多鲁德的长诗
+        "the_last_night_the_first_light": "Quest 76101",                                   // 终至破晓 | 异时的流星
+        "the_artist_by_the_moons_side_iv": "Quest 76120",                                  // 伴月的小画家·其四
+        "reverberation_of_heroic_spirits": "Quest 76142",                                  // 英灵的残响
+        "quest_76145": "Quest 76145",                                                      // (test)隐藏$HIDDEN
+        "focal_point_of_ancient_array_i": "Quest 76160",                                   // 古老的阵眼·其一 | 多鲁德的长诗
+        "focal_point_of_ancient_array_ii": "Quest 76161",                                  // 古老的阵眼·其二 | 多鲁德的长诗
+        "focal_point_of_ancient_array_iii": "Quest 76162",                                 // 古老的阵眼·其三 | 多鲁德的长诗
+        "quest_76165": "Quest 76165",                                                      // (test)隐藏$HIDDEN
+        "quest_76166": "Quest 76166",                                                      // (test)隐藏$HIDDEN
+        "quest_76167": "Quest 76167",                                                      // (test)隐藏$HIDDEN
+        "quest_76168": "Quest 76168",                                                      // (test)隐藏$HIDDEN
+        "quest_76169": "Quest 76169",                                                      // (test)隐藏$HIDDEN
+        "flora_investigation_special_lecture": "Quest 76170, File 76170",                  // 植物调查特别授课
+        "mineral_investigation_special_lecture": "Quest 76171, File 76171",                // 矿物调查特别授课
+        "fauna_investigation_special_lecture": "Quest 76172, File 76172",                  // 动物调查特别授课
+        "moonlit_patrol_exercise": "Quest 76509",                                          // 月引周巡之述演
+        "end_of_a_leisurely_holiday": "Quest 76510",                                       // 悠闲假日的尾声
+        "the_moonlit_watcher-v6.3-0": "Quest 76671",                                       // 月下的守望者
+        "the_moonlit_watcher-v6.3-1": "Quest 76672",                                       // 月下的守望者
         "witchs_lodge": "Quest 76673",                                                     // 魔女的小屋
         "witchs_chatter": "Quest 76674",                                                   // 魔女的闲谈
         "on_this_intoxicating_night": "Quest 76675",                                       // 在他们都喝醉的夜里
-        "well_dance_together_again": "Quest 76676",                                        // 下回再舞！
         "like_seeds_on_the_wind": "Quest 76677",                                           // 如风带来的种子
-        "everlasting_as_the_moon-1": "Quest 76678",                                        // 如月之恒
+        "quest_70548": "Quest 70548",                                                      // (test)隐藏$HIDDEN
+        "quest_70549": "Quest 70549",                                                      // (test)隐藏$HIDDEN
+        "quest_70550": "Quest 70550",                                                      // (test)隐藏$HIDDEN
+        "quest_70551": "Quest 70551",                                                      // (test)隐藏$HIDDEN
+        "quest_70552": "Quest 70552",                                                      // (test)隐藏$HIDDEN
+        "quest_70553": "Quest 70553",                                                      // (test)隐藏$HIDDEN
+        "a_special_blend_a_timeless_masterpiece": "Quest 70555",                           // 特调佳作，列为经典
+        "gliding_challenge_new_heights": "Quest 70556",                                    // 飞行挑战·全新演绎
+        "reunite_my_shroom_buddies-v6.4-0": "Quest 73355",                                 // 重逢，蕈兽伙伴！
+        "reunite_my_shroom_buddies-v6.4-1": "Quest 73708",                                 // 重逢，蕈兽伙伴！
+        "behold_the_grandeur_seize_the_splendor": "Quest 73709",                           // 胜地共览，亮点觅捕
+        "a_new_day_at_the_lil_fungi_playground": "Quest 73710",                            // 小小灵蕈乐园，准备开张
+        "sightseeing_with_friends_a_trip_to_fontaine": "Quest 73711",                      // 灵蕈旅记：枫丹之行
+        "sightseeing_with_friends_back_to_sumeru": "Quest 73712",                          // 灵蕈旅记：须弥重游
+        "sightseeing_with_friends_underwater_fun": "Quest 73713",                          // 灵蕈旅记：水下趣览
+        "sightseeing_with_friends_scenic_highlights": "Quest 73714",                       // 灵蕈旅记：综景一览
+        "witchs_revelation_wardens_instruction": "Quest 74695",                            // 魔女的谕示·监守之谕
+        "nameless_bloodstained_monument": "Quest 76069",                                   // 无铭染血之碑
         "stronghold_guard_hoard_guard_unit": "Quest 76680",                                // 据点守卫·大门军团！
+        "return_home_children_of_the_desert": "Quest 40239, File 40239",                   // 返乡吧，来自沙漠的孩子们
+        "forest_boar_pauses_for_the_bloom": "Quest 70061, File 70061",                     // 山有林猪粗嗅花
+        "the_wind_has_ceased-v6.5-0": "Quest 70065, File 70065",                           // 风停了 | 魔山
+        "unofficial_chronicle_of_the_desert_pavilion": "Quest 70067, File 70067",          // 「沙上楼阁」稗记 | 天堂
+        "quest_70069": "Quest 70069, File 70069",                                          // (test)寻找幸存者C
+        "quest_70073": "Quest 70073, File 70073",                                          // (test)隐藏$HIDDEN
+        "quest_70076": "Quest 70076, File 70076",                                          // (test)探索区域C
+        "quest_70077": "Quest 70077, File 70077",                                          // (test)隐藏$HIDDEN
+        "winds_beneath_the_tower_of_silence": "Quest 70078, File 70078",                   // 寂静之塔下的风向
+        "quest_70079": "Quest 70079, File 70079",                                          // (test)隐藏$HIDDEN
+        "quest_70080": "Quest 70080, File 70080",                                          // (test)隐藏$HIDDEN
+        "quest_70082": "Quest 70082, File 70082",                                          // (test)隐藏$HIDDEN
+        "quest_70088": "Quest 70088, File 70088",                                          // (test)隐藏$HIDDEN
+        "quest_70089": "Quest 70089, File 70089",                                          // (test)隐藏$HIDDEN
+        "quest_70097": "Quest 70097, File 70097",                                          // (test)隐藏$HIDDEN
+        "the_wind_has_ceased-v6.5-1": "Quest 70099, File 70099",                           // 风停了
+        "quest_70111": "Quest 70111, File 70111",                                          // (test)隐藏$HIDDEN
+        "quest_70112": "Quest 70112, File 70112",                                          // (test)隐藏$HIDDEN
+        "a_knights_guide_to_surveying": "Quest 70558, File 70558",                         // 骑士的测绘教学
+        "a_battlefield_feast_after_work": "Quest 70559, File 70559",                       // 收工时的「战地」大餐
+        "quest_70808": "Quest 70808, File 70808",                                          // (test)隐藏$HIDDEN
+        "quest_70809": "Quest 70809, File 70809",                                          // (test)隐藏$HIDDEN
+        "quest_70817": "Quest 70817, File 70817",                                          // (test)隐藏$HIDDEN
+        "quest_70819": "Quest 70819, File 70819",                                          // (test)隐藏$HIDDEN
+        "quest_70820": "Quest 70820, File 70820",                                          // (test)隐藏$HIDDEN
+        "quest_70826": "Quest 70826, File 70826",                                          // (test)隐藏$HIDDEN
+        "quest_70827": "Quest 70827, File 70827",                                          // (test)隐藏$HIDDEN
+        "quest_70828": "Quest 70828, File 70828",                                          // (test)隐藏$HIDDEN
+        "popular_entertainment": "Quest 74532, File 74532",                                // 大众化的结局构想
+        "a_robust_theoretical_discussion": "Quest 74690, File 74690",                      // 激烈的开端理论
+        "witchs_revelation_instruction_of_curious_form": "Quest 74696",                    // 魔女的谕示·奇躯之谕
+        "long_live_life": "Quest 76089, File 76089",                                       // 生命万岁 | 天堂
+        "a_day_the_grand_temple_inscribed_with_ages": "Quest 76095, File 76095",           // 圣殿的一日春秋 | 天堂
+        "the_final_judgment": "Quest 76096, File 76096",                                   // 最后的审判 | 审判
+        "quest_76124": "Quest 76124, File 76124",                                          // (test)隐藏$HIDDEN
+        "counterfeit_classics": "Quest 76147, File 76147",                                 // 赝作古典 | 天堂
+        "lions_celerity-v6.5-0": "Quest 76148, File 76148",                                // 狮子奋迅 | 地狱
+        "quest_76149": "Quest 76149, File 76149",                                          // (test)隐藏$HIDDEN
+        "quest_76150": "Quest 76150, File 76150",                                          // (test)隐藏$HIDDEN
+        "lions_celerity-v6.5-1": "Quest 76152, File 76152",                                // 狮子奋迅 | 地狱
+        "animal_research_chic_badgers": "Quest 76189, File 76189",                         // 动物调查·帔髦獾
+        "animal_research_golden_loaches": "Quest 76190, File 76190",                       // 动物调查·金鳅鳅
+        "animal_research_capybaras": "Quest 76191, File 76191",                            // 动物调查·豚兽
+        "animal_research_frostfin_whales": "Quest 76192, File 76192",                      // 动物调查·霜鳍鲸
+        "special_research_melusine": "Quest 76193, File 76193",                            // 特别调查·美露莘？
+        "mineral_research_rainbowdrop_crystals": "Quest 76194, File 76194",                // 矿物调查·虹滴晶
+        "mineral_research_pine_amber": "Quest 76195, File 76195",                          // 矿物调查·松珀香
+        "mineral_research_moonfall_silver": "Quest 76196, File 76196",                     // 矿物调查·月落银
+        "plant_research_winter_icelea": "Quest 76198, File 76198",                         // 植物调查·冬凌草
+        "plant_research_frostlamp_flowers": "Quest 76199, File 76199",                     // 植物调查·霜盏花
+        "plant_research_twinleaf_pitcher_plants": "Quest 76200, File 76200",               // 植物调查·双叶笼草
+        "quest_76206": "Quest 76206, File 76206",                                          // (test)隐藏$HIDDEN
+        "quest_76207": "Quest 76207, File 76207",                                          // (test)隐藏$HIDDEN
+        "submerged_dragon_soaring_phoenix": "Quest 76210, File 76210",                     // 潜龙飞凤
+        "quest_76212": "Quest 76212, File 76212",                                          // (test)隐藏$HIDDEN
+        "quest_76213": "Quest 76213, File 76213",                                          // (test)隐藏$HIDDEN
+        "quest_76214": "Quest 76214, File 76214",                                          // (test)隐藏$HIDDEN
+        "a_proposition_beyond_refutation": "Quest 70092",                                  // 无法反驳的命题 | 魔女的课业·辩驳之题
+        "dont_let_the_colors_escape": "Quest 75672",                                       // 斑斓色彩不许逃！
+        "a_splash_of_color_on_the_plate": "Quest 75673",                                   // 斑斓色彩在盘中！
+        "a_window_into_the_world": "Quest 76141",                                          // 眺望世界之窗
+        "witchs_homework_the_role_of_a_guide": "Quest 76159",                              // 魔女的课业·导引之职…？ | 魔女的课业·导引之职…？
+        "cat_and_cog": "Quest 76185",                                                      // 猫咪与齿轮
+        "the_joyous_floating_island": "Quest 76202",                                       // 欢腾浮岛 | 胜过白银与精金
+        "the_silent_theater": "Quest 76203",                                               // 无声剧场 | 胜过白银与精金
+        "the_lost_palace": "Quest 76204",                                                  // 遗失宫殿 | 胜过白银与精金
+        "the_forgotten_lighthouse": "Quest 76205",                                         // 忘忧灯塔 | 胜过白银与精金
+        "tea_party_reinvitation_nefer": "Quest 76222",                                     // 茶会的再邀·奈芙尔
+        "technical_martial_challenge": "Quest 76511",                                      // 「有限制冷静格斗赛」
+        "final_match_concludes_champion_decided": "Quest 76512",                           // 赛事终场，冠军落定
+        "tea_party_reinvitation_albedo": "Quest 70090",                                    // 茶会的再邀·阿贝多
+        "a_chat_in_the_snowy_mountains": "Quest 70114",                                    // 雪山小叙
+        "a_meeting_of_puppets": "Quest 73356",                                             // 「人偶」的相会
+        "tea_party_reinvitation_hat_guy": "Quest 73357",                                   // 茶会的再邀·阿帽
+        "stories_make_the_best_pastries": "Quest 74248",                                   // 故事乃最好的茶点
+        "for_fontaine": "Quest 74249",                                                     // 为了枫丹！
+        "stories_of_the_past": "Quest 74251",                                              // 过去的故事
+        "ann_maryann_and_marionette": "Quest 74253",                                       // 安与玛丽安与小玛丽安
+        "narcissuss_waltz": "Quest 74254",                                                 // 水仙的圆舞曲
+        "tea_party_reinvitation_tabletop_troupe": "Quest 74255",                           // 茶会的再邀·桌上剧团
+        "tea_party_reinvitation_furina": "Quest 74256",                                    // 茶会的再邀·芙宁娜
+        "tea_party_reinvitation_neuvillette": "Quest 74258",                               // 茶会的再邀·那维莱特
+        "tea_party_reinvitation_narzissenkreuz_reunion-v6.7-0": "Quest 74259",             // 茶会的再邀·水仙的重聚
+        "tea_party_reinvitation_narzissenkreuz_reunion-v6.7-1": "Quest 74260",             // 茶会的再邀·水仙的重聚
+        "tea_party_reinvitation_narzissenkreuz_reunion-v6.7-2": "Quest 74261",             // 茶会的再邀·水仙的重聚
+        "revelations_by_chance": "Quest 74691",                                            // 偶发的谕示
+        "witchs_revelation_special_blends_instruction": "Quest 74692",                     // 魔女的谕示·特调之谕
+        "witchs_revelation_dutys_instruction": "Quest 74693",                              // 魔女的谕示·履职之谕
+        "witchs_revelation_voyaging_instruction": "Quest 74694",                           // 魔女的谕示·舶来之谕
+        "witchs_revelation_instruction_beyond_dreams": "Quest 74697",                      // 魔女的谕示·梦外之谕
+        "witchs_revelation_great_youkais_instruction": "Quest 74698",                      // 魔女的谕示·大妖怪之谕
+        "elegance_safety_first": "Quest 74700",                                            // 优雅？安全第一！
+        "danger_keep_away": "Quest 74701",                                                 // 危险？请勿靠近！
+        "fisharium_open_for_business": "Quest 74702",                                      // 水族馆？开业！
+        "just_a_30_cut": "Quest 74703",                                                    // 营业额？只拿三成！
+        "friends_in_the_aquarium": "Quest 74704",                                          // 水族箱里的…朋友？
+        "us_in_the_aquarium": "Quest 74705",                                               // 水族箱里的…我们？
+        "a_superstar_in_the_aquarium": "Quest 74706",                                      // 水族箱里的…明星？
+        "an_actor_in_the_aquarium": "Quest 74707",                                         // 水族箱里的…演员？
+        "the_emergence_of_irate_fish": "Quest 74708",                                      // 暴躁鱼儿在出没？
+        "the_cantankerous_fish_have_their_circumstances": "Quest 74709",                   // 暴躁鱼儿的隐情？
+        "tons_of_tons_of_furious_fish": "Quest 74710",                                     // 暴躁鱼儿还不少…
+        "rapid_restitution_to_the_raging_fish": "Quest 74711",                             // 暴躁鱼儿快痊愈…
+        "a_warning_from_the_wrathful_fish": "Quest 74712",                                 // 暴躁鱼儿的警告！
+        "a_small_token": "Quest 75238",                                                    // 小小的心意
+        "tea_party_reinvitation_citlali": "Quest 75266",                                   // 茶会的再邀·茜特菈莉
+        "disco_in_motion_holiday_emotion": "Quest 75674",                                  // 跃跃律动，假日再临！
+        "a_lighthearted_feast_of_magic": "Quest 75675",                                    // 不留负担的美味魔法！
+        "visitors_from_the_stars-v6.7-0": "Quest 76062",                                   // 星空访客 | 天外来客
+        "quest_76065": "Quest 76065",                                                      // (test)隐藏$HIDDEN
+        "quest_76068": "Quest 76068",                                                      // (test)隐藏$HIDDEN
+        "pioneers-v6.7-0": "Quest 76127",                                                  // 先驱 | 天外来客
+        "project_moongazer-v6.7-0": "Quest 76131",                                         // 望月者计划 | 望月者计划
+        "pioneers-v6.7-1": "Quest 76132",                                                  // 先驱 | 先驱
+        "visitors_from_the_stars-v6.7-1": "Quest 76133",                                   // 星空访客 | 天外来客
+        "project_moongazer-v6.7-1": "Quest 76143",                                         // 望月者计划 | 望月者计划
+        "quest_76163": "Quest 76163",                                                      // (test)隐藏$HIDDEN
+        "quest_76176": "Quest 76176",                                                      // (test)隐藏$HIDDEN
+        "beneath_the_lunar_sea": "Quest 76177",                                            // 月海之下
+        "where_the_white_dove_rests": "Quest 76180",                                       // 白鸽的栖处
+        "a_garden_gathering": "Quest 76182",                                               // 花园小聚
+        "fire_and_ice": "Quest 76183",                                                     // 火与冰
+        "just_like_old_times": "Quest 76184",                                              // 一如往日
+        "a_small_overture": "Quest 76186",                                                 // 小小的尝试
+        "tea_or_bulle_fruit": "Quest 76187",                                               // 茶叶还是泡泡桔？
+        "testhiddenhidden-v6.7-0": "Quest 76208",                                          // (test)隐藏$HIDDEN
+        "a_ladys_invitation": "Quest 76218",                                               // 淑女之邀
+        "tea_party_reinvitation_arlecchino": "Quest 76220",                                // 茶会的再邀·阿蕾奇诺
+        "tea_party_reinvitation_tartaglia": "Quest 76221",                                 // 茶会的再邀·达达利亚
+        "tea_party_reinvitation_lauma": "Quest 76223",                                     // 茶会的再邀·菈乌玛
+        "tea_party_reinvitation_columbina": "Quest 76225",                                 // 茶会的再邀·哥伦比娅
+        "quest_76226": "Quest 76226",                                                      // (test)隐藏$HIDDEN
         "origin_of_the_sequence": "Quest 76681",                                           // 序列之始
-        "testhiddenhidden-6": "Quest 76682",                                               // (test)隐藏$HIDDEN
+        "testhiddenhidden-v6.7-1": "Quest 76682",                                          // (test)隐藏$HIDDEN
         "sightlines_and_camera_tricks": "Quest 76683",                                     // 瞄准线与视角魔法
         "flower_feathers_and_bullets": "Quest 76684",                                      // 花羽伴弹头
+        "quest_70072": "Quest 70072",                                                      // (test)隐藏$HIDDEN
+        "quest_70084": "Quest 70084",                                                      // (test)隐藏$HIDDEN
+        "quest_70116": "Quest 70116",                                                      // (test)隐藏$HIDDEN
+        "quest_70117": "Quest 70117",                                                      // (test)隐藏$HIDDEN
+        "quest_70119": "Quest 70119",                                                      // (test)隐藏$HIDDEN
+        "quest_70120": "Quest 70120",                                                      // (test)隐藏$HIDDEN
+        "quest_70129": "Quest 70129",                                                      // (test)隐藏$HIDDEN
+        "quest_70153": "Quest 70153",                                                      // (test)隐藏$HIDDEN
         "variations_on_belyi_and_chernyi": "Quest 77000",                                  // 白与黑的变奏舞
-        "variations_on_belyi_and_chernyi_schedule": "Quest 77001",                         // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-1": "Quest 77002",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-2": "Quest 77003",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-3": "Quest 77004",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-4": "Quest 77005",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-5": "Quest 77006",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-6": "Quest 77007",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-7": "Quest 77008",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-8": "Quest 77009",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-9": "Quest 77010",                       // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-10": "Quest 77011",                      // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-11": "Quest 77012",                      // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-12": "Quest 77013",                      // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-0": "Quest 77001",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-1": "Quest 77002",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-2": "Quest 77003",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-3": "Quest 77004",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-4": "Quest 77005",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-5": "Quest 77006",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-6": "Quest 77007",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-7": "Quest 77008",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-8": "Quest 77009",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-9": "Quest 77010",                  // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-10": "Quest 77011",                 // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-11": "Quest 77012",                 // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-12": "Quest 77013",                 // 白与黑的变奏舞·日程
         "quest_77017": "Quest 77017",                                                      //
         "to_gaze_upon_the_dreaming_pale_crown": "Quest 77100",                             // 望向入梦的白冕
         "the_stone_beasts_like_ghouls_seated": "Quest 77101",                              // 石兽如幽灵般端坐
@@ -2962,7 +2947,6 @@ export default {
         "quest_77151": "Quest 77151",                                                      // (test)隐藏$HIDDEN
         "quest_77153": "Quest 77153",                                                      // (test)隐藏$HIDDEN
         "quest_77154": "Quest 77154",                                                      // (test)隐藏$HIDDEN
-        "quest_77156": "Quest 77156",                                                      // (test)隐藏$HIDDEN
         "quest_77159": "Quest 77159",                                                      // (test)隐藏$HIDDEN
         "an_ark_that_used_to_be_a_soul": "Quest 77160",                                    // 曾为灵魂的木舟
         "quest_77161": "Quest 77161",                                                      // (test)隐藏$HIDDEN
@@ -2971,9 +2955,6 @@ export default {
         "quest_77170": "Quest 77170",                                                      // (test)隐藏$HIDDEN
         "quest_77171": "Quest 77171",                                                      // (test)隐藏$HIDDEN
         "quest_77172": "Quest 77172",                                                      // (test)隐藏$HIDDEN
-        "quest_77173": "Quest 77173",                                                      // (test)隐藏$HIDDEN
-        "quest_77174": "Quest 77174",                                                      // (test)隐藏$HIDDEN
-        "quest_77175": "Quest 77175",                                                      // (test)隐藏$HIDDEN
         "quest_77184": "Quest 77184",                                                      // (test)隐藏$HIDDEN
         "just_like_a_snowball": "Quest 77185",                                             // 像一个雪球一样
         "quest_77186": "Quest 77186",                                                      // (test)隐藏$HIDDEN
@@ -2997,9 +2978,9 @@ export default {
         "quest_77214": "Quest 77214",                                                      // (test)隐藏$HIDDEN
         "quest_77215": "Quest 77215",                                                      // (test)隐藏$HIDDEN
         "simple_chores": "Quest 77233",                                                    // 简单零工
-        "variations_on_belyi_and_chernyi_schedule-13": "Quest 77235",                      // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-14": "Quest 77236",                      // 白与黑的变奏舞·日程
-        "variations_on_belyi_and_chernyi_schedule-15": "Quest 77237",                      // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-13": "Quest 77235",                 // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-14": "Quest 77236",                 // 白与黑的变奏舞·日程
+        "variations_on_belyi_and_chernyi_schedule-v7.0-15": "Quest 77237",                 // 白与黑的变奏舞·日程
         "quest_77238": "Quest 77238",                                                      // (test)隐藏$HIDDEN
         "quest_77239": "Quest 77239",                                                      // (test)隐藏$HIDDEN
         "quest_77240": "Quest 77240",                                                      // (test)隐藏$HIDDEN
@@ -3012,9 +2993,9 @@ export default {
         "hunter_on_the_snowfields": "Quest 77650",                                         // 雪原上的猎手
         "a_thread_of_dawnlight": "Quest 77651",                                            // 曙光的一缕
         "many_hands_make_light_work": "Quest 77652",                                       // 众人拾柴火焰高
-        "remnants_of_the_shadow_realm": "Quest 77653",                                     // 影域的遗留
-        "remnants_of_the_shadow_realm-1": "Quest 77654",                                   // 影域的遗留
-        "remnants_of_the_shadow_realm-2": "Quest 77655",                                   // 影域的遗留
+        "remnants_of_the_shadow_realm-v7.0-0": "Quest 77653",                              // 影域的遗留
+        "remnants_of_the_shadow_realm-v7.0-1": "Quest 77654",                              // 影域的遗留
+        "remnants_of_the_shadow_realm-v7.0-2": "Quest 77655",                              // 影域的遗留
         "daybreak_after_the_snow": "Quest 77656",                                          // 雪后曙光
         "a_special_selection": "Quest 77657",                                              // 一场特殊的选拔
         "looming_shadows_part_i": "Quest 77658",                                           // 危影重重·其一
@@ -3027,118 +3008,62 @@ export default {
         "one_yet_to_take_a_bow": "Quest 77671",                                            // 未谢幕者
         "the_unbowed_ones_gratitude": "Quest 77672",                                       // 未谢幕者的答谢
         "a_grueling_combat_simulation": "Quest 77674",                                     // 严酷的战况模拟
-        "another_horizon_of_adventure-2": "Quest 77676",                                   // 冒险就要朝着远方
-        "they_who_hear_the_sea": "Quest 79000",                                            // 听海人
-        "the_winding_homeward_way": "Quest 79001",                                         // 归乡漫漫路
-        "who_wields_the_wild_wind": "Quest 79002",                                         // 狂风，听谁号令
-        "from_outer_lands": "Quest 79003",                                                 // 自外而来
-        "the_other_side_of_isle_and_sea": "Quest 79004",                                   // 岛与海的彼端
-        "a_trip_through_fog_and_wind": "Quest 79005",                                      // 雾与风的旅行
-        "big_badaboom_battle": "Quest 79007",                                              // 砰砰大作战
-        "summer_gift": "Quest 79008",                                                      // 夏日赠礼
-        "thus_was_the_work_done_in_vain": "Quest 79013",                                   // 正因其徒劳
-        "where_the_treasure_dwells": "Quest 79020",                                        // 秘宝所藏 | 四礁觅宝记
-        "treasure_voyage": "Quest 79021",                                                  // 寻物航行
-        "the_misplaced_photo": "Quest 79022",                                              // 被丢失的合照 | 溯及以往
-        "the_discarded_insignia": "Quest 79023",                                           // 被抛出的徽记 | 溯及以往
-        "a_misplaced_conch": "Quest 79024",                                                // 被错置的海螺 | 溯及以往
-        "bakedanuki_wanderlust": "Quest 79025",                                            // 渴望旅行的妖狸
-        "drama_phantasmagoria_tale_of_the_swordwielding_princess": "Quest 79026",          // 极夜幻想剧·王女执剑记！
-        "the_final_treasure": "Quest 79027",                                               // 最后的宝藏
-        "treasure_clue_broken_isle": "Quest 79028",                                        // 宝藏线索·破破岛 | 四礁觅宝记
-        "treasure_clue_twinning_isle": "Quest 79029",                                      // 宝藏线索·双双岛 | 四礁觅宝记
-        "treasure_clue_minacious_isle": "Quest 79030",                                     // 宝藏线索·危危岛 | 四礁觅宝记
-        "treasure_clue_pudding_isle": "Quest 79031",                                       // 宝藏线索·布丁岛 | 四礁觅宝记
-        "quest_79033": "Quest 79033",                                                      // 监听3个海螺是否被拾取$HIDDEN
-        "quest_79034": "Quest 79034",                                                      // (test)狸猫WQ隐藏$HIDDEN
-        "the_bakedanukis_gift": "Quest 79035",                                             // 妖狸的赠礼
-        "returning_curios": "Quest 79041",                                                 // 千奇澴回
-        "quest_79043": "Quest 79043",                                                      // 壁画区阅读物2$HIDDEN
-        "daiyas_threeday_reverie": "Quest 79044",                                          // 黛依阿的三日遐想 | 黛依阿的三日遐想
-        "the_black_nacre_and_the_alldevouring_kraken": "Quest 79045",                      // 黑水晶号与吞金海怪 | 黛依阿的三日遐想
-        "petrifying_gaze": "Quest 79046",                                                  // 瞳孔里的固形魔咒 | 黛依阿的三日遐想
-        "skycastle_saviors": "Quest 79047",                                                // 天空高城救守记 | 黛依阿的三日遐想
-        "quest_79048": "Quest 79048",                                                      // 壁画区阅读物1$HIDDEN
-        "quest_79049": "Quest 79049",                                                      // 壁画区阅读物3$HIDDEN
-        "capturing_light_and_shadow": "Quest 79050",                                       // 捕获我的光影与线条
-        "quest_79051": "Quest 79051",                                                      // 壁画区阅读物4$HIDDEN
-        "quest_79052": "Quest 79052",                                                      // 哈多后续对话$HIDDEN
-        "quest_79053": "Quest 79053",                                                      // （test)之后的隐藏任务$HIDDEN
-        "a_starry_night_as_remembered": "Quest 79054",                                     // 如留旧时的星影
-        "quest_79055": "Quest 79055",                                                      // (test)纯水片场1$HIDDEN
-        "domain_adventures": "Quest 79056",                                                // 秘境冒险的征途
-        "quest_79057": "Quest 79057",                                                      // (test)隐藏父任务，创建奇影闲置NPC$HIDDEN
-        "quest_79058": "Quest 79058",                                                      // (test)纯水片场2$HIDDEN
-        "quest_79059": "Quest 79059",                                                      // (test)纯水片场3$HIDDEN
-        "towards_the_lighthouse_or_far_away": "Quest 79060",                               // 向着灯塔，或是远方
-        "quest_79061": "Quest 79061",                                                      // (test)灯塔后日谈$HIDDEN
-        "narration_footnotes": "Quest 79062",                                              // 旁白的注脚
-        "quest_79063": "Quest 79063",                                                      // （test）圆桌会议阅读物$HIDDEN
-        "quest_79064": "Quest 79064",                                                      // （test）被巨人赶出去的任务$HIDDEN
-        "the_lotus_leaf_and_the_champion": "Quest 79065",                                  // 荷叶与冠军
-        "the_forest_and_the_princess": "Quest 79066",                                      // 森林与公主
-        "the_answer_of_the_lotus_leaves_and_forest": "Quest 79067",                        // 荷叶与森林的答案
-        "quest_79068": "Quest 79068",                                                      // （test）123木头人关卡1$HIDDEN
-        "quest_79069": "Quest 79069",                                                      // （test）123木头人关卡2$HIDDEN
-        "quest_79070": "Quest 79070",                                                      // (test)折纸系列WQ完成后的闲置对话$HIDDEN
-        "owl_musician": "Quest 79071",                                                     // 《猫头鹰乐师》
-        "flying_hatter": "Quest 79072",                                                    // 《飞帽匠》
-        "good_shelf": "Quest 79073",                                                       // 《好架子》
-        "brave_northerly_wind": "Quest 79074",                                             // 《勇敢的北风》
-        "quest_79075": "Quest 79075",                                                      // (test)小花隐藏任务$HIDDEN
-        "texts_coda": "Quest 79079",                                                       // 正文的尾声
-        "quest_79080": "Quest 79080",                                                      // (test)摄影呀哈哈$HIDDEN
-        "explore_this_world": "Quest 79081",                                               // 探索这个世界
-        "quest_79082": "Quest 79082",                                                      // (test)拯救矿工$HIDDEN
+        "another_horizon_of_adventure-v7.0": "Quest 77676",                                // 冒险就要朝着远方
+        "quest_75282": "Quest 75282",                                                      // (test)隐藏$HIDDEN
+        "quest_76097": "Quest 76097",                                                      // (test)隐藏$HIDDEN
+        "quest_77156": "Quest 77156",                                                      // (test)隐藏$HIDDEN
+        "quest_77173": "Quest 77173",                                                      // (test)隐藏$HIDDEN
+        "quest_77174": "Quest 77174",                                                      // (test)隐藏$HIDDEN
+        "quest_77175": "Quest 77175",                                                      // (test)隐藏$HIDDEN
     },
     "commission_quests": {
         "the_boars_are_attacking": "Quest 468",                                            // 猪突…猛进！
-        "blocked": "Quest 20001",                                                          // 此路不通？
-        "owe_mora_pay_mora": "Quest 20003",                                                // 应付尽付
-        "owe_mora_pay_mora-1": "Quest 20004",                                              // 应付尽付
-        "lost_key": "Quest 20005",                                                         // 钥匙是易丢品
-        "food_delivery": "Quest 20006",                                                    // 餐品订单
-        "urgent_repairs": "Quest 20007",                                                   // 紧急修理
-        "big_pudgy_problem": "Quest 20008",                                                // 圆滚滚的大团骚乱！
-        "language_exchange": "Quest 20009",                                                // 语言交流
-        "language_exchange-1": "Quest 20010",                                              // 语言交流
-        "blocked-1": "Quest 20011",                                                        // 此路不通？
-        "blocked-2": "Quest 20012",                                                        // 此路不通？
-        "blocked-3": "Quest 20013",                                                        // 此路不通？
+        "blocked-v1.x-0": "Quest 20001",                                                   // 此路不通？
+        "owe_mora_pay_mora-v1.x": "Quest 20003",                                           // 应付尽付
+        "owe_mora_pay_mora-v2.4": "Quest 20004",                                           // 应付尽付
+        "lost_key-v1.x-0": "Quest 20005",                                                  // 钥匙是易丢品
+        "food_delivery-v1.x-0": "Quest 20006",                                             // 餐品订单
+        "urgent_repairs-v1.x-0": "Quest 20007",                                            // 紧急修理
+        "big_pudgy_problem-v1.x-0": "Quest 20008",                                         // 圆滚滚的大团骚乱！
+        "language_exchange-v1.x-0": "Quest 20009",                                         // 语言交流
+        "language_exchange-v1.x-1": "Quest 20010",                                         // 语言交流
+        "blocked-v1.x-1": "Quest 20011",                                                   // 此路不通？
+        "blocked-v1.x-2": "Quest 20012",                                                   // 此路不通？
+        "blocked-v1.x-3": "Quest 20013",                                                   // 此路不通？
         "adventurer_exam_battle_tactics": "Quest 20014",                                   // 冒险家测验·作战方式
-        "language_exchange-2": "Quest 20015",                                              // 语言交流
-        "food_delivery-1": "Quest 20016",                                                  // 餐品订单
-        "urgent_repairs-1": "Quest 20017",                                                 // 紧急修理
-        "urgent_repairs-2": "Quest 20018",                                                 // 紧急修理
-        "lost_key-1": "Quest 20019",                                                       // 钥匙是易丢品
+        "language_exchange-v1.x-2": "Quest 20015",                                         // 语言交流
+        "food_delivery-v1.x-1": "Quest 20016",                                             // 餐品订单
+        "urgent_repairs-v1.x-1": "Quest 20017",                                            // 紧急修理
+        "urgent_repairs-v1.x-2": "Quest 20018",                                            // 紧急修理
+        "lost_key-v1.x-1": "Quest 20019",                                                  // 钥匙是易丢品
         "adventurer_exam_the_art_of_adventure": "Quest 20020",                             // 冒险家测验·冒险诀窍
-        "adventurer_exam_taking_flight": "Quest 20021",                                    // 冒险家测验·起飞方式
+        "adventurer_exam_taking_flight-v1.x": "Quest 20021",                               // 冒险家测验·起飞方式
         "presumption_of_innocence": "Quest 20023",                                         // 无罪推定
-        "lost_key-2": "Quest 20025",                                                       // 钥匙是易丢品
-        "food_delivery-2": "Quest 20026",                                                  // 餐品订单
-        "big_pudgy_problem-1": "Quest 20027",                                              // 圆滚滚的大团骚乱！
-        "big_pudgy_problem-2": "Quest 20028",                                              // 圆滚滚的大团骚乱！
+        "lost_key-v1.x-2": "Quest 20025",                                                  // 钥匙是易丢品
+        "food_delivery-v1.x-2": "Quest 20026",                                             // 餐品订单
+        "big_pudgy_problem-v1.x-1": "Quest 20027",                                         // 圆滚滚的大团骚乱！
+        "big_pudgy_problem-v1.x-2": "Quest 20028",                                         // 圆滚滚的大团骚乱！
         "return_to_days_of_winter": "Quest 20029",                                         // 向冬日回归
-        "anna_the_adventurer": "Quest 20033",                                              // 冒险家，安娜！
-        "anna_the_adventurer-1": "Quest 20034",                                            // 冒险家，安娜！
-        "lost_key-3": "Quest 20035",                                                       // 钥匙是易丢品
+        "anna_the_adventurer-v1.x-0": "Quest 20033",                                       // 冒险家，安娜！
+        "anna_the_adventurer-v1.x-1": "Quest 20034",                                       // 冒险家，安娜！
+        "lost_key-v1.x-3": "Quest 20035",                                                  // 钥匙是易丢品
         "whispers_in_the_wind": "Quest 20036",                                             // 愿风带走思念
         "long_distance_love": "Quest 20037",                                               // 触不可及的恋人
         "grateful_to_the_gods": "Quest 20038",                                             // 报答神明的方式
         "timaeus_alchemy_tutorial": "Quest 20039",                                         // 蒂玛乌斯的炼金指导
         "a_new_storm_is_brewing": "Quest 20040",                                           // 新的风暴尚未出现
-        "adventure_takes_courage": "Quest 20041",                                          // 冒险就要勇于前进！
+        "adventure_takes_courage-v1.x": "Quest 20041",                                     // 冒险就要勇于前进！
         "stop_albert_stop": "Quest 20042",                                                 // 艾伯特先生，别再冲了——！
         "michelle_never_stops": "Quest 20043",                                             // 永不停歇的风与米歇尔小姐
-        "ellin_the_wannabe_knight": "Quest 20044",                                         // 艾琳，未来的骑士——
-        "anna_the_adventurer-2": "Quest 20046",                                            // 冒险家，安娜！
+        "ellin_the_wannabe_knight-v1.x-0": "Quest 20044",                                  // 艾琳，未来的骑士——
+        "anna_the_adventurer-v1.x-2": "Quest 20046",                                       // 冒险家，安娜！
         "step_by_step": "Quest 20047",                                                     // 冒险就要步步为营
         "pigeon_duck_and_child": "Quest 20048",                                            // 鸽子、鸭子、小孩子
         "a_little_booze_doesnt_hurt": "Quest 20049",                                       // 蒙德酒客
-        "ellin_the_wannabe_knight-1": "Quest 20050",                                       // 艾琳，未来的骑士——
+        "ellin_the_wannabe_knight-v1.x-1": "Quest 20050",                                  // 艾琳，未来的骑士——
         // "wines_of_mondstadt": "Quest 20051",                                               // 蒙德城的酒
-        "anna_the_adventurer-3": "Quest 20052",                                            // 冒险家，安娜！
-        "ellin_the_wannabe_knight-2": "Quest 20053",                                       // 艾琳，未来的骑士——
+        "anna_the_adventurer-v1.x-3": "Quest 20052",                                       // 冒险家，安娜！
+        "ellin_the_wannabe_knight-v1.x-2": "Quest 20053",                                  // 艾琳，未来的骑士——
         "guy_in_the_background": "Quest 20054",                                            // 无人注意的盖伊
         "nora_run": "Quest 20058",                                                         // 诺拉快跑！
         "the_more_treasures_the_merrier": "Quest 20059",                                   // 宝物…来者不拒！
@@ -3146,33 +3071,33 @@ export default {
         "pigeons_go_awol": "Quest 20061",                                                  // 鸽子习惯一去不回
         "the_limitations_of_an_adventurer": "Quest 20062",                                 // 「冒险家」的能力极限
         "the_best_audience_in_all_of_mondstadt": "Quest 20063",                            // 全蒙德最好的听众
-        "ellin_the_wannabe_knight-3": "Quest 20065",                                       // 艾琳，未来的骑士——
-        "ellin_the_wannabe_knight-4": "Quest 20066",                                       // 艾琳，未来的骑士——
-        "adventurer_exam_taking_flight-1": "Quest 20067",                                  // 冒险家测验·起飞方式
+        "ellin_the_wannabe_knight-v1.x-3": "Quest 20065",                                  // 艾琳，未来的骑士——
+        "ellin_the_wannabe_knight-v1.x-4": "Quest 20066",                                  // 艾琳，未来的骑士——
+        "adventurer_exam_taking_flight-v2.4": "Quest 20067",                               // 冒险家测验·起飞方式
         "sorry_timmie": "Quest 20068",                                                     // 提米，对不起！
         "floral_fresh": "Quest 20069",                                                     // 趁鲜花气息逗留
-        "fresh_flora": "Quest 20070",                                                      // 愿鲜花气息逗留
-        "fresh_flora-1": "Quest 20071",                                                    // 愿鲜花气息逗留
-        "fresh_flora-2": "Quest 20072",                                                    // 愿鲜花气息逗留
+        "fresh_flora-v1.x-0": "Quest 20070",                                               // 愿鲜花气息逗留
+        "fresh_flora-v1.x-1": "Quest 20071",                                               // 愿鲜花气息逗留
+        "fresh_flora-v1.x-2": "Quest 20072",                                               // 愿鲜花气息逗留
         "emergency_supplies": "Quest 20073",                                               // 应急补给
         "a_boys_letter": "Quest 20102",                                                    // 一个男孩的去信
         "poetry_exchange": "Quest 20103",                                                  // 诗歌交流
         "cleanup_at_dawn_ii": "Quest 20104",                                               // 酒庄大扫除之二
-        "miracle_medicine": "Quest 20511",                                                 // 奇药庐中来
-        "miracle_medicine-1": "Quest 20512",                                               // 奇药庐中来
-        "miracle_medicine-2": "Quest 20513",                                               // 奇药庐中来
-        "recuperating_from_a_severe_illness": "Quest 20514",                               // 大病初愈
-        "recuperating_from_a_severe_illness-1": "Quest 20515",                             // 大病初愈
-        "recuperating_from_a_severe_illness-2": "Quest 20516",                             // 大病初愈
+        "miracle_medicine-v1.x-0": "Quest 20511",                                          // 奇药庐中来
+        "miracle_medicine-v1.x-1": "Quest 20512",                                          // 奇药庐中来
+        "miracle_medicine-v1.x-2": "Quest 20513",                                          // 奇药庐中来
+        "recuperating_from_a_severe_illness-v1.x-0": "Quest 20514",                        // 大病初愈
+        "recuperating_from_a_severe_illness-v1.x-1": "Quest 20515",                        // 大病初愈
+        "recuperating_from_a_severe_illness-v1.x-2": "Quest 20516",                        // 大病初愈
         "a_surprise_gift": "Quest 20517",                                                  // 惊喜大礼
-        "a_commission_from_that_guy": "Quest 20518",                                       // 「那位先生」的委托
-        "a_commission_from_that_guy-1": "Quest 20519",                                     // 「那位先生」的委托
+        "a_commission_from_that_guy-v1.x-0": "Quest 20518",                                // 「那位先生」的委托
+        "a_commission_from_that_guy-v1.x-1": "Quest 20519",                                // 「那位先生」的委托
         "only_halffrozen": "Quest 20520",                                                  // 中度冰寒
         "eat_it_while_its_hot": "Quest 20521",                                             // 趁热食用
         "tales_of_winter": "Quest 20600",                                                  // 来自冬天的故事
         "reliable_helper": "Quest 20700",                                                  // 说到做到！
         "a_returning_customer": "Quest 20701",                                             // 回头客
-        "question_and_answer-1": "Quest 70801",                                            // 骑士团手册问答
+        "question_and_answer-v1.x-2": "Quest 70801",                                       // 骑士团手册问答
         "leaves_on_the_wind": "Quest 20703",                                               // 落叶归风
         "meteorites_and_adventure": "Quest 41125",                                         // 陨石与冒险
 
@@ -3182,36 +3107,36 @@ export default {
         "the_littlest_journey_medicine_onhand": "Quest 21028",                             // 小小的远行·常备药
         "the_littlest_journey_nonemergency_food": "Quest 21029",                           // 小小的远行·非应急食物
         "the_littlest_journey_means_of_selfdefense": "Quest 21030",                        // 小小的远行·防身的方法？
-        "uninvited_guests": "Quest 21031",                                                 // 不速之客
-        "where_is_the_unseen_razor": "Quest 21033",                                        // 试问，藏锋何处？
-        "where_is_the_unseen_razor-1": "Quest 21034",                                      // 试问，藏锋何处？
-        "the_day_the_sword_departs": "Quest 21035",                                        // 剑去之日
-        "the_day_the_sword_departs-1": "Quest 21036",                                      // 剑去之日
-        "the_day_the_sword_departs-2": "Quest 21037",                                      // 剑去之日
-        "the_day_the_sword_departs-3": "Quest 21038",                                      // 剑去之日
-        "pirate_invasion_in_liyue_harbor": "Quest 22000",                                  // 璃月港，有海盗！
-        "pirate_invasion_in_liyue_harbor-1": "Quest 22001",                                // 璃月港，有海盗！
-        "pirate_invasion_in_liyue_harbor-2": "Quest 22002",                                // 璃月港，有海盗！
+        "uninvited_guests-v2.4": "Quest 21031",                                            // 不速之客
+        "where_is_the_unseen_razor-v3.3-0": "Quest 21033",                                 // 试问，藏锋何处？
+        "where_is_the_unseen_razor-v3.3-1": "Quest 21034",                                 // 试问，藏锋何处？
+        "the_day_the_sword_departs-v3.3-0": "Quest 21035",                                 // 剑去之日
+        "the_day_the_sword_departs-v3.3-1": "Quest 21036",                                 // 剑去之日
+        "the_day_the_sword_departs-v1.x": "Quest 21037",                                   // 剑去之日
+        "the_day_the_sword_departs-v3.3-2": "Quest 21038",                                 // 剑去之日
+        "pirate_invasion_in_liyue_harbor-v1.x-0": "Quest 22000",                           // 璃月港，有海盗！
+        "pirate_invasion_in_liyue_harbor-v1.x-1": "Quest 22001",                           // 璃月港，有海盗！
+        "pirate_invasion_in_liyue_harbor-v1.x-2": "Quest 22002",                           // 璃月港，有海盗！
         "yanxiaos_dilemma": "Quest 22003",                                                 // 勿言勿笑
         "fishing_jiangxue": "Quest 22004",                                                 // 独钓江雪
-        "the_lost_relic": "Quest 22005",                                                   // 「遗落」的文物
-        "the_lost_relic-1": "Quest 22006",                                                 // 「遗落」的文物
-        "the_lost_relic-2": "Quest 22007",                                                 // 「遗落」的文物
+        "the_lost_relic-v1.x-0": "Quest 22005",                                            // 「遗落」的文物
+        "the_lost_relic-v1.x-1": "Quest 22006",                                            // 「遗落」的文物
+        "the_lost_relic-v1.x-2": "Quest 22007",                                            // 「遗落」的文物
         "good_medicine_tastes_bitter": "Quest 22008",                                      // 良药苦口
         "a_little_raid": "Quest 22009",                                                    // 「夺宝」小行动
-        "business_in_a_marsh": "Quest 22100",                                              // 花洲有客栈
-        "business_in_a_marsh-1": "Quest 22101",                                            // 花洲有客栈
-        "business_in_a_marsh-2": "Quest 22102",                                            // 花洲有客栈
-        "guest_from_afar": "Quest 22103",                                                  // 客从远方来
-        "guest_from_afar-1": "Quest 22104",                                                // 客从远方来
-        "guest_from_afar-2": "Quest 22105",                                                // 客从远方来
+        "business_in_a_marsh-v1.x-0": "Quest 22100",                                       // 花洲有客栈
+        "business_in_a_marsh-v1.x-1": "Quest 22101",                                       // 花洲有客栈
+        "business_in_a_marsh-v1.x-2": "Quest 22102",                                       // 花洲有客栈
+        "guest_from_afar-v1.x-0": "Quest 22103",                                           // 客从远方来
+        "guest_from_afar-v1.x-1": "Quest 22104",                                           // 客从远方来
+        "guest_from_afar-v1.x-2": "Quest 22105",                                           // 客从远方来
         "one_ship_two_ships_three_ships": "Quest 22106",                                   // 港口驶过几艘船，二四六七八
         "good_sign": "Quest 22107",                                                        // 好兆头
-        "where_is_the_unseen_razor-2": "Quest 22108",                                      // 试问，藏锋何处？
-        "where_is_the_unseen_razor-3": "Quest 22109",                                      // 试问，藏锋何处？
-        "where_is_the_unseen_razor-4": "Quest 22110",                                      // 试问，藏锋何处？
-        "stairway_to_wangshu": "Quest 22112",                                              // 望舒须筑阶
-        "stairway_to_wangshu-1": "Quest 22113",                                            // 望舒须筑阶
+        "where_is_the_unseen_razor-v1.x-0": "Quest 22108",                                 // 试问，藏锋何处？
+        "where_is_the_unseen_razor-v1.x-1": "Quest 22109",                                 // 试问，藏锋何处？
+        "where_is_the_unseen_razor-v1.x-2": "Quest 22110",                                 // 试问，藏锋何处？
+        "stairway_to_wangshu-v1.x-0": "Quest 22112",                                       // 望舒须筑阶
+        "stairway_to_wangshu-v1.x-1": "Quest 22113",                                       // 望舒须筑阶
         "socalled_work": "Quest 22114",                                                    // 所谓「工作」
         "for_old_times_sake": "Quest 22115",                                               // 久久望故人
         "a_novel_idea": "Quest 22116",                                                     // 这本小说会很厉害！
@@ -3221,10 +3146,10 @@ export default {
         "cliffhanger": "Quest 22301",                                                      // 且听下回分解
         "this_novel_is_amazing": "Quest 22302",                                            // 这本小说真厉害
         "wine_with_a_taste_of_freedom": "Quest 22303",                                     // 酒自有滋味
-        "sailors_treasure": "Quest 22304",                                                 // 水手的秘宝
+        "sailors_treasure-v1.x-0": "Quest 22304",                                          // 水手的秘宝
         "diamond_in_the_rough": "Quest 22305",                                             // 点石成…什么
-        "sailors_treasure-1": "Quest 22306",                                               // 水手的秘宝
-        "sailors_treasure-2": "Quest 22307",                                               // 水手的秘宝
+        "sailors_treasure-v1.x-1": "Quest 22306",                                          // 水手的秘宝
+        "sailors_treasure-v1.x-2": "Quest 22307",                                          // 水手的秘宝
         "growing_pains": "Quest 22500",                                                    // 成长的烦恼
         "the_essence_of_poetry": "Quest 22501",                                            // 诗言志辩
         "the_sparrow_studies_the_blade": "Quest 22701",                                    // 飞雀扰剑意
@@ -3240,7 +3165,7 @@ export default {
         "bantan_sango_case_file_cleanup_work": "Quest 22020",                              // 万端珊瑚事件簿·收尾工作
         "the_gourmet_supremos_cookoff": "Quest 22021",                                     // 全能美食队·烹饪对决
         "the_gourmet_supremos_foodie_quiz": "Quest 22022",                                 // 全能美食队·美食小问答
-        "the_taste_of_home": "Quest 22023",                                                // 家乡之味
+        "the_taste_of_home-v2.0-0": "Quest 22023",                                         // 家乡之味
         "absolutely_unique_delicacy": "Quest 22025",                                       // 绝对独特的美食
         "the_gourmet_supremos_whered_the_ingredients_go": "Quest 22026",                   // 全能美食队·食材在哪呀？
         "o_archon_hear_me": "Quest 22027",                                                 // 神明啊，回应我吧！
@@ -3248,36 +3173,36 @@ export default {
         "an_art_to_be_honed": "Quest 22029",                                               // 必须精进的武艺
         "the_gourmet_supremos_extreme_cookery": "Quest 22030",                             // 全能美食队·厨道的极意
         "ceaseless_training": "Quest 22031",                                               // 永不停歇的修炼
-        "the_taste_of_home-1": "Quest 22032",                                              // 家乡之味
-        "the_taste_of_home-2": "Quest 22033",                                              // 家乡之味
+        "the_taste_of_home-v2.0-1": "Quest 22032",                                         // 家乡之味
+        "the_taste_of_home-v2.0-2": "Quest 22033",                                         // 家乡之味
         "bantan_sango_case_file_the_search": "Quest 22034",                                // 万端珊瑚事件簿·搜索工作
         "bantan_sango_case_file_misdirection": "Quest 22035",                              // 万端珊瑚事件簿·迷惑行动
         "inazuma_sales_specialist": "Quest 22036",                                         // 稻妻销售员
         "postsale_service": "Quest 22037",                                                 // 售后服务
-        "crash_course_on_inazuman_fashion": "Quest 22039",                                 // 稻妻时尚入门
-        "crash_course_on_inazuman_fashion-1": "Quest 22040",                               // 稻妻时尚入门
+        "crash_course_on_inazuman_fashion-v2.0-0": "Quest 22039",                          // 稻妻时尚入门
+        "crash_course_on_inazuman_fashion-v2.0-1": "Quest 22040",                          // 稻妻时尚入门
         "the_cats_trail": "Quest 22041",                                                   // 猫之迹
         "a_fishy_flavor": "Quest 22042",                                                   // 鱼之味
         "to_make_a_cat_carving": "Quest 22043",                                            // 雕猫之法
         "to_make_cat_ornaments": "Quest 22044",                                            // 饰猫之法
         "shadow_of_the_cat": "Quest 22045",                                                // 猫的留影
-        "shrine_cleanup": "Quest 22046",                                                   // 神社大扫除
+        "shrine_cleanup-v2.1-0": "Quest 22046",                                            // 神社大扫除
         "archery_demonstration": "Quest 22047",                                            // 箭术示范
-        "shrine_cleanup-1": "Quest 22048",                                                 // 神社大扫除
+        "shrine_cleanup-v2.1-1": "Quest 22048",                                            // 神社大扫除
         "playing_with_fire_works": "Quest 22049",                                          // 烟花试玩计划
 
         "1001_cups_of_coffee": "Quest 23000",                                              // 一千零一杯咖啡
-        "gold_devouring_and_mora_gathering": "Quest 23001",                                // 吞金和蓄财
+        "gold_devouring_and_mora_gathering-v3.0-0": "Quest 23001",                         // 吞金和蓄财
         "attache_in_another_land": "Quest 23002",                                          // 御用在他乡
-        "gold_devouring_and_mora_gathering-1": "Quest 23003",                              // 吞金和蓄财
+        "gold_devouring_and_mora_gathering-v3.0-1": "Quest 23003",                         // 吞金和蓄财
         "project_baby": "Quest 23004",                                                     // 宝贝计划
-        "gold_devouring_and_mora_gathering-2": "Quest 23005",                              // 吞金和蓄财
+        "gold_devouring_and_mora_gathering-v3.0-2": "Quest 23005",                         // 吞金和蓄财
         "clean_and_healthy": "Quest 23006",                                                // 洁净与健康
-        "concresoil": "Quest 23007",                                                       // 凝成泥土
-        "concresoil-1": "Quest 23008",                                                     // 凝成泥土
+        "concresoil-v3.0-0": "Quest 23007",                                                // 凝成泥土
+        "concresoil-v3.0-1": "Quest 23008",                                                // 凝成泥土
         "the_other_applications_of_concresoil": "Quest 23009",                             // 凝成泥土的它用
         "eat_and_learn": "Quest 23010",                                                    // 食与学
-        "equivalent_exchange_once_more": "Quest 23011",                                    // 等量再交换!
+        "equivalent_exchange_once_more-v1.x-0": "Quest 23011",                             // 等量再交换!
         "meow_meow_meow_meow_meow": "Quest 23012",                                         // 喵…喵喵？喵！喵。
         "garcias_paean_key_items": "Quest 23013",                                          // 加尔恰的赞歌·关键物品
         "garcias_paean_substitutes": "Quest 23014",                                        // 加尔恰的赞歌·替代物
@@ -3298,7 +3223,7 @@ export default {
         "the_great_tree_state_of_growth": "Quest 23029",                                   // 大树·生长态
         "the_great_tree_statistical_state": "Quest 23030",                                 // 大树·统计态
         "supreme_hookshot": "Quest 23031",                                                 // 鱼钩上的绝景？
-        "equivalent_exchange_once_more-1": "Quest 23032",                                  // 等量再交换！
+        "equivalent_exchange_once_more-v1.x-1": "Quest 23032",                             // 等量再交换！
         "king_of_invokations": "Quest 23033",                                              // 《召唤王》
         "the_hooks_unexpected_adventure": "Quest 23036",                                   // 鱼钩的奇异时光？
         "good_medicine_is_hard_to_come_by": "Quest 23037",                                 // 良药难求
@@ -3309,9 +3234,9 @@ export default {
         "blooming_sands_lasting_scent": "Quest 23042",                                     // 沙上花·余香
         "price_comparison": "Quest 23043",                                                 // 货比两价
 
-        "tales_from_the_court": "Quest 24000",                                             // 枫丹廷，二三事
-        "tales_from_the_court-1": "Quest 24001",                                           // 枫丹廷，二三事
-        "tales_from_the_court-2": "Quest 24002",                                           // 枫丹廷，二三事
+        "tales_from_the_court-v4.0-0": "Quest 24000",                                      // 枫丹廷，二三事
+        "tales_from_the_court-v4.0-1": "Quest 24001",                                      // 枫丹廷，二三事
+        "tales_from_the_court-v4.0-2": "Quest 24002",                                      // 枫丹廷，二三事
         "their_childhood": "Quest 24003",                                                  // 他们的童年
         "their_childhood_time_waits_for_no_one": "Quest 24004",                            // 他们的童年·时光不等人
         "their_childhood_city_caper": "Quest 24005",                                       // 他们的童年·游城记
@@ -3326,10 +3251,10 @@ export default {
         "at_least_the_fish_know": "Quest 24014",                                           // 至少鱼知道
         "aesthetic_critique_selfcritique": "Quest 24015",                                  // 审美力批判·自我批判
         "science_of_data_management": "Quest 24016",                                       // 资料整理学
-        "days_beneath_the_waves": "Quest 24017",                                           // 水底的日子
+        "days_beneath_the_waves-v4.0-0": "Quest 24017",                                    // 水底的日子
         "other_duties": "Quest 24018",                                                     // 另有他职
         "what_is_the_meaning_of_life": "Quest 24019",                                      // 生活的意义是…？
-        "days_beneath_the_waves-1": "Quest 24020",                                         // 水底的日子
+        "days_beneath_the_waves-v4.0-1": "Quest 24020",                                    // 水底的日子
         "traces_of_back_pain": "Quest 24021",                                              // 腰痛的痕迹
         "refreshing_fonta_a_font_of_refreshment": "Quest 24022",                           // 清爽枫达，畅饮世界！
         "time_to_drink": "Quest 24023",                                                    // 饮品时间
@@ -3341,14 +3266,14 @@ export default {
         "tending_to_a_tepetlisaurus_in_search_of_a_recipe": "Quest 25022",                 // 洗理嵴锋·新奇食物
         "steaming_hot_swim": "Quest 25025",                                                // 热乎乎的鳍游
         "how_to_make_friends": "Quest 25026",                                              // 交友之法
-        "prophets_of_pop": "Quest 25027",                                                  // 流行音乐，谁先知？
-        "prophets_of_pop-1": "Quest 25028",                                                // 流行音乐，谁先知？
-        "saurian_versus_mountain": "Quest 25029",                                          // 龙与山
-        "grow_up_quickly_littlun": "Quest 25030",                                          // 小小人儿，快长大
-        "grow_up_quickly_littlun-1": "Quest 25031",                                        // 小小人儿，快长大…？
+        "prophets_of_pop-v5.0-0": "Quest 25027",                                           // 流行音乐，谁先知？
+        "prophets_of_pop-v5.0-1": "Quest 25028",                                           // 流行音乐，谁先知？
+        "saurian_versus_mountain-v5.0-0": "Quest 25029",                                   // 龙与山
+        "grow_up_quickly_littlun-v5.0-0": "Quest 25030",                                   // 小小人儿，快长大
+        "grow_up_quickly_littlun-v5.0-1": "Quest 25031",                                   // 小小人儿，快长大…？
         "sharpshooter_on_hand": "Quest 25032",                                             // 妙影在手
-        "saurian_versus_mountain-1": "Quest 25033",                                        // 龙与山
-        "saurian_versus_mountain-2": "Quest 25034",                                        // 龙与山
+        "saurian_versus_mountain-v5.0-1": "Quest 25033",                                   // 龙与山
+        "saurian_versus_mountain-v5.0-2": "Quest 25034",                                   // 龙与山
         "hey_your_letter": "Quest 25035",                                                  // 嘿！你的信！
         "hmm_natlan": "Quest 25036",                                                       // 咦？纳塔？
     },
