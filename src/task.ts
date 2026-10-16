@@ -3,6 +3,7 @@ import { create_page, export_category } from '~/utils/page';
 import { InteractionData, TaskData } from "~/utils/data";
 import { Lang, t } from "~/utils/i18n";
 import { get_task_conditions } from "~/utils/task_condition";
+import { get_task_narrations } from "~/utils/task_narration";
 import { get_interaction_dialogs } from "~/utils/task_interaction";
 import { get_task_item_operation, get_task_operations } from "~/utils/task_item";
 import type { InteractionDialog } from "~/utils/task_interaction";
@@ -42,6 +43,7 @@ type SourceTaskStep = {
     description: string,
     talks: number[],
     finish_conditions: SourceTaskCondition[],
+    fail_conditions: SourceTaskCondition[],
 };
 
 type SourceTaskDialog = {
@@ -197,6 +199,7 @@ function get_source_task(source: string, lang: Lang): SourceTask | undefined {
             description: step.description,
             talks: get_step_talks(step),
             finish_conditions: get_source_conditions({ conditions: step.finishConditions }).conditions,
+            fail_conditions: get_source_conditions({ conditions: step.failConditions }).conditions,
         }));
 
     return {
@@ -394,6 +397,40 @@ function get_dialogs(
     };
 }
 
+function get_step_end_conditions(
+    step: SourceTaskStep,
+    event: 'finish' | 'fail',
+    talk_keys: Map<number, number>,
+    references: Map<number, TaskStepReference>,
+    own_references: Map<number, TaskStepReference>,
+    lang: Lang,
+): TaskFinishConditionToken[] {
+    return step[`${event}_conditions`].flatMap((condition, index): TaskFinishConditionToken[] => {
+        const talk = condition.talk_id === undefined ? undefined : talk_keys.get(condition.talk_id);
+        const semantic = /^QUEST_CONTENT_QUEST_(?:GLOBAL_)?VAR_/.test(condition.type)
+            || /^QUEST_CONTENT_QUEST_STATE_(?:NOT_)?EQUAL$/.test(condition.type);
+        let tokens: TaskFinishConditionToken[] = talk === undefined
+            ? get_task_conditions({
+                logic: '',
+                conditions: [{
+                    ...condition,
+                    type: semantic ? condition.type.replace(/^QUEST_CONTENT_/, 'QUEST_COND_') : condition.type,
+                    ...(/QUEST_CONTENT_QUEST_STATE_(NOT_)?EQUAL/.test(condition.type)
+                        ? { step_id: Number(condition.params[0]), state: ['QUEST_STATE_NONE',
+                            'QUEST_STATE_UNSTARTED', 'QUEST_STATE_UNFINISHED', 'QUEST_STATE_FINISHED',
+                            'QUEST_STATE_FAILED'][Number(condition.params[1])] } : {}),
+                }],
+            }, references, own_references, lang)
+            : [{ type: 'talk', talk }];
+        if (!tokens.length) tokens = get_task_conditions({ logic: '', conditions: [condition] },
+            references, own_references, lang);
+        if (talk === undefined && !semantic) tokens = tokens.map(token => typeof token === 'string'
+            || token.type === 'talk' ? token : { ...token,
+                id: JSON.stringify([event, step.id, condition.type, condition.params]) });
+        return [...tokens, ...(index > 0 ? ['or' as const] : [])];
+    });
+}
+
 function get_steps(
     steps: SourceTaskStep[],
     talk_keys: Map<number, number>,
@@ -406,30 +443,8 @@ function get_steps(
         ...(step.operations.length ? { operations: step.operations } : {}),
         description: step.description,
         talks: map_ids(step.talks, talk_keys) as number[],
-        finish_conditions: step.finish_conditions.flatMap((condition, index): TaskFinishConditionToken[] => {
-            const talk = condition.talk_id === undefined ? undefined : talk_keys.get(condition.talk_id);
-            const semantic = /^QUEST_CONTENT_QUEST_(?:GLOBAL_)?VAR_/.test(condition.type)
-                || /^QUEST_CONTENT_QUEST_STATE_(?:NOT_)?EQUAL$/.test(condition.type);
-            let tokens: TaskFinishConditionToken[] = talk === undefined
-                ? get_task_conditions({
-                    logic: '',
-                    conditions: [{
-                        ...condition,
-                        type: semantic ? condition.type.replace(/^QUEST_CONTENT_/, 'QUEST_COND_') : condition.type,
-                        ...(/QUEST_CONTENT_QUEST_STATE_(NOT_)?EQUAL/.test(condition.type)
-                            ? { step_id: Number(condition.params[0]), state: ['QUEST_STATE_NONE',
-                                'QUEST_STATE_UNSTARTED', 'QUEST_STATE_UNFINISHED', 'QUEST_STATE_FINISHED',
-                                'QUEST_STATE_FAILED'][Number(condition.params[1])] } : {}),
-                    }],
-                }, references, own_references, lang)
-                : [{ type: 'talk', talk }];
-            if (!tokens.length) tokens = get_task_conditions({ logic: '', conditions: [condition] },
-                references, own_references, lang);
-            if (talk === undefined && !semantic) tokens = tokens.map(token => typeof token === 'string'
-                || token.type === 'talk' ? token : { ...token,
-                    id: JSON.stringify(['finish', step.id, condition.type, condition.params]) });
-            return [...tokens, ...(index > 0 ? ['or' as const] : [])];
-        }),
+        finish_conditions: get_step_end_conditions(step, 'finish', talk_keys, references, own_references, lang),
+        fail_conditions: get_step_end_conditions(step, 'fail', talk_keys, references, own_references, lang),
     }]));
 }
 
@@ -480,6 +495,7 @@ function get_task(
         suggested_tasks: map_ids(source.suggested_tasks, get_task_id_map()) as string[],
         steps: get_steps(source.steps, talk_keys, references, own_references, lang),
         talks: get_talks(source.talks, references, own_references, lang),
+        narrations: get_task_narrations(source.quest_id, get_key_map(source.steps), lang),
     };
 }
 

@@ -1,5 +1,6 @@
 /data
 /src/images
+/src/lua/**
 /src/map-data
 
 /tmp

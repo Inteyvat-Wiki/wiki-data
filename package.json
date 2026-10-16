@@ -4,6 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "gen": "tsx index.ts",
+    "check:narration": "tsx scripts/check_narration.ts",
     "gen:reading-lists": "node scripts/reading_lists.cjs",
     "gen:reading": "tsx scripts/generate_reading.ts",
     "check:reading": "tsx scripts/check_reading.ts",
