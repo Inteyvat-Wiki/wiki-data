@@ -252,6 +252,19 @@ export const QuestItemData = {
     }
 }
 
+export const NpcData = {
+
+    get_npcs: (lang: Lang) => genshindb.npcs('names', {
+        ...alias_query_options(lang), matchCategories: true, verboseCategories: true,
+    }) || [],
+
+    get_npc: (name: string, lang: Lang) => {
+        const result = genshindb.npcs(name, alias_query_options(lang));
+        if (!result) throw new Error(`NPC ${name} not found in genshindb`);
+        return result;
+    },
+}
+
 export const InteractionData = {
 
     get_giving: (id: number): { items: { id: number, count: number }[], choices?: { id: number }[], count?: number, remove: boolean } | undefined => {

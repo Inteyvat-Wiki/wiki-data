@@ -98,6 +98,7 @@ export type TaskDialog = {
     speaker_subtitle?: string,
     next_dialogs: TaskDialogNext[],
     operations?: TaskOperation[],
+    actions?: { type: string, timing: 'before' | 'while' | 'after', source: string }[],
 };
 
 export type TaskTriggerPoint = {

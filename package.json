@@ -4,6 +4,8 @@
   "main": "index.ts",
   "scripts": {
     "gen": "tsx index.ts",
+    "gen:npcs": "tsx scripts/generate_npcs.ts",
+    "check:npcs": "tsx scripts/check_npcs.ts",
     "check:narration": "tsx scripts/check_narration.ts",
     "gen:reading-lists": "node scripts/reading_lists.cjs",
     "gen:reading": "tsx scripts/generate_reading.ts",

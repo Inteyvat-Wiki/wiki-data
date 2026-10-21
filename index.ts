@@ -14,6 +14,7 @@ import { gen_readable } from "~/readable";
 import { gen_map, get_maps } from '~/map';
 import { gen_chapter_group } from "~/chapter_groups";
 import { gen_task } from "~/task";
+import { gen_npc } from "~/npc";
 import { gen_quest_item } from "~/quest_item";
 import { get_menu } from '~/menu';
 
@@ -36,6 +37,7 @@ function main() {
         gen_map(lang, `./data/${lang}/map`);
         gen_chapter_group(lang, `./data/${lang}/chapter_group`);
         gen_task(lang, `./data/${lang}/task`);
+        gen_npc(lang, `./data/${lang}/npc`);
         gen_quest_item(lang, `./data/${lang}/quest_item`);
     }
 
