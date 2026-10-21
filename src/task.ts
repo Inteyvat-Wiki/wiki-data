@@ -6,6 +6,7 @@ import { TaskData } from "~/utils/data";
 import { Lang, t } from "~/utils/i18n";
 import { get_task_conditions } from "~/utils/task_condition";
 import { get_task_narrations } from "~/utils/task_narration";
+import { get_task_bubbles } from "~/utils/task_bubble";
 import { get_task_item_operation } from "~/utils/task_item";
 import task_index from "~/data/tasks";
 import type {
@@ -343,10 +344,11 @@ function get_task(
         steps: get_steps(source.steps, talk_keys, references, own_references, lang),
         talks: get_talks(source.talks, references, own_references, lang),
         narrations: get_task_narrations(source.quest_id, get_key_map(source.steps), lang),
+        bubbles: get_task_bubbles(source.quest_id, get_key_map(source.steps), lang),
     };
 }
 
-function get_task_export(lang: Lang): TaskExport {
+export function get_task_export(lang: Lang): TaskExport {
     const source_tasks = get_source_tasks(lang);
     const references = get_step_references(source_tasks, lang);
     const available_entries = entries.filter(entry => source_tasks.has(entry.source));

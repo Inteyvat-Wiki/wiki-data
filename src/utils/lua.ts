@@ -78,14 +78,19 @@ export type LuaGuard = { id: string, value: boolean, description: string };
 export type LuaCall = {
     id: string, method: string, args: any[], guards: LuaGuard[],
     delay: number, after?: string,
+    callbacks?: { source: string, method: string, argument: number }[],
 };
-type Context = { guards: LuaGuard[], delay: number, after?: string, stack: string[] };
+type Context = { guards: LuaGuard[], delay: number, after?: string, stack: string[], callbacks?: LuaCall['callbacks'] };
+
+export const lua_bubble_methods = new Set(['CreateSpeechBubbleTask', 'TriggerNpcSpeechBubble',
+    'ClearSpeechBubbleTask', 'StopQuestSpeechBubbleByNpc', 'ClearNpcSpeechBubble']);
 
 // Static evaluation recovers constants and captured config tables; it never executes game Lua.
 export class LuaInspector {
     actor: Record<string, any> = {};
     owner = 0;
     calls: LuaCall[] = [];
+    private mode: 'narration' | 'speech_bubble' = 'narration';
     constructor(public source: string, public root: LuaPrototype,
         private configs: Map<number, Record<string, any>>) {}
 
@@ -199,18 +204,24 @@ export class LuaInspector {
                     if (target && next) this.evaluate(target, values, next);
                     if (method && next) {
                         const id = `${this.source}:${prototype.path}:${pc}`;
-                        if (/Narrator|^(ShowReminder|SayReminder)$/.test(method)) this.calls.push({
+                        if (this.mode === 'speech_bubble' ? lua_bubble_methods.has(method)
+                            : /Narrator|^(ShowReminder|SayReminder)$/.test(method)) this.calls.push({
                             id, method, args: payload, guards, delay: next.delay, after: next.after,
+                            ...(next.callbacks?.length ? { callbacks: next.callbacks } : {}),
                         });
                         const callback_index = method === 'AfterMainPageActiveSafeCall' ? 0
                             : method === 'NpcNarratorOnlyTaskByData' ? 2 : 1;
-                        if (method === 'CallDelay' || method === 'AfterMainPageActiveSafeCall' || /Narrator.*Task/.test(method)) {
-                            const callback = payload[callback_index];
+                        if (method === 'CallDelay' || method === 'AfterMainPageActiveSafeCall' || /Narrator.*Task/.test(method)
+                            || this.mode === 'speech_bubble' && method === 'ActionSafeCall') {
+                            const index = method === 'ActionSafeCall' ? 0 : callback_index;
+                            const callback = payload[index];
                             const callback_target = callback?.prototype ? callback : callback?.closure;
                             if (callback_target) this.evaluate(callback_target, [this.actor], {
                                 ...next,
                                 delay: next.delay + (method === 'CallDelay' && typeof payload[0] === 'number' ? payload[0] : 0),
                                 after: /Narrator/.test(method) ? id : next.after,
+                                ...(this.mode === 'speech_bubble' ? { callbacks: [...(next.callbacks || []),
+                                    { source: id, method, argument: index }] } : {}),
                             });
                         }
                     }
@@ -249,8 +260,9 @@ export class LuaInspector {
         return this.actor;
     }
 
-    inspect(entry: string): LuaCall[] {
+    inspect(entry: string, mode: 'narration' | 'speech_bubble' = 'narration'): LuaCall[] {
         this.calls = [];
+        this.mode = mode;
         const closure = this.actor[entry];
         if (closure?.prototype) this.evaluate(closure, [this.actor], { guards: [], delay: 0, stack: [] });
         return this.calls;

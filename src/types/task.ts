@@ -142,6 +142,7 @@ export type Task = {
     steps: Record<string, TaskStep>,
     talks: Record<string, TaskTalk>,
     narrations: Record<string, TaskNarration>,
+    bubbles?: Record<string, TaskBubble>,
 };
 
 export type TaskNarration = {
@@ -153,6 +154,26 @@ export type TaskNarration = {
     after?: string,
     conditions: TaskConditionToken[],
     dialogs: Record<string, TaskDialog & { duration?: number }>,
+};
+
+export type TaskBubble = {
+    type: 'speech_bubble',
+    step: number,
+    event: 'start' | 'finish' | 'failed',
+    source: string,
+    api: string,
+    action: 'create' | 'trigger' | 'clear_task' | 'clear_npc',
+    npc_id?: number,
+    dialog_id?: number,
+    dialog?: TaskDialog,
+    dialog_speaker?: { id?: string, type: string },
+    text_sources?: string[],
+    // Actual trailing arguments; native timing/repeat/distance semantics are not inferred.
+    parameters?: (number | boolean | string | null | { reference: string } | { unknown: true })[],
+    delay?: number,
+    after?: string,
+    callbacks?: { source: string, method: string, argument: number }[],
+    conditions: TaskConditionToken[],
 };
 
 export type TaskExport = {

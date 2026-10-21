@@ -3,11 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Lang } from '~/utils/i18n';
 import type { TaskDialog, TaskNarration, TaskConditionToken } from '~/types/task';
-import { LuaInspector, read_lua, type LuaCall } from '~/utils/lua';
+import type { LuaCall } from '~/utils/lua';
+import { get_task_lua_placements } from '~/utils/task_lua';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source_path = process.env.GENSHIN_DATA_PATH || path.resolve(project, '../genshin data');
-const lua_path = path.join(project, 'src/lua');
 const language_codes: Record<Lang, string> = {
     zh_hans: 'CHS', zh_hant: 'CHT', en: 'EN', de: 'DE', es: 'ES', fr: 'FR',
     id: 'ID', it: 'IT', ja: 'JP', ko: 'KR', pt: 'PT', ru: 'RU', th: 'TH', tr: 'TR', vi: 'VI',
@@ -46,60 +46,25 @@ function files(folder: string): string[] {
 
 function get_placements() {
     if (placements) return placements;
-    placements = new Map();
-    const chunks = files(lua_path).filter(file => /\.(luac|lua|bytes|bin)$/i.test(file)).flatMap(file => {
-        try { return [{ file, root: read_lua(file) }]; }
-        catch (error) { warn(`${path.relative(lua_path, file)}: ${String(error)}`); return []; }
-    });
-    const configs = new Map<number, Record<string, any>>();
-    const ambiguous = new Set<number>();
-    for (const { file, root } of chunks) {
-        if (!root.constants.includes('MainID')) continue;
-        let data: Record<string, any>;
-        try { data = new LuaInspector(path.relative(lua_path, file), root, configs).load(); }
-        catch (error) { warn(`${file}: ${String(error)}`); continue; }
-        if (!Number.isInteger(data.MainID)) continue;
-        if (configs.has(data.MainID)) ambiguous.add(data.MainID);
-        else configs.set(data.MainID, data);
-    }
-    for (const id of ambiguous) { configs.delete(id); warn(`ambiguous client config for Quest ${id}`); }
-    for (const { file, root } of chunks) {
-        const inspector = new LuaInspector(path.relative(lua_path, file), root, configs);
-        try { inspector.load(); }
-        catch (error) { warn(`${file}: ${String(error)}`); continue; }
-        if (!inspector.owner) continue;
-        for (const method of Object.keys(inspector.actor)) {
-            const match = method.match(/^OnSub(Start|Finish|Failed)(\d+)$/);
-            if (!match) continue;
-            const entries = placements.get(inspector.owner) || [];
-            let calls: LuaCall[];
-            try { calls = inspector.inspect(method); }
-            catch (error) { warn(`${file}:${method}: ${String(error)}`); continue; }
-            for (const call of calls) {
-                if (!/^(QuestNarratorTask|NarratorOnlyTask(?:ByData(?:SpecifyingResumeReminder|WithPriority)?|Legacy)?|NpcNarratorOnlyTaskByData|NarratorTask(?:ByData|Legacy)?|WarningNarratorTask|ShowReminder|SayReminder)$/.test(call.method)) continue;
-                const event = match[1].toLowerCase() as TaskNarration['event'];
-                const argument = call.args[call.method === 'NpcNarratorOnlyTaskByData'
-                    || call.method === 'WarningNarratorTask' ? 1 : 0];
-                const list = argument?.dialogList || argument;
-                if (list && typeof list === 'object' && !list.reference && !list.narratorId) {
-                    for (const [key, value] of Object.entries(list)) {
-                        if (!/^\d+$/.test(key)) continue;
-                        const id = typeof value === 'number' ? value : (value as any)?.dialogID;
-                        if (Number.isInteger(id)) wanted_dialogs.add(id);
-                    }
-                }
-                if (!entries.some(entry => entry.step === Number(match[2]) && entry.event === event && entry.call.id === call.id)) {
-                    entries.push({ step: Number(match[2]), event, call });
+    placements = get_task_lua_placements('narration');
+    for (const entries of placements.values()) {
+        for (const { call } of entries) {
+            const argument = call.args[call.method === 'NpcNarratorOnlyTaskByData'
+                || call.method === 'WarningNarratorTask' ? 1 : 0];
+            const list = argument?.dialogList || argument;
+            if (list && typeof list === 'object' && !list.reference && !list.narratorId) {
+                for (const [key, value] of Object.entries(list)) {
+                    if (!/^\d+$/.test(key)) continue;
+                    const id = typeof value === 'number' ? value : (value as any)?.dialogID;
+                    if (Number.isInteger(id)) wanted_dialogs.add(id);
                 }
             }
-            placements.set(inspector.owner, entries);
         }
     }
-    console.log(`narration: ${chunks.length} Lua chunks, ${[...placements.values()].reduce((sum, entries) => sum + entries.length, 0)} lifecycle calls`);
     return placements;
 }
 
-function text_map(lang: Lang) {
+export function text_map(lang: Lang) {
     let map = text_maps.get(lang);
     if (!map) {
         for (const language of text_maps.keys()) if (language !== 'zh_hans') text_maps.delete(language);
@@ -213,13 +178,14 @@ function detect_text_keys() {
     reminder_speaker_key = find_text_key(reminder, '派蒙');
 }
 
-function get_dialog(raw: any, lang: Lang): TaskDialog | undefined {
+export function get_dialog(raw: any, lang: Lang): TaskDialog | undefined {
     const chinese = text_map('zh_hans'), localized = text_map(lang);
     detect_text_keys();
     const hashes = Object.entries(raw).filter(([key, value]) => key !== 'id' && typeof value === 'number' && chinese[String(value)]);
     const speaker = Object.values(raw).find((value: any) => value?.type?.startsWith('TALK_ROLE_')) as any;
     // Fixed texts and IDs identify fields, not version-specific hashes or obfuscated keys.
-    const key = raw.reminder ? reminder_content_key : [...content_keys].find(key => raw[key]);
+    const key = raw.reminder ? reminder_content_key : raw.talkContentTextMapHash
+        ? 'talkContentTextMapHash' : [...content_keys].find(key => raw[key]);
     const content_hash = key && raw[key] || (hashes.length === 1 ? hashes[0][1] : undefined);
     if (!content_hash) { warn(`dialog ${raw.id}: ambiguous content field`); return; }
     const content = localized[String(content_hash)]?.replace(/\\n/g, '\n');

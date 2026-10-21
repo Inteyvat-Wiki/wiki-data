@@ -7,6 +7,8 @@
     "gen:npcs": "tsx scripts/generate_npcs.ts",
     "check:npcs": "tsx scripts/check_npcs.ts",
     "check:narration": "tsx scripts/check_narration.ts",
+    "check:bubbles": "tsx scripts/check_bubbles.ts",
+    "check:bubbles:export": "tsx scripts/check_bubbles_export.ts",
     "gen:reading-lists": "node scripts/reading_lists.cjs",
     "gen:reading": "tsx scripts/generate_reading.ts",
     "check:reading": "tsx scripts/check_reading.ts",
