@@ -4,6 +4,7 @@
 /src/map-data
 
 /tmp
+/luac.out
 
 # Logs
 logs

@@ -30,7 +30,23 @@ export function get_npc(source: SourceNpc, lang: Lang): Npc {
     const menu_options = new Set(source.talks.flatMap(talk => talk.nextTalks));
     return {
         name: source.name,
+        title: source.title || null,
         npc_id: source.id,
+        birth_points: source.birthPoints.map(point => ({
+            scene_id: point.sceneId,
+            id: point.id,
+            position: point.position,
+            ...(point.roomId !== undefined ? { room_id: point.roomId } : {}),
+            ...(point.groupId !== undefined ? { group_id: point.groupId } : {}),
+            ...(point.suiteIds ? { suite_ids: point.suiteIds } : {}),
+            ...(point.priority !== undefined ? { priority: point.priority } : {}),
+            ...(point.rawConditions ? { raw_conditions: point.rawConditions } : {}),
+            ...(point.platform ? { platform: {
+                group_id: point.platform.groupId,
+                config_id: point.platform.configId,
+            } } : {}),
+            source: point.source,
+        })),
         entry_talks: map_ids(source.entryTalks, keys) as number[],
         diagnostics: source.diagnostics,
         talks: Object.fromEntries(source.talks.map((talk, index) => {

@@ -9,7 +9,22 @@
 - Npc、Quest 正文分别索引，使用正文内部 talk ID 与明确的 `initDialog` 关联。入口不按乘法推导。
 - 常驻 NPC 没有任务步骤；任务进度只作为对话条件或关联任务链接。
 - 不同条件版本保留在同一 NPC 的 talks 中。菜单按 `nextTalks` 顺序保留全部符合条件的话题，不使用任务的同入口优先级去重。
+- NPC 名称取自 NpcExcel 的文本引用；称号（`title`）通过 ManualTextMap 中明确的 `NPC_TITLE_{id}` 键查询文本引用，可表示职业、身份或所属。沿用清洗和 `process_text`，不固定 TextMap 哈希。没有称号时不展示该项。
+- 出生点读取 `BinOutput/Scene/SceneNpcBorn` 与 `SceneNpcBornNoGroup`，按记录中的 `_configId` 关联 NPC ID。genshin-db 导出 `birthPoints`，Wiki 与接口导出 `birth_points`；不把出生点填入对话的触发点。
 - InterAction 有覆盖时使用其后继，否则保留原始后继；句内条件、变量、物品操作复用任务处理。
+
+## 出生场景与坐标
+
+`birth_points` 保留源记录顺序，不合并同坐标的不同实例，也不选取某个点作为唯一固定位置。每条记录包含：
+
+- `scene_id`、`id`：场景 ID、出生实例 ID；实例 ID 需要结合场景和来源识别，不是 NPC ID。
+- `position`：场景中的 `[x, y, z]` 原始坐标，不转换成地图坐标；缺少绝对坐标时为 `null`。
+- `source`：原始 JSON 路径。
+- `room_id`、`group_id`、`suite_ids`、`priority`：源记录存在时保留。
+- `raw_conditions`：原始出现条件的嵌套数组，保留未知条件，不参与现有对话条件求值。它属于原始数据，内部字段不作为稳定接口解析。
+- `platform`：平台的 `group_id` 与 `config_id` 引用；尚未解算平台变换和相对偏移。
+
+找不到出生记录时列表为空。当前 1,838 名 NPC 中，1,595 名具有直接坐标，另 5 名仅有平台关联，238 名在这两类配置中没有记录；183 名具有多条出生记录。静态出生记录不代表当前状态下必然出现，也不等于 NPC 移动后的实时位置。此次只导出数据，暂不接入前端地图。
 
 ## 分类与键名
 
@@ -51,4 +66,4 @@ npm run check:npcs
 
 商店、UI 交互和 Lua 行为保留来源并显示提示，不执行游戏脚本；原始 `finishExec` 保存在 genshin-db，尚未模拟其游戏状态变化。尚未恢复场景出现/日程规则、所有 Lua 副作用，以及缺失正文引用。`isDaily` 只是候选筛选，不能据此宣称每段对话始终可见。
 
-共享代码位于提取层 `extract/dialogue.js`、Wiki 层 `src/utils/dialogue.ts`、服务端 `utils/dialogue.ts`。前端句内流程仍复用 `task_flow.ts`，NPC 的入口和菜单由 `npc_flow.ts` 单独处理，不创建任务步骤。
+共享代码位于提取层 `extract/dialogue.js`、Wiki 层 `src/utils/dialogue.ts`、服务端 `utils/dialogue.ts`。前端任务与 NPC 均使用 `task_flow.ts` 处理句内分支和跨 Talk 后继，选择界面复用 `TalkFlowSelector.vue`。`npc_flow.ts` 仅确定本轮 NPC 入口并限定沿显式后继继续，不创建任务步骤；对话终止后不会自动切入其他独立入口。后继选择已展示入口句时，不再在正文中重复展示同一句的单选控件。
