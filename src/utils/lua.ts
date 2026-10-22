@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import { get_lua_callback_rule, is_lua_delay, lua_bubble_methods } from './lua_bubble_rules';
+export { lua_bubble_methods } from './lua_bubble_rules';
 
 export type LuaPrototype = {
     path: string,
@@ -78,12 +80,30 @@ export type LuaGuard = { id: string, value: boolean, description: string };
 export type LuaCall = {
     id: string, method: string, args: any[], guards: LuaGuard[],
     delay: number, after?: string,
-    callbacks?: { source: string, method: string, argument: number }[],
+    delay_unknown?: true,
+    callbacks?: { source: string, method: string, argument: number, kind?: 'delay' | 'safe_call' | 'narration_finish' }[],
 };
-type Context = { guards: LuaGuard[], delay: number, after?: string, stack: string[], callbacks?: LuaCall['callbacks'] };
+type Context = { guards: LuaGuard[], delay: number, delay_unknown?: true, after?: string, stack: string[], callbacks?: LuaCall['callbacks'] };
 
-export const lua_bubble_methods = new Set(['CreateSpeechBubbleTask', 'TriggerNpcSpeechBubble',
-    'ClearSpeechBubbleTask', 'StopQuestSpeechBubbleByNpc', 'ClearNpcSpeechBubble']);
+export type LuaShareConfig = { SubIds: any, RewindData: any, QuestData: Record<string, any> };
+
+// Share modules assign literal tables to globals instead of returning a client config.
+// Admit straight-line data only: native calls, branches and loops are not evaluated here.
+export function read_lua_share_config(source: string, root: LuaPrototype): { id: number, data: LuaShareConfig } | undefined {
+    if (!root.constants.includes('main_id') || !root.constants.includes('quest_data')) return;
+    const allowed = new Set(['MOVE', 'LOADK', 'LOADKX', 'LOADBOOL', 'LOADNIL', 'GETUPVAL', 'GETTABUP',
+        'GETTABLE', 'SETTABUP', 'SETUPVAL', 'SETTABLE', 'NEWTABLE', 'SETLIST', 'RETURN', 'EXTRAARG']);
+    if (root.children.length || root.code.some((word, pc) => !allowed.has(lua_opcodes[word & 63])
+        || lua_opcodes[word & 63] === 'LOADBOOL' && !!((word >>> 14) & 511)
+        || lua_opcodes[word & 63] === 'RETURN' && pc !== root.code.length - 1)) return;
+    const environment: Record<string, any> = {};
+    new LuaInspector(source, root, new Map()).evaluate({ prototype: root,
+        upvalues: root.upvalues.map(() => ({ value: environment })) }, []);
+    if (!Number.isSafeInteger(environment.main_id) || environment.main_id <= 0
+        || !environment.quest_data || typeof environment.quest_data !== 'object') return;
+    return { id: environment.main_id, data: { SubIds: environment.sub_ids,
+        RewindData: environment.rewind_data, QuestData: environment.quest_data } };
+}
 
 // Static evaluation recovers constants and captured config tables; it never executes game Lua.
 export class LuaInspector {
@@ -91,11 +111,19 @@ export class LuaInspector {
     owner = 0;
     calls: LuaCall[] = [];
     private mode: 'narration' | 'speech_bubble' = 'narration';
+    private global_environment?: Record<string, any>;
+    private mutable_globals = new Set<string>();
+    private unknown_global_write = false;
     constructor(public source: string, public root: LuaPrototype,
-        private configs: Map<number, Record<string, any>>) {}
+        private configs: Map<number, Record<string, any>>,
+        private shares: Map<number, LuaShareConfig> = new Map(),
+        private static_globals = false) {}
 
     private lookup(object: any, key: any): any {
         if (key === 'clientData' && this.owner) return this.configs.get(this.owner);
+        if (key === 'shareData' && this.owner) return this.shares.get(this.owner);
+        if (object && object === this.global_environment) return !this.unknown_global_write && !this.mutable_globals.has(String(key)) && Object.hasOwn(object, key)
+            ? object[key] : { reference: `_G.${key}` };
         if (object?.reference) return { reference: `${object.reference}.${key}` };
         return object?.[key];
     }
@@ -148,6 +176,12 @@ export class LuaInspector {
         if (context?.stack.includes(prototype.path) || (context?.stack.length || 0) > 30) return;
         const registers: Cell[] = Array.from({ length: prototype.stack }, (_, index) => ({ value: args[index] }));
         const tests = new Map<number, string>();
+        const conditional_initialization = !context && this.global_environment && prototype.code.some((word, pc) => {
+            const op = lua_opcodes[word & 63];
+            return ['JMP', 'FORLOOP', 'FORPREP', 'TFORLOOP', 'EQ', 'LT', 'LE', 'TEST', 'TESTSET'].includes(op)
+                || op === 'LOADBOOL' && !!((word >>> 14) & 511)
+                || op === 'RETURN' && pc !== prototype.code.length - 1;
+        });
         const rk = (value: number) => value & 256 ? prototype.constants[value & 255] : registers[value]?.value;
         const describe = (value: any) => value?.reference || (typeof value === 'object' ? '?' : String(value));
         for (let pc = 0; pc < prototype.code.length; pc++) {
@@ -168,7 +202,8 @@ export class LuaInspector {
             else if (op === 'NEWTABLE') set(a, {});
             else if (op === 'SETTABLE' || op === 'SETTABUP') {
                 const object = op === 'SETTABUP' ? closure.upvalues[a]?.value : get(a);
-                if (object && !object.reference) object[rk(b)] = rk(c);
+                if (object && !object.reference && !(context && object === this.global_environment)) object[rk(b)] =
+                    object === this.global_environment && conditional_initialization ? { reference: `_G.${rk(b)}` } : rk(c);
             } else if (op === 'SELF') {
                 const object = get(b), key = rk(c), value = this.lookup(object, key);
                 set(a + 1, object);
@@ -207,21 +242,23 @@ export class LuaInspector {
                         if (this.mode === 'speech_bubble' ? lua_bubble_methods.has(method)
                             : /Narrator|^(ShowReminder|SayReminder)$/.test(method)) this.calls.push({
                             id, method, args: payload, guards, delay: next.delay, after: next.after,
+                            ...(next.delay_unknown ? { delay_unknown: true } : {}),
                             ...(next.callbacks?.length ? { callbacks: next.callbacks } : {}),
                         });
-                        const callback_index = method === 'AfterMainPageActiveSafeCall' ? 0
-                            : method === 'NpcNarratorOnlyTaskByData' ? 2 : 1;
-                        if (method === 'CallDelay' || method === 'AfterMainPageActiveSafeCall' || /Narrator.*Task/.test(method)
-                            || this.mode === 'speech_bubble' && method === 'ActionSafeCall') {
-                            const index = method === 'ActionSafeCall' ? 0 : callback_index;
+                        const callback_rule = get_lua_callback_rule(method, this.mode);
+                        if (callback_rule) {
+                            const index = callback_rule.argument;
                             const callback = payload[index];
                             const callback_target = callback?.prototype ? callback : callback?.closure;
+                            const delay = next.delay + (callback_rule.kind === 'delay' && is_lua_delay(payload[0]) ? payload[0] : 0);
                             if (callback_target) this.evaluate(callback_target, [this.actor], {
                                 ...next,
-                                delay: next.delay + (method === 'CallDelay' && typeof payload[0] === 'number' ? payload[0] : 0),
-                                after: /Narrator/.test(method) ? id : next.after,
+                                delay: is_lua_delay(delay) ? delay : 0,
+                                ...(this.mode === 'speech_bubble' && callback_rule.kind === 'delay' && (!is_lua_delay(payload[0]) || !is_lua_delay(delay))
+                                    ? { delay_unknown: true as const } : {}),
+                                after: callback_rule.kind === 'narration_finish' ? id : next.after,
                                 ...(this.mode === 'speech_bubble' ? { callbacks: [...(next.callbacks || []),
-                                    { source: id, method, argument: index }] } : {}),
+                                    { source: id, method, argument: index, kind: callback_rule.kind }] } : {}),
                             });
                         }
                     }
@@ -250,10 +287,29 @@ export class LuaInspector {
     }
 
     load() {
+        if (this.static_globals) this.global_environment = {};
         const root: Closure = { prototype: this.root,
-            upvalues: this.root.upvalues.map(() => ({ value: { reference: '_G' } })) };
+            upvalues: this.root.upvalues.map(() => ({ value: this.global_environment || { reference: '_G' } })) };
         const value = this.evaluate(root, []);
         if (value && !value.reference) this.actor = value;
+        if (this.static_globals) {
+            this.mutable_globals.clear();
+            this.unknown_global_write = false;
+            // Initialization values are usable only if no runtime closure can replace that global.
+            const visit = (prototype: LuaPrototype, environment_upvalues: Set<number>) => {
+                if (prototype !== this.root && prototype !== this.actor.OnDataLoaded?.prototype) {
+                    for (const word of prototype.code) {
+                        if (lua_opcodes[word & 63] !== 'SETTABUP' || !environment_upvalues.has((word >>> 6) & 255)) continue;
+                        const key = (word >>> 23) & 511;
+                        if (key & 256) this.mutable_globals.add(String(prototype.constants[key & 255]));
+                        else this.unknown_global_write = true;
+                    }
+                }
+                for (const child of prototype.children) visit(child, new Set(child.upvalues.flatMap(([stack, index], slot) =>
+                    !stack && environment_upvalues.has(index) ? [slot] : [])));
+            };
+            visit(this.root, new Set(this.root.upvalues.map((_, index) => index)));
+        }
         this.owner = typeof this.actor.defaultAlias === 'string'
             ? Number(this.actor.defaultAlias.match(/^Quest(\d+)$/)?.[1]) || 0 : 0;
         if (this.actor.OnDataLoaded?.prototype) this.evaluate(this.actor.OnDataLoaded, [this.actor]);

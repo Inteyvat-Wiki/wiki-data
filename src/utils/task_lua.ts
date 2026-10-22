@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LuaInspector, lua_bubble_methods, read_lua, type LuaCall, type LuaPrototype } from './lua';
+import { LuaInspector, lua_bubble_methods, read_lua, read_lua_share_config,
+    type LuaCall, type LuaPrototype, type LuaShareConfig } from './lua';
+import { bubble_call_identity } from './lua_bubble_rules';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const lua_path = path.join(project, 'src/lua');
@@ -38,19 +40,33 @@ export function get_task_lua_placements(mode: 'narration' | 'speech_bubble'): Ma
         } catch (error) { console.warn(`task Lua: ${file}: ${String(error)}`); }
     }
     for (const id of ambiguous) { configs.delete(id); console.warn(`task Lua: ambiguous config for Quest ${id}`); }
+    const shares = new Map<number, LuaShareConfig>(), ambiguous_shares = new Set<number>();
+    for (const { file, root } of chunks) {
+        try {
+            const share = read_lua_share_config(path.relative(lua_path, file), root);
+            if (!share) continue;
+            if (shares.has(share.id)) ambiguous_shares.add(share.id);
+            else shares.set(share.id, share.data);
+        } catch (error) { console.warn(`task Lua: ${file}: ${String(error)}`); }
+    }
+    for (const id of ambiguous_shares) { shares.delete(id); console.warn(`task Lua: ambiguous share config for Quest ${id}`); }
     for (const { file, root } of chunks) {
         const inspector = new LuaInspector(path.relative(lua_path, file), root, configs);
         try { inspector.load(); }
         catch (error) { console.warn(`task Lua: ${file}: ${String(error)}`); continue; }
         if (!inspector.owner) continue;
         const bubble = has_bubbles(root);
+        // Share-data recovery is scoped to bubbles; preserve the established narration model.
+        let bubble_inspector = bubble ? new LuaInspector(path.relative(lua_path, file), root, configs, shares, true) : undefined;
+        try { bubble_inspector?.load(); }
+        catch (error) { console.warn(`task Lua: ${file}:speech_bubble: ${String(error)}`); bubble_inspector = undefined; }
         for (const method of Object.keys(inspector.actor)) {
             const match = method.match(/^OnSub(Start|Finish|Failed)(\d+)$/);
             if (!match) continue;
             for (const kind of ['narration', 'speech_bubble'] as const) {
-                if (kind === 'speech_bubble' && !bubble) continue;
+                if (kind === 'speech_bubble' && !bubble_inspector) continue;
                 let calls: LuaCall[];
-                try { calls = inspector.inspect(method, kind); }
+                try { calls = (kind === 'speech_bubble' ? bubble_inspector! : inspector).inspect(method, kind); }
                 catch (error) { console.warn(`task Lua: ${file}:${method}:${kind}: ${String(error)}`); continue; }
                 const entries = placements[kind].get(inspector.owner) || [];
                 for (const call of calls) {
@@ -58,10 +74,7 @@ export function get_task_lua_placements(mode: 'narration' | 'speech_bubble'): Ma
                     // Keep different paths/guards to one bubble site; they are alternatives.
                     const duplicate = entries.some(entry => entry.step === Number(match[2])
                         && entry.event === match[1].toLowerCase() && entry.call.id === call.id
-                        && (kind === 'narration' || JSON.stringify([entry.call.guards, entry.call.callbacks, entry.call.delay, entry.call.after,
-                            entry.call.args.map(value => value && typeof value === 'object' ? value.reference || '?' : value)])
-                            === JSON.stringify([call.guards, call.callbacks, call.delay, call.after,
-                                call.args.map(value => value && typeof value === 'object' ? value.reference || '?' : value)])));
+                        && (kind === 'narration' || bubble_call_identity(entry.call) === bubble_call_identity(call)));
                     if (!duplicate) entries.push({ step: Number(match[2]), event: match[1].toLowerCase() as LuaTaskPlacement['event'], call });
                 }
                 placements[kind].set(inspector.owner, entries);

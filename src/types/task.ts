@@ -156,25 +156,40 @@ export type TaskNarration = {
     dialogs: Record<string, TaskDialog & { duration?: number }>,
 };
 
-export type TaskBubble = {
+export type TaskBubbleBase = {
     type: 'speech_bubble',
     step: number,
     event: 'start' | 'finish' | 'failed',
     source: string,
     api: string,
-    action: 'create' | 'trigger' | 'clear_task' | 'clear_npc',
-    npc_id?: number,
-    dialog_id?: number,
-    dialog?: TaskDialog,
-    dialog_speaker?: { id?: string, type: string },
-    text_sources?: string[],
-    // Actual trailing arguments; native timing/repeat/distance semantics are not inferred.
-    parameters?: (number | boolean | string | null | { reference: string } | { unknown: true })[],
+    scope: 'quest' | 'npc',
     delay?: number,
+    delay_unknown?: true,
     after?: string,
-    callbacks?: { source: string, method: string, argument: number }[],
+    after_source?: string,
+    callbacks?: { source: string, method: string, argument: number, kind?: 'delay' | 'safe_call' | 'narration_finish' }[],
     conditions: TaskConditionToken[],
 };
+
+// A cleanup event cannot accidentally carry text, and a display event must have its NPC and text.
+export type TaskBubble = TaskBubbleBase & ({
+    action: 'create' | 'trigger',
+    npc_id: number,
+    dialog_id: number,
+    dialog: TaskDialog,
+    dialog_speaker?: { id?: string, type: string },
+    text_sources: string[],
+    // Unknown native timing/repeat/distance arguments remain positional evidence.
+    parameters?: (number | boolean | string | null | { reference: string } | { unknown: true })[],
+} | {
+    action: 'clear_task',
+    scope: 'quest',
+    npc_id?: never, dialog_id?: never, dialog?: never, parameters?: never,
+} | {
+    action: 'clear_npc',
+    npc_id: number,
+    dialog_id?: never, dialog?: never, parameters?: never,
+});
 
 export type TaskExport = {
     files: {

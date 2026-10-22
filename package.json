@@ -5,6 +5,7 @@
   "scripts": {
     "gen": "tsx index.ts",
     "gen:npcs": "tsx scripts/generate_npcs.ts",
+    "gen:tasks": "tsx scripts/generate_tasks.ts",
     "check:npcs": "tsx scripts/check_npcs.ts",
     "check:narration": "tsx scripts/check_narration.ts",
     "check:bubbles": "tsx scripts/check_bubbles.ts",

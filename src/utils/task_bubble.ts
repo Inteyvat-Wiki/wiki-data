@@ -1,10 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import type { Lang } from './i18n';
-import type { TaskBubble, TaskConditionToken } from '../types/task';
+import type { TaskBubble, TaskBubbleBase, TaskConditionToken } from '../types/task';
 import { get_task_lua_placements } from './task_lua';
-import { get_dialog, text_map } from './task_narration';
+import { get_dialog, get_task_narrations, has_dialog_content_field, text_map } from './task_narration';
+import { bubble_call_identity, bubble_delay_fields, bubble_parameter, get_bubble_rule, has_conflicting_bubble_text } from './lua_bubble_rules';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = process.env.GENSHIN_DATA_PATH || path.resolve(project, '../genshin data');
@@ -28,7 +30,7 @@ function* tables(value: any): Generator<any> {
 
 function* files(folder: string): Generator<string> {
     if (!fs.existsSync(folder)) return;
-    for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
+    for (const entry of fs.readdirSync(folder, { withFileTypes: true }).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)) {
         const file = path.join(folder, entry.name);
         if (entry.isDirectory()) yield* files(file);
         else if (file.endsWith('.json')) yield file;
@@ -41,8 +43,8 @@ function get_dialogs(): Map<number, Candidate[]> {
     const wanted = new Set<number>();
     for (const entries of get_task_lua_placements('speech_bubble').values()) {
         for (const { call } of entries) {
-            if (/^(CreateSpeechBubbleTask|TriggerNpcSpeechBubble)$/.test(call.method)
-                && Number.isInteger(call.args[1]) && call.args[1] > 0) wanted.add(call.args[1]);
+            if (get_bubble_rule(call.method)?.text
+                && Number.isSafeInteger(call.args[1]) && call.args[1] > 0) wanted.add(call.args[1]);
         }
     }
     const add = (id: number, raw: any, file: string) => {
@@ -53,7 +55,8 @@ function get_dialogs(): Map<number, Candidate[]> {
     };
     for (const file of files(path.join(source, 'BinOutput/Talk'))) {
         for (const raw of tables(JSON.parse(fs.readFileSync(file, 'utf8')))) {
-            if (Number.isInteger(raw.id) && Object.values(raw).some((value: any) => value?.type?.startsWith('TALK_ROLE_')))
+            if (Number.isSafeInteger(raw.id) && raw.id > 0 && (has_dialog_content_field(raw)
+                || Object.values(raw).some((value: any) => value?.type?.startsWith('TALK_ROLE_'))))
                 add(raw.id, raw, path.relative(source, file).replaceAll('\\', '/'));
         }
     }
@@ -68,63 +71,86 @@ function get_dialogs(): Map<number, Candidate[]> {
 }
 
 function resolve_dialog(id: number, npc: number, lang: Lang) {
-    const converted = (get_dialogs().get(id) || []).flatMap(candidate => {
+    const convert = (language: Lang) => (get_dialogs().get(id) || []).flatMap(candidate => {
         // A missing Excel hash is not repaired by XOR or approximate numeric matching.
-        if (candidate.raw.talkContentTextMapHash && !text_map(lang)[String(candidate.raw.talkContentTextMapHash)]) return [];
-        const dialog = get_dialog(candidate.raw, lang);
+        if (candidate.raw.talkContentTextMapHash && !text_map(language)[String(candidate.raw.talkContentTextMapHash)]) return [];
+        const dialog = get_dialog(candidate.raw, language);
         return dialog ? [{ ...candidate, dialog }] : [];
     });
+    const reference = convert('zh_hans');
+    // A namespace conflict must not disappear merely because one translation is missing.
+    if (has_conflicting_bubble_text(reference.map(candidate => candidate.dialog))) {
+        warn(`dialog ${id}: conflicting reference-language content sources; skipped`); return;
+    }
+    const converted = lang === 'zh_hans' ? reference : convert(lang);
     if (!converted.length) { warn(`dialog ${id}: no ${lang} text`); return; }
-    if (new Set(converted.map(candidate => candidate.dialog.content)).size !== 1) {
+    if (has_conflicting_bubble_text(converted.map(candidate => candidate.dialog))) {
         warn(`dialog ${id}: conflicting ${lang} content sources; skipped`); return;
     }
     const chosen = converted[0];
     if (!names) names = new Map((json('ExcelBinOutput/NpcExcelConfigData.json') as any[]).map(row => [row.id, row.nameTextMapHash]));
     const name = text_map(lang)[String(names.get(npc))];
-    const role = Object.values(chosen.raw).find((value: any) => value?.type?.startsWith('TALK_ROLE_')) as any;
+    const roles = new Map(converted.flatMap(candidate => {
+        const role = Object.values(candidate.raw).find((value: any) => value?.type?.startsWith('TALK_ROLE_')) as any;
+        if (!role) return [];
+        const normalized = { type: role.type, ...(role.id != null ? { id: String(role.id) } : {}) };
+        return [[JSON.stringify(normalized), normalized] as const];
+    }));
     const { speaker: _source_speaker, ...dialog } = chosen.dialog;
     return {
         // The bubble's NPC argument controls its attachment, independently of the dialog role.
         dialog: { ...dialog, role: 'npc' as const, ...(name ? { speaker: name } : {}) },
-        ...(role ? { dialog_speaker: { type: role.type, ...(role.id != null ? { id: String(role.id) } : {}) } } : {}),
-        text_sources: [...new Set(converted.map(candidate => candidate.file))],
+        ...(roles.size === 1 ? { dialog_speaker: roles.values().next().value } : {}),
+        text_sources: [...new Set(converted.map(candidate => candidate.file))].sort(),
     };
 }
 
 export function get_task_bubbles(quest: number, steps: Map<number, number>, lang: Lang): Record<string, TaskBubble> {
     const result: Record<string, TaskBubble> = {};
+    const pending = new Map<string, Map<string, TaskBubble>>();
     for (const { call, step: raw_step, event } of get_task_lua_placements('speech_bubble').get(quest) || []) {
         const step = steps.get(raw_step);
         if (!step) { warn(`Quest ${quest}: step ${raw_step} not exported`); continue; }
-        const create = call.method === 'CreateSpeechBubbleTask', trigger = call.method === 'TriggerNpcSpeechBubble';
-        const clear_task = call.method === 'ClearSpeechBubbleTask';
+        const rule = get_bubble_rule(call.method);
+        if (!rule) { warn(`${call.id}: unsupported bubble API ${call.method}; skipped`); continue; }
         const npc = call.args[0], id = call.args[1];
-        if (!clear_task && (!Number.isInteger(npc) || npc <= 0)) { warn(`${call.id}: unresolved NPC; skipped`); continue; }
-        if ((create || trigger) && (!Number.isInteger(id) || id <= 0)) { warn(`${call.id}: unresolved dialog; skipped`); continue; }
-        const text = create || trigger ? resolve_dialog(id, npc, lang) : undefined;
-        if ((create || trigger) && !text) continue;
+        if (rule.npc && (!Number.isSafeInteger(npc) || npc <= 0)) { warn(`${call.id}: unresolved NPC; skipped`); continue; }
+        if (rule.text && (!Number.isSafeInteger(id) || id <= 0)) { warn(`${call.id}: unresolved dialog; skipped`); continue; }
+        const text = rule.text ? resolve_dialog(id, npc, lang) : undefined;
+        if (rule.text && !text) continue;
         const conditions: TaskConditionToken[] = [];
-        for (const guard of new Map(call.guards.map(guard => [guard.id, guard])).values()) {
+        for (const guard of new Map(call.guards.map(guard => [`${guard.id}:${guard.value}`, guard])).values()) {
             conditions.push({ type: 'boolean', id: guard.id, title: 'Lua', subtitle: guard.description, value: guard.value });
             if (conditions.length > 1) conditions.push('and');
         }
-        const bubble: TaskBubble = {
+        const after = call.after && `${event}:${step}:${call.after}`;
+        const parent_exists = after && get_task_narrations(quest, steps, lang)[after];
+        const common: TaskBubbleBase = {
             type: 'speech_bubble', step, event, source: call.id, api: call.method,
-            action: create ? 'create' : trigger ? 'trigger' : clear_task ? 'clear_task' : 'clear_npc',
-            ...(!clear_task ? { npc_id: npc } : {}),
-            ...(text ? { dialog_id: id, ...text } : {}),
-            ...(create ? { parameters: call.args.slice(2).map(value =>
-                value === null || ['number', 'boolean', 'string'].includes(typeof value) ? value
-                    : value?.reference ? { reference: value.reference } : { unknown: true }) } : {}),
+            scope: rule.scope,
             conditions,
-            ...(call.delay ? { delay: call.delay } : {}),
-            ...(call.after ? { after: `${event}:${step}:${call.after}` } : {}),
+            ...bubble_delay_fields(call),
+            ...(parent_exists ? { after } : call.after ? { after_source: call.after } : {}),
             ...(call.callbacks?.length ? { callbacks: call.callbacks } : {}),
         };
+        let bubble: TaskBubble;
+        if (rule.text && text) bubble = { ...common, action: rule.action as 'create' | 'trigger',
+            npc_id: npc, dialog_id: id, ...text,
+            ...(rule.action === 'create' ? { parameters: call.args.slice(2).map(bubble_parameter) } : {}),
+        };
+        else if (rule.action === 'clear_task') bubble = { ...common, scope: 'quest', action: 'clear_task' };
+        else bubble = { ...common, action: 'clear_npc', npc_id: npc };
         const base = `${event}:${step}:${call.id}`;
-        let key = base, index = 2;
-        while (result[key] && JSON.stringify(result[key]) !== JSON.stringify(bubble)) key = `${base}:variant:${index++}`;
-        result[key] = bubble;
+        const variants = pending.get(base) || new Map<string, TaskBubble>();
+        variants.set(bubble_call_identity(call), bubble);
+        pending.set(base, variants);
+    }
+    for (const [base, variants] of pending) {
+        for (const [identity, bubble] of [...variants].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) {
+            const key = variants.size === 1 ? base : `${base}:path:${createHash('sha256').update(identity).digest('hex').slice(0, 16)}`;
+            if (result[key]) throw new Error(`Bubble path identity collision: ${key}`);
+            result[key] = bubble;
+        }
     }
     return result;
 }

@@ -178,6 +178,13 @@ function detect_text_keys() {
     reminder_speaker_key = find_text_key(reminder, '派蒙');
 }
 
+// A valid text record may omit its original role: bubble attachment comes from the API's NPC.
+export function has_dialog_content_field(raw: any): boolean {
+    detect_text_keys();
+    return ['talkContentTextMapHash', ...content_keys].some(key =>
+        Number.isSafeInteger(raw[key]) && raw[key] > 0);
+}
+
 export function get_dialog(raw: any, lang: Lang): TaskDialog | undefined {
     const chinese = text_map('zh_hans'), localized = text_map(lang);
     detect_text_keys();

@@ -97,7 +97,7 @@ export function export_category<T, P extends PageDataTrait>(
         throw new Error(`Duplicate page IDs: ${directory}`);
     }
     for (const id of [...ids, ...pages.map(page => page.id)]) {
-        if (!/^[a-zA-Z0-9_-]+$/.test(id)) throw new Error(`Invalid ID: ${id}`);
+        if (!/^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*$/.test(id)) throw new Error(`Invalid ID: ${id}`);
     }
     for (const page of pages) {
         for (const id of [...page.items, ...page.related_items]) {
