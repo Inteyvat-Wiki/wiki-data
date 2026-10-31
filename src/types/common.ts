@@ -25,6 +25,7 @@ export type PageDataTrait = {
     show: boolean,
     items: string[],
     related_items: string[],
+    group?: { id: string; mode: 'stages' | 'variants' },
 };
 
 export type ItemCommon<ItemTypes extends string | null = string> = {

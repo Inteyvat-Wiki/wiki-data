@@ -1,4 +1,4 @@
-import genshindb, { Language } from 'genshin-db';
+import genshindb, { Language, type ArchiveRecord, type MiscRecord } from 'genshin-db';
 import { Lang } from '~/utils/i18n';
 
 const language_map: Record<Lang, string> = {
@@ -40,6 +40,34 @@ const id_query_options = (lang: Lang) => ({
 });
 
 const id_name_cache = new Map<string, string | null>();
+
+type ArchiveFolder = 'serenitea' | 'tcg' | 'miliastra';
+function read_catalogue<T>(category: string, query: Function | undefined, lang: Lang): T[] {
+    if (lang !== 'zh_hans' && lang !== 'en') throw new Error(`Archive language not configured: ${lang}`);
+    if (typeof query !== 'function') throw new Error(`Update genshin-db: ${category} query is not available`);
+    const records = query('names', {
+        resultLanguage: language_map[lang] as Language,
+        queryLanguages: [language_map[lang] as Language],
+        matchCategories: true, verboseCategories: true,
+        matchNames: false, matchAltNames: false, matchAliases: false,
+    });
+    if (!Array.isArray(records) || !records.length) {
+        throw new Error(`Missing genshin-db data: ${category}/${lang}. Run GenshinData-scripts export and genshin-db makeIndex first.`);
+    }
+    return records;
+}
+
+export const ArchiveData = {
+    get_records: (category: ArchiveFolder, lang: Lang): ArchiveRecord[] => {
+        const queries = { serenitea: genshindb.serenitea, tcg: genshindb.tcg, miliastra: genshindb.miliastra };
+        if (!Object.hasOwn(queries, category)) throw new Error(`Unknown archive category: ${category}`);
+        return read_catalogue<ArchiveRecord>(category, queries[category], lang);
+    },
+};
+
+export const MiscData = {
+    get_records: (lang: Lang): MiscRecord[] => read_catalogue<MiscRecord>('misc', genshindb.misc, lang),
+};
 
 export function find_data_name_by_id(id: number, lang: Lang, folder: string): string | null {
     const cache_key = `${lang}:${folder}:${id}`;

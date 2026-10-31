@@ -26,6 +26,7 @@
         "task": "Quest",
         "player": "Player",
         "scene": "Scene",
+        "homeworld_new_talk": "New topic state",
         "event": "Event",
         "vehicle": "Vehicle",
         "activity": "Event",

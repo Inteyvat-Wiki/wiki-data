@@ -125,6 +125,9 @@ add_boolean_conditions(['QUEST_COND_PACK_HAVE_ANY_ITEM'], 'has_any_item', 'item'
 add_boolean_conditions(['QUEST_COND_PACK_HAVE_ITEM_WITH_ID'], 'has_item', 'item', [0], [0], 'has_item', 1);
 add_boolean_conditions(['QUEST_COND_PLAYER_CHOOSE_MALE'], 'male_player', 'player', [], [], 'male_player', 0);
 add_boolean_conditions(['QUEST_COND_IS_DAYTIME'], 'daytime', 'scene', [], [], 'daytime', 0);
+// NPC + topic identify one state; the third parameter is its expected boolean value.
+// Keeping 0/1 in the ID would create two independent switches for the same topic.
+add_boolean_conditions(['QUEST_COND_HOMEWORLD_NPC_NEW_TALK'], 'homeworld_new_talk', 'event', [0, 1], [0, 1], 'homeworld_new_talk', 2);
 add_boolean_conditions(['QUEST_COND_DAILY_TASK_REWARD_CAN_GET'], 'daily_reward_available', 'player', [], [], 'daily_reward_available', 0);
 add_boolean_conditions(['QUEST_COND_DAILY_TASK_REWARD_RECEIVED'], 'daily_reward_received', 'player', [], [], 'daily_reward_received', 0);
 add_boolean_conditions(['QUEST_COND_TMPVALUE_HIT_NICKNAME'], 'nickname_match', 'event', [0], [0], 'nickname_match', 1);

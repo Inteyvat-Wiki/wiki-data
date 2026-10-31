@@ -25,6 +25,7 @@ export function grouped_entries(
         });
         if (group.grouped) {
             for (const id of group.items) {
+                if (id === group.id) continue; // A maintained item ID may also be the canonical page ID.
                 entries.push({
                     id,
                     type: group.type,
@@ -84,7 +85,11 @@ export function export_category<T, P extends PageDataTrait>(
     directory: string,
     pages: P[],
     objects: { id: string; data: T }[],
+    common: Record<string, unknown> = {},
 ): void {
+    for (const name of Object.keys(common)) {
+        if (!/^[a-z][a-z_]*$/.test(name) || name === 'ids') throw new Error(`Invalid common export name: ${name}`);
+    }
     const ids = objects.map(object => object.id);
     const available = new Set(ids);
     if (available.size !== ids.length) throw new Error(`Duplicate data IDs: ${directory}`);
@@ -113,6 +118,7 @@ export function export_category<T, P extends PageDataTrait>(
     for (const object of objects) write(path.join(items_directory, `${object.id}.json`), object.data);
     write(path.join(directory, 'pages.json'), pages);
     write(path.join(index_directory, 'ids.json'), ids);
+    for (const [name, data] of Object.entries(common)) write(path.join(index_directory, `${name}.json`), data);
     for (const file of fs.readdirSync(items_directory, { withFileTypes: true })) {
         if (file.isFile() && file.name.endsWith('.json') && !available.has(file.name.slice(0, -5))) {
             fs.unlinkSync(path.join(items_directory, file.name));

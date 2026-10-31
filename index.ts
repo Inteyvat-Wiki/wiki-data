@@ -17,6 +17,10 @@ import { gen_task } from "~/task";
 import { gen_npc } from "~/npc";
 import { gen_quest_item } from "~/quest_item";
 import { get_menu } from '~/menu';
+import { gen_serenitea } from '~/serenitea';
+import { gen_tcg } from '~/tcg';
+import { gen_miliastra } from '~/miliastra';
+import { gen_misc } from '~/misc';
 
 const languages: Lang[] = ['zh_hans', 'en'];
 
@@ -39,6 +43,10 @@ function main() {
         gen_task(lang, `./data/${lang}/task`);
         gen_npc(lang, `./data/${lang}/npc`);
         gen_quest_item(lang, `./data/${lang}/quest_item`);
+        gen_serenitea(lang, `./data/${lang}/serenitea`);
+        gen_tcg(lang, `./data/${lang}/tcg`);
+        gen_miliastra(lang, `./data/${lang}/miliastra`);
+        gen_misc(lang, `./data/${lang}/misc`);
     }
 
     fs.writeFileSync('./data/common/menu.json', JSON.stringify(get_menu(), null, 4), 'utf-8');
