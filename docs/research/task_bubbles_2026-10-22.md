@@ -1,5 +1,7 @@
 # 气泡规则复核（2026-10-22）
 
+维护说明（2026-10-23）：下文路径保留核验时的历史位置。Lua 静态解析与接口规则现已迁入 GenshinData-scripts 的 `extract/subtitles/`，wiki-data 改为查询 genshin-db；当前流程见 [数据分层](../data_pipeline.md)。
+
 本页记录规范化初次核验；同日后续已扩展到 236 条显示事件，见 [覆盖率续查](task_bubbles_coverage_2026-10-22.md)。
 
 规范入口为 [任务气泡字幕导出规则 v1](../task_bubbles.md)。本次收敛接口、字段与去重规则，保持现有任务目录和文本覆盖。

@@ -1,6 +1,6 @@
 # 任务气泡字幕导出规则 v1
 
-气泡写入 `Task.bubbles`，与对话 `talks`、旁白字幕 `narrations` 并列。每条记录表示脚本中的显示或清理请求，不保证游戏运行时一定播放。正式导出静态读取 `src/lua` 字节码，不执行游戏 Lua。
+气泡写入 `Task.bubbles`，与对话 `talks`、旁白字幕 `narrations` 并列。每条记录表示脚本中的显示或清理请求，不保证游戏运行时一定播放。原始提取位于 GenshinData-scripts 的 `extract/subtitles`，静态读取其配置的 Lua 字节码，不执行游戏 Lua；wiki-data 查询 genshin-db 的 `tasksubtitles`，不再读取 `src/lua`。流程见 [data_pipeline.md](data_pipeline.md)。
 
 ## 六条基本规则
 

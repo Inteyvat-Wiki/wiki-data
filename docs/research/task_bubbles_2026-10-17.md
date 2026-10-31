@@ -1,5 +1,7 @@
 # 任务气泡导出
 
+维护说明（2026-10-23）：下文记录历史实现，`src/lua` 不再作为 wiki-data 的正式导出输入。Lua 静态解析已迁入 GenshinData-scripts，经 genshin-db 提供字幕查询；当前流程见 [数据分层](../data_pipeline.md)。
+
 `Task.bubbles` 与 `talks`、`narrations` 并列，保存气泡请求及清理事件。`step` 是当前任务导出的步骤序号，`event` 是 start/finish/failed；`source` 保存 Lua 文件、原型路径和指令 PC。
 
 ## 可核验的关联方式

@@ -3,7 +3,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { get_task_export, get_task_id_map } from '../src/task';
 import type { Task } from '../src/types/task';
-import { get_bubble_rule } from '../src/utils/lua_bubble_rules';
+
+const read = fs.readFileSync;
+fs.readFileSync = ((file: any, ...args: any[]) => {
+    const name = String(file).replaceAll('\\', '/');
+    assert(!/(?:\/ExcelBinOutput\/|\/BinOutput\/|\/TextMap\/|\/src\/lua\/|\.luac$|GenshinData-scripts\/config\.json)/i.test(name),
+        `Task export attempted to bypass genshin-db: ${name}`);
+    return (read as any)(file, ...args);
+}) as typeof fs.readFileSync;
 
 const output = path.resolve('.cache/bubble-export-check');
 const summaries: any[] = [];
@@ -28,12 +35,10 @@ for (const lang of ['zh_hans', 'en'] as const) {
             assert.ok(task.steps[String(bubble.step)], `${file}: bubble step does not exist`);
             assert.ok(['start', 'finish', 'failed'].includes(bubble.event));
             assert.ok(bubble.source.includes('.luac:'));
-            const rule = get_bubble_rule(bubble.api);
-            assert.ok(rule, `${file}: unsupported API`);
-            assert.equal(bubble.scope, rule.scope);
-            assert.equal(bubble.action, rule.action);
-            assert.equal(Boolean(bubble.dialog), rule.text);
-            assert.equal(typeof bubble.npc_id === 'number', rule.npc);
+            assert.ok(bubble.api, `${file}: source API must survive database querying`);
+            assert.ok(['quest', 'npc'].includes(bubble.scope));
+            assert.equal(Boolean(bubble.dialog), bubble.action === 'create' || bubble.action === 'trigger');
+            assert.equal(typeof bubble.npc_id === 'number', bubble.action !== 'clear_task');
             assert.ok(!bubble.delay_unknown || bubble.delay === undefined, 'unknown delay must not be exported as a numeric total');
             if (bubble.dialog) {
                 text_events++;
@@ -68,3 +73,4 @@ for (const lang of ['zh_hans', 'en'] as const) {
 }
 fs.writeFileSync(path.join(output, 'summary.json'), JSON.stringify(summaries, null, 2));
 console.log(JSON.stringify(summaries, null, 2));
+fs.readFileSync = read;
