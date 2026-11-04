@@ -43,7 +43,7 @@
 ## 复核产物
 
 - `.cache/bubble-rules-check/exploration-before.json`：续查前 366 条显示候选及分类。
-- `.cache/bubble-rules-check/exploration.json`：逐条参数、入口、步骤、文本与原因；`explore.ts` 可复算。
+- `.cache/bubble-rules-check/exploration.json`：逐条参数、入口、步骤、文本与原因；分析结果保留，一次性探查脚本已清理。
 - `.cache/bubble-rules-check/text-gaps.json`：剩余文字 ID 的全命名空间核查。
 - `.cache/bubble-rules-check/additions.json`：新旧事件逐条比对，原有记录未丢失；全部任务中英事件键一致。
 - `.cache/bubble-export-check/summary.json` 与语言子目录：完整对象检查汇总及独立样例。

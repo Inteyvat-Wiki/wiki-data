@@ -43,8 +43,8 @@ ID，供原始 ID 检索。common/<栏目>/source_ids.json 保存旧源 ID 到 W
 结构性 ID 迁移另外在 `src/data/archive_id_aliases.js` 维护旧 Wiki ID 到稳定源 ID 的关系，
 导出为 `common/<栏目>/id_aliases.json`，由目录转换成当前 ID；旧的 `ganyu-0`、`ganyu-1`
 等地址仍可读取，不会继续出现在新列表和关系链接中。别名不得遮蔽正式 ID 或指向未导出的条目。
-`node scripts/prefix_archive_ids.cjs` 可预览仍未处理的跨类型冲突，加 `--apply` 才机械修改目录；
-重复运行不会继续添加前缀。补录计划同样按类型命名空间区分新增同名条目。
+一次性前缀迁移已完成，迁移脚本已清理。后续通过补录计划按类型命名空间区分新增同名条目；
+人工修改已有 ID 时同步维护上述别名，并运行 `npm run check:archive-directories` 核验。
 
 删除目录中的条目即停止导出；按通常生成方式清理旧的 items JSON，源数据与旧图片
 输入不会删除。此前数字命名的生成文件已由同一规则清理，可以从上游与目录重生成。
