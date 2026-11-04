@@ -7,11 +7,11 @@ import { ArchiveData } from '../src/utils/data';
 const output = path.resolve('tmp/page-reference-regression');
 fs.mkdirSync(path.join(output, 'en/npc'), { recursive: true });
 fs.writeFileSync(path.join(output, 'en/npc/pages.json'), JSON.stringify([
-    { id: 'npc_9310', name: 'Same name' }, { id: 'npc_9501', name: 'Same name' },
+    { id: 'fischl-v4.7', name: 'Same name' }, { id: 'fischl-v3.3', name: 'Same name' },
 ]));
 const refs = new PageReferences(output);
-assert.deepEqual(source_page_ids('npc').get(9501), ['npc_9501']);
-assert.equal(refs.resolve('npc', 9501, 'en')!.id, 'npc_9501', 'same-name records must not shadow the exact source ID');
+assert.deepEqual(source_page_ids('npc').get(9501), ['fischl-v3.3']);
+assert.equal(refs.resolve('npc', 9501, 'en')!.id, 'fischl-v3.3', 'same-name records must not shadow the exact source ID');
 assert.equal(refs.resolve('npc', 9501, 'zh_hans'), null, 'publication is language-specific');
 assert.equal(refs.resolve('npc', 9502, 'en'), null, 'never substitute another same-name NPC');
 assert.equal(new PageReferences(path.join(output, 'empty')).resolve('npc', 9501, 'en'), null, 'publication is output-specific');

@@ -1,18 +1,23 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import genshindb from 'genshin-db';
-import type { Npc, NpcPages } from '../src/types/npc';
+import genshindb from '../src/utils/genshin';
+import type { Npc, NpcPages } from '@inteyvat-wiki/wiki-contracts/npc';
+import { get_output_root } from '../src/utils/output';
+const input = get_output_root();
 
 for (const lang of ['zh_hans', 'en']) {
-    const read = (file: string) => JSON.parse(fs.readFileSync(`data/${lang}/npc/${file}.json`, 'utf8'));
+    const read = (file: string) => JSON.parse(fs.readFileSync(`${input}/${lang}/npc/${file}.json`, 'utf8'));
     const pages: NpcPages = read('pages');
-    const ids = new Set(JSON.parse(fs.readFileSync('data/common/npc/ids.json', 'utf8')));
+    const ids = new Set(JSON.parse(fs.readFileSync(`${input}/common/npc/ids.json`, 'utf8')));
     assert.equal(pages.length, ids.size);
     assert(pages.length > 1800);
     let positioned = 0;
+    const by_source_id = new Map<number, Npc>();
     for (const page of pages) {
         assert(ids.has(page.id));
         const npc: Npc = read(`items/${page.id}`);
+        assert(!by_source_id.has(npc.npc_id), 'each NPC must have one maintained export key');
+        by_source_id.set(npc.npc_id, npc);
         assert(!('steps' in npc));
         assert(Array.isArray(npc.birth_points));
         if (npc.birth_points.some(point => point.position)) positioned++;
@@ -26,7 +31,7 @@ for (const lang of ['zh_hans', 'en']) {
             }
         }
         if (lang === 'en') {
-            const chinese: Npc = JSON.parse(fs.readFileSync(`data/zh_hans/npc/items/${page.id}.json`, 'utf8'));
+            const chinese: Npc = JSON.parse(fs.readFileSync(`${input}/zh_hans/npc/items/${page.id}.json`, 'utf8'));
             assert.deepEqual(npc.birth_points, chinese.birth_points);
         }
         for (const key of npc.entry_talks) assert(npc.talks[key]);
@@ -37,6 +42,14 @@ for (const lang of ['zh_hans', 'en']) {
                 for (const next of dialog.next_dialogs) assert(talk.dialogs[next.dialog]);
             }
         }
+    }
+    // These explicit groups and valid bodies are absent from NpcFreeTalkIndex.
+    for (const [npc_id, talk_id] of [[7001, 6700101], [7002, 6700201]]) {
+        const npc = by_source_id.get(npc_id!)!;
+        assert(npc, `NPC ${npc_id} must not depend on free-talk index membership`);
+        const talk = Object.values(npc.talks).find(talk => talk.source_id === talk_id);
+        assert(talk?.initial_dialogs?.length, `NPC ${npc_id} must retain its explicit initial dialogue`);
+        assert(npc.entry_talks.some(key => npc.talks[key] === talk));
     }
     const timmie: Npc = read('items/timmie');
     assert.equal(timmie.title, null);
@@ -52,18 +65,18 @@ for (const lang of ['zh_hans', 'en']) {
     assert.equal(sara.title, lang === 'zh_hans' ? '「猎鹿人」侍应生' : 'Waitress, Good Hunter');
     const takeout = Object.values(sara.talks).find(talk => talk.source_id === 41701)!;
     assert.equal(takeout.dialogs[takeout.initial_dialogs![0]!.dialog]!.role, 'select');
-    const charles: Npc = read('items/charles');
+    const charles: Npc = read('items/charles-v1.x');
     assert.equal(charles.birth_points[0]!.scene_id, 1009);
     assert.equal(charles.birth_points[0]!.room_id, 1);
-    const multiple: Npc = read('items/npc_10260');
+    const multiple: Npc = read('items/li_dang');
     assert(multiple.birth_points.length > 1);
     assert(multiple.birth_points.every(point => point.group_id === 133103907));
     assert.deepEqual(multiple.birth_points.flatMap(point => point.suite_ids || []), [2, 3, 4, 5, 6]);
-    const platform: Npc = read('items/npc_2514');
+    const platform: Npc = read('items/bosu');
     assert.equal(platform.birth_points[0]!.position, null);
     assert.deepEqual(platform.birth_points[0]!.platform, { group_id: 133101350, config_id: 350001 });
-    assert.deepEqual(read('items/npc_1574').birth_points, []);
-    assert(read('items/npc_1517').birth_points.some((point: Npc['birth_points'][number]) => point.raw_conditions?.length));
+    assert.deepEqual(read('items/troubled_telfair').birth_points, []);
+    assert(read('items/viktor').birth_points.some((point: Npc['birth_points'][number]) => point.raw_conditions?.length));
     assert.equal(charles.title, lang === 'zh_hans' ? '「天使的馈赠」酒保' : "Bartender, Angel's Share");
     const shop = Object.values(charles.talks).find(talk => talk.source_id === 6146501)!;
     assert(Object.values(shop.dialogs).some(dialog => dialog.actions?.some(action => action.type === 'shop')));
@@ -74,4 +87,8 @@ assert.equal(by_id.id, 1567);
 assert.equal(genshindb.npcs('NPC 1567', { matchAliases: true })!.id, by_id.id);
 assert.equal(genshindb.npcs('Timmie')!.id, by_id.id);
 assert.equal(genshindb.npcs('NPC 2078', { matchAliases: true })!.id, 2078);
+const unindexed = genshindb.npcs('NPC 7001', { matchAliases: true })!;
+assert.equal(unindexed.id, 7001);
+assert.equal(unindexed.source.group, 'BinOutput/Talk/NpcGroup/7001.json');
+assert(!('resource' in unindexed.source), 'missing index resources must not be fabricated');
 console.log('NPC name, alias, ID and duplicate-name queries passed');

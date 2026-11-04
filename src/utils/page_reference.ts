@@ -34,8 +34,7 @@ export function source_page_ids(category: string): Map<number, string[]> {
     else if (category === 'quest_item') walk(quest_item_list);
     else if (category === 'book') walk(book_list);
     else if (category === 'npc') {
-        for (const [id, alias] of Object.entries(npc_list as Record<string, string>)) add(NpcData.get_npc(alias, 'zh_hans').id, id);
-        for (const npc of NpcData.get_npcs('zh_hans')) if (!result.has(npc.id)) add(npc.id, `npc_${npc.id}`);
+        for (const [id, alias] of Object.entries(npc_list)) add(NpcData.get_npc(alias, 'zh_hans').id, id);
     } else if (category === 'character') {
         for (const id of character_list) add(CharacterData.get_character(id, 'zh_hans').id, id);
     } else if (category === 'material') {

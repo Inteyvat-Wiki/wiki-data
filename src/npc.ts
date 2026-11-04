@@ -6,7 +6,7 @@ import { Lang } from '~/utils/i18n';
 import { get_key_map, get_source_dialog, get_talk_dialogs, map_ids } from '~/utils/dialogue';
 import { get_task_conditions } from '~/utils/task_condition';
 import { get_task_id_map, get_task_step_references } from '~/task';
-import type { Npc, NpcPages } from '~/types/npc';
+import type { Npc, NpcPages } from '@inteyvat-wiki/wiki-contracts/npc';
 import type { SourceTaskConditions } from '~/types/task';
 
 function get_conditions(source: SourceNpc['talks'][number]['beginConditions']): SourceTaskConditions {
@@ -80,13 +80,9 @@ export function get_npc(source: SourceNpc, lang: Lang): Npc {
 }
 
 export function get_npc_export(lang: Lang): { files: { id: string, data: Npc }[], list: NpcPages } {
-    const files = Object.entries(npc_index as Record<string, string>).map(([id, name]) => ({
+    const files = Object.entries(npc_index).map(([id, name]) => ({
         id, data: get_npc(NpcData.get_npc(name, lang), lang),
     }));
-    const configured = new Set(files.map(file => file.data.npc_id));
-    for (const source of NpcData.get_npcs(lang)) {
-        if (!configured.has(source.id)) files.push({ id: `npc_${source.id}`, data: get_npc(source, lang) });
-    }
     return {
         files,
         list: files.map(({ id, data }) => create_page({
