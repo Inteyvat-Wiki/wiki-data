@@ -1,4 +1,5 @@
-export default [
+/** @type {import('./data').NameList} */
+const data = [
     "dull_blade",                                   // 无锋剑
     "waster_greatsword",                            // 训练大剑
     "beginners_protector",                          // 新手长枪
@@ -252,4 +253,7 @@ export default [
     "breezeborne_refrain",                          // 柔风游弦
     "winters_heavy_heart",                          // 凝雪沉心
     "silver_light",                                 // 银釭
-]
+    "starsealed_edict",                             // 秘星典谕
+];
+
+export default data;

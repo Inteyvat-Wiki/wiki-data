@@ -3,8 +3,8 @@ import { create_page, export_category } from '~/utils/page';
 import { GeographyData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from "~/utils/i18n";
-import { Geography, GeographyPages } from "~/types/geography";
-import type { GeographyArea, GeographyType } from "~/types/common";
+import { Geography, GeographyPages } from "@inteyvat-wiki/wiki-contracts/geography";
+import type { GeographyArea, GeographyType } from "@inteyvat-wiki/wiki-contracts/common";
 import geography_list from "~/data/geographies";
 
 const geography_areas: Record<number, GeographyArea> = {

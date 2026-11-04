@@ -3,7 +3,7 @@ import { create_page, export_category, named_entries } from '~/utils/page';
 import { QuestItemData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { QuestItem, QuestItemPages } from "~/types/quest_item";
+import { QuestItem, QuestItemPages } from "@inteyvat-wiki/wiki-contracts/quest_item";
 import quest_item_list from "~/data/quest_items";
 import { get_quest_item_tasks } from "~/task";
 

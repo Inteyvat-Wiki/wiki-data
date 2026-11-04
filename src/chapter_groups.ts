@@ -7,7 +7,6 @@ import { get_task_id_map } from "~/task";
 import chapter_group_index from "~/data/chapters";
 import type {
     ChapterGroup,
-    ChapterGroupIndex,
     ChapterGroupPages,
     ChapterGroupType,
 } from "~/types/chapter_group";
@@ -18,7 +17,7 @@ type ChapterGroupEntry = {
     chapters: string[],
 };
 
-const index = chapter_group_index as ChapterGroupIndex;
+const index = chapter_group_index;
 const entries: ChapterGroupEntry[] = Object.entries(index).flatMap(([type, groups]) =>
     Object.entries(groups).map(([id, chapters]) => ({
         id,

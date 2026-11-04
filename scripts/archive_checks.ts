@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import genshindb from 'genshin-db';
 import { get_archive_export, get_archive_excluded_ids, set_archive_output } from '../src/utils/archive';
-import type { ArchiveCategory } from '../src/types/archive';
+import type { ArchiveCategory } from '@inteyvat-wiki/wiki-contracts/archive';
 import { archive_directories, directory_entries } from '../src/utils/archive_directory';
 
 export function check_archive_category(category: ArchiveCategory, expected: number, expected_source = expected) {

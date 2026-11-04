@@ -23,8 +23,6 @@ import type {
     TaskType,
 } from "~/types/task";
 
-type TaskIndex = Record<TaskType, Record<string, string>>;
-
 type TaskEntry = {
     id: string,
     type: TaskType,
@@ -70,7 +68,7 @@ type SourceTask = {
     talks: SourceTaskTalk[],
 };
 
-const entries = Object.entries(task_index as TaskIndex).flatMap(([type, tasks]) =>
+const entries = Object.entries(task_index).flatMap(([type, tasks]) =>
     Object.entries(tasks).map(([id, source]) => ({ id, type: type as TaskType, source })));
 const source_names = [...new Set(entries.map(entry => entry.source))];
 const task_cache = new Map<Lang, Map<string, SourceTask>>();
@@ -405,6 +403,32 @@ export function gen_task(lang: Lang, path: string) {
     export_category(path, list, files.map(file => ({ id: file.id, data: file.task })));
 }
 
-export function get_task_step_references(lang: Lang): Map<number, TaskStepReference> {
-    return get_step_references(get_source_tasks(lang), lang);
+export function get_task_step_references(lang: Lang, options: { omitHiddenText?: boolean } = {}): Map<number, TaskStepReference> {
+    const cached=task_cache.get(lang);
+    if(cached) {
+        const references=get_step_references(cached,lang);
+        if(options.omitHiddenText) for(const entry of entries) {
+            const task=cached.get(entry.source); if(!task) continue;
+            for(const step of task.steps) {
+                const ref=references.get(step.id); if(!ref) continue;
+                ref.title=task.hidden?'':task.name||'';
+                ref.subtitle=step.hidden?'':step.description||'';
+            }
+        }
+        return references;
+    }
+    // Reference-only consumers need the maintained route and step order, not dialogue/item conversion.
+    const references=new Map<number,TaskStepReference>();
+    for(const entry of entries) {
+        const data:any=TaskData.get_task(entry.source,lang), hidden=get_hidden(data.showType);
+        if(hidden===undefined) continue;
+        const steps=[...data.steps].map((step:any,index:number)=>({step,index}))
+            .sort((left,right)=>left.step.order-right.step.order||left.index-right.index);
+        steps.forEach(({step},index)=>references.set(step.id,{task:entry.id,step:index+1,
+            title:options.omitHiddenText ? (!hidden&&data.name||'') : (!hidden&&data.name||entry.id||t('task_condition.task',lang)),
+            // Match get_source_task: only an explicit hidden flag suppresses text.
+            // An omitted show-type field also occurs on ordinary named quest steps.
+            subtitle:options.omitHiddenText ? (get_hidden(step.listShowType)!==true&&step.description||'') : (step.description||String(index+1))}));
+    }
+    return references;
 }

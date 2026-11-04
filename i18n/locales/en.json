@@ -1,4 +1,12 @@
 {
+    "map": {
+        "unnamed": {
+            "scene": "Unnamed scene {id}",
+            "floor": "Unnamed floor {id}",
+            "layer_extent": "Unnamed layer extent {id}",
+            "layer_group": "Unnamed layer group {id}"
+        }
+    },
     "book": {
         "collection": "Collection",
         "description": "Description"

@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import genshindb, { type MiscRecord } from 'genshin-db';
 import { convert_misc_records, get_misc_export, misc_asset_manifest, set_misc_output } from '../src/misc';
-import { MISC_TYPES } from '../src/types/misc';
+import { MISC_TYPES } from '@inteyvat-wiki/wiki-contracts/misc';
 import { ConvertRaw } from '../src/utils/convert_raw';
 import { directory_id } from '../src/utils/archive_directory';
 

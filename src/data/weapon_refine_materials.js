@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').WeaponRefineMaterialDirectory} */
+const data = {
     "festering_desire": "festering_dragon_marrow",                                                  // 腐殖龙髓
     "windblume_ode": "the_visible_winds",                                                           // 「看得见的风」
     "dodoco_tales": "fragments_of_innocence",                                                       // 「童真的断篇」
@@ -26,3 +27,5 @@ export default {
     "etherlight_spindlelute": "golden_strings",                                                     // 金色弦丝
     "rainbow_serpents_rain_bow": "refined_heart",                                                   // 练心
 };
+
+export default data;

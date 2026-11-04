@@ -128,11 +128,13 @@ export function get_character(name: string, lang: Lang): Character {
         const res: Character["link_description"] = [];
 
         const linked_id: { [key: string]: boolean } = {};
-        for (let key in talents_data) {
-            if ((talents_data as any)[key].descriptionRaw != undefined) {
+        for (const source of [talents_data, constellations_data]) {
+            for (const key in source) {
+                const description = (source as any)[key]?.descriptionRaw;
+                if (typeof description !== 'string') continue;
                 const regex = /{LINK#N([0-9]+)}[^{}]+{\/LINK}/g;
                 let match;
-                while ((match = regex.exec((talents_data as any)[key].descriptionRaw)) !== null) {
+                while ((match = regex.exec(description)) !== null) {
                     linked_id[match[1]] = true;
                 }
             }

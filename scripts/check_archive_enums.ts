@@ -5,6 +5,7 @@ import { ConvertRaw } from '../src/utils/convert_raw';
 import { ArchiveData, MiscData } from '../src/utils/data';
 import { archive_directories, select_directory_records } from '../src/utils/archive_directory';
 import { convert_archive_images } from '../src/utils/archive_images';
+import type { ArchiveTalk } from '@inteyvat-wiki/wiki-contracts/archive';
 const source_images = [{ name: 'base', kind: 'card' }, { name: 'gold', kind: 'card_face:GCG_CARD_FACE_GOLD:1' },
     { name: '123456789', kind: 'icon' }, { name: 'prefab', kind: 'card_view:cardPrefabName' }];
 const resolved: string[] = [];
@@ -23,9 +24,12 @@ resolved.length = 0;
 assert.deepEqual(convert_archive_images('miliastra', 'hall', replacements, resolve_image).map(image => image.name), ['large']);
 assert.deepEqual(resolved, ['large']);
 assert.deepEqual(convert_archive_images('miliastra', 'hall', replacements, (name, kind) => ({ name, kind, url: name === 'large' ? null : '/images/small.png' })).map(image => image.name), ['small', 'large']);
-const fixture = { id: '["QUEST_COND_GCG_NPC_TYPE",["1"]]', subtitle: 'QUEST_COND_GCG_NPC_TYPE', text: 'QUEST_COND_GCG_NPC_TYPE' };
-assert.deepEqual(ConvertRaw.convert_dialogue_keys(fixture), { id: '["condition:gcg_npc_type",["1"]]', subtitle: 'gcg_npc_type', text: fixture.text });
-assert(fixture.id.includes('QUEST_COND_'));
+const fixture: ArchiveTalk = { source_id: 1, title: 'Fixture', priority: 0, begin_way: null, next_talks: [],
+    trigger_ids: [], trigger_points: [], objects: [], dialogs: { '1': { role: 'text', content: 'QUEST_COND_GCG_NPC_TYPE', next_dialogs: [] } },
+    conditions: [{ id: '["QUEST_COND_GCG_NPC_TYPE",["1"]]', subtitle: 'QUEST_COND_GCG_NPC_TYPE', title: '', type: 'boolean', value: true }] };
+assert.deepEqual(ConvertRaw.convert_dialogue_keys(fixture), { ...fixture, conditions: [{
+    id: '["condition:gcg_npc_type",["1"]]', subtitle: 'gcg_npc_type', title: '', type: 'boolean', value: true }] });
+assert(typeof fixture.conditions[0] !== 'string' && fixture.conditions[0].id.includes('QUEST_COND_'));
 assert.equal(ConvertRaw.get_card_type('GCG_CARD_CHARACTER'), 'character');
 assert.equal(ConvertRaw.get_card_tag('GCG_TAG_ELEMENT_CRYO'), 'element_cryo');
 assert.equal(ConvertRaw.get_archive_image_kind('card_face:GCG_CARD_FACE_GOLD:123'), 'card_face:gold:123');

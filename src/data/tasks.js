@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').TaskDirectory} */
+const data = {
     "archon_quests": {
         "birds_eye_view": "Quest 352",                                                     // 鸟瞰风物 | 捕风的异乡人
         "unexpected_power": "Quest 353",                                                   // 异常的权柄 | 捕风的异乡人
@@ -3278,3 +3279,5 @@ export default {
         "hmm_natlan": "Quest 25036",                                                       // 咦？纳塔？
     },
 };
+
+export default data;

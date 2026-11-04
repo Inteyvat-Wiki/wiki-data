@@ -3,7 +3,7 @@ import { create_page, export_category, typed_entries } from '~/utils/page';
 import { MaterialData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Material, MaterialPages } from "~/types/material";
+import { Material, MaterialPages } from "@inteyvat-wiki/wiki-contracts/material";
 import material_list from "~/data/materials";
 
 const show_full_description: string[] = (() => {

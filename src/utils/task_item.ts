@@ -5,7 +5,7 @@ import type { TaskItemOperation, TaskOperation } from '~/types/task';
 import quest_item_index from '~/data/quest_items';
 
 const item_pages = new Map<number, string>();
-for (const [key, value] of Object.entries(quest_item_index as Record<string, string | Record<string, string>>)) {
+for (const [key, value] of Object.entries(quest_item_index)) {
     const entries = typeof value === 'string' ? [[key, value]] : Object.entries(value);
     for (const [page, alias] of entries) {
         const match = /^QuestItem (\d+)$/.exec(alias);

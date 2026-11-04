@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { MISC_TYPES, type MiscItem, type MiscPage } from '../src/types/misc';
+import { MISC_TYPES, type MiscItem, type MiscPage } from '@inteyvat-wiki/wiki-contracts/misc';
 import { directory_id } from '../src/utils/archive_directory';
 
 async function main() {

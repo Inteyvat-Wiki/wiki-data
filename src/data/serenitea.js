@@ -1,5 +1,6 @@
 // Wiki IDs are maintained here; values are stable genshin-db source IDs.
-export default {
+/** @type {import('./data').SereniteaDirectory} */
+const data = {
     "realm": {
         // #region realm
         "floating_abode": "realm-1",                                                                 // 罗浮洞
@@ -2649,3 +2650,5 @@ export default {
         // #endregion companion
     },
 };
+
+export default data;

@@ -6,7 +6,7 @@ import { get_serenitea_export } from '../src/serenitea';
 import { get_tcg_export } from '../src/tcg';
 import { get_miliastra_export } from '../src/miliastra';
 import { set_archive_output } from '../src/utils/archive';
-import type { ArchiveExport } from '../src/types/archive';
+import type { ArchiveExport } from '@inteyvat-wiki/wiki-contracts/archive';
 
 const output = fs.mkdtempSync(path.join(os.tmpdir(), 'wiki-archives-'));
 set_archive_output(output);

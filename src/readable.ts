@@ -3,7 +3,7 @@ import { create_page, export_category } from '~/utils/page';
 import { DocumentData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang } from "~/utils/i18n";
-import { Readable, ReadablePages } from "~/types/readable";
+import { Readable, ReadablePages } from "@inteyvat-wiki/wiki-contracts/readable";
 import readable_list from "~/data/readables";
 
 export function get_readable(id: string, name: string, lang: Lang): Readable {
@@ -32,7 +32,7 @@ export function get_readable_list(lang: Lang): ReadablePages {
 }
 
 export function gen_readable(lang: Lang, path: string) {
-    export_category(path, get_readable_list(lang), Object.entries(readable_list as Record<string, string>).map(([id, name]) => ({
+    export_category(path, get_readable_list(lang), Object.entries(readable_list).map(([id, name]) => ({
         id, data: get_readable(id, name, lang),
     })));
 }

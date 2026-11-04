@@ -1,5 +1,6 @@
 // 以下区段保留原始分类，便于维护；实际导出分类由源数据决定。
-export default {
+/** @type {import('./data').LivingBeingDirectory} */
+const data = {
     "enemy": [
         // #region enemy_elemental
         "pyro_slime",                                                   // 火史莱姆
@@ -558,4 +559,6 @@ export default {
         "rock_crab",                                                    // 岩居蟹
         // #endregion animal_others
     ],
-}
+};
+
+export default data;

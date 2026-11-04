@@ -1,26 +1,27 @@
-import genshindb, { Language, type ArchiveRecord, type MiscRecord } from 'genshin-db';
+import { Language, type ArchiveRecord, type MiscRecord, type QueryFunction, type Outfit, type WeaponSkin, type WindGlider } from 'genshin-db';
+import genshindb from './genshin';
 import { Lang } from '~/utils/i18n';
 
-const language_map: Record<Lang, string> = {
-    'zh_hans': 'CHS',
-    'zh_hant': 'CHT',
-    'de': 'DE',
-    'en': 'EN',
-    'es': 'ES',
-    'fr': 'FR',
-    'id': 'ID',
-    'it': 'IT',
-    'ja': 'JP',
-    'ko': 'KR',
-    'pt': 'PT',
-    'ru': 'RU',
-    'th': 'TH',
-    'tr': 'TR',
-    'vi': 'VI',
+const language_map: Record<Lang, Language> = {
+    'zh_hans': Language.ChineseSimplified,
+    'zh_hant': Language.ChineseTraditional,
+    'de': Language.German,
+    'en': Language.English,
+    'es': Language.Spanish,
+    'fr': Language.French,
+    'id': Language.Indonesian,
+    'it': Language.Italian,
+    'ja': Language.Japanese,
+    'ko': Language.Korean,
+    'pt': Language.Portuguese,
+    'ru': Language.Russian,
+    'th': Language.Thai,
+    'tr': Language.Turkish,
+    'vi': Language.Vietnamese,
 }
 
 const alias_query_options = (lang: Lang) => ({
-    resultLanguage: language_map[lang] as Language,
+    resultLanguage: language_map[lang],
     matchAliases: true,
 });
 
@@ -30,8 +31,8 @@ const normalize_alias_query = (name: string) =>
     name.replace(/-(\d+)$/, '$1').replace(/_/g, '');
 
 const id_query_options = (lang: Lang) => ({
-    resultLanguage: language_map[lang] as Language,
-    queryLanguages: [language_map[lang] as Language],
+    resultLanguage: language_map[lang],
+    queryLanguages: [language_map[lang]],
     matchNames: false,
     matchIds: true,
     matchAltNames: false,
@@ -42,12 +43,12 @@ const id_query_options = (lang: Lang) => ({
 const id_name_cache = new Map<string, string | null>();
 
 type ArchiveFolder = 'serenitea' | 'tcg' | 'miliastra';
-function read_catalogue<T>(category: string, query: Function | undefined, lang: Lang): T[] {
+function read_catalogue<T>(category: string, query: QueryFunction<T>, lang: Lang): T[] {
     if (lang !== 'zh_hans' && lang !== 'en') throw new Error(`Archive language not configured: ${lang}`);
     if (typeof query !== 'function') throw new Error(`Update genshin-db: ${category} query is not available`);
     const records = query('names', {
-        resultLanguage: language_map[lang] as Language,
-        queryLanguages: [language_map[lang] as Language],
+        resultLanguage: language_map[lang],
+        queryLanguages: [language_map[lang]],
         matchCategories: true, verboseCategories: true,
         matchNames: false, matchAltNames: false, matchAliases: false,
     });
@@ -61,20 +62,36 @@ export const ArchiveData = {
     get_records: (category: ArchiveFolder, lang: Lang): ArchiveRecord[] => {
         const queries = { serenitea: genshindb.serenitea, tcg: genshindb.tcg, miliastra: genshindb.miliastra };
         if (!Object.hasOwn(queries, category)) throw new Error(`Unknown archive category: ${category}`);
-        return read_catalogue<ArchiveRecord>(category, queries[category], lang);
+        return read_catalogue(category, queries[category], lang);
     },
 };
 
 export const MiscData = {
-    get_records: (lang: Lang): MiscRecord[] => read_catalogue<MiscRecord>('misc', genshindb.misc, lang),
+    get_records: (lang: Lang): MiscRecord[] => read_catalogue('misc', genshindb.misc, lang),
 };
 
-export function find_data_name_by_id(id: number, lang: Lang, folder: string): string | null {
+export type OutfitSourceRecord =
+    | { folder: 'outfits'; data: Outfit }
+    | { folder: 'weaponskins'; data: WeaponSkin }
+    | { folder: 'windgliders'; data: WindGlider };
+
+export const OutfitData = {
+    get_records: (lang: Lang): OutfitSourceRecord[] => [
+        ...read_catalogue('outfits', genshindb.outfits, lang).map(data => ({ folder: 'outfits' as const, data })),
+        ...read_catalogue('weaponskins', genshindb.weaponskins, lang).map(data => ({ folder: 'weaponskins' as const, data })),
+        ...read_catalogue('windgliders', genshindb.windgliders, lang).map(data => ({ folder: 'windgliders' as const, data })),
+    ],
+};
+
+export type NamedDataFolder = 'characters' | 'materials' | 'weapons' | 'tasks';
+
+export function find_data_name_by_id(id: number, lang: Lang, folder: NamedDataFolder): string | null {
     const cache_key = `${lang}:${folder}:${id}`;
     if (id_name_cache.has(cache_key)) return id_name_cache.get(cache_key)!;
 
-    const query = (genshindb as any)[folder];
-    const result = typeof query === 'function' ? query(String(id), id_query_options(lang)) : undefined;
+    // Only explicitly supported records participate in condition titles; never invoke arbitrary client members.
+    const queries = { characters: genshindb.characters, materials: genshindb.materials, weapons: genshindb.weapons, tasks: genshindb.tasks };
+    const result = Object.hasOwn(queries, folder) ? queries[folder](String(id), id_query_options(lang)) : undefined;
     if (result && typeof result.name === 'string' && result.name) {
         id_name_cache.set(cache_key, result.name);
         return result.name;
@@ -296,11 +313,10 @@ export const NpcData = {
 export const InteractionData = {
 
     get_giving: (id: number): { items: { id: number, count: number }[], choices?: { id: number }[], count?: number, remove: boolean } | undefined => {
-        const manifest = require('genshin-db/src/data/interactions.json');
-        return manifest.givings?.[id];
+        return genshindb.interactionGiving(id);
     },
 
-    // perform_cfg 是 interaction 的源路径，直接读取原始资源；找不到时再按对话 id 查找。
+    // perform_cfg 是 interaction 的资源键，通过公开接口精确读取；找不到时再按对话 id 查找。
     find_interaction: (name: string) =>
         get_interaction_data(name) || null,
 
@@ -331,28 +347,13 @@ export const InteractionData = {
     },
 }
 
-// 通过 genshin-db 内部的 getdata 模块按文件名精确读取，绕过其模糊搜索
-let interaction_getdata: any;
-
 // 同一 interaction 会被多个对话引用（不同对话 id 子集），按名缓存避免重复解析
 const interaction_cache = new Map<string, any>();
 const interaction_by_id_cache = new Map<number, any | null>();
 
-function get_interaction_getdata() {
-    if (interaction_getdata === undefined) {
-        try {
-            interaction_getdata = require('genshin-db/src/getdata.js');
-        } catch {
-            interaction_getdata = null;
-        }
-    }
-    return interaction_getdata;
-}
-
 function get_interaction_data(name: string): any {
     if (interaction_cache.has(name)) return interaction_cache.get(name);
-    const getdata = get_interaction_getdata();
-    const result = getdata ? getdata.getData('English', 'interactions', name) : null;
+    const result = genshindb.getRecord('interactions', name, { language: 'English' }) || null;
     interaction_cache.set(name, result);
     return result;
 }

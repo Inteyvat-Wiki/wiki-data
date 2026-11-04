@@ -4,7 +4,7 @@ import type { Lang } from '~/utils/i18n';
 import { MiscData } from '~/utils/data';
 import { create_page, export_category } from '~/utils/page';
 import { archive_asset_manifest, archive_image, set_archive_output } from '~/utils/archive';
-import { MISC_TYPES, type MiscExport, type MiscItem } from '~/types/misc';
+import { MISC_TYPES, type MiscExport, type MiscItem, type LoadingSituation } from '@inteyvat-wiki/wiki-contracts/misc';
 import { PageReferences } from '~/utils/page_reference';
 import { ConvertRaw } from '~/utils/convert_raw';
 import { apply_page_groups, achievement_page_groups } from '~/utils/page_groups';
@@ -40,7 +40,7 @@ export function convert_misc_records(records: MiscRecord[], lang: Lang, director
     const source_ids = new Map(selected.map(({id, source_id}) => [id, source_id]));
     const files = selected.map(({id, record}) => {
         const { id: source_id, order, show, version, ...source } = structuredClone(record);
-        const type = ConvertRaw.get_archive_type('misc', source.type) as MiscItem['type'];
+        const type = ConvertRaw.get_archive_type('misc', source.type);
         const diagnostics = [...(source.diagnostics || [])];
         const references = [...(source.source.references || [])];
         const relations = source.relations.flatMap(relation => {
@@ -85,23 +85,25 @@ export function convert_misc_records(records: MiscRecord[], lang: Lang, director
                 const { image: source_image, ...content } = node;
                 return { ...content, kind: ConvertRaw.get_message_kind(node.kind), ...(image ? { image: { ...image } } : {}) };
             }) } } : {}),
-            ...(source.loading_situations ? { loading_situations: source.loading_situations.map(value => {
+            ...(source.loading_situations ? { loading_situations: source.loading_situations.map((value): LoadingSituation => {
                 const action = ConvertRaw.get_loading_action(value.action);
                 const image = value.image && images.find(image => image.name === value.image!.name
                     && image.kind === ConvertRaw.get_archive_image_kind(value.image!.kind));
                 if (value.image && !image) throw new Error(`Missing loading situation image reference: ${id}/${value.id}`);
-                return { id: value.id, action,
-                    ...(image ? { image: { ...image } } : {}),
-                    ...(action === 'transport' ? {
-                        areas: value.areas.map(area => ({ id: area.id, name: area.name })),
-                        ...(value.terrain ? { terrain: ConvertRaw.get_loading_terrain(value.terrain) } : {}),
-                    } : {}),
-                    ...(action === 'certain_dungeon' ? {
-                        ...(value.dungeon_type ? { dungeon_type: ConvertRaw.get_loading_dungeon_type(value.dungeon_type) } : {}),
-                        ...(value.dungeons ? { dungeons: value.dungeons.map(dungeon => ({ id: dungeon.id, name: dungeon.name })) } : {}),
-                    } : {}),
-                    ...(action === 'specified_room' && value.scene_ids ? { scene_ids: [...value.scene_ids] } : {}),
+                // Keep insertion order (id, action, image, action-specific fields) unchanged.
+                const base = { id: value.id, action, ...(image ? { image: { ...image } } : {}) };
+                if (action === 'transport') return { ...base, action,
+                    areas: value.areas.map(area => ({ id: area.id, name: area.name })),
+                    ...(value.terrain ? { terrain: ConvertRaw.get_loading_terrain(value.terrain) } : {}),
                 };
+                if (action === 'certain_dungeon') return { ...base, action,
+                    ...(value.dungeon_type ? { dungeon_type: ConvertRaw.get_loading_dungeon_type(value.dungeon_type) } : {}),
+                    ...(value.dungeons ? { dungeons: value.dungeons.map(dungeon => ({ id: dungeon.id, name: dungeon.name })) } : {}),
+                };
+                if (action === 'specified_room') return { ...base, action,
+                    ...(value.scene_ids ? { scene_ids: [...value.scene_ids] } : {}),
+                };
+                return { ...base, action };
             }) } : {}),
             sections: source.sections.map(section => ({ ...(section.title !== undefined ? { title: section.title } : {}),
                 ...(section.kind !== undefined ? { kind: ConvertRaw.get_archive_section_kind(section.kind) } : {}), text: section.text })), images, relations,

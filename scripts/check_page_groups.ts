@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { get_output_root } from '../src/utils/output';
 import { grouped_entries } from '../src/utils/page';
 import { apply_page_groups, achievement_page_groups, hall_page_groups } from '../src/utils/page_groups';
 
@@ -33,7 +34,7 @@ const before = JSON.stringify(halls);
 assert.equal(apply_page_groups(halls, groups).files, halls.files, 'grouping must not rewrite raw item objects');
 assert.equal(JSON.stringify(halls), before);
 for (const lang of ['zh_hans', 'en']) for (const category of ['miliastra', 'misc']) {
-    const pages = JSON.parse(fs.readFileSync(`data/${lang}/${category}/pages.json`, 'utf8'));
+    const pages = JSON.parse(fs.readFileSync(`${get_output_root()}/${lang}/${category}/pages.json`, 'utf8'));
     const ids = new Set(pages.map((page: any) => page.id));
     const roots = pages.filter((page: any) => page.group && page.show);
     assert.equal(roots.length, category === 'miliastra' ? 9 : 148);

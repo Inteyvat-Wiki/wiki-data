@@ -1,21 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { get_output_root } from './output';
+import { readPngHeader, preferImage } from '@inteyvat-wiki/resource-tools';
 
-function measure(file: string) {
-    const header = Buffer.alloc(24), handle = fs.openSync(file, 'r');
-    try {
-        if (fs.readSync(handle, header, 0, 24, 0) !== 24) throw new Error(`Truncated image header: ${file}`);
-    } finally { fs.closeSync(handle); }
-    if (header.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' || header.toString('ascii', 12, 16) !== 'IHDR') throw new Error(`Invalid image header: ${file}`);
-    const width = header.readUInt32BE(16), height = header.readUInt32BE(20);
-    if (!width || !height || width > 16384 || height > 16384) throw new Error(`Invalid image dimensions: ${file}`);
-    return { pixels: width * height, bytes: fs.statSync(file).size };
-}
-export function prefer_image(candidate: string, current: string): boolean {
-    const next = measure(candidate), previous = measure(current);
-    return next.pixels > previous.pixels || next.pixels === previous.pixels
-        && (next.bytes > previous.bytes || next.bytes === previous.bytes && candidate < current);
-}
+export const prefer_image = preferImage;
 export function image_basename(reference: string): string {
     return path.posix.basename(reference.replaceAll('\\', '/')).replace(/\.(?:png|tga|jpe?g)$/i, '');
 }
@@ -25,7 +13,7 @@ export class ImageStore {
     private index?: Map<string, string>;
     private copied = new Map<string, string>();
     readonly failures = new Set<string>();
-    constructor(private source: string, private defaultOutput: string) {}
+    constructor(private source: string, private defaultOutput: string | (() => string)) {}
     private resolve(reference: string) {
         if (!this.index) {
             this.index = new Map();
@@ -33,7 +21,7 @@ export class ImageStore {
                 if (!/\.png$/i.test(relative)) continue;
                 const file = path.join(this.source, relative), name = path.parse(relative).name;
                 try {
-                    measure(file);
+                    readPngHeader(file);
                     const previous = this.index.get(name);
                     if (!previous || prefer_image(file, previous)) this.index.set(name, file);
                 } catch { this.failures.add(file); }
@@ -41,14 +29,14 @@ export class ImageStore {
         }
         return this.index.get(image_basename(reference));
     }
-    fromName(reference: string | undefined, relative: string, output = this.defaultOutput): string | null {
+    fromName(reference: string | undefined, relative: string, output?: string): string | null {
         if (!reference) { this.failures.add(relative); return null; }
         const file = this.resolve(reference);
         if (!file) { this.failures.add(reference); return null; }
         return this.fromPath(file, relative, output);
     }
-    fromPath(file: string | null, relative: string, output = this.defaultOutput): string | null {
-        const root = path.resolve(output, 'images');
+    fromPath(file: string | null, relative: string, output?: string): string | null {
+        const root = path.resolve(output || (typeof this.defaultOutput === 'function' ? this.defaultOutput() : this.defaultOutput), 'images');
         relative = relative.replaceAll('\\', '/');
         if (!relative.endsWith('.png')) relative += '.png';
         const requested = path.resolve(root, relative);
@@ -68,4 +56,4 @@ export class ImageStore {
         } catch { this.failures.add(file); return null; }
     }
 }
-export const images = new ImageStore(path.resolve(__dirname, '../images'), path.resolve(__dirname, '../../data'));
+export const images = new ImageStore(path.resolve(__dirname, '../images'), get_output_root);

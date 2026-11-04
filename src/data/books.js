@@ -1,4 +1,5 @@
-export default [
+/** @type {import('./data').NameList} */
+const data = [
     "teyvat_travel_guide_mondstadt",                                             // 提瓦特游览指南·蒙德篇
     "teyvat_travel_guide_liyue",                                                 // 提瓦特游览指南·璃月篇
     "teyvat_travel_guide_inazuma",                                               // 提瓦特游览指南·稻妻篇
@@ -290,3 +291,5 @@ export default [
     "polestar_ballet_anthology_iii",                                             // 极星舞剧集·卷三
     "polestar_ballet_anthology_iv",                                              // 极星舞剧集·卷四
 ];
+
+export default data;

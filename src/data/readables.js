@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').ReadableDirectory} */
+const data = {
     "incomplete_poem_part_1": "Document 100110",                                 // 诗篇断章（上）
     "incomplete_poem_part_2": "Document 100111",                                 // 诗篇断章（中）
     "incomplete_poem_part_3": "Document 100112",                                 // 诗篇断章（下）
@@ -1807,3 +1808,5 @@ export default {
     "whispers_of_stars_and_smoke": "Document 340028",                            // 星与烟帷的夜语
     "hurlock_variations": "Document 340029",                                     // 赫尔洛克变奏曲
 };
+
+export default data;

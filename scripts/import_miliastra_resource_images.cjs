@@ -1,50 +1,43 @@
-// Image-only import: all raw-data/resource-key interpretation is upstream.
+// Image-only Wiki adapter: all resource-key interpretation remains upstream.
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const { validatePng } = require('./import_misc_images.cjs');
+const {importResourceImages} = require('@inteyvat-wiki/resource-tools');
 function run(work, output) {
-    const plan = JSON.parse(fs.readFileSync(path.join(work, 'resource-plan.json'), 'utf8'));
+    const planFile = path.join(work, 'resource-plan.json');
+    const plan = JSON.parse(fs.readFileSync(planFile, 'utf8'));
     assert.equal(plan.schema, 1);
     const wanted = new Map();
-    for (const { image } of Object.values(plan.resources)) {
+    for (const {image} of Object.values(plan.resources)) {
+        assert(/^UI_[A-Za-z0-9_]+$/.test(image.Name), 'Invalid Wiki resource image name');
         if (!wanted.has(image.Name)) wanted.set(image.Name, []);
         wanted.get(image.Name).push(image);
     }
-    const candidates = [];
-    const images = new Map();
-    function visit(directory) {
-        for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-            const file = path.join(directory, entry.name);
-            if (entry.isDirectory()) { visit(file); continue; }
-            if (!entry.name.endsWith('.png')) continue;
-            const name = path.parse(entry.name).name, requested = wanted.get(name);
-            if (!requested) continue;
-            assert(requested.some(image => file.split(path.sep).includes(path.basename(image.Source) + '_export')),
+    const reportFile = path.join(work, 'validated-import.json');
+    const options = {directories: [work], wanted: [...wanted.keys()],
+        selection: plan.image_selection || 'preserve', output, inputs: [planFile],
+        validateCandidate({name, file}) {
+            assert(wanted.get(name).some(image => file.split(path.sep).includes(path.basename(image.Source) + '_export')),
                 `PNG from unexpected block: ${file}`);
-            const png = validatePng(fs.readFileSync(file));
-            const value = { name, file, ...png }, previous = images.get(name);
-            candidates.push(value);
-            if (previous && plan.image_selection !== 'largest') assert.equal(previous.sha256, png.sha256, `Conflicting exact image: ${name}`);
-            if (!previous || value.width * value.height > previous.width * previous.height
-                || value.width * value.height === previous.width * previous.height && (value.bytes > previous.bytes
-                    || value.bytes === previous.bytes && value.file < previous.file)) images.set(name, value);
-        }
+        }};
+    const preview = importResourceImages(options);
+    for (const diagnostic of preview.diagnostics) {
+        assert(diagnostic.reason !== 'ambiguous_candidates', `Conflicting exact image: ${diagnostic.name}`);
+        if (diagnostic.detail?.includes('unexpected block')) throw new Error(diagnostic.detail);
     }
-    visit(work);
-    assert.equal(images.size, wanted.size, `Incomplete extraction: ${images.size}/${wanted.size}`);
-    fs.mkdirSync(output); // never overwrite old imports
-    for (const [name, image] of images) {
-        assert(/^UI_[A-Za-z0-9_]+$/.test(name));
-        fs.copyFileSync(image.file, path.join(output, name + '.png'), fs.constants.COPYFILE_EXCL);
-    }
-    fs.writeFileSync(path.join(work, 'validated-import.json'), JSON.stringify({ output, count: images.size,
-        inputs: plan.inputs, candidates, images: [...images.values()] }, null, 2), { flag: 'wx' });
-    return { imported: images.size, output };
+    assert(!fs.existsSync(reportFile), 'Import report exists');
+    const report = importResourceImages({...options, apply: true});
+    // Preserve the original compatibility report, including flat candidates.
+    fs.writeFileSync(reportFile, JSON.stringify({output, count: report.imported, inputs: plan.inputs,
+        input_hashes: report.inputs, candidates: report.candidates.flatMap(group => group.images),
+        images: report.images}, null, 2), {flag: 'wx'});
+    return {imported: report.imported, output};
 }
-module.exports = { run };
+module.exports = {run};
 if (require.main === module) {
-    const [work, output] = process.argv.slice(2);
-    assert(output, 'Usage: node scripts/import_miliastra_resource_images.cjs EXTRACTION_DIR NEW_IMAGE_DIR');
-    console.log(JSON.stringify(run(path.resolve(work), path.resolve(output))));
+    try {
+        const [work, output] = process.argv.slice(2);
+        assert(output, 'Usage: node scripts/import_miliastra_resource_images.cjs EXTRACTION_DIR NEW_IMAGE_DIR');
+        console.log(JSON.stringify(run(path.resolve(work), path.resolve(output))));
+    } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

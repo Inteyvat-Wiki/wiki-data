@@ -3,7 +3,7 @@ import { gen_serenitea } from '../src/serenitea';
 import { gen_tcg } from '../src/tcg';
 import { gen_miliastra } from '../src/miliastra';
 
-const output = path.resolve(process.argv[2] || './data');
+const output = path.resolve(process.argv[2] || process.env.WIKI_DATA_OUTPUT || './data');
 const generators = { serenitea: gen_serenitea, tcg: gen_tcg, miliastra: gen_miliastra };
 const categories = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(generators);
 for (const category of categories) {

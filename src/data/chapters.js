@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').ChapterDirectory} */
+const data = {
     "archon_quests": {
         "the_outlander_who_caught_the_wind": [
             "the_outlander_who_caught_the_wind",                                // 序章 第一幕 | 捕风的异乡人
@@ -830,3 +831,5 @@ export default {
         ],
     },
 };
+
+export default data;

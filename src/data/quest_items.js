@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').QuestItemDirectory} */
+const data = {
     "dvalin_tear": {
         "crimson_crystal": "QuestItem 100135",                                                     // 赤色的结晶
         "teardrop_crystal-v1.x-0": "QuestItem 100158",                                             // 泪滴结晶
@@ -1919,4 +1920,6 @@ export default {
     "entrance_door_lever_for_a_certain_basement_room": "QuestItem 121668",                         // 地下室某房间入口门的操纵杆
     "exit_door_lever_for_a_certain_basement_room": "QuestItem 121669",                             // 地下室某房间出口门的操纵杆
     "peculiar_reagent_sample": "QuestItem 121672",                                                 // 奇怪的试剂样品
-}
+};
+
+export default data;

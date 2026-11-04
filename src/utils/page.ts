@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { PageDataTrait } from '~/types/common';
+import type { PageDataTrait } from '@inteyvat-wiki/wiki-contracts/common';
+import { isWikiId } from '@inteyvat-wiki/wiki-contracts/ids';
 
 export type PageEntry = Pick<PageDataTrait, 'id' | 'show' | 'items' | 'related_items'> & {
     type?: string;
@@ -54,18 +55,39 @@ export function typed_entries(source: Record<string, (string | string[])[]>): Pa
         })));
 }
 
-export function named_entries(source: Record<string, string | Record<string, string>>): PageEntry[] {
+export function named_entries<T extends string | number>(source: Record<string, T | Record<string, T>>): PageEntry[] {
     return grouped_entries(Object.entries(source).map(([id, value]) => ({
         id,
-        items: typeof value === 'string' ? [id] : Object.keys(value),
-        grouped: typeof value !== 'string',
+        items: typeof value === 'object' ? Object.keys(value) : [id],
+        grouped: typeof value === 'object',
     })));
 }
 
-export function create_page<T extends { id: string; name: string; icon?: string | null; star?: PageDataTrait['star'] }>(
+type PageMetadata = Pick<PageDataTrait, 'id' | 'name'> & Partial<Omit<PageDataTrait, 'id' | 'name'>>;
+type EntryFields = 'show' | 'items' | 'related_items';
+type Normalized<T, K extends 'icon' | 'star'> = K extends keyof T
+    ? Exclude<T[K], undefined> | (undefined extends T[K] ? null : never) : PageDataTrait[K];
+type WithDefault<T, K extends PropertyKey, D> = K extends keyof T
+    ? T[K] | ({} extends Pick<T, K> ? D : never) : D;
+export type CreatedPage<T, E extends PageEntry | undefined = undefined> =
+    T extends unknown ? Omit<T, 'icon' | 'star' | EntryFields> & {
+        icon: Normalized<T, 'icon'>;
+        star: Normalized<T, 'star'>;
+    } & (E extends undefined ? {
+        show: WithDefault<T, 'show', boolean>;
+        items: WithDefault<T, 'items', string[]>;
+        related_items: WithDefault<T, 'related_items', string[]>;
+    } : Pick<PageDataTrait, EntryFields>) : never;
+
+// Entry fields replace metadata; icon/star normalize only nullish values.
+// Without an entry, explicit undefined metadata still overrides a spread default.
+// A key absent from T is not necessarily absent at runtime (structural typing).
+export function create_page<T extends PageMetadata>(metadata: T): CreatedPage<T>;
+export function create_page<T extends PageMetadata, E extends PageEntry | undefined>(
     metadata: T,
-    entry?: PageEntry,
-): T & PageDataTrait {
+    entry: E,
+): CreatedPage<T, E>;
+export function create_page(metadata: PageMetadata, entry?: PageEntry) {
     return {
         show: true,
         items: [metadata.id],
@@ -81,10 +103,11 @@ export function create_page<T extends { id: string; name: string; icon?: string 
     };
 }
 
-export function export_category<T, P extends PageDataTrait>(
+// Low-level writer: category binding belongs at the caller's contract boundary.
+export function export_category(
     directory: string,
-    pages: P[],
-    objects: { id: string; data: T }[],
+    pages: readonly PageDataTrait[],
+    objects: readonly { id: string; data: object }[],
     common: Record<string, unknown> = {},
 ): void {
     for (const name of Object.keys(common)) {
@@ -102,7 +125,7 @@ export function export_category<T, P extends PageDataTrait>(
         throw new Error(`Duplicate page IDs: ${directory}`);
     }
     for (const id of [...ids, ...pages.map(page => page.id)]) {
-        if (!/^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*$/.test(id)) throw new Error(`Invalid ID: ${id}`);
+        if (!isWikiId(id)) throw new Error(`Invalid ID: ${id}`);
     }
     for (const page of pages) {
         for (const id of [...page.items, ...page.related_items]) {

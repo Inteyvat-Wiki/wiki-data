@@ -1,5 +1,6 @@
 // Wiki IDs are maintained here; values are stable genshin-db source IDs.
-export default {
+/** @type {import('./data').MiliastraDirectory} */
+const data = {
     "costume": {
         // #region costume
         "phantom_night_dress-0": "costume-1501401",                                                  // 诡夜裙装
@@ -3545,3 +3546,5 @@ export default {
         // #endregion hall
     },
 };
+
+export default data;

@@ -1,5 +1,6 @@
 // Wiki IDs are maintained here; values are stable genshin-db source IDs.
-export default {
+/** @type {import('./data').TcgDirectory} */
+const data = {
     "card": {
         // #region card
         "card-ganyu": "card-1101",                                                                   // 甘雨
@@ -2361,3 +2362,5 @@ export default {
         // #endregion stage
     },
 };
+
+export default data;

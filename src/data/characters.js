@@ -1,4 +1,5 @@
-export default [
+/** @type {import('./data').NameList} */
+const data = [
     "aether_anemo",
     "lumine_anemo",
     "aether_geo",
@@ -130,5 +131,9 @@ export default [
     "alyosha",
     "odette",
     "vesna",
-    "vodyanitsa"
-]
+    "vodyanitsa",
+    "valeriy",
+    "mitya"
+];
+
+export default data;

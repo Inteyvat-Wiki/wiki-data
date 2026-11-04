@@ -1,5 +1,6 @@
 // Wiki IDs are maintained here; values are stable genshin-db source IDs.
-export default {
+/** @type {import('./data').MiscDirectory} */
+const data = {
     "achievement": {
         // #region achievement
         "the_wind_and_the_star_traveler": "achievement-80001",                                       // 风与异乡人
@@ -5813,3 +5814,5 @@ export default {
         // #endregion graeae_message
     },
 };
+
+export default data;

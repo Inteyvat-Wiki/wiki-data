@@ -80,8 +80,10 @@ npm run check:misc:api -- http://127.0.0.1:4010
 
 ### 同名图片重新提取
 
-`scripts/prepare_misc_images.ps1 -WorkDirectory <新的绝对工作目录>` 按当前资源清单
+`node scripts/prepare_misc_images.cjs --work <新的绝对工作目录>` 按当前资源清单
 检查全部图片引用（包含已导入项），生成准备报告与提取计划，不自动执行提取。
+无需 PowerShell；资源包的已编译辅助程序通过 AnimeStudio 所需的 .NET 运行时
+读取索引，只输出清单需要的名称。可用 `--studio`、`--map`、`--dotnet` 显式指定位置。
 它仅匹配完整资源名，优先 Sprite、缺少 Sprite 才使用同名 Texture2D；不会把承载
 Sprite 的整张图集当作该图片。AnimeStudio 使用 `--group_assets BySource`，将不同
 来源文件中的同名候选分目录保留，避免先落盘的小图导致后续大图被跳过。

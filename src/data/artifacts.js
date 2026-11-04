@@ -1,4 +1,5 @@
-export default [
+/** @type {import('./data').NameList} */
+const data = [
     "adventurer",                                           // 冒险家
     "lucky_dog",                                            // 幸运儿
     "traveling_doctor",                                     // 游医
@@ -62,4 +63,6 @@ export default [
     "disenchantment_in_deep_shadow",                        // 影中沉凝的幻灭
     "scarlet_proof",                                        // 血红之证
     "heart_of_the_furnace",                                 // 炉火融炼之心
-]
+];
+
+export default data;

@@ -3,11 +3,12 @@ import tcg from '~/data/tcg';
 import miliastra from '~/data/miliastra';
 import misc from '~/data/misc';
 import old_ids from '~/data/archive_id_aliases';
+import { isDirectoryId } from '@inteyvat-wiki/wiki-contracts/ids';
 
 export const archive_directories = { serenitea, tcg, miliastra, misc };
 export type DirectoryCategory = keyof typeof archive_directories;
 export type ExportDirectory = Record<string, Record<string, string>>;
-export const valid_directory_id = (id: string) => /^(?:[a-z][a-z0-9]*(?:_[a-z0-9]+)*-)?[a-z0-9]+(?:_[a-z0-9]+)*(?:-\d+)?$/.test(id);
+export const valid_directory_id = isDirectoryId;
 
 export function directory_entries(directory: ExportDirectory) {
     const ids = new Set<string>(), sources = new Set<string>();
@@ -48,7 +49,7 @@ export function directory_aliases(category: DirectoryCategory): Record<string, s
     const entries = directory_entries(archive_directories[category]);
     const ids = new Set(entries.map(entry => entry.id));
     const sources = new Map(entries.map(entry => [entry.source_id, entry.id]));
-    return Object.fromEntries(Object.entries((old_ids as Record<string, Record<string, string>>)[category] || {}).map(([old, source]) => {
+    return Object.fromEntries(Object.entries(old_ids[category] || {}).map(([old, source]) => {
         const canonical = sources.get(source);
         if (!valid_directory_id(old) || !canonical || ids.has(old)) throw new Error(`Invalid or shadowed directory alias: ${category}/${old}`);
         return [old, canonical];

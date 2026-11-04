@@ -1,5 +1,5 @@
 import { grouped_entries } from '~/utils/page';
-import type { PageDataTrait } from '~/types/common';
+import type { PageDataTrait } from '@inteyvat-wiki/wiki-contracts/common';
 import hall_groups from '~/data/miliastra_hall_groups';
 
 type GroupItem = { type: string; name: string; description: string;
@@ -35,7 +35,7 @@ export function apply_page_groups<T extends GroupItem, P extends GroupPage>(resu
 export function hall_page_groups<T extends GroupItem, P extends GroupPage>(result: { files: { id: string; data: T }[]; list: P[] }, source?: { id: string; images: { name: string; kind?: string }[] }[]): PageGroup[] {
     const sources = new Map(result.list.map(page => [page.source_id, page.id]));
     const items = new Map(result.files.map(file => [file.id, file.data]));
-    return (hall_groups as readonly (readonly string[])[]).flatMap(pair => {
+    return hall_groups.flatMap(pair => {
         const ids = pair.map(source => sources.get(source));
         if (!ids.every((id): id is string => !!id && items.has(id))) return [];
         const values = ids.map(id => items.get(id)!);

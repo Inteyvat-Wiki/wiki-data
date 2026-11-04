@@ -3,7 +3,7 @@ import { create_page, export_category } from '~/utils/page';
 import { ArtifactData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Artifact, ArtifactPages } from "~/types/artifact";
+import { Artifact, ArtifactPages } from "@inteyvat-wiki/wiki-contracts/artifact";
 import artifact_list from "~/data/artifacts";
 
 export function get_artifact(name: string, lang: Lang): Artifact {

@@ -23,7 +23,7 @@
 | GenshinData-scripts `voice/audio.js` | 已找到 RazTools/Audio 的移植前提交 56da8d49（2024-01-22）及 Copyright 2023 Razmoth 的 MIT；已附全文 | 来源与许可证据已补；原作者当时实际参考的精确提交仍未记录，不把历史参考提交冒充精确来源 |
 | Wiki `app/assets/icons/sparkle.svg` | 已精确比对 Glyphs sparkle-bold 路径，原作者 Goran Spasojevic，MIT | 已补 ASSETS.md、源码署名注释和 public/licenses 中的原始完整许可；图形未改动，原始下载渠道未知不影响已找到的图形对应证据 |
 | Wiki `public/favicon.svg` | 项目方确认内嵌花朵 PNG 由 AI 生成，已记录首次引入提交 | 已纠正来源分类；生成服务、生成记录、输入素材及服务条款尚未提供，不承诺独占版权或自动适用代码 MIT |
-| genshin-db npm `files` | 仍包含 `src/min/data.min.json`；顶层包名仍为社区同名包，专用发布配置还使用 `@genshin-db/tcg` | npm 架构改造时制定代码白名单并使用自己的名称；不要直接执行遗留发布入口。本轮没有发布、执行打包生命周期或改变数据分发设计 |
+| genshin-db npm `files` | 2026-11-04 工程复核：已移除 `src/min/data.min.json`；仍使用社区同名包名，但设为 `private: true`，遗留发布和上游通知入口已停用 | 后续确定组织作用域名称与发布版本；真实 tarball 已纳入隔离安装及提取/查询检查。工程修复不等于补齐游戏内容授权或此前尚缺的许可证据 |
 | GenshinData-scripts 现有仓库内容 | 已跟踪 stats/data、stats/dist 及 voice/*.txt，其中包含游戏数值、打包代码及资源路径清单 | 根据实际来源分别分类；工具许可不自动覆盖这些内容。完整 ISC 来源确认后也需检查 stats 单独分发产物的声明；未删除或改写历史内容 |
 | Wiki 浏览器包、服务端部署包、工具 bundle | 仓库内的 NOTICES.md 不等于声明会自动进入实际产物 | 发布时检查最终产物与实际包含的依赖，保留所需许可/版权/NOTICE，并让接收者能获得声明；本轮不声称已经完成前端全部产物声明收集 |
 | 外部 AnimeStudio 及 .NET 引用 | 已读取本机安装根部 MIT 文件并保留原文，含 Radu、Perfare、Razmoth、Escartem 的原始版权行 | 安装包具体构建提交与其他 DLL 许可仍需核对；根部 MIT 不等于全部依赖统一授权，本轮未分发外部 DLL |

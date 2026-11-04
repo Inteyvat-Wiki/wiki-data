@@ -1,4 +1,5 @@
-import genshindb, { type TaskSubtitleRecord } from 'genshin-db';
+import { type TaskSubtitleRecord } from 'genshin-db';
+import genshindb from './genshin';
 import type { Lang } from './i18n';
 import type { TaskBubble, TaskNarration } from '../types/task';
 

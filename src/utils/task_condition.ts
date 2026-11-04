@@ -1,4 +1,4 @@
-import { find_data_name_by_id } from '~/utils/data';
+import { find_data_name_by_id, type NamedDataFolder } from '~/utils/data';
 import { Lang, t } from '~/utils/i18n';
 import type {
     SourceTaskCondition,
@@ -177,7 +177,7 @@ function get_condition_title(
         .flatMap(value => value.split(','))
         .map(Number)
         .filter(Number.isFinite);
-    const find_names = (folder: string) => ids
+    const find_names = (folder: NamedDataFolder) => ids
         .map(id => find_data_name_by_id(id, lang, folder) || String(id));
 
     if (schema.object === 'avatar') return find_names('characters').join(' / ') || t('task_condition.character', lang);

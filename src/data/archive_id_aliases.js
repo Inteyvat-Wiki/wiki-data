@@ -1,5 +1,6 @@
 // Previous Wiki IDs -> stable source IDs. Canonical IDs stay in each catalogue.
-export default {
+/** @type {import('./data').ArchiveIdAliases} */
+const data = {
     "tcg": {
         "ganyu-0": "card-1101",
         "diona-0": "card-1102",
@@ -466,3 +467,5 @@ export default {
         "second_blooming-1": "tutorial-899"
     }
 };
+
+export default data;

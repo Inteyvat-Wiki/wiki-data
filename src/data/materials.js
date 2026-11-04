@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').MaterialDirectory} */
+const data = {
     "forge": [
         [
             "strange_tooth",                                                // 奇异的「牙齿」
@@ -1425,3 +1426,5 @@ export default {
         "hearty_indulgence",                                            // 「酣畅」
     ],
 };
+
+export default data;

@@ -1,4 +1,12 @@
 {
+    "map": {
+        "unnamed": {
+            "scene": "未命名场景 {id}",
+            "floor": "未命名楼层 {id}",
+            "layer_extent": "未命名图层范围 {id}",
+            "layer_group": "未命名图层组 {id}"
+        }
+    },
     "book": {
         "collection": "所属书籍",
         "description": "描述"

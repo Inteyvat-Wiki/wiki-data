@@ -4,7 +4,7 @@ import type { Animal, Enemy } from 'genshin-db';
 import { LivingBeingData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { LivingBeing, LivingBeingPages } from "~/types/living_being";
+import { LivingBeing, LivingBeingPages } from "@inteyvat-wiki/wiki-contracts/living_being";
 import living_being_list from "~/data/living_beings";
 
 const living_being_types: Record<Animal['categoryType'] | Enemy['categoryType'], LivingBeing['type']> = {

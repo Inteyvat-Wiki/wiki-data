@@ -4,6 +4,8 @@ import genshindb from 'genshin-db';
 import { archive_directories, directory_entries, directory_id, directory_aliases, valid_directory_id, select_directory_records, type DirectoryCategory } from '../src/utils/archive_directory';
 import { get_archive_excluded_ids } from '../src/utils/archive';
 import { convert_misc_records } from '../src/misc';
+import { get_output_root } from '../src/utils/output';
+const input = get_output_root();
 
 const records = [{id:'card-1', type:'card'}, {id:'card-2', type:'card'}];
 assert.deepEqual(select_directory_records(records, {card:{only_second:'card-2'}}).map(entry => entry.record.id), ['card-2']);
@@ -41,22 +43,22 @@ for (const category of Object.keys(archive_directories) as DirectoryCategory[]) 
     }
     const excluded = category === 'misc' ? new Set() : get_archive_excluded_ids(category,source);
     assert(entries.every(entry => source.some((record:any) => record.id === entry.source_id) && !excluded.has(entry.source_id)));
-    const aliases = JSON.parse(fs.readFileSync(`data/common/${category}/source_ids.json`,'utf8'));
+    const aliases = JSON.parse(fs.readFileSync(`${input}/common/${category}/source_ids.json`,'utf8'));
     assert.deepEqual(aliases,Object.fromEntries(entries.map(entry=>[entry.source_id,entry.id])));
     const wiki_aliases = directory_aliases(category);
-    assert.deepEqual(JSON.parse(fs.readFileSync(`data/common/${category}/id_aliases.json`, 'utf8')), wiki_aliases);
+    assert.deepEqual(JSON.parse(fs.readFileSync(`${input}/common/${category}/id_aliases.json`, 'utf8')), wiki_aliases);
     for (const [old, canonical] of Object.entries(wiki_aliases)) {
         assert(!ids.get(category)!.has(old), 'an alias must not shadow a canonical ID');
         assert(ids.get(category)!.has(canonical), 'aliases must resolve directly to current IDs');
     }
     for (const lang of ['zh_hans','en']) {
-        const pages = JSON.parse(fs.readFileSync(`data/${lang}/${category}/pages.json`,'utf8'));
+        const pages = JSON.parse(fs.readFileSync(`${input}/${lang}/${category}/pages.json`,'utf8'));
         assert.deepEqual(pages.map((page:any)=>page.id),entries.map(entry=>entry.id));
         assert.deepEqual(pages.map((page:any)=>page.source_id),entries.map(entry=>entry.source_id));
-        const files = fs.readdirSync(`data/${lang}/${category}/items`).filter(file=>file.endsWith('.json')).map(file=>file.slice(0,-5));
+        const files = fs.readdirSync(`${input}/${lang}/${category}/items`).filter(file=>file.endsWith('.json')).map(file=>file.slice(0,-5));
         assert.deepEqual(files.sort(), [...ids.get(category)!].sort(), 'stale numeric-name JSON must be pruned');
         for (const entry of entries) {
-            const item = JSON.parse(fs.readFileSync(`data/${lang}/${category}/items/${entry.id}.json`,'utf8'));
+            const item = JSON.parse(fs.readFileSync(`${input}/${lang}/${category}/items/${entry.id}.json`,'utf8'));
             assert.equal(item.type,entry.type);
             assert.equal(item.source.id,entry.source_id.slice(entry.type.length+1));
             for (const relation of item.relations) if (ids.has(relation.category)) assert(ids.get(relation.category)!.has(relation.id), `${category}/${entry.id}: dangling ${relation.category}/${relation.id}`);

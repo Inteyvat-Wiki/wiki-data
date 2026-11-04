@@ -1,4 +1,5 @@
-export default {
+/** @type {import('./data').GeographyDirectory} */
+const data = {
     "viewpoint": [
         // #region viewpoint:mondstadt
         "the_city_of_wind",                                             // 风之城
@@ -343,3 +344,5 @@ export default {
         // #endregion dungeon:nod-krai
     ],
 };
+
+export default data;

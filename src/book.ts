@@ -4,7 +4,7 @@ import type { Book as RawBook } from 'genshin-db';
 import { BookData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";
 import { Lang, t } from "~/utils/i18n";
-import { Book, BookPages } from "~/types/book";
+import { Book, BookPages } from "@inteyvat-wiki/wiki-contracts/book";
 import book_list from "~/data/books";
 
 export function get_book(name: string, lang: Lang): Book {

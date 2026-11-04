@@ -13,10 +13,11 @@ import tr from '~~/i18n/locales/tr.json'
 import vi from '~~/i18n/locales/vi.json'
 import zh_hans from '~~/i18n/locales/zh_hans.json'
 import zh_hant from '~~/i18n/locales/zh_hant.json'
+import { LANGUAGE_CODES, type LanguageCode } from '@inteyvat-wiki/wiki-contracts/language';
 
-export type Lang = 'zh_hans' | 'zh_hant' | 'de' | 'en' | 'es' | 'fr' | 'id' | 'it' | 'ja' | 'ko' | 'pt' | 'ru' | 'th' | 'tr' | 'vi';
+export type Lang = LanguageCode;
 
-export const lang_list: Lang[] = ['zh_hans', 'zh_hant', 'de', 'en', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'pt', 'ru', 'th', 'tr', 'vi'];
+export const lang_list: Lang[] = [...LANGUAGE_CODES];
 
 const messages: Record<Lang, any> = { de, en, es, fr, id, it, ja, ko, pt, ru, th, tr, vi, zh_hans, zh_hant }
 

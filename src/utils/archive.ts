@@ -4,7 +4,8 @@ import type { Lang } from '~/utils/i18n';
 import { create_page } from '~/utils/page';
 import { get_source_dialog, get_talk_dialogs } from '~/utils/dialogue';
 import { get_task_conditions } from '~/utils/task_condition';
-import type { ArchiveCategory, ArchiveExport, ArchiveImage, ArchiveRelation, ArchiveTalk } from '~/types/archive';
+import type { ArchiveCategory, ArchiveExport, ArchiveImage, ArchiveRelation, ArchiveTalk } from '@inteyvat-wiki/wiki-contracts/archive';
+import { isTaskConditionToken } from '@inteyvat-wiki/wiki-contracts/task';
 import { archive_directories, directory_id, select_directory_records } from '~/utils/archive_directory';
 import { ConvertRaw } from '~/utils/convert_raw';
 import { image_basename } from '~/utils/images';
@@ -31,7 +32,7 @@ export function archive_image(reference: string | undefined, category: ArchiveCa
     return { name: String(reference), url, kind };
 }
 
-export function archive_external_relation(category: 'character' | 'npc' | 'task' | 'quest_item' | 'book',
+export function archive_external_relation(category: string,
     sourceId: number, lang: Lang, role: string): ArchiveRelation | null {
     const page = references.resolve(category, sourceId, lang);
     return page ? { ...page, role } : null;
@@ -40,7 +41,12 @@ export function archive_external_relation(category: 'character' | 'npc' | 'task'
 
 export function convert_archive_talk(source: ArchiveSourceTalk, lang: Lang): ArchiveTalk {
     const { source_dialogue, ...talk } = source;
-    if (!source_dialogue) return talk as ArchiveTalk;
+    if (!source_dialogue) {
+        if (!talk.dialogs || !talk.conditions || !talk.conditions.every(isTaskConditionToken)) {
+            throw new Error(`Invalid narrative archive talk: ${source.source_id}`);
+        }
+        return { ...talk, dialogs: talk.dialogs, conditions: talk.conditions };
+    }
     const dialogue = get_talk_dialogs({
         dialogs: source_dialogue.dialogs.map(get_source_dialog),
         initial_dialog: source_dialogue.initial_dialog,
@@ -57,7 +63,7 @@ export function convert_archive_talk(source: ArchiveSourceTalk, lang: Lang): Arc
     return { ...talk, ...dialogue,
         conditions: conditions.map(token => typeof token === 'string' || !labels.has(token.id)
             ? token : { ...token, ...labels.get(token.id) }),
-    } as ArchiveTalk;
+    };
 }
 
 export function get_archive_excluded_ids(category: ArchiveCategory,
@@ -73,7 +79,7 @@ export function get_archive_excluded_ids(category: ArchiveCategory,
             || ['virtual', 'suite_placeholder'].includes(ConvertRaw.get_furniture_role(record.furniture_type ?? '')))).map(record => record.id));
 }
 
-export function get_archive_export(category: ArchiveCategory, lang: Lang): ArchiveExport {
+export function get_archive_export<C extends ArchiveCategory>(category: C, lang: Lang): ArchiveExport<C> {
     const records = ArchiveData.get_records(category, lang);
     const excluded = get_archive_excluded_ids(category, records);
     const selected = select_directory_records(records, archive_directories[category]);
@@ -83,8 +89,8 @@ export function get_archive_export(category: ArchiveCategory, lang: Lang): Archi
         // genshin-db caches query results. Never attach Wiki URLs or mutate its source records.
         const { id: source_id, order, show, version, ...data } = structuredClone(record);
         const type = ConvertRaw.get_archive_type(category, data.type);
-        if (data.card_type) data.card_type.id = ConvertRaw.get_card_type(data.card_type.id);
-        if (data.tags) data.tags = data.tags.map(tag => ({ ...tag, id: ConvertRaw.get_card_tag(tag.id) }));
+        const card_type = data.card_type && { id: ConvertRaw.get_card_type(data.card_type.id), name: data.card_type.name };
+        const tags = data.tags?.map(tag => ({ ...tag, id: ConvertRaw.get_card_tag(tag.id) }));
         if (category === 'serenitea' && data.type === 'furniture' && !Array.isArray(data.classifications)) {
             throw new Error(`Missing source classifications: ${id}. Regenerate serenitea in GenshinData-scripts and rebuild genshin-db indices.`);
         }
@@ -116,7 +122,7 @@ export function get_archive_export(category: ArchiveCategory, lang: Lang): Archi
             }
             if (relation.source_id === undefined) return [{ category: category_key, id: relation.id, name: relation.name, role,
                 ...(relation.count !== undefined ? { count: relation.count } : {}) }];
-            const resolved = archive_external_relation(relation.category as 'character' | 'npc' | 'task', relation.source_id, lang, role);
+            const resolved = archive_external_relation(relation.category, relation.source_id, lang, role);
             if (!resolved) {
                 const reference = `${relation.category}:${relation.source_id}:${relation.role}`;
                 if (!(data.source.references ||= []).includes(reference)) data.source.references.push(reference);
@@ -131,8 +137,8 @@ export function get_archive_export(category: ArchiveCategory, lang: Lang): Archi
             ...(data.classifications ? { classifications: data.classifications.map(value => ({
                 id: value.id, group_id: value.group_id, group_name: value.group_name, name: value.name,
             })) } : {}),
-            ...(data.card_type ? { card_type: { id: data.card_type.id, name: data.card_type.name } } : {}),
-            ...(data.tags ? { tags: data.tags.map(tag => ({ id: tag.id, name: tag.name,
+            ...(card_type ? { card_type } : {}),
+            ...(tags ? { tags: tags.map(tag => ({ id: tag.id, name: tag.name,
                 ...(tag.order !== undefined ? { order: tag.order } : {}), ...(tag.hidden !== undefined ? { hidden: tag.hidden } : {}),
             })) } : {}),
             entry_talks: data.entry_talks,
