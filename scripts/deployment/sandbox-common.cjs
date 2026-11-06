@@ -31,7 +31,9 @@ function httpsURL(value) {
     return url;
 }
 function artifact(value, name) {
-    object(value, ['version', 'url', 'sha256', 'sha512', 'root', 'runId', 'runAttempt', 'commit', 'artifactId'], `tools.${name}`);
+    object(value, ['version', 'url', 'sha256', 'sha512', 'root',
+        ...(name === 'git' ? ['releaseTag', 'assetId', 'assetName', 'bytes'] : []),
+        ...(name === 'animeStudio' ? ['runId', 'runAttempt', 'commit', 'artifactId'] : [])], `tools.${name}`);
     if (name !== 'animeStudio') assert(typeof value.version === 'string' && /^\d+\.\d+\.\d+(?:[-.][A-Za-z0-9.-]+)?$/.test(value.version), `${name}: exact version required`);
     else assert(value.version === undefined, 'AnimeStudio nightly identity is run/commit/artifact, not an invented semantic version');
     const url = httpsURL(value.url);
@@ -40,15 +42,23 @@ function artifact(value, name) {
         if (value.sha512) assert(/^[a-f0-9]{128}$/.test(value.sha512) && !/^0+$/.test(value.sha512), 'Invalid official .NET SHA-512');
         else assert(SHA256.test(value.sha256) && !/^0+$/.test(value.sha256), 'Invalid .NET SHA-256');
     } else assert(value.sha512 === undefined && SHA256.test(value.sha256) && !/^0+$/.test(value.sha256), `${name}: SHA-256 required`);
-    assert(url.pathname.endsWith('.zip'), `${name}: use a pinned ZIP artifact`);
+    const releaseAsset = name === 'git' && url.hostname === 'api.github.com'
+        && /^\/repos\/git-for-windows\/git\/releases\/assets\/\d+$/.test(url.pathname);
+    assert(url.pathname.endsWith('.zip') || releaseAsset, `${name}: use a pinned ZIP artifact`);
     if (value.root !== undefined && value.root !== '') relative(value.root, `${name}.root`);
     if (name === 'node') {
         assert.equal(value.version, NODE_VERSION, 'Deployment Node must match the server');
         assert.equal(value.url, `https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-win-x64.zip`);
         assert.equal(value.root, `node-v${NODE_VERSION}-win-x64`);
     } else if (name === 'git') {
-        assert.equal(url.hostname, 'github.com');
-        assert(url.pathname.startsWith('/git-for-windows/git/releases/download/v'), 'Use a fixed Git-for-Windows release (MinGit ZIP)');
+        assert(releaseAsset || url.hostname === 'github.com' && url.pathname.startsWith('/git-for-windows/git/releases/download/v'),
+            'Use a fixed Git-for-Windows release ZIP or numeric release asset API');
+        assert.equal(value.releaseTag, 'v' + value.version, 'Git release tag must match the exact executable version');
+        assert(Number.isSafeInteger(value.assetId) && value.assetId > 0, 'Fixed Git assetId required');
+        assert(typeof value.assetName === 'string' && /^MinGit-[0-9.]+(?:-busybox)?-64-bit\.zip$/.test(value.assetName), 'Fixed MinGit ZIP name required');
+        assert(Number.isSafeInteger(value.bytes) && value.bytes > 0, 'Fixed Git asset length required');
+        assert.equal(value.url, releaseAsset ? `https://api.github.com/repos/git-for-windows/git/releases/assets/${value.assetId}`
+            : `https://github.com/git-for-windows/git/releases/download/${value.releaseTag}/${value.assetName}`, 'Git asset URL/identity mismatch');
     } else if (name.startsWith('dotnet')) {
         assert(['builds.dotnet.microsoft.com', 'download.visualstudio.microsoft.com', 'ci.dot.net'].includes(url.hostname), 'Use a fixed official .NET ZIP');
         assert(!/latest/i.test(value.url), 'Do not use a floating .NET channel');

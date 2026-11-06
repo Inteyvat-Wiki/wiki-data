@@ -15,7 +15,8 @@ function fixture() {
     const tool = (url, version) => ({url, version, sha256: HASH});
     return {schema: 1, memoryMB: 4096, tools: {
         node: {...tool('https://nodejs.org/dist/v24.22.2/node-v24.22.2-win-x64.zip', '24.22.2'), root: 'node-v24.22.2-win-x64'},
-        git: tool('https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/MinGit-2.53.0-64-bit.zip', '2.53.0.windows.1'),
+        git: {...tool('https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/MinGit-2.53.0-64-bit.zip', '2.53.0.windows.1'),
+            releaseTag: 'v2.53.0.windows.1', assetId: 677312705, assetName: 'MinGit-2.53.0-64-bit.zip', bytes: 4},
         dotnetSdk: tool('https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.100/dotnet-sdk-8.0.100-win-x64.zip', '8.0.100'),
         dotnetRuntime: tool('https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.0/dotnet-runtime-10.0.0-win-x64.zip', '10.0.0'),
         animeStudio: {url: 'https://nightly.link/Escartem/AnimeStudio/actions/runs/123/AnimeStudio-net10.zip', sha256: HASH,
@@ -94,6 +95,40 @@ test('sample IDs and image requirements are explicit', () => {
     }
     const lock = fixture(); lock.job.requireImages = true;
     assert.throws(() => common.validateLock(lock), /real resource entries/);
+});
+
+test('Git download can use its exact numeric official release asset, never latest or arbitrary API', async () => {
+    const lock = fixture(); lock.tools.git.url = 'https://api.github.com/repos/git-for-windows/git/releases/assets/677312705';
+    common.validateLock(lock);
+    let observed;
+    const response = await guest.publicFetch(lock.tools.git.url, {}, async (_url, options) => {observed = options; return new Response('zip');});
+    assert.equal(observed.headers.accept, 'application/octet-stream'); await response.body.cancel();
+    lock.tools.git.url = 'https://api.github.com/repos/other/repo/releases/assets/1'; assert.throws(() => common.validateLock(lock));
+});
+
+test('public connection retry is bounded and reports causes without signed URL data', async () => {
+    let attempts = 0;
+    const fail = async () => {attempts++; const error = new Error('https://private.invalid/?token=hidden'); error.cause = {code: 'UND_ERR_CONNECT_TIMEOUT'}; throw error;};
+    await assert.rejects(guest.publicFetch('https://example.com/pinned.zip', {retryDelayMs: 0}, fail), error => {
+        assert(error.message.includes('UND_ERR_CONNECT_TIMEOUT')); assert(!error.message.includes('hidden')); return true;
+    });
+    assert.equal(attempts, 3);
+});
+
+test('fixed Git release metadata must match tag, asset ID, ZIP name, length, digest and API route', () => {
+    const spec = fixture().tools.git;
+    const release = {tag_name: spec.releaseTag, assets: [{id: spec.assetId, name: spec.assetName, size: spec.bytes,
+        state: 'uploaded', digest: 'sha256:' + spec.sha256, url: `https://api.github.com/repos/git-for-windows/git/releases/assets/${spec.assetId}`,
+        browser_download_url: spec.url}]};
+    guest.verifyGitMetadata(spec, release);
+    for (const [key, value] of [['id', 1], ['name', 'other.zip'], ['size', 1], ['digest', 'sha256:' + 'f'.repeat(64)], ['state', 'new'], ['url', 'https://example.com/file']]) {
+        const changed = structuredClone(release); changed.assets[0][key] = value;
+        assert.throws(() => guest.verifyGitMetadata(spec, changed));
+    }
+    assert.throws(() => guest.verifyGitMetadata(spec, {...release, tag_name: 'latest'}));
+    assert.throws(() => guest.verifyGitMetadata(spec, {...release, assets: [...release.assets, ...release.assets]}));
+    const lock = fixture(); lock.tools.git.url = 'https://api.github.com/repos/git-for-windows/git/releases/assets/1';
+    assert.throws(() => common.validateLock(lock), /identity mismatch/);
 });
 
 test('Windows traversal, reserved device names, ADS and absolute paths fail', () => {

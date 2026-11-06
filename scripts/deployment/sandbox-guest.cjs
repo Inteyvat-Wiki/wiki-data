@@ -8,13 +8,30 @@ const {pipeline} = require('node:stream/promises');
 const {createRequire} = require('node:module');
 const {GUEST, PACKAGES, validateLock, readJSON, writeJSON, verifyFile, hashFile, httpsURL, relative} = require('./sandbox-common.cjs');
 
+function connectionError(error) {
+    // Do not print redirected, signed URLs or response headers. Original lock URLs contain no credentials.
+    return [error?.name, error?.code || error?.cause?.code].filter(Boolean).join(': ') || 'network error';
+}
 async function publicFetch(url, options = {}, fetcher = fetch) {
     // No credentials, caller headers, environment proxy tokens, or HTTP downgrade.
     let current = url;
     for (let hop = 0; hop <= 5; hop++) {
         const parsed = new URL(current);
         assert(parsed.protocol === 'https:' && !parsed.username && !parsed.password, 'Download requires HTTPS');
-        const response = await fetcher(current, {redirect: 'manual', headers: {'user-agent': 'Inteyvat-Wiki-sandbox-deployment'}, signal: AbortSignal.timeout(options.timeoutMs || 600000)});
+        const headers = {'user-agent': 'Inteyvat-Wiki-sandbox-deployment'};
+        if (parsed.hostname === 'api.github.com' && /^\/repos\/git-for-windows\/git\/releases\/assets\/\d+$/.test(parsed.pathname))
+            headers.accept = 'application/octet-stream';
+        let response;
+        for (let attempt = 0; attempt < 3; attempt++) {
+            try {
+                response = await fetcher(current, {redirect: 'manual', headers, signal: AbortSignal.timeout(options.timeoutMs || 600000)});
+                if (![429, 502, 503, 504].includes(response.status) || attempt === 2) break;
+                await response.body?.cancel();
+            } catch (error) {
+                if (attempt === 2) throw new Error(`Public download connection failed at ${parsed.hostname} (${connectionError(error)})`);
+            }
+            await new Promise(resolve => setTimeout(resolve, options.retryDelayMs ?? (attempt + 1) * 1000));
+        }
         if ([301, 302, 303, 307, 308].includes(response.status)) {
             const next = response.headers.get('location'); await response.body?.cancel();
             assert(next, 'Redirect without location'); current = new URL(next, current).href; continue;
@@ -46,6 +63,18 @@ function verifyAnimeMetadata(spec, run, artifact) {
     assert.equal(artifact.workflow_run?.id, spec.runId); assert.equal(artifact.workflow_run?.head_sha, spec.commit);
     assert.equal(decodeURIComponent(new URL(spec.url).pathname.split('/').pop()), artifact.name + '.zip');
     if (artifact.digest) assert.equal(artifact.digest, 'sha256:' + spec.sha256, 'Actions artifact digest changed');
+}
+function verifyGitMetadata(spec, release) {
+    assert.equal(release.tag_name, spec.releaseTag);
+    const assets = release.assets.filter(asset => asset.id === spec.assetId);
+    assert.equal(assets.length, 1, 'Git release asset identity is missing or ambiguous');
+    const asset = assets[0];
+    assert.equal(asset.name, spec.assetName); assert.equal(asset.size, spec.bytes); assert.equal(asset.state, 'uploaded');
+    assert.equal(asset.digest, 'sha256:' + spec.sha256, 'Git release asset digest changed');
+    assert.equal(asset.url, `https://api.github.com/repos/git-for-windows/git/releases/assets/${spec.assetId}`);
+    assert.equal(asset.browser_download_url, `https://github.com/git-for-windows/git/releases/download/${spec.releaseTag}/${spec.assetName}`);
+    assert([asset.url, asset.browser_download_url].includes(spec.url), 'Git download URL does not match the verified asset');
+    return {releaseTag: release.tag_name, assetId: asset.id, assetName: asset.name, sha256: spec.sha256, bytes: asset.size};
 }
 function runner(logRoot, baseEnvironment) {
     let sequence = 0;
@@ -116,9 +145,13 @@ async function main() {
         verifyAnimeMetadata(anime, animeRun, animeArtifact);
         writeJSON(path.join(provenance, 'anime-studio.json'), {commit: anime.commit, runId: anime.runId, runAttempt: anime.runAttempt,
             artifactId: anime.artifactId, name: animeArtifact.name, sha256: anime.sha256});
+        const gitRelease = await apiJSON(`https://api.github.com/repos/git-for-windows/git/releases/tags/${encodeURIComponent(lock.tools.git.releaseTag)}`);
+        writeJSON(path.join(provenance, 'git.json'), verifyGitMetadata(lock.tools.git, gitRelease));
         for (const key of ['git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio']) {
+            console.log(`Downloading and verifying ${key}...`);
             const file = path.join(downloads, key + '.zip'); await download(lock.tools[key], file);
             await expand(file, path.join(tools, key.startsWith('dotnet') ? 'dotnet' : key), key === 'dotnetRuntime');
+            console.log(`Installed ${key}.`);
         }
         const git = path.join(tools, 'git', lock.tools.git.root || '', 'cmd/git.exe');
         const dotnet = path.join(tools, 'dotnet/dotnet.exe');
@@ -137,10 +170,12 @@ async function main() {
         phase = 'repositories';
         const repos = {}, reposRoot = path.join(GUEST.work, 'repos'); fs.mkdirSync(reposRoot);
         for (const [name, repo] of Object.entries(lock.repositories)) {
+            console.log(`Fetching ${name} at ${repo.commit}...`);
             repos[name] = path.join(reposRoot, name);
             await fetchRepository(run, git, name, repo, repos[name], name === 'source' && lock.job.versions);
         }
         phase = 'packages';
+        console.log('Building and installing fixed internal packages...');
         const local = require(path.join(repos.wikiData, 'scripts/local_packages.cjs'));
         assert.deepEqual(local.NAMES, PACKAGES, 'The locked package workflow has a different package contract');
         const work = path.join(GUEST.work, 'packages'); fs.mkdirSync(work);
@@ -160,6 +195,7 @@ async function main() {
         await run('types', process.execPath, [env.npm_execpath, 'run', 'check:types'], repos.wikiData);
         await run('deployment-types', process.execPath, ['node_modules/typescript/bin/tsc', '-p', 'scripts/deployment/sandbox-types.tsconfig.json'], repos.wikiData);
         phase = 'resources';
+        console.log('Preparing and extracting the declared real resource sample...');
         const resolver = createRequire(path.join(repos.wikiData, 'package.json'));
         const api = resolver('@inteyvat-wiki/resource-tools');
         const resourceRoot = path.join(GUEST.work, 'resources'), cache = path.join(GUEST.work, 'cache');
@@ -186,6 +222,7 @@ async function main() {
         const configFile = path.join(GUEST.work, 'wiki-data.config.json'); writeJSON(configFile, config);
         const configEnv = {WIKI_DATA_CONFIG: configFile};
         phase = 'export';
+        console.log(`Exporting ${lock.job.mode} data...`);
         if (lock.job.mode === 'smoke') {
             await run('real-sample', process.execPath, ['--import', 'tsx', 'scripts/deployment/sandbox-smoke.ts', path.join(GUEST.input, 'lock.json'), path.join(provenance, 'sample.json')], repos.wikiData, configEnv);
         } else {
@@ -206,5 +243,5 @@ async function main() {
         result.finishedAt = new Date().toISOString(); writeJSON(path.join(GUEST.output, 'result.json'), result);
     }
 }
-module.exports = {publicFetch, download, verifyAnimeMetadata, sourceFetchArgs, listOutputs, main};
+module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, listOutputs, main};
 if (require.main === module) main().catch(error => { console.error(error.stack); process.exitCode = 1; });

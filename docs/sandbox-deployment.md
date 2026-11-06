@@ -41,7 +41,11 @@
     "git": {
       "version": "REPLACE_WITH_EXACT_GIT_VERSION",
       "url": "https://github.com/git-for-windows/git/releases/download/REPLACE_WITH_TAG/REPLACE_WITH_MIN_GIT_ZIP",
-      "sha256": "REPLACE_WITH_TRUSTED_SHA256"
+      "sha256": "REPLACE_WITH_TRUSTED_SHA256",
+      "releaseTag": "REPLACE_WITH_TAG_MATCHING_VERSION",
+      "assetId": 123456,
+      "assetName": "REPLACE_WITH_MIN_GIT_ZIP_NAME",
+      "bytes": 123
     },
     "dotnetSdk": {
       "version": "REPLACE_WITH_EXACT_SDK_VERSION",
@@ -92,7 +96,7 @@
 
 说明：
 
-- Node 必须为与远程一致的 `24.22.2`。Git 使用固定 Git-for-Windows MinGit ZIP；`version` 与 `git --version` 一致。工具 ZIP 若有顶层目录，用 `root` 指明相对路径（例如 Node）；.NET ZIP 直接展开到同一工具目录。
+- Node 必须为与远程一致的 `24.22.2`。Git 使用固定 Git-for-Windows MinGit ZIP；`version` 与 `git --version` 一致。也可使用 `https://api.github.com/repos/git-for-windows/git/releases/assets/数字ID`，客户端发送 `Accept: application/octet-stream`，仍验证原固定 ZIP 哈希，不能改用 `latest`。无论哪个入口，来宾都会先读取固定 Release tag 元数据，核对 asset ID、name、bytes、uploaded 状态、digest、API URL 和下载 URL；不能仅凭能下载就接受另一资源。工具 ZIP 若有顶层目录，用 `root` 指明相对路径（例如 Node）；.NET ZIP 直接展开到同一工具目录。
 - AnimeStudio nightly 没有虚构的语义版本字段。固定 Actions run、attempt、commit、artifact ID、ZIP SHA-256；来宾还查询 GitHub 元数据验证结论成功、未过期及身份一致。工作流分支 URL 不被接受。历史构建过期/网络不可用时明确失败，不自动换新版。
 - 启动器不自动解析或生成清单中的版本/哈希，也不自动安装、启用宿主 Windows 功能。
 - `resources.files[].input` 是相对锁定清单目录或绝对本机文件路径。只复制显式列出的普通文件，复制前后验长度及 SHA-256；只读映射本轮副本，不映射原目录。本地样本总量上限 512 MiB。若使用公开固定下载，改为 `url`，不与 `input` 同时填写；来宾下载并校验，不支持在 URL 放凭证或查询参数。
@@ -154,3 +158,5 @@ node node_modules/typescript/bin/tsc -p scripts/deployment/sandbox-types.tsconfi
 Windows 上附加使用系统 PowerShell 5.1 的实际安全解压测试。真实运行必须另行记录固定输入、宿主 Windows build、启动/停止 ID 与结果，不能以单测通过代替部署完成。
 
 CLI 语义依据 [Windows Sandbox CLI 文档](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-cli)。若新版 wsb 的非空列表 JSON 字段变化，脚本会拒绝识别，须核对实际输出后更新兼容字段，不能退回猜测用户实例。
+
+真实环境首轮已验证启动、两处目录共享、System 身份运行、Node 下载校验和自己的实例停止。曾遇到 `github.com:443` 连接超时；公开 Release asset API 是同一产物的可选入口，不改变来源身份。下载连接及临时服务错误最多尝试三次，日志不打印带签名的跳转 URL。nightly.link 的 HEAD 请求可能返回 404，不能据此断言产物失效；应以 GET 响应和最终内容校验判断。
