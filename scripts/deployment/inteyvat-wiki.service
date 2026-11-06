@@ -1,0 +1,29 @@
+[Unit]
+Description=Inteyvat Wiki deployment
+After=network.target
+
+[Service]
+Type=simple
+User=inteyvat-wiki
+Group=inteyvat-wiki
+WorkingDirectory=/srv/inteyvat-wiki/current
+Environment=NODE_ENV=production
+Environment=NITRO_HOST=127.0.0.1
+Environment=NITRO_PORT=4780
+Environment=WIKI_DATA_ROOT=/var/lib/inteyvat-wiki/data
+Environment=WIKI_UPLOAD_EXTEND_NODE_TIMEOUT=1
+EnvironmentFile=/etc/inteyvat-wiki/environment
+ExecStart=/srv/inteyvat-wiki/runtime/node/bin/node /srv/inteyvat-wiki/current/.output/server/index.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/inteyvat-wiki
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
