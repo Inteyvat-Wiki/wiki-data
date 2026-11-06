@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const {isIPv4} = require('node:net');
 
 const NODE_VERSION = '24.22.2';
 const PACKAGES = Object.freeze({
@@ -29,6 +30,16 @@ function httpsURL(value) {
     const url = new URL(value);
     assert(url.protocol === 'https:' && !url.username && !url.password && !url.search && !url.hash, 'Expected credential-free HTTPS URL without query/fragment');
     return url;
+}
+function gitProxyURL(value) {
+    // Validate the literal input: URL normalization could hide credentials, paths or noncanonical IPs.
+    const match = typeof value === 'string' && /^http:\/\/(\d{1,3}(?:\.\d{1,3}){3}):([1-9]\d{0,4})$/.exec(value);
+    assert(match && match[0] === value && isIPv4(match[1]) && Number(match[2]) <= 65535,
+        'network.gitProxy: expected http://IPv4:port (1..65535), without credentials, path, query or fragment');
+    const [first, second] = match[1].split('.').map(Number);
+    assert(first === 10 || first === 172 && second >= 16 && second <= 31 || first === 192 && second === 168,
+        'network.gitProxy: expected an RFC1918 private IPv4 relay address');
+    return value;
 }
 function artifact(value, name) {
     object(value, ['version', 'url', 'sha256', 'sha512', 'root',
@@ -80,8 +91,12 @@ function repository(value, name) {
         && value.history.every(hash => SHA.test(hash) && !/^0+$/.test(hash)), 'History endpoints must be full SHAs');
 }
 function validateLock(lock) {
-    object(lock, ['schema', 'tools', 'repositories', 'job', 'resources', 'memoryMB'], 'lock');
+    object(lock, ['schema', 'tools', 'repositories', 'job', 'resources', 'memoryMB', 'network'], 'lock');
     assert.equal(lock.schema, 1);
+    if (lock.network !== undefined) {
+        object(lock.network, ['gitProxy'], 'network');
+        if (lock.network.gitProxy !== undefined) gitProxyURL(lock.network.gitProxy);
+    }
     object(lock.tools, ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio'], 'tools');
     for (const key of ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio']) artifact(lock.tools[key], key);
     object(lock.repositories, ['wikiData', 'tools', 'contracts', 'provider', 'db', 'source'], 'repositories');
@@ -159,4 +174,4 @@ async function verifyFile(file, expected) {
 function configuration(memoryMB = 8192) {
     return `<Configuration><Networking>Enable</Networking><VGpu>Disable</VGpu><ClipboardRedirection>Disable</ClipboardRedirection><AudioInput>Disable</AudioInput><VideoInput>Disable</VideoInput><PrinterRedirection>Disable</PrinterRedirection><MemoryInMB>${memoryMB}</MemoryInMB></Configuration>`;
 }
-module.exports = {NODE_VERSION, PACKAGES, GUEST, GUID, relative, httpsURL, validateLock, readJSON, writeJSON, hashFile, verifyFile, noLinks, configuration};
+module.exports = {NODE_VERSION, PACKAGES, GUEST, GUID, relative, httpsURL, gitProxyURL, validateLock, readJSON, writeJSON, hashFile, verifyFile, noLinks, configuration};

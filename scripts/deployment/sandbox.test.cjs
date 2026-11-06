@@ -69,6 +69,78 @@ test('explicit fixed lock is accepted, latest/credentials/unknown keys are rejec
     for (const change of invalid) { const lock = fixture(); change(lock); assert.throws(() => common.validateLock(lock)); }
 });
 
+test('Git proxy is optional and accepts only explicit RFC1918 IPv4 endpoints', () => {
+    assert.equal(common.validateLock(fixture()).network, undefined);
+    const empty = fixture(); empty.network = {}; common.validateLock(empty);
+    for (const gitProxy of ['http://10.0.0.1:1', 'http://10.255.255.254:65535', 'http://172.16.0.1:80',
+        'http://172.31.112.1:49187', 'http://192.168.0.1:8080', 'http://192.168.255.254:3128']) {
+        const lock = fixture(); lock.network = {gitProxy};
+        assert.equal(common.gitProxyURL(gitProxy), gitProxy);
+        assert.equal(common.validateLock(lock).network.gitProxy, gitProxy);
+    }
+});
+
+test('Git proxy rejects credentials, paths, query, fragments and invalid hosts or ports', () => {
+    for (const gitProxy of [null, true, 8080, {}, '',
+        'http://user:password@172.31.112.1:49187', 'http://user@172.31.112.1:49187',
+        'http://:password@172.31.112.1:49187', 'http://@172.31.112.1:49187',
+        'http://172.31.112.1:49187/', 'http://172.31.112.1:49187/path', 'http://172.31.112.1:49187/..',
+        'http://172.31.112.1:49187?token=hidden', 'http://172.31.112.1:49187?',
+        'http://172.31.112.1:49187#fragment', 'http://172.31.112.1:49187#',
+        'https://172.31.112.1:49187', 'socks5://172.31.112.1:49187',
+        'http://0.0.0.0:49187', 'http://127.0.0.1:49187', 'http://127.1.2.3:49187',
+        'http://8.8.8.8:49187', 'http://169.254.1.1:49187', 'http://100.64.0.1:49187',
+        'http://172.15.255.255:49187', 'http://172.32.0.1:49187', 'http://192.169.0.1:49187',
+        'http://localhost:49187', 'http://relay.example:49187', 'http://[::1]:49187',
+        'http://[::ffff:172.31.112.1]:49187', 'http://10.256.0.1:49187', 'http://10.1:49187',
+        'http://010.0.0.1:49187', 'http://0x0a000001:49187', 'http://167772161:49187',
+        'http://172.31.112.1', 'http://172.31.112.1:', 'http://172.31.112.1:0',
+        'http://172.31.112.1:65536', 'http://172.31.112.1:-1', 'http://172.31.112.1:abc',
+        'http://172.31.112.1:49187.0', 'http://172.31.112.1:049187',
+        ' http://172.31.112.1:49187', 'http://172.31.112.1:49187\n', 'http://172.31.112.1:49187\t']) {
+        const lock = fixture(); lock.network = {gitProxy};
+        assert.throws(() => common.validateLock(lock), /network\.gitProxy/, JSON.stringify(gitProxy));
+    }
+    for (const network of [null, [], 'http://172.31.112.1:49187', {httpProxy: 'http://172.31.112.1:49187'},
+        {gitProxy: 'http://172.31.112.1:49187', npmProxy: 'http://172.31.112.1:49187'}]) {
+        const lock = fixture(); lock.network = network;
+        assert.throws(() => common.validateLock(lock), /network/);
+    }
+});
+
+test('all repository Git commands use only the explicit per-command proxy, with defaults unchanged', async t => {
+    const directory = temporary(t), git = 'test-only-git.exe';
+    const repo = {...fixture().repositories.source, history: ['c'.repeat(40), 'd'.repeat(40)]};
+    let number = 0;
+    for (const network of [undefined, {}, {gitProxy: 'http://172.31.112.1:49187'}]) for (const history of [false, true]) {
+        const destination = path.join(directory, String(++number)), calls = [];
+        const retry = Boolean(network?.gitProxy && history);
+        const run = async (...args) => {
+            calls.push(args);
+            if (retry && args[0] === 'source-fetch')
+                throw Object.assign(new Error('simulated connection reset'), {exitCode: 128, outputTail: 'Recv failure: Connection was reset'});
+            return args[0] === 'source-identity' ? repo.commit + '\n' : 'false\n';
+        };
+        await guest.fetchRepository(run, git, 'source', repo, destination, history, network);
+        const commands = [
+            ['init', ['init', '--quiet']], ['remote', ['remote', 'add', 'origin', repo.url]],
+            ['fetch', guest.sourceFetchArgs(repo, history)],
+            ...(retry ? [['fetch-retry-2', guest.sourceFetchArgs(repo, history)]] : []),
+            ['checkout', ['checkout', '--detach', repo.commit]], ['identity', ['rev-parse', 'HEAD']],
+            ...(history ? [['history', ['rev-parse', '--is-shallow-repository']],
+                ...repo.history.map(hash => ['history-endpoint', ['cat-file', '-e', hash + '^{commit}']])] : []),
+        ];
+        const proxyArgs = network?.gitProxy ? ['-c', 'http.proxy=' + network.gitProxy] : [];
+        assert.deepEqual(calls, commands.map(([step, args]) => [`source-${step}`, git,
+            ['-c', 'core.autocrlf=false', '-c', 'core.longpaths=true', ...proxyArgs, '-C', destination, ...args], common.GUEST.work]));
+        assert.deepEqual(fs.readdirSync(destination), [], 'Mock Git commands must not write persistent config');
+    }
+    const rejected = path.join(directory, 'rejected');
+    await assert.rejects(guest.fetchRepository(() => assert.fail('Invalid proxy must not invoke Git'), git, 'source', repo,
+        rejected, false, {gitProxy: 'http://127.0.0.1:49187'}), /network\.gitProxy/);
+    assert(!fs.existsSync(rejected));
+});
+
 test('history inference never silently becomes a shallow no-version export', () => {
     const lock = fixture(); lock.job.versions = true;
     assert.throws(() => common.validateLock(lock), /history SHAs/);

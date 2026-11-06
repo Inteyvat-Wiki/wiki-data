@@ -6,7 +6,7 @@ const {spawn} = require('node:child_process');
 const {Readable} = require('node:stream');
 const {pipeline} = require('node:stream/promises');
 const {createRequire} = require('node:module');
-const {GUEST, PACKAGES, validateLock, readJSON, writeJSON, verifyFile, hashFile, httpsURL, relative, noLinks} = require('./sandbox-common.cjs');
+const {GUEST, PACKAGES, validateLock, readJSON, writeJSON, verifyFile, hashFile, httpsURL, gitProxyURL, relative, noLinks} = require('./sandbox-common.cjs');
 
 function connectionError(error) {
     // Do not print redirected, signed URLs or response headers. Original lock URLs contain no credentials.
@@ -124,9 +124,11 @@ async function fetchWithRetry(command, args, {sleep = milliseconds => new Promis
 function sourceFetchArgs(repo, withHistory) {
     return ['fetch', '--no-tags', ...(withHistory ? [] : ['--depth=1']), 'origin', ...new Set([repo.commit, ...(withHistory ? repo.history || [] : [])])];
 }
-async function fetchRepository(run, git, name, repo, destination, history = false) {
+async function fetchRepository(run, git, name, repo, destination, history = false, network = {}) {
+    // Per-command override only; never persist the relay or copy host proxy configuration.
+    const proxyArgs = network.gitProxy === undefined ? [] : ['-c', 'http.proxy=' + gitProxyURL(network.gitProxy)];
     fs.mkdirSync(destination);
-    const command = (step, args) => run(`${name}-${step}`, git, ['-c', 'core.autocrlf=false', '-c', 'core.longpaths=true', '-C', destination, ...args], GUEST.work);
+    const command = (step, args) => run(`${name}-${step}`, git, ['-c', 'core.autocrlf=false', '-c', 'core.longpaths=true', ...proxyArgs, '-C', destination, ...args], GUEST.work);
     await command('init', ['init', '--quiet']);
     await command('remote', ['remote', 'add', 'origin', repo.url]);
     await fetchWithRetry(command, sourceFetchArgs(repo, history));
@@ -214,7 +216,7 @@ async function main() {
         for (const [name, repo] of Object.entries(lock.repositories)) {
             console.log(`Fetching ${name} at ${repo.commit}...`);
             repos[name] = path.join(reposRoot, name);
-            await fetchRepository(run, git, name, repo, repos[name], name === 'source' && lock.job.versions);
+            await fetchRepository(run, git, name, repo, repos[name], name === 'source' && lock.job.versions, lock.network);
         }
         phase = 'packages';
         console.log('Building and installing fixed internal packages...');
@@ -285,5 +287,5 @@ async function main() {
         result.finishedAt = new Date().toISOString(); writeJSON(path.join(GUEST.output, 'result.json'), result);
     }
 }
-module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, fetchWithRetry, transientGitFailure, listOutputs, extractionOutput, main};
+module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, fetchRepository, fetchWithRetry, transientGitFailure, listOutputs, extractionOutput, main};
 if (require.main === module) main().catch(error => { console.error(error.stack); process.exitCode = 1; });

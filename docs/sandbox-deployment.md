@@ -108,6 +108,29 @@
 - `job.mode: "pipeline"` 时使用 `target` 替代 `ids`；目标为现有 pipeline 支持的 `characters`、`weapons`、`outfits` 等。这不会自动补齐缺失的上游输入。
 - 通过对象/API/图片检查仅证明本轮部署范围通过，不能证明所有解析器、图片、Lua 和历史兼容。
 
+## 可选的本轮 Git 代理
+
+默认不配置代理，行为不变。仅在本轮已获授权且宿主已启动受限临时 CONNECT relay 时，可在锁定清单顶层显式添加：
+
+```json
+"network": {"gitProxy": "http://172.31.112.1:49187"}
+```
+
+地址只是格式示例，必须换成沙箱可达的宿主 vEthernet IPv4 地址及本轮 relay 监听端口；不自动发现、不继承宿主代理环境变量或配置，也不修改系统代理。仅接受严格的 `http://IPv4:port`，IPv4 必须属于 RFC1918 的 `10.0.0.0/8`、`172.16.0.0/12` 或 `192.168.0.0/16`，端口为 `1–65535`；不接受域名、IPv6、回环、公网、`0.0.0.0`、用户密码、任何路径（包括尾随 `/`）、query 或 hash。
+
+此项只为仓库获取相关 Git 命令追加 `-c http.proxy=URL`，包括 fetch 重试及历史检查；不写持久 gitconfig、不关闭 TLS 校验。仓库仍只接受 GitHub HTTPS，宿主 relay 必须只允许 GitHub HTTPS CONNECT，不能开放为通用代理。工具下载（包括 Git ZIP）、元数据、资源下载及 npm 仍走既有路径，不使用此项。
+
+relay 的启动及关闭由宿主另行负责，本入口不管理 relay。宿主工具用法：
+
+```text
+node scripts/deployment/sandbox-git-proxy.cjs PRIVATE_BIND_IP PORT ONE_GUEST_IP LOOPBACK_PROXY_PORT
+node scripts/deployment/sandbox-git-proxy.cjs 172.31.112.1 49187 ONE_GUEST_IP LOOPBACK_PROXY_PORT
+```
+
+先启动沙箱并查询本轮实际来宾 IPv4，再将 `ONE_GUEST_IP` 替换为该单一地址，将 `LOOPBACK_PROXY_PORT` 替换为宿主现有回环代理端口，随后启动 relay 并执行来宾任务。绑定地址必须是本机明确的私网接口，且与锁中的 `network.gitProxy` 一致；**不得监听 `0.0.0.0` 或使用通配 guest**。relay 只接受该 guest 的 `CONNECT github.com:443`，拒绝认证头，上游固定为宿主 loopback 代理；运行 60 分钟自动结束，也可用 Ctrl+C（SIGINT）关闭。
+
+如需 Windows 防火墙放行，应由操作者显式建立本轮临时入站 TCP 规则，将本地地址、端口精确限定为 relay 的绑定地址和端口，将远端地址精确限定为本轮查询到的单一 guest IP，不开放任意接口、端口或来源。脚本不自动开启防火墙或添加规则。记录本轮规则标识，**本轮结束（包括失败或中止）后必须关闭临时 relay，并由操作者撤销本轮创建的防火墙规则**；即使 relay 已自动结束，规则也仍需撤销，不能将此授权延续到下一轮。
+
 ## 宿主命令
 
 在 wiki-data 仓库执行，路径示例应换成本轮自己的目录：
