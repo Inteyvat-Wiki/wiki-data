@@ -6,7 +6,7 @@ const {spawn} = require('node:child_process');
 const {Readable} = require('node:stream');
 const {pipeline} = require('node:stream/promises');
 const {createRequire} = require('node:module');
-const {GUEST, PACKAGES, validateLock, readJSON, writeJSON, verifyFile, hashFile, httpsURL, relative} = require('./sandbox-common.cjs');
+const {GUEST, PACKAGES, validateLock, readJSON, writeJSON, verifyFile, hashFile, httpsURL, relative, noLinks} = require('./sandbox-common.cjs');
 
 function connectionError(error) {
     // Do not print redirected, signed URLs or response headers. Original lock URLs contain no credentials.
@@ -116,6 +116,16 @@ async function listOutputs(root) {
     }
     return files.sort((a, b) => a.path.localeCompare(b.path, 'en'));
 }
+function extractionOutput(cacheRoot, kind) {
+    assert(['images', 'lua'].includes(kind), 'Unknown extraction output kind');
+    const parent = path.join(cacheRoot, 'resources', kind);
+    noLinks(parent);
+    fs.mkdirSync(parent, {recursive: true});
+    const output = path.join(parent, 'extracted');
+    assert(!fs.existsSync(output), 'Extraction output already exists; use a clean run');
+    // resource-tools creates the leaf nonrecursively and refuses existing destinations.
+    return output;
+}
 async function main() {
     assert.equal(process.platform, 'win32', 'Guest deployment requires Windows');
     const runInfo = readJSON(path.join(GUEST.input, 'run.json'));
@@ -210,7 +220,7 @@ async function main() {
         }
         for (const kind of ['images', 'lua']) if (lock.resources?.[kind]?.length) {
             const entries = lock.resources[kind].map(entry => ({...entry, Source: path.join(resourceRoot, entry.Source)}));
-            const output = path.join(cache, 'resources', kind, 'extracted');
+            const output = extractionOutput(cache, kind);
             const options = {entries, studio, dotnet, game: lock.resources.game, output, inputs: [path.join(GUEST.input, 'lock.json')], timeoutMs: 600000};
             const report = kind === 'images' ? api.extractResources({...options, selection: 'largest'}) : api.extractLuaResources(options);
             writeJSON(path.join(provenance, `extraction-${kind}.json`), report);
@@ -243,5 +253,5 @@ async function main() {
         result.finishedAt = new Date().toISOString(); writeJSON(path.join(GUEST.output, 'result.json'), result);
     }
 }
-module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, listOutputs, main};
+module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, listOutputs, extractionOutput, main};
 if (require.main === module) main().catch(error => { console.error(error.stack); process.exitCode = 1; });

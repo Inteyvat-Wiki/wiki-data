@@ -253,6 +253,18 @@ test('output inventories contain stable hashes and relative names', async t => {
     assert.equal(files.length, 1); assert.equal(files[0].path, 'en/items/a.json'); assert.equal(files[0].bytes, 2);
 });
 
+test('extraction creates only parents so the resource-tools nonrecursive new-directory contract works', t => {
+    const directory = temporary(t), cache = path.join(directory, 'new-cache');
+    for (const kind of ['images', 'lua']) {
+        const output = guest.extractionOutput(cache, kind);
+        assert(fs.statSync(path.dirname(output)).isDirectory());
+        assert(!fs.existsSync(output), 'Caller must not pre-create the extraction leaf');
+        fs.mkdirSync(output); // The exact nonrecursive operation used by resource-tools.newDirectory.
+        assert.throws(() => guest.extractionOutput(cache, kind), /already exists/);
+    }
+    assert.throws(() => guest.extractionOutput(cache, '../escape'), /Unknown/);
+});
+
 test('execution requires matching guest report and rejects replay', async t => {
     const {file, directory} = manifest(t), fake = mockWSB();
     const state = await host.start(file, directory, fake.call);
