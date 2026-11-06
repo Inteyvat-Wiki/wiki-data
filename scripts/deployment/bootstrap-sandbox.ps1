@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Bootstrap', 'Expand')][string]$Mode = 'Bootstrap',
+    [ValidateSet('Bootstrap', 'Expand', 'VerifyVcRedist')][string]$Mode = 'Bootstrap',
     [string]$Archive,
     [string]$Destination,
     [switch]$Merge
@@ -10,6 +10,28 @@ $ProgressPreference = 'SilentlyContinue'
 $inputRoot = 'C:\InteyvatInput'
 $outputRoot = 'C:\InteyvatOutput'
 $workRoot = 'C:\InteyvatSandbox'
+
+function Assert-GuestSystem {
+    if (-not [Security.Principal.WindowsIdentity]::GetCurrent().IsSystem) { throw 'VC++ installation requires guest System identity' }
+    if ([IO.Path]::GetFullPath($PSCommandPath) -ine "$inputRoot\bootstrap-sandbox.ps1" -or
+        (Get-Location).Path -ine $workRoot -or -not $run.id -or $env:INTEYVAT_SANDBOX_RUN -cne $run.id -or $execution.id -cne $run.id) {
+        throw 'VC++ installation requires the prepared guest execution, never the host'
+    }
+    if ((Get-FileHash -LiteralPath "$inputRoot\lock.json" -Algorithm SHA256).Hash.ToLowerInvariant() -cne $run.lockSha256) { throw 'Deployment lock changed' }
+}
+function Get-VcRedistEvidence([string]$Installer) {
+    $signature = Get-AuthenticodeSignature -LiteralPath $Installer
+    $signer = $signature.SignerCertificate
+    $version = (Get-Item -LiteralPath $Installer).VersionInfo
+    return [ordered]@{
+        fileVersion = $version.FileVersion
+        productVersion = $version.ProductVersion
+        signatureStatus = [string]$signature.Status
+        signerName = if ($signer) { $signer.GetNameInfo([Security.Cryptography.X509Certificates.X509NameType]::SimpleName, $false) } else { '' }
+        signerSubject = if ($signer) { $signer.Subject } else { '' }
+        signerThumbprint = if ($signer) { $signer.Thumbprint } else { '' }
+    }
+}
 
 function Expand-CheckedZip([string]$ZipFile, [string]$Target, [bool]$AllowMerge) {
     Add-Type -AssemblyName System.IO.Compression
@@ -48,6 +70,12 @@ function Expand-CheckedZip([string]$ZipFile, [string]$Target, [bool]$AllowMerge)
 $run = Get-Content -LiteralPath "$inputRoot\run.json" -Raw | ConvertFrom-Json
 $execution = Get-Content -LiteralPath "$outputRoot\execution.json" -Raw | ConvertFrom-Json
 if ($execution.id -ne $run.id) { throw 'Not a prepared sandbox execution' }
+if ($Mode -eq 'VerifyVcRedist') {
+    Assert-GuestSystem
+    if ([IO.Path]::GetFullPath($Archive) -ine "$workRoot\downloads\VC_redist.x64.exe") { throw 'VC++ installer must be the private guest download' }
+    Get-VcRedistEvidence $Archive | ConvertTo-Json -Compress
+    exit 0
+}
 if ($Mode -eq 'Expand') {
     Expand-CheckedZip $Archive $Destination $Merge.IsPresent
     exit 0
@@ -74,8 +102,10 @@ try {
     Expand-CheckedZip "$workRoot\downloads\node.zip" "$workRoot\tools\node" $false
     $nodeExe = "$workRoot\tools\node\$($node.root)\node.exe"
     $env:INTEYVAT_SANDBOX_RUN = $run.id
-    $process = Start-Process -FilePath $nodeExe -ArgumentList "$inputRoot\sandbox-guest.cjs" -WorkingDirectory $workRoot -WindowStyle Hidden -PassThru -Wait `
+    $process = Start-Process -FilePath $nodeExe -ArgumentList "$inputRoot\sandbox-guest.cjs" -WorkingDirectory $workRoot -WindowStyle Hidden -PassThru `
         -RedirectStandardOutput "$outputRoot\logs\guest.stdout.log" -RedirectStandardError "$outputRoot\logs\guest.stderr.log"
+    # Wait only for Node, not persistent build-server descendants; own-sandbox stop disposes of those.
+    $process.WaitForExit()
     if ($process.ExitCode -ne 0) { throw "Guest deployment failed ($($process.ExitCode)); inspect guest logs" }
     if (-not (Test-Path -LiteralPath "$outputRoot\result.json")) { throw 'Guest did not produce a result' }
 } catch {

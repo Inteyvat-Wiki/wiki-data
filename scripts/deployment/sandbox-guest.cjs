@@ -103,6 +103,34 @@ function runner(logRoot, baseEnvironment) {
         });
     });
 }
+function verifyVcRedistEvidence(spec, evidence) {
+    assert.equal(evidence.signatureStatus, 'Valid', 'VC++ installer Authenticode signature must be Valid');
+    assert.equal(evidence.signerName, 'Microsoft Corporation', 'VC++ installer must be signed by Microsoft Corporation');
+    assert(/(?:^|,\s*)O=Microsoft Corporation(?:,|$)/.test(evidence.signerSubject), 'VC++ installer signer organization mismatch');
+    assert.equal(evidence.fileVersion, spec.version, 'VC++ installer file version differs from lock');
+}
+async function installVcRedist(run, spec, file, provenance) {
+    await verifyFile(file, spec);
+    const evidence = JSON.parse(await run('vc-redist-verify', 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe',
+        ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', path.join(GUEST.input, 'bootstrap-sandbox.ps1'),
+            '-Mode', 'VerifyVcRedist', '-Archive', file], GUEST.work));
+    const report = {version: spec.version, url: spec.url, sha256: spec.sha256, bytes: spec.bytes,
+        verification: evidence, installation: {status: 'not-started'}};
+    try {
+        verifyVcRedistEvidence(spec, evidence);
+        try {
+            await run('vc-redist-install', file, ['/install', '/quiet', '/norestart'], GUEST.work);
+            report.installation = {status: 'installed', exitCode: 0, rebootRequired: false};
+        } catch (error) {
+            const rebootRequired = error.exitCode === 3010 && !error.timedOut;
+            report.installation = {status: rebootRequired ? 'reboot-required' : 'failed', exitCode: error.exitCode ?? null,
+                rebootRequired, timedOut: Boolean(error.timedOut)};
+            if (rebootRequired) throw Object.assign(new Error('VC++ x64 Redist requires reboot (3010); this run failed and will not build repositories. Use a new sandbox after investigation.'), {rebootRequired: true});
+            throw error;
+        }
+    } finally { writeJSON(path.join(provenance, 'vc-redist.json'), report); }
+    return report;
+}
 function transientGitFailure(error) {
     if (error?.timedOut || error?.exitCode !== 128) return false;
     const text = error.outputTail || '';
@@ -183,6 +211,10 @@ async function main() {
         const powershell = 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe';
         const expand = (file, dest, merge = false) => run('unzip', powershell, ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass',
             '-File', path.join(GUEST.input, 'bootstrap-sandbox.ps1'), '-Mode', 'Expand', '-Archive', file, '-Destination', dest, ...(merge ? ['-Merge'] : [])], GUEST.work);
+        console.log('Downloading, verifying and installing fixed VC++ x64 Redist in the guest...');
+        const vcInstaller = path.join(downloads, 'VC_redist.x64.exe');
+        await download(lock.tools.vcRedist, vcInstaller);
+        await installVcRedist(run, lock.tools.vcRedist, vcInstaller, provenance);
         const anime = lock.tools.animeStudio;
         const animeRun = await apiJSON(`https://api.github.com/repos/Escartem/AnimeStudio/actions/runs/${anime.runId}`);
         const animeArtifact = await apiJSON(`https://api.github.com/repos/Escartem/AnimeStudio/actions/artifacts/${anime.artifactId}`);
@@ -283,9 +315,10 @@ async function main() {
             sourceCommit: lock.repositories.source.commit, note: 'Deployment test only. No upload or production validation; preserve provenance when merging a sample into a complete dataset.'});
     } catch (error) {
         Object.assign(result, {phase, error: error.message}); process.exitCode = 1; console.error(error.stack);
+        if (error.rebootRequired) result.rebootRequired = true;
     } finally {
         result.finishedAt = new Date().toISOString(); writeJSON(path.join(GUEST.output, 'result.json'), result);
     }
 }
-module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, fetchRepository, fetchWithRetry, transientGitFailure, listOutputs, extractionOutput, main};
+module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, verifyVcRedistEvidence, installVcRedist, sourceFetchArgs, fetchRepository, fetchWithRetry, transientGitFailure, listOutputs, extractionOutput, main};
 if (require.main === module) main().catch(error => { console.error(error.stack); process.exitCode = 1; });

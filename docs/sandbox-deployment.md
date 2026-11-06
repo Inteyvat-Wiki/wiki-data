@@ -7,7 +7,7 @@
 ## 当前范围与先决条件
 
 - 宿主为支持 `wsb start/list/exec/share/stop --raw` 的 Windows，已经启用 Windows Sandbox。宿主只需 Node，不要求 PowerShell 7、Git 或 .NET。
-- 来宾用系统 Windows PowerShell 5.1 下载并校验固定 Node `24.22.2`，后续由 Node 调度。PowerShell 仅负责最小引导和检查路径后解压 ZIP。
+- 来宾用系统 Windows PowerShell 5.1 下载并校验固定 Node `24.22.2`，后续由 Node 调度。PowerShell 负责最小引导、安全解压及 VC++ 安装器签名/文件版本取证。
 - 内部包复用 `scripts/local_packages.cjs`：`npm pack` 执行维护者构建；临时、只读、回环地址的包源安装未发布的组织包。不会创建 `file:` 依赖或修改上游源码依赖声明。
 - .NET SDK 用于构建项目 bridge，.NET runtime 用于 AnimeStudio CLI。二者独立固定 ZIP、版本和校验和；允许以 `sha512` 使用 .NET 官方元数据的 SHA-512，或使用已验证的 `sha256`，但不能同时填写。例如 SDK 8 的 bridge 与 runtime 10 的 AnimeStudio 可并存。不是 GUI/WindowsDesktop runtime。
 - 代码仓库必须公开且指定完整 commit。正式历史模式必须能获取全部指定历史端点；没有历史时失败，不自行退化。
@@ -61,6 +61,12 @@
       "url": "https://builds.dotnet.microsoft.com/REPLACE_WITH_FIXED_RUNTIME_ZIP",
       "sha512": "REPLACE_WITH_OFFICIAL_128_HEX_SHA512"
     },
+    "vcRedist": {
+      "version": "REPLACE_WITH_EXACT_FOUR_PART_FILE_VERSION",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/REPLACE_WITH_FIXED_PATH/VC_redist.x64.exe",
+      "sha256": "REPLACE_WITH_VERIFIED_INSTALLER_SHA256",
+      "bytes": 123
+    },
     "animeStudio": {
       "url": "https://nightly.link/Escartem/AnimeStudio/actions/runs/123456/AnimeStudio-net10.zip",
       "runId": 123456,
@@ -102,6 +108,7 @@
 
 - Node 必须为与远程一致的 `24.22.2`。Git 使用固定 Git-for-Windows MinGit ZIP；`version` 与 `git --version` 一致。也可使用 `https://api.github.com/repos/git-for-windows/git/releases/assets/数字ID`，客户端发送 `Accept: application/octet-stream`，仍验证原固定 ZIP 哈希，不能改用 `latest`。无论哪个入口，来宾都会先读取固定 Release tag 元数据，核对 asset ID、name、bytes、uploaded 状态、digest、API URL 和下载 URL；不能仅凭能下载就接受另一资源。工具 ZIP 若有顶层目录，用 `root` 指明相对路径（例如 Node）；.NET ZIP 直接展开到同一工具目录。
 - AnimeStudio nightly 没有虚构的语义版本字段。固定 Actions run、attempt、commit、artifact ID、ZIP SHA-256；来宾还查询 GitHub 元数据验证结论成功、未过期及身份一致。工作流分支 URL 不被接受。历史构建过期/网络不可用时明确失败，不自动换新版。
+- `tools.vcRedist` 必填，`version` 必须是四段文件版本（如 `14.51.36247.0`），同时锁定 SHA-256 和准确字节数。只接受上述微软域名 `/download/pr/.../VC_redist.x64.exe` 固定 URL；`aka.ms`、`latest`、x86/ARM64 均不接受。实际 pin 由操作者核对官方来源、签名和文件版本后提供，不从浮动入口自动生成信任。来宾复用下载长度/哈希校验，然后要求 Authenticode `Valid`、签名者名称及组织为 `Microsoft Corporation`、文件版本与锁相同，才以 System 身份执行 `/install /quiet /norestart`。安装在获取/构建仓库之前，沿用隐藏窗口和 20 分钟超时。退出 0 才继续；3010 明确记录需要重启、本轮失败，不自动重启或继续构建；其他非零退出/超时也失败。`provenance/vc-redist.json` 保留锁身份、文件/产品版本、签名状态、证书主题/指纹和安装结果。入口校验本轮身份、固定来宾路径与 System 身份；不在宿主安装，也不复制 DLL。
 - 启动器不自动解析或生成清单中的版本/哈希，也不自动安装、启用宿主 Windows 功能。
 - `resources.files[].input` 是相对锁定清单目录或绝对本机文件路径。只复制显式列出的普通文件，复制前后验长度及 SHA-256；只读映射本轮副本，不映射原目录。本地样本总量上限 512 MiB。若使用公开固定下载，改为 `url`，不与 `input` 同时填写；来宾下载并校验，不支持在 URL 放凭证或查询参数。
 - `images`/`lua` 的定位使用资源工具公共 `AssetEntry`：Source（相对已声明文件）、Offset、字符串 PathID、类型、实际名称及可选 Container。必须来自已验证的资源索引，不凭文件名猜测，不直接复用包含宿主绝对路径的 `.map`。
@@ -148,6 +155,8 @@ node scripts/deployment/sandbox.cjs stop --run D:/DeploymentRuns/sandbox-本轮�
 启动前发现任何已有沙箱即拒绝，不接管用户实例。停止仅接受本工具在宿主侧记录为成功创建、当前仍存在的那个 ID。启动结果或实例 JSON 不可识别时拒绝推断归属；不会调用“停止全部”。若启动中断导致归属不确定，人工检查 `start-response.json`、`host-state.json` 与 `wsb list --raw` 后再处理。
 
 `exec` 每轮只执行一次；失败不在同一环境重试，诊断后创建新轮次。宿主退出不会自动停止沙箱，因此终止任务时仍需显式 `stop`。没有自动递归清理功能，不会删除旧轮次。
+
+引导以隐藏窗口 `Start-Process -PassThru` 启动 Node，再用 `$process.WaitForExit()` 只等待主 Node，随后检查退出码和报告；不使用会等待后代进程的 `Start-Process -Wait`。这用于处理已观察到的“结果已写出但 exec 未返回”现象：构建服务（如 VBCSCompiler）存活是待下一轮干净运行核实的原因推断，不是已证实根因。不终止全局 dotnet；残留进程由本轮自己的沙箱 `stop` 销毁。
 
 ## 输出与权限边界
 

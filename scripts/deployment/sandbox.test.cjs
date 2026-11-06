@@ -19,6 +19,7 @@ function fixture() {
             releaseTag: 'v2.53.0.windows.1', assetId: 677312705, assetName: 'MinGit-2.53.0-64-bit.zip', bytes: 4},
         dotnetSdk: tool('https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.100/dotnet-sdk-8.0.100-win-x64.zip', '8.0.100'),
         dotnetRuntime: tool('https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.0/dotnet-runtime-10.0.0-win-x64.zip', '10.0.0'),
+        vcRedist: {...tool('https://download.visualstudio.microsoft.com/download/pr/11111111-1111-1111-1111-111111111111/AAAAAAAA/VC_redist.x64.exe', '14.51.36247.0'), bytes: 4},
         animeStudio: {url: 'https://nightly.link/Escartem/AnimeStudio/actions/runs/123/AnimeStudio-net10.zip', sha256: HASH,
             runId: 123, runAttempt: 1, artifactId: 456, commit: SHA},
     }, repositories: Object.fromEntries(['wikiData', 'tools', 'contracts', 'provider', 'db', 'source'].map(name =>
@@ -67,6 +68,91 @@ test('explicit fixed lock is accepted, latest/credentials/unknown keys are rejec
         lock => {lock.tools.git.url += '?token=do-not-forward';},
     ];
     for (const change of invalid) { const lock = fixture(); change(lock); assert.throws(() => common.validateLock(lock)); }
+});
+
+test('VC++ lock requires four-part version, fixed Microsoft x64 URL, SHA-256 and bytes', () => {
+    common.validateLock(fixture());
+    const missing = fixture(); delete missing.tools.vcRedist;
+    assert.throws(() => common.validateLock(missing), /vcRedist/);
+    const fixed = fixture().tools.vcRedist.url;
+    for (const [key, value] of [
+        ['version', 'latest'], ['version', '14.51.36247'], ['version', '14.51.36247.0-preview'],
+        ['url', 'https://aka.ms/vs/17/release/VC_redist.x64.exe'],
+        ['url', fixed.replace('AAAAAAAA', 'latest')], ['url', fixed.replace('x64', 'x86')],
+        ['url', fixed.replace('x64', 'arm64')], ['url', fixed.replace('download.visualstudio.microsoft.com', 'example.com')],
+        ['url', fixed + '?download=1'], ['sha256', undefined], ['sha256', '0'.repeat(64)],
+        ['bytes', undefined], ['bytes', 0], ['bytes', 1.5], ['sha512', 'a'.repeat(128)],
+    ]) {
+        const lock = fixture(); lock.tools.vcRedist[key] = value;
+        assert.throws(() => common.validateLock(lock), undefined, `${key}: ${value}`);
+    }
+});
+
+test('VC++ installation rejects invalid signature/version and records explicit reboot failure', async t => {
+    // Only inert fixture bytes and a fake runner: never launch an installer or change the host.
+    const directory = temporary(t), file = path.join(directory, 'VC_redist.x64.exe'), bytes = Buffer.from('inert installer fixture');
+    fs.writeFileSync(file, bytes);
+    const spec = {...fixture().tools.vcRedist, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex')};
+    const valid = {fileVersion: spec.version, productVersion: spec.version, signatureStatus: 'Valid', signerName: 'Microsoft Corporation',
+        signerSubject: 'CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US', signerThumbprint: 'fixture'};
+    const cases = [
+        {evidence: valid, code: 0}, {evidence: valid, code: 3010}, {evidence: valid, code: 1603},
+        {evidence: valid, code: 3010, timedOut: true},
+        ...['NotSigned', 'HashMismatch', 'UnknownError'].map(signatureStatus => ({evidence: {...valid, signatureStatus}})),
+        {evidence: {...valid, signerName: 'Not Microsoft Corporation'}},
+        {evidence: {...valid, signerSubject: 'CN=Microsoft Corporation, O=Not Microsoft Corporation'}},
+        {evidence: {...valid, fileVersion: '14.51.36247.1'}},
+    ];
+    for (const [index, scenario] of cases.entries()) {
+        const provenance = path.join(directory, String(index)), calls = []; fs.mkdirSync(provenance);
+        const run = async (...args) => {
+            calls.push(args);
+            if (args[0] === 'vc-redist-verify') return JSON.stringify(scenario.evidence);
+            assert.equal(args[0], 'vc-redist-install');
+            if (scenario.code) throw Object.assign(new Error('simulated installer failure'), {exitCode: scenario.code, timedOut: scenario.timedOut});
+            return '';
+        };
+        const operation = guest.installVcRedist(run, spec, file, provenance);
+        if (scenario.code === 0) await operation;
+        else if (scenario.code === 3010 && !scenario.timedOut)
+            await assert.rejects(operation, error => error.rebootRequired === true && /requires reboot \(3010\)/.test(error.message));
+        else await assert.rejects(operation);
+        const report = common.readJSON(path.join(provenance, 'vc-redist.json'));
+        assert.equal(report.version, spec.version); assert.equal(report.sha256, spec.sha256); assert.equal(report.bytes, bytes.length);
+        assert.deepEqual(report.verification, scenario.evidence);
+        assert.deepEqual(calls[0], ['vc-redist-verify', 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe',
+            ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', path.join(common.GUEST.input, 'bootstrap-sandbox.ps1'),
+                '-Mode', 'VerifyVcRedist', '-Archive', file], common.GUEST.work]);
+        if (scenario.code === undefined) {
+            assert.equal(calls.length, 1, 'Invalid signature/version must not invoke the installer');
+            assert.equal(report.installation.status, 'not-started');
+        } else {
+            assert.deepEqual(calls[1], ['vc-redist-install', file, ['/install', '/quiet', '/norestart'], common.GUEST.work]);
+            assert.equal(calls.length, 2);
+            assert.equal(report.installation.exitCode, scenario.code);
+            assert.equal(report.installation.rebootRequired, scenario.code === 3010 && !scenario.timedOut);
+            assert.equal(report.installation.status, scenario.code === 0 ? 'installed'
+                : scenario.code === 3010 && !scenario.timedOut ? 'reboot-required' : 'failed');
+        }
+    }
+    for (const changed of [{...spec, bytes: spec.bytes + 1}, {...spec, sha256: HASH}])
+        await assert.rejects(guest.installVcRedist(() => assert.fail('Bad bytes/hash must not invoke any command'), changed, file, directory), /mismatch/);
+});
+
+test('VC++ uses guest System verification before builds; bootstrap waits only for main Node', () => {
+    const ps = fs.readFileSync(path.join(__dirname, 'bootstrap-sandbox.ps1'), 'utf8');
+    const source = fs.readFileSync(path.join(__dirname, 'sandbox-guest.cjs'), 'utf8');
+    const hostSource = fs.readFileSync(path.join(__dirname, 'sandbox.cjs'), 'utf8');
+    assert.match(ps, /WindowsIdentity\]::GetCurrent\(\)\.IsSystem/);
+    assert.match(ps, /\$PSCommandPath/); assert.match(ps, /\$env:INTEYVAT_SANDBOX_RUN -cne \$run\.id/);
+    assert.match(ps, /if \(\$Mode -eq 'VerifyVcRedist'\) \{\s+Assert-GuestSystem[\s\S]*?Get-VcRedistEvidence \$Archive/);
+    assert(source.indexOf('await installVcRedist(run,') < source.indexOf("phase = 'repositories'"));
+    assert.match(source, /windowsHide: true/); assert.match(source, /20 \* 60 \* 1000/);
+    assert(!/installVcRedist|VC_redist|\/install/.test(hostSource), 'Host must only dispatch the guest, never install VC++');
+    const start = ps.slice(ps.indexOf('$process = Start-Process'), ps.indexOf('$process.WaitForExit()'));
+    assert.match(start, /-WindowStyle Hidden -PassThru/); assert(!/-Wait\b/.test(start));
+    assert.match(ps, /\$process\.WaitForExit\(\)\s+if \(\$process\.ExitCode -ne 0\)/);
+    assert(ps.indexOf('Guest did not produce a result') > ps.indexOf('$process.WaitForExit()'));
 });
 
 test('Git proxy is optional and accepts only explicit RFC1918 IPv4 endpoints', () => {

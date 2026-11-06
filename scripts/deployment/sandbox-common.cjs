@@ -42,6 +42,16 @@ function gitProxyURL(value) {
     return value;
 }
 function artifact(value, name) {
+    if (name === 'vcRedist') {
+        object(value, ['version', 'url', 'sha256', 'bytes'], 'tools.vcRedist');
+        assert(typeof value.version === 'string' && /^\d+\.\d+\.\d+\.\d+$/.test(value.version) && !/\s/.test(value.version), 'vcRedist: exact four-part version required');
+        httpsURL(value.url);
+        assert(/^https:\/\/download\.visualstudio\.microsoft\.com\/download\/pr\/(?:[A-Za-z0-9_-]+\/)+VC_redist\.x64\.exe$/.test(value.url)
+            && !/latest|\s/i.test(value.url), 'vcRedist: use a fixed official VC_redist.x64.exe URL, never aka.ms/latest');
+        assert(SHA256.test(value.sha256) && !/^0+$/.test(value.sha256), 'vcRedist: SHA-256 required');
+        assert(Number.isSafeInteger(value.bytes) && value.bytes > 0, 'vcRedist: fixed installer length required');
+        return;
+    }
     object(value, ['version', 'url', 'sha256', 'sha512', 'root',
         ...(name === 'git' ? ['releaseTag', 'assetId', 'assetName', 'bytes'] : []),
         ...(name === 'animeStudio' ? ['runId', 'runAttempt', 'commit', 'artifactId'] : [])], `tools.${name}`);
@@ -97,8 +107,8 @@ function validateLock(lock) {
         object(lock.network, ['gitProxy'], 'network');
         if (lock.network.gitProxy !== undefined) gitProxyURL(lock.network.gitProxy);
     }
-    object(lock.tools, ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio'], 'tools');
-    for (const key of ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio']) artifact(lock.tools[key], key);
+    object(lock.tools, ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio', 'vcRedist'], 'tools');
+    for (const key of ['node', 'git', 'dotnetSdk', 'dotnetRuntime', 'animeStudio', 'vcRedist']) artifact(lock.tools[key], key);
     object(lock.repositories, ['wikiData', 'tools', 'contracts', 'provider', 'db', 'source'], 'repositories');
     for (const key of ['wikiData', 'tools', 'contracts', 'provider', 'db', 'source']) repository(lock.repositories[key], key);
     object(lock.job, ['mode', 'versions', 'target', 'ids', 'requireImages'], 'job');
