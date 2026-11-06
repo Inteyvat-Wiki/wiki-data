@@ -57,6 +57,22 @@ test('wire representation preserves exact byte order, hashes, lengths and final 
     }
     assert.equal(bytes.length, offset + 32); assert.equal(bytes.subarray(offset).toString('hex'), plan.releaseId);
 });
+
+test('manifest preflight rejects missing, case-mismatched and inline image references before any upload', async t => {
+    const f = fixture(t);
+    const image = fs.readdirSync(path.join(f.root, 'images'), {recursive: true}).find(file => file.endsWith('.png'));
+    assert(image);
+    const reference = '/images/' + image.split(path.sep).join('/');
+    f.write('common/asset-probe.json', {nested: [{html: `<img src="${reference}">`}]});
+    await buildManifest(f.root);
+    for (const missing of ['/images/does-not-exist.png', reference.toUpperCase().replace('/IMAGES/', '/images/'), '/images/../outside.png']) {
+        f.write('common/asset-probe.json', {nested: [{html: `<img src="${missing}">`}]});
+        await assert.rejects(buildManifest(f.root), error => /Missing or invalid dataset image/.test(error.message)
+            && error.message.includes('common/asset-probe.json'));
+    }
+    fs.writeFileSync(path.join(f.root, 'common/asset-probe.json'), Buffer.from([0xff]));
+    await assert.rejects(buildManifest(f.root), /Invalid UTF-8 JSON/);
+});
 test('changed input, forbidden files, incomplete export and symlinks fail before committing a bundle', async t => {
     const f = fixture(t), plan = await buildManifest(f.root);
     f.write('common/menu.json', {changed: true});

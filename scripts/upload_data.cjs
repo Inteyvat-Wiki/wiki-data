@@ -7,6 +7,7 @@ const http = require('node:http');
 const https = require('node:https');
 const crypto = require('node:crypto');
 const {Readable} = require('node:stream');
+const {TextDecoder} = require('node:util');
 const {spawnSync} = require('node:child_process');
 const contract = require('@inteyvat-wiki/wiki-contracts/upload');
 const {validateExports} = require('./check_exports.cjs');
@@ -55,16 +56,42 @@ async function openInput(entry) {
     }
     return file;
 }
-async function hashInput(entry) {
+function validateImageReferences(value, files, filename) {
+    const pending = [value];
+    while (pending.length) {
+        const entry = pending.pop();
+        if (typeof entry === 'string') {
+            // Match the server's upload boundary, including inline HTML images.
+            for (const match of entry.matchAll(/\/images\/[^\s<>"'\[\](){}]+/g)) {
+                const image = match[0].slice(1);
+                if (!contract.isUploadPath(image) || !files.has(image))
+                    throw new Error(`Missing or invalid dataset image in ${filename}: ${image}`);
+            }
+        } else if (Array.isArray(entry)) {
+            for (const child of entry) pending.push(child);
+        } else if (entry && typeof entry === 'object') {
+            for (const child of Object.values(entry)) pending.push(child);
+        }
+    }
+}
+async function hashInput(entry, files) {
     const file = await openInput(entry), hash = crypto.createHash('sha256');
+    const json = entry.path.endsWith('.json') ? [] : undefined;
     let size = 0;
     try {
         for await (const chunk of file.createReadStream({autoClose: false})) {
             size += chunk.length;
             if (size > entry.stat.size) throw new Error(`Input changed: ${entry.path}`);
             hash.update(chunk);
+            json?.push(chunk);
         }
         if (size !== entry.stat.size || !sameStat(entry.stat, snapshotStat(await file.stat()))) throw new Error(`Input changed: ${entry.path}`);
+        if (json) {
+            let value;
+            try { value = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(Buffer.concat(json))); }
+            catch { throw new Error(`Invalid UTF-8 JSON in upload input: ${entry.path}`); }
+            validateImageReferences(value, files, entry.path);
+        }
         return hash.digest('hex');
     } finally { await file.close(); }
 }
@@ -79,12 +106,12 @@ function validateDataset(root) {
 async function buildManifest(directory, limits = contract.DEFAULT_UPLOAD_LIMITS) {
     const root = path.resolve(directory), entries = inventory(root);
     if (!entries.length || entries.length > limits.maxFiles) throw new Error('Upload file count exceeds the protocol limit');
-    const files = [], manifest = {schema: 1, files, totalBytes: 0};
+    const files = [], manifest = {schema: 1, files, totalBytes: 0}, names = new Set(entries.map(entry => entry.path));
     for (const entry of entries) {
         if (entry.stat.size <= 0 || entry.stat.size > limits.maxFileBytes) throw new Error(`Invalid/excessive upload file size: ${entry.path}`);
         manifest.totalBytes += entry.stat.size;
         if (!Number.isSafeInteger(manifest.totalBytes) || manifest.totalBytes > limits.maxTotalBytes) throw new Error('Upload total size exceeds the protocol limit');
-        files.push({path: entry.path, size: entry.stat.size, sha256: await hashInput(entry)});
+        files.push({path: entry.path, size: entry.stat.size, sha256: await hashInput(entry, names)});
     }
     const error = contract.getUploadManifestError(manifest, limits);
     if (error) throw new Error(`Invalid upload manifest: ${error}`);
