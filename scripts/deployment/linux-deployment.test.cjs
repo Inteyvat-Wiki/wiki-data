@@ -84,6 +84,28 @@ test('remote uploader requires an explicit valid missing-image acknowledgement',
         assert.throws(() => missingImageCount(value), /did not confirm/);
 });
 
+test('exhaustive detail check covers both locales and does not accept missing or malformed details', async t => {
+    const {requests, verify} = require('./verify-details.cjs');
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wiki-detail-check-'));
+    t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+    const fixture = writeUploadFixture(root);
+    for (const category of ['tcg', 'quest_item', 'task']) fixture.write(`common/${category}/ids.json`, ['fixture']);
+    const jobs = requests(root);
+    assert.equal(jobs.length, 6);
+    assert(jobs.some(job => job.route === '/api/archive/tcg/fixture?lang=en'));
+    assert(jobs.some(job => job.route === '/api/quest-item/fixture?lang=zh_hans'));
+    const report = await verify(new URL('http://127.0.0.1/'), jobs, async url => {
+        if (url.pathname.includes('/quest-item/')) return new Response('{}', {status: 404});
+        const name = url.pathname.includes('/task/') ? null : 'Fixture';
+        return new Response(JSON.stringify({name}), {headers: {'content-type': 'application/json'}});
+    });
+    assert.equal(report.checked, 6); assert.equal(report.failed, 2);
+    assert.equal(report.categories.task.failed, 0);
+    const bad = await verify(new URL('http://127.0.0.1/'), jobs.slice(0, 1), async () =>
+        new Response('{}', {headers: {'content-type': 'application/json'}}));
+    assert.equal(bad.failed, 1);
+});
+
 test('test-only sample adapter preserves verified bytes, rejects failed/tampered runs and leaves other categories empty', t => {
     // Synthetic unit fixture ONLY: never used for the real deployment run.
     const {main: sampleRelease} = require('./sample-release.cjs');

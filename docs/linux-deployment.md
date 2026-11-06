@@ -68,5 +68,6 @@ node linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256
 
 发布后可执行只读验证：`node scripts/deployment/verify-public.cjs http://HOST:14780/ EXPORT_ROOT`。
 它对比中英全部栏目列表、地图场景、代表性角色/武器/风之翼接口与图片字节，并确认公网管理接口被屏蔽。
+需要逐条遍历时，执行 `node scripts/deployment/verify-details.cjs http://HOST:14780/ EXPORT_ROOT`：按所有栏目导出 ID 检查中英详情接口，固定最多 4 个并发，只读且不自动重试，输出统计和失败条目。它检查响应可用性和基本形状，不替代每个字段的语义审查。
 这里只核验 HTTP 与导出内容，不替代浏览器中的布局和交互测试。
 对于 `sample-release.cjs` 生成的独立真实样本测试集，验证时追加 `--test-only`；它会核对测试来源标记，允许其他栏目为空，不会将样本判作全量通过。
