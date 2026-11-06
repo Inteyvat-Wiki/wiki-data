@@ -86,6 +86,6 @@ Live-source tests (including GDS's excluded misc test), source-dependent validat
 
 ## Remote CI status
 
-This change adds no remote CI, changes no workflow triggers, and runs no remote jobs. The existing workflow still assumes sibling installs/ordinary `npm ci`; it is **not compatible with the unpublished scoped dependencies**. Before pushing changes that trigger it, maintainers must separately review/adapt that workflow to the explicit source mapping and local-registry bootstrap, or wait for publication of the exact locked artifacts. A passing local package check is not evidence of a passing remote workflow.
+Remote CI workflows have been removed. Pushes and pull requests no longer trigger workspace checks; run the local commands above explicitly when needed. Local build/test scripts and `npm ci` remain available. Reintroducing remote automation requires separate approval and a dependency bootstrap compatible with the unpublished scoped packages.
 
 When coordinating repositories, record their actual revisions and Wiki's recursive submodule revisions. Repository default branches can change between runs; explicit source paths alone do not pin revisions. No publishing, release, or registry credentials are required by this local workflow.
