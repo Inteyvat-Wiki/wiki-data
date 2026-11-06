@@ -115,6 +115,36 @@ test('public connection retry is bounded and reports causes without signed URL d
     assert.equal(attempts, 3);
 });
 
+test('Git fetch retries only transient network failures with identical fixed arguments', async () => {
+    const args = guest.sourceFetchArgs(fixture().repositories.source, false), calls = [], delays = [];
+    const error = Object.assign(new Error('fetch failed'), {exitCode: 128, outputTail: 'fatal: Recv failure: Connection was reset'});
+    const options = {sleep: async value => {delays.push(value);}, log: () => {}};
+    const result = await guest.fetchWithRetry(async (name, received) => {
+        calls.push({name, args: [...received]});
+        if (calls.length < 3) {received.push('not-reused'); throw error;}
+        return 'fixed commit fetched';
+    }, args, options);
+    assert.equal(result, 'fixed commit fetched');
+    assert.deepEqual(calls.map(call => call.args), [args, args, args]);
+    assert.deepEqual(calls.map(call => call.name), ['fetch', 'fetch-retry-2', 'fetch-retry-3']);
+    assert.deepEqual(delays, [2000, 4000]);
+    let failedAttempts = 0;
+    await assert.rejects(guest.fetchWithRetry(async () => {failedAttempts++; throw error;}, args, options));
+    assert.equal(failedAttempts, 3);
+});
+
+test('Git fetch never retries certificate/authentication/commit/hash errors or command timeout', async () => {
+    for (const text of ['SSL certificate problem', 'Authentication failed', 'not our ref abc', 'couldn\'t find remote ref abc',
+        'repository not found', 'hash mismatch', 'Unrecognized permanent error']) {
+        let attempts = 0;
+        const error = Object.assign(new Error('failed'), {exitCode: 128, outputTail: text});
+        await assert.rejects(guest.fetchWithRetry(async () => {attempts++; throw error;}, ['fetch'], {sleep: async () => {}, log: () => {}}));
+        assert.equal(attempts, 1);
+    }
+    assert(!guest.transientGitFailure({exitCode: 128, outputTail: 'Connection timed out', timedOut: true}));
+    assert(!guest.transientGitFailure({exitCode: 1, outputTail: 'Connection timed out'}));
+});
+
 test('fixed Git release metadata must match tag, asset ID, ZIP name, length, digest and API route', () => {
     const spec = fixture().tools.git;
     const release = {tag_name: spec.releaseTag, assets: [{id: spec.assetId, name: spec.assetName, size: spec.bytes,

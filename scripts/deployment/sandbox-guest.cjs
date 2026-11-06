@@ -82,12 +82,44 @@ function runner(logRoot, baseEnvironment) {
         const log = path.join(logRoot, `${String(++sequence).padStart(2, '0')}-${name}.log`);
         const fd = fs.openSync(log, 'wx');
         const child = spawn(file, args, {cwd, windowsHide: true, env: {...baseEnvironment, ...env}, stdio: ['ignore', 'pipe', 'pipe']});
-        let tail = '';
+        let tail = '', timedOut = false;
+        const timer = setTimeout(() => {
+            timedOut = true;
+            // Terminate only this owned command tree, never all Git/Node processes.
+            if (process.platform === 'win32' && child.pid) {
+                const killer = spawn('C:\\Windows\\System32\\taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], {windowsHide: true, stdio: 'ignore'});
+                killer.once('error', () => child.kill());
+            } else child.kill();
+        }, 20 * 60 * 1000);
+        timer.unref();
         const collect = chunk => { fs.writeSync(fd, chunk); tail = (tail + chunk).slice(-32768); };
         child.stdout.on('data', collect); child.stderr.on('data', collect);
         child.once('error', reject);
-        child.once('close', code => { fs.closeSync(fd); code === 0 ? resolve(tail) : reject(new Error(`${name} failed (${code}); see ${path.basename(log)}`)); });
+        child.once('close', code => {
+            clearTimeout(timer); fs.closeSync(fd);
+            if (code === 0 && !timedOut) resolve(tail);
+            else reject(Object.assign(new Error(`${name} ${timedOut ? 'timed out after 20 minutes' : `failed (${code})`}; see ${path.basename(log)}`),
+                {exitCode: code, outputTail: tail, timedOut}));
+        });
     });
+}
+function transientGitFailure(error) {
+    if (error?.timedOut || error?.exitCode !== 128) return false;
+    const text = error.outputTail || '';
+    // Authentication, certificate, missing-commit and integrity errors are not retried.
+    if (/certificate|SSL peer|authentication|not our ref|couldn't find remote ref|repository not found|checksum|hash mismatch/i.test(text)) return false;
+    return /Recv failure: Connection was reset|Failed to connect|Could not resolve host|Connection timed out|Operation timed out|Empty reply from server|TLS connection was non-properly terminated|RPC failed; curl (?:18|28|35|52|55|56)\b|requested URL returned error: (?:429|500|502|503|504)\b/i.test(text);
+}
+async function fetchWithRetry(command, args, {sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds)), log = console.error} = {}) {
+    const fixedArgs = Object.freeze([...args]);
+    for (let attempt = 0; attempt < 3; attempt++) {
+        try { return await command(attempt === 0 ? 'fetch' : `fetch-retry-${attempt + 1}`, [...fixedArgs]); }
+        catch (error) {
+            if (attempt === 2 || !transientGitFailure(error)) throw error;
+            log(`Transient Git network failure; retrying the same URL/commit (${attempt + 2}/3).`);
+            await sleep((attempt + 1) * 2000);
+        }
+    }
 }
 function sourceFetchArgs(repo, withHistory) {
     return ['fetch', '--no-tags', ...(withHistory ? [] : ['--depth=1']), 'origin', ...new Set([repo.commit, ...(withHistory ? repo.history || [] : [])])];
@@ -97,7 +129,7 @@ async function fetchRepository(run, git, name, repo, destination, history = fals
     const command = (step, args) => run(`${name}-${step}`, git, ['-c', 'core.autocrlf=false', '-c', 'core.longpaths=true', '-C', destination, ...args], GUEST.work);
     await command('init', ['init', '--quiet']);
     await command('remote', ['remote', 'add', 'origin', repo.url]);
-    await command('fetch', sourceFetchArgs(repo, history));
+    await fetchWithRetry(command, sourceFetchArgs(repo, history));
     await command('checkout', ['checkout', '--detach', repo.commit]);
     assert.equal((await command('identity', ['rev-parse', 'HEAD'])).trim(), repo.commit);
     if (history) {
@@ -253,5 +285,5 @@ async function main() {
         result.finishedAt = new Date().toISOString(); writeJSON(path.join(GUEST.output, 'result.json'), result);
     }
 }
-module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, listOutputs, extractionOutput, main};
+module.exports = {publicFetch, download, verifyAnimeMetadata, verifyGitMetadata, sourceFetchArgs, fetchWithRetry, transientGitFailure, listOutputs, extractionOutput, main};
 if (require.main === module) main().catch(error => { console.error(error.stack); process.exitCode = 1; });

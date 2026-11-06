@@ -160,3 +160,5 @@ Windows 上附加使用系统 PowerShell 5.1 的实际安全解压测试。真�
 CLI 语义依据 [Windows Sandbox CLI 文档](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-cli)。若新版 wsb 的非空列表 JSON 字段变化，脚本会拒绝识别，须核对实际输出后更新兼容字段，不能退回猜测用户实例。
 
 真实环境首轮已验证启动、两处目录共享、System 身份运行、Node 下载校验和自己的实例停止。曾遇到 `github.com:443` 连接超时；公开 Release asset API 是同一产物的可选入口，不改变来源身份。下载连接及临时服务错误最多尝试三次，日志不打印带签名的跳转 URL。nightly.link 的 HEAD 请求可能返回 404，不能据此断言产物失效；应以 GET 响应和最终内容校验判断。
+
+Git fetch 对明确的连接重置、超时、DNS/临时 HTTP 服务错误最多执行三次，间隔 2/4 秒，保持完全相同的 origin 和固定 SHA，不禁用 TLS、不改源、不回退宿主缓存。证书、认证、找不到提交和内容完整性错误立即失败。每条外部命令最长 20 分钟，超时只终止该命令自己的进程树；命令超时不继续重试。非交互 fetch 日志可能在完成前为空；诊断接收量应只读打开 `.git/objects/pack` 的临时文件测量长度，Windows 目录列表对未关闭文件可能暂时显示 0。
