@@ -1,0 +1,5 @@
+{
+    "extends": "../../tsconfig.check.json",
+    "include": ["sandbox-smoke.ts", "../../src/**/*.ts", "../../src/data/*.js"],
+    "exclude": ["../../node_modules"]
+}
