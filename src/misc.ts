@@ -1,5 +1,5 @@
 import path from 'node:path';
-import type { MiscRecord } from 'genshin-db';
+import type { MiscRecord } from '@inteyvat-wiki/genshin-db';
 import type { Lang } from '~/utils/i18n';
 import { MiscData } from '~/utils/data';
 import { create_page, export_category } from '~/utils/page';

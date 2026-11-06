@@ -1,4 +1,4 @@
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 
 function shape(value: unknown, fields: string[], label: string): Record<string, unknown> {
     if (!value || typeof value !== 'object' || Array.isArray(value)

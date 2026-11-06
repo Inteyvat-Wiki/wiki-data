@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import genshindb, { type MiscRecord } from 'genshin-db';
+import genshindb, { type MiscRecord } from '@inteyvat-wiki/genshin-db';
 import { convert_misc_records, get_misc_export, misc_asset_manifest, set_misc_output } from '../src/misc';
 import { MISC_TYPES } from '@inteyvat-wiki/wiki-contracts/misc';
 import { ConvertRaw } from '../src/utils/convert_raw';

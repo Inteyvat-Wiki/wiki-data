@@ -1,4 +1,4 @@
-import { Language, type ArchiveRecord, type MiscRecord, type QueryFunction, type Outfit, type WeaponSkin, type WindGlider } from 'genshin-db';
+import { Language, type ArchiveRecord, type MiscRecord, type QueryFunction, type Outfit, type WeaponSkin, type WindGlider } from '@inteyvat-wiki/genshin-db';
 import genshindb from './genshin';
 import { Lang } from '~/utils/i18n';
 

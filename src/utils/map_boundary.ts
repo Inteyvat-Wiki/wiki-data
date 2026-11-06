@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import type { MapCoordinate, MapOverlay, MapRegion } from '@inteyvat-wiki/wiki-contracts/map';
 import { get_output_root } from './output';
+import { ConvertRaw } from './convert_raw';
 
 export interface MapPngSource { file: string; sha256: string }
 export interface MapPixelImage { width: number; height: number; data: Uint8Array }
@@ -13,6 +14,25 @@ export function checked_map_image(source: MapPngSource): Buffer {
     const bytes=fs.readFileSync(source.file);
     if (createHash('sha256').update(bytes).digest('hex')!==source.sha256) throw new Error('Map image changed after snapshot preparation');
     return bytes;
+}
+export function convert_sprite_boundary(record: MapRecord, sceneId: string, copyImage: (source:string,target:string)=>string|null): MapOverlay[] {
+    return ConvertRaw.get_map_boundary_parts(record).map(part => {
+        const bytes = checked_map_image(part.image), relative = `map/scenes/${sceneId}/${part.id}`;
+        let image: string | null;
+        if (part.color.every(value => value === 1)) image = copyImage(part.image.file, relative);
+        else {
+            const png = PNG.sync.read(bytes);
+            for (let i=0;i<png.data.length;i+=4) for (let channel=0;channel<3;channel++) png.data[i+channel]=Math.round(png.data[i+channel]!*part.color[channel]!);
+            const root=path.resolve(get_output_root(),'images'), file=path.resolve(root,relative+'.png');
+            if (!file.startsWith(root+path.sep)) throw new Error('Invalid boundary output path');
+            fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,PNG.sync.write(png)); image='/images/'+relative+'.png';
+        }
+        if (!image) throw new Error(`Native boundary image was not copied: ${part.id}`);
+        const points = part.vertices;
+        return {id:part.id,image,label:'',kind:'boundary',evidence:'native',opacity:part.opacity,blend:part.blend,zIndex:100000+part.order,
+            bounds:[{x:Math.min(...points.map(p=>p.x)),y:Math.min(...points.map(p=>p.y))},{x:Math.max(...points.map(p=>p.x)),y:Math.max(...points.map(p=>p.y))}],
+            corners:[points[3]!,points[2]!,points[1]!,points[0]!]};
+    });
 }
 function wrap(value:number,size:number) { return ((value%size)+size)%size; }
 /** Bilinear repeat sampling, with PNG rows converted to bottom-origin texture UV. */

@@ -1,6 +1,6 @@
 
-import type { Character, Weapon, MapRecord } from 'genshin-db';
-import type { MapCatalogueKind } from '@inteyvat-wiki/wiki-contracts/map';
+import type { Character, Weapon, MapRecord } from '@inteyvat-wiki/genshin-db';
+import type { MapCatalogueKind, MapRegion } from '@inteyvat-wiki/wiki-contracts/map';
 import { map_area_polygon } from './map_areas';
 import { map_initial_state, map_state_write, map_level_state, map_level_write, map_layer_write } from './map_state_replay';
 
@@ -160,7 +160,7 @@ const map_catalogue_fields: Record<string, string[]> = {
         'title_text_id', 'description_text_id', 'image_file', 'image_sha256', 'image_width', 'image_height', 'badge_state'],
     map_settings: ['minimap_ui_radius', 'minimap_sight_radius', 'minimap_scale', 'minimap_scales', 'map_scale', 'map_scale_min', 'map_scale_max', 'mark_near_threshold'],
     resource: ['category', 'status', 'source_entry', 'decoded', 'references', 'serialized_file', 'visibility_status', 'layout', 'component_color', 'material',
-        'asset_name', 'root_name', 'area_ids', 'scene_id', 'group_id', 'layer_id', 'floor_id', 'display_geometry', 'image_file', 'image_sha256', 'image_width', 'image_height', 'render_order', 'area_variants', 'limit_region_id', 'mask', 'rim'],
+        'asset_name', 'root_name', 'area_ids', 'scene_id', 'group_id', 'layer_id', 'floor_id', 'display_geometry', 'image_file', 'image_sha256', 'image_width', 'image_height', 'render_order', 'area_variants', 'limit_region_id', 'mask', 'rim', 'shader_profile', 'parts'],
     boundary_geometry: ['polygons', 'active_reference'],
     layer_region: ['group_id', 'layer_id', 'scene_id', 'shapes', 'polygons', 'footprints', 'bounds_validation'],
     viewpoint: ['viewpoint_id', 'scene_id', 'world_area_id', 'group_id', 'config_id', 'gadget_id', 'image_name', 'show_only_unlocked', 'disused'],
@@ -259,6 +259,29 @@ type ConvertedMapRecord = {
     position?: { x: number; y: number; z: number };
 };
 
+function convert_limit_outline(record: MapRecord): MapRegion {
+    if (record.kind !== 'limit_region' || record.data.geometry_status !== 'client-simple-polygon')
+        throw new Error(`Missing client limit outline: ${record.id}`);
+    const polygons = map_source_list(record.data.polygons);
+    if (polygons.length !== 1) throw new Error(`Expected one client limit outline: ${record.id}`);
+    const polygon = map_source_object(polygons[0], ['minimum', 'maximum', 'points', 'area_type', 'source', 'map_back_prefab'], 'limit outline');
+    const origin = map_source_object(polygon.source, ['decoder', 'asset_path', 'resource_key', 'block', 'offset', 'path_id', 'sha256'], 'limit outline source');
+    map_known(origin.decoder, ['simple-polygon-7.2-v1'], 'limit outline decoder');
+    if (polygon.map_back_prefab !== undefined)
+        map_source_object(polygon.map_back_prefab, ['asset_path', 'resource_key', 'block', 'offset', 'size'], 'limit outline prefab');
+    const project = (raw: unknown) => {
+        const point = map_source_object(raw, ['x', 'y', 'z'], 'limit outline vertex');
+        if (point.y !== undefined) map_source_number(point.y);
+        return { x: map_source_number(point.x), y: map_source_number(point.z) };
+    };
+    project(polygon.minimum); project(polygon.maximum);
+    const ring = map_source_list(polygon.points).map(project);
+    if (ring.length < 3) throw new Error(`Invalid client limit outline: ${record.id}`);
+    const extent = map_optional_enum({ POLYGON_AREA_TYPE_OUTSIDE: 'outside' }, polygon.area_type, 'limit outline extent');
+    return { id: convert_map_id(record.id), label: '', kind: 'playable-boundary', evidence: 'native',
+        rings: [ring], ...(extent ? { extent } : {}) };
+}
+
 /** Check source evolution even for omitted metadata; only explicitly constructed fields can leave this boundary. */
 function convert_map_record_source(record: MapRecord): ConvertedMapRecord {
     const source = map_source_object(record, ['schema', 'id', 'kind', 'name', 'description', 'texts', 'relations', 'data', 'source', 'diagnostics', 'version'], 'map record');
@@ -314,7 +337,11 @@ function convert_map_record_source(record: MapRecord): ConvertedMapRecord {
             }
             break;
         case 'scene_tag': boolean('default_valid', 'independent'); map_source_list(data.conditions).forEach(value => map_condition(value, true)); break;
-        case 'limit_region': enumeration('region_type'); boolean('hide_paimon'); break;
+        case 'limit_region':
+            enumeration('region_type'); boolean('hide_paimon');
+            if (data.geometry_status !== undefined) map_known(data.geometry_status, ['exact-resource-name', 'native-mask-and-rim', 'client-simple-polygon'], 'limit geometry status');
+            if (data.geometry_status === 'client-simple-polygon') convert_limit_outline(record);
+            break;
         case 'open_state': boolean('allow_client_open'); map_source_list(data.conditions).forEach(value => map_condition(value, true)); break;
         case 'quest_event':
             map_state_write(record); map_level_write(record); map_layer_write(record);
@@ -338,6 +365,7 @@ function convert_map_record_source(record: MapRecord): ConvertedMapRecord {
                 map_known(data.preview, ['all-areas-open-time-zero'], 'outside fog preview'); map_source_list(data.groups); break;
             }
             map_known(data.category, ['image', 'object', 'atlas-image', 'base-tile', 'native-boundary'], 'map resource category'); enumeration('status');
+            if (data.parts !== undefined) convert_boundary_parts(record);
             if (data.layout) {
                 const layout = map_source_object(data.layout, ['coordinateSpace', 'corners', 'projectionStatus'], 'resource layout');
                 map_known(layout.coordinateSpace, ['prefab-ui'], 'map coordinate space'); map_known(layout.projectionStatus, ['not-calibrated'], 'map projection');
@@ -413,7 +441,37 @@ function convert_map_record_source(record: MapRecord): ConvertedMapRecord {
     return result;
 }
 
+function convert_boundary_parts(record: MapRecord) {
+    const data = map_source_object(record.data, ['category','status','shader_profile','parts','scene_id','limit_region_id'], 'sprite boundary');
+    map_known(data.category, ['native-boundary'], 'boundary category');
+    map_known(data.status, ['static-serialized-state'], 'boundary state');
+    map_known(data.shader_profile, ['native-sprite-boundary-v1'], 'boundary profile');
+    const parts = map_source_list(data.parts);
+    if (!parts.length) throw new Error('Empty native boundary');
+    return parts.map((value, index) => {
+        const part = map_source_object(value, ['id','image_file','image_sha256','display_geometry','color','blend','order','source'], 'boundary part');
+        map_source_string(part.id); if (part.order !== index) throw new Error('Unmapped native boundary order');
+        const source = map_source_object(part.source, ['file','bytes','sha256'], 'boundary part source');
+        map_source_string(source.file); map_source_string(source.sha256); map_source_number(source.bytes);
+        const geometry = map_source_object(part.display_geometry, ['space','corners','profile'], 'boundary geometry');
+        map_known(geometry.space, ['world-xz'], 'boundary space'); map_source_string(geometry.profile);
+        const points = map_source_list(geometry.corners).map(value => {
+            const point = map_source_object(value, ['x','y'], 'boundary point');
+            return { x: map_source_number(point.x), y: map_source_number(point.y) };
+        });
+        const rgba = map_source_list(part.color).map(map_source_number);
+        if (points.length !== 4 || rgba.length !== 4 || rgba.some(n => n < 0 || n > 1)) throw new Error('Invalid boundary shape or color');
+        const sha256 = map_source_string(part.image_sha256);
+        if (!/^[a-f0-9]{64}$/.test(sha256)) throw new Error('Invalid boundary image digest');
+        return { id: `${record.id}-part-${index}`, image: { file: map_source_string(part.image_file), sha256 },
+            vertices: points, color: rgba.slice(0,3) as [number,number,number], opacity: rgba[3]!,
+            blend: map_source_enum({ normal:'normal', additive:'additive' } as const, part.blend, 'boundary blend'), order: index };
+    });
+}
+
 export const ConvertRaw = {
+    get_map_boundary_parts: convert_boundary_parts,
+    get_map_limit_outline: convert_limit_outline,
     get_map_record: convert_map_record_source,
     get_map_id: convert_map_id,
     get_map_point_display: convert_map_point_display,
@@ -429,6 +487,17 @@ export const ConvertRaw = {
         transport: 'teleport', statue: 'statue', 'personal-scene-jump': 'point', building: 'place',
         'virtual-transport': 'teleport', 'vehicle-summon': 'point', unresolved: 'point',
     }, value, 'point class'),
+    // Wiki display policy; native drawing layers do not establish native zoom thresholds.
+    get_map_icon_min_zoom: (value: unknown): number | undefined => map_optional_enum({
+        NpcOther: 'nearby', HomeworldFarmField: 'standard', LocalPlayer: 'standard', Prioritized: 'standard',
+        OtherPlayer: 'standard', QuestMain: 'standard', QuestBranch: 'standard', QuestEvent: 'standard',
+        QuestAcception: 'standard', WQAcceptHint: 'standard', Radar: 'standard', TransportGoddess: 'standard',
+        Dungeon: 'standard', Anecdote: 'standard', QuestActivity: 'standard', QuestWorld: 'standard',
+        QuestRandom: 'standard', Ore: 'standard', Activity: 'standard', Custom: 'standard', Monster: 'standard',
+        TransportOther: 'standard', NpcAdventure: 'standard', NpcActivity: 'standard', Area: 'standard',
+        Default: 'standard', Vehicle: 'standard', HomeworldMainHouse: 'standard', HomeworldFurnitureSuite: 'standard',
+        HomeworldDjinn: 'standard', HomeworldNpc: 'standard', HomeworldTransPoint: 'standard', HomeworldSafePoint: 'standard',
+    }, value, 'map icon layer') === 'nearby' ? -2 : undefined,
     get_outfit_type: (folder: string): OutfitType => mapped_key({
         outfits: 'character', weaponskins: 'weapon', windgliders: 'glider',
     }, folder, 'outfit folder'),

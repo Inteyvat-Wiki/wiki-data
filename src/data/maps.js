@@ -1167,13 +1167,13 @@ const data = {
                 "point-3-1104",                                                             // 传送锚点
                 "point-3-1105",                                                             // 传送锚点
                 "point-3-1113",                                                             // 揭示之书
-                "point-3-1114",                                                             // 格式塔的探索
-                "point-3-1115",                                                             // 格式塔的探索
-                "point-3-1116",                                                             // 格式塔的探索
-                "point-3-1117",                                                             // 格式塔的探索
-                "point-3-1118",                                                             // 格式塔的探索
-                "point-3-1119",                                                             // 格式塔的探索
-                "point-3-1120",                                                             // 格式塔的探索
+                // "point-3-1114",                                                             // 格式塔的探索
+                // "point-3-1115",                                                             // 格式塔的探索
+                // "point-3-1116",                                                             // 格式塔的探索
+                // "point-3-1117",                                                             // 格式塔的探索
+                // "point-3-1118",                                                             // 格式塔的探索
+                // "point-3-1119",                                                             // 格式塔的探索
+                // "point-3-1120",                                                             // 格式塔的探索
                 "point-3-1121",                                                             // 七天神像-水
                 "point-3-1122",                                                             // 传送锚点
                 "point-3-1125",                                                             // 传送锚点
@@ -1342,9 +1342,9 @@ const data = {
                 "point-3-1466",                                                             // 悬浮小屋
                 "point-3-1467",                                                             // 悬浮小屋
                 "point-3-1468",                                                             // 悬浮小屋
-                "point-3-1469",                                                             // 马尼菲科的摄影点位
-                "point-3-1470",                                                             // 马尼菲科的摄影点位
-                "point-3-1471",                                                             // 马尼菲科的摄影点位
+                // "point-3-1469",                                                             // 马尼菲科的摄影点位
+                // "point-3-1470",                                                             // 马尼菲科的摄影点位
+                // "point-3-1471",                                                             // 马尼菲科的摄影点位
                 "point-3-1473",                                                             // 荒废砌造坞
                 "point-3-1476",                                                             // 天蛇船
                 "point-3-1477",                                                             // 传送锚点
@@ -1667,11 +1667,11 @@ const data = {
                 "point-3-256",                                                              // 传送锚点
                 "point-3-257",                                                              // 传送锚点
                 "point-3-258",                                                              // 传送锚点
-                "point-3-259",                                                              // 「机关棋谭·代理人」驹形
-                "point-3-268",                                                              // 风花节
+                // "point-3-259",                                                              // 「机关棋谭·代理人」驹形
+                // "point-3-268",                                                              // 风花节
                 "point-3-271",                                                              // 「伏龙树」之底
                 "point-3-282",                                                              // 山脊守望
-                "point-3-286",                                                              // 「导能原盘」胡塞尼
+                // "point-3-286",                                                              // 「导能原盘」胡塞尼
                 "point-3-29",                                                               // 七天神像-风
                 "point-3-293",                                                              // 七天神像-雷
                 "point-3-296",                                                              // 传送锚点
@@ -1705,11 +1705,11 @@ const data = {
                 "point-3-341",                                                              // 鸣神大社·神樱
                 "point-3-342",                                                              // 炼金
                 "point-3-343",                                                              // 「社奉行」吏僚
-                "point-3-344",                                                              // 「机关棋谭·代理人」驹形
+                // "point-3-344",                                                              // 「机关棋谭·代理人」驹形
                 "point-3-35",                                                               // 传送锚点
                 "point-3-350",                                                              // 千门虚舟
                 "point-3-351",                                                              // 池中宅邸
-                "point-3-354",                                                              // 筑机战阵
+                // "point-3-354",                                                              // 筑机战阵
                 "point-3-359",                                                              // 阵代屋敷
                 "point-3-36",                                                               // 传送锚点
                 "point-3-361",                                                              // 椛染之庭
@@ -1729,7 +1729,7 @@ const data = {
                 "point-3-382",                                                              // 传送锚点
                 "point-3-383",                                                              // 传送锚点
                 "point-3-384",                                                              // 传送锚点
-                "point-3-388",                                                              // 琳阳
+                // "point-3-388",                                                              // 琳阳
                 "point-3-391",                                                              // 蒙德钓鱼协会
                 "point-3-396",                                                              // 鸣神岛·天守
                 "point-3-4",                                                                // 七天神像-风
@@ -1746,7 +1746,7 @@ const data = {
                 // "point-3-415",                                                              // 未提供名称
                 "point-3-42",                                                               // 铭记之谷
                 "point-3-424",                                                              // 茂知之壳
-                "point-3-428",                                                              // 「导能原盘」胡塞尼
+                // "point-3-428",                                                              // 「导能原盘」胡塞尼
                 "point-3-429",                                                              // 「设计师」若紫
                 "point-3-432",                                                              // 传送锚点
                 "point-3-433",                                                              // 沉眠之庭
@@ -1765,7 +1765,7 @@ const data = {
                 "point-3-463",                                                              // 七天神像-草
                 "point-3-464",                                                              // 七天神像-草
                 "point-3-465",                                                              // 七天神像-草
-                "point-3-467",                                                              // 灯中妙影
+                // "point-3-467",                                                              // 灯中妙影
                 "point-3-468",                                                              // 群玉阁
                 "point-3-471",                                                              // 七天神像-草
                 "point-3-472",                                                              // 七天神像-草
@@ -1906,7 +1906,7 @@ const data = {
                 "point-3-666",                                                              // 传送锚点
                 "point-3-667",                                                              // 传送锚点
                 "point-3-668",                                                              // 传送锚点
-                "point-3-669",                                                              // 筑机战阵
+                // "point-3-669",                                                              // 筑机战阵
                 "point-3-671",                                                              // 蜃景祭场
                 "point-3-674",                                                              // 赤沙之槛
                 "point-3-675",                                                              // 千柱的花园
@@ -1998,7 +1998,7 @@ const data = {
                 "point-3-831",                                                              // 传送锚点
                 "point-3-832",                                                              // 梅洛彼得堡
                 "point-3-833",                                                              // 传送锚点
-                "point-3-834",                                                              // 与纯水精灵安的冒险
+                // "point-3-834",                                                              // 与纯水精灵安的冒险
                 // "point-3-835",                                                              // 未提供名称
                 // "point-3-836",                                                              // 未提供名称
                 "point-3-84",                                                               // 传送锚点
@@ -2043,9 +2043,9 @@ const data = {
                 "point-3-884",                                                              // 传送锚点
                 "point-3-885",                                                              // 传送锚点
                 "point-3-887",                                                              // 传送锚点
-                "point-3-895",                                                              // 与纯水精灵安的冒险
-                "point-3-896",                                                              // 与纯水精灵安的冒险
-                "point-3-897",                                                              // 与纯水精灵安的冒险
+                // "point-3-895",                                                              // 与纯水精灵安的冒险
+                // "point-3-896",                                                              // 与纯水精灵安的冒险
+                // "point-3-897",                                                              // 与纯水精灵安的冒险
                 "point-3-898",                                                              // 沫芒宫
                 "point-3-900",                                                              // 德波大饭店
                 "point-3-902",                                                              // 欧庇克莱歌剧院
@@ -2599,6 +2599,8 @@ const data = {
         // #region scene:enkanomiya 渊下宫
         "enkanomiya": {
             "source": "scene-5",                                                            // 渊下宫
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-69c2257315b04d1b5c2af8b6",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -2663,6 +2665,8 @@ const data = {
         // #region scene:the_chasm_underground_mines 层岩巨渊·地下矿区
         "the_chasm_underground_mines": {
             "source": "scene-6",                                                            // 层岩巨渊·地下矿区
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-73b74e98594d2e2ae8132d88",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -2719,6 +2723,8 @@ const data = {
         // #region scene:scene-9 金苹果群岛
         "scene-9": {
             "source": "scene-9",                                                            // 金苹果群岛
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-50ebddf4846c5b917fb95a02",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -2798,9 +2804,47 @@ const data = {
         },
         // #endregion scene:scene-9
 
+        // #region scene:veluriyam_mirage 琉形蜃境
+        "veluriyam_mirage": {
+            "source": "scene-10",                                                           // 琉形蜃境
+            "maskGroups": {},
+            "labels": [
+                "map-place-da2509cd9bb762a1a6b085ea",                                       // 银瓶庭院
+                "map-place-cb8713c1f8bfa5ff6da7a772",                                       // 蔓生溪谷
+                "map-place-440ea72a006cb1b6da3984ef",                                       // 隐众游园
+                "map-place-915aae35479e207c7033e85a",                                       // 寄想者剧场
+            ],
+            "places": [
+                "point-10-2",                                                               // 传送锚点
+                "point-10-3",                                                               // 传送锚点
+                "point-10-4",                                                               // 传送锚点
+                "point-10-5",                                                               // 传送锚点
+                "point-10-6",                                                               // 传送锚点
+                // "point-10-7",                                                            // 召唤浪船；缺少图标、描述
+                "point-10-8",                                                               // 传送锚点
+                "point-10-9",                                                               // 传送锚点
+                // "point-10-10",                                                           // 召唤浪船；缺少图标、描述
+                // "point-10-12",                                                           // 召唤浪船；缺少图标、描述
+                "point-10-13",                                                              // 传送锚点
+                // "point-10-16",                                                           // 缺少原始名称
+                // "point-10-18",                                                           // 缺少原始名称、描述
+                // "point-10-19",                                                           // 缺少原始名称、描述
+                "point-10-20",                                                              // 传送锚点
+            ],
+            "areas": [
+                "world-area-102500",                                                        // 银瓶庭院（一级区域）
+                "world-area-102600",                                                        // 蔓生溪谷（一级区域）
+                "world-area-102700",                                                        // 隐众游园（一级区域）
+                "world-area-102800",                                                        // 寄想者剧场（一级区域）
+            ],
+        },
+        // #endregion scene:veluriyam_mirage
+
         // #region scene:sea_of_bygone_eras 旧日之海
         "sea_of_bygone_eras": {
             "source": "scene-11",                                                           // 旧日之海
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-bff721b7ddcd68e2bc4c005a",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -2949,6 +2993,8 @@ const data = {
         // #region scene:ancient_sacred_mountain 远古圣山
         "ancient_sacred_mountain": {
             "source": "scene-101",                                                          // 远古圣山
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-a7e3a2641aa89c86ce244c58",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -3032,6 +3078,8 @@ const data = {
         // #region scene:scene-102 霜月
         "scene-102": {
             "source": "scene-102",                                                          // 霜月
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-8253c89860a8ab3b385001c1",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {
@@ -3143,6 +3191,8 @@ const data = {
         // #region scene:temple_of_space 空之神殿
         "temple_of_space": {
             "source": "scene-103",                                                          // 空之神殿
+            // 客户端原生红边贴图及外侧填充。
+            "boundary": "resource-boundary-76b7a132920a29b3a4168320",
             // #region maskGroups 遮罩片区；仅整理查看入口，不合并条件或推断互斥。
             // 标记位置由组内每张图片的中心取算术平均，不维护手工坐标。
             "maskGroups": {

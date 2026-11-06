@@ -1,4 +1,4 @@
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import { isMapCatalogue, type MapCatalogue, type MapCatalogueItem } from '@inteyvat-wiki/wiki-contracts/map';
 import { map_icon_exporter } from './map_icons';
 import { ConvertRaw } from './convert_raw';

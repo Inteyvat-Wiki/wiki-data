@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import type { MapScene } from '@inteyvat-wiki/wiki-contracts/map';
 import { validatePng } from '@inteyvat-wiki/resource-tools';
 import { images } from './images';

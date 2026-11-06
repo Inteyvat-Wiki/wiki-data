@@ -1,4 +1,4 @@
-import type { Dungeon, MapRecord } from 'genshin-db';
+import type { Dungeon, MapRecord } from '@inteyvat-wiki/genshin-db';
 import { inline_link_text } from '@inteyvat-wiki/wiki-contracts/inline_link';
 import type { MapCatalogueItem } from '@inteyvat-wiki/wiki-contracts/map';
 

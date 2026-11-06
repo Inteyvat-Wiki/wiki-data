@@ -1,4 +1,4 @@
-import type { Npc as SourceNpc } from 'genshin-db';
+import type { Npc as SourceNpc } from '@inteyvat-wiki/genshin-db';
 import npc_index from '~/data/npcs';
 import { create_page, export_category } from '~/utils/page';
 import { NpcData } from '~/utils/data';

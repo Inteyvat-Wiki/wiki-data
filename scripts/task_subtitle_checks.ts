@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import genshindb from 'genshin-db';
+import genshindb from '@inteyvat-wiki/genshin-db';
 import { get_task_subtitles } from '../src/utils/task_subtitles';
 
 export function check_task_subtitles(kind: 'narration' | 'bubble') {

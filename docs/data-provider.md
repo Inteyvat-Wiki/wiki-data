@@ -4,22 +4,121 @@
 
 ## 常规导出
 
-使用 Node.js 22.13 或更新版本，先安装相邻仓库的本地 npm 依赖。`npm run gen` 默认先验证上游输入身份，缓存有效时复用，缺失或输入变化时重新准备；再创建固定快照的查询实例。普通角色、任务等查询调用不变。`gen:tasks`、`gen:archives`、`gen:misc`、`gen:npcs` 也会先初始化。
+使用 Node.js 22.13 或更新版本，安装 npm 依赖并配置 `wiki-data.config.json`。不再依赖相邻源码目录。`npm run gen` 默认先验证上游输入身份，缓存有效时复用，缺失或输入变化时重新准备；再创建固定快照的查询实例。普通角色、任务等查询调用不变。`gen:tasks`、`gen:archives`、`gen:misc`、`gen:npcs` 也会先初始化。
+
+`npm run pipeline -- init` 创建本地配置模板，拒绝覆盖已有文件。`--config` 优先于 `WIKI_DATA_CONFIG`，否则读取当前工作目录的 `wiki-data.config.json`。配置不存在时只使用默认值及环境变量；显式指定但不存在的配置会报错。未知字段和错误类型也会报错。JSON 相对路径以配置文件目录为基准，环境变量相对路径以启动命令的工作目录为基准。
+
+配置结构（以下路径为示例；文件不应提交）：
+
+```json
+{
+  "version": 1,
+  "source": {
+    "root": "../game-data",
+    "historyRefs": ["refs/remotes/origin/master", "HEAD"],
+    "versions": true
+  },
+  "resources": {
+    "studio": "../tools/AnimeStudio",
+    "assetMap": "../inputs/game.map",
+    "root": "../inputs/blocks",
+    "game": "GI",
+    "luaRoot": "../inputs/verified-lua",
+    "imageRoots": ["./src/images"],
+    "caches": {
+      "worldAreas": "../prepared/world-areas.json",
+      "mapAreaConfigs": "../prepared/map-area-configs.json"
+    }
+  },
+  "cache": {"root": "../cache/inteyvat"},
+  "output": {"data": "../published-data"}
+}
+```
+
+`source.root` 必须是已提交的游戏数据 Git 仓库。历史版本需要完整的相应历史引用，不用下载日期推断版本。`source.historySeedCache` 可指定已核验历史统计种子；`versionOverrides` 仍由上游按完整提交 SHA 校验。`resources.root` 可选，用于检查图片/Lua 清单的块文件是否位于指定资源目录；移动资源后应重新制作 AnimeStudio `.map`，不猜测旧绝对路径的新位置。`resources.dotnet` 可指定 .NET 主程序，不要求安装 PowerShell。
+
+默认缓存位于系统用户缓存目录的 `Inteyvat-Wiki` 下：`genshin-data` 存上游快照，`genshin-db` 存查询索引，`resources` 存资源提取工作。可以分别配置 `cache.exports`、`cache.indexes`、`cache.resources`。不写入 `node_modules`，不把输出放进原始输入目录。旧缓存、Lua 和图片可以直接配置绝对路径复用；不会自动搬迁或删除旧文件。默认图片查找包含新资源缓存的 `images` 子目录，`imageRoots` 添加已有图片目录，同名仍选较大图。
+
+`query.snapshot` 固定快照并默认关闭准备；`query.prepare:false` 只读打开现有快照；`query.backend:"legacy"` 仅用于旧文件迁移对比。`output.assets` 可覆盖 Wiki 自有静态资源目录，默认相对于 wiki-data 的安装位置，不再依赖命令启动位置。
 
 缓存默认存放在用户缓存目录，不写 node_modules；可设置：
 
 | 环境变量 | 用途 |
 | --- | --- |
-| `GENSHIN_DATA_SOURCE` | 原始数据仓库；未指定时由上游配置决定 |
+| `GENSHIN_DATA_SOURCE` | 覆盖 `source.root` |
 | `WIKI_DATA_CACHE` | 完整记录缓存，也接受 `GENSHIN_DATA_CACHE` |
 | `WIKI_DATA_INDEX_CACHE` | 查询索引缓存，也接受 `GENSHIN_DB_CACHE` |
-| `GENSHIN_HISTORY_REFS` | 按先后顺序、逗号分隔的历史引用；本地上游配置已有历史分支和 HEAD |
+| `GENSHIN_HISTORY_REFS` | 覆盖 `source.historyRefs`，按先后顺序、逗号分隔 |
 | `GENSHIN_HISTORY_SEED` | 经上游校验后复用的历史统计缓存目录 |
 | `GENSHIN_LUA_PATH` | 上游字幕所需 Lua 输入目录 |
 | `WIKI_DATA_OUTPUT` | 默认导出目录；完整导出也接受第一个命令行参数 |
 | `WIKI_DATA_SNAPSHOT` | 固定已有快照 ID，不自动更新 |
 | `WIKI_DATA_PREPARE=0` | 只打开已有快照，不验证或重新提取输入 |
 | `WIKI_DATA_BACKEND=legacy` | 显式使用旧本地数据，仅供迁移核对 |
+| `WIKI_CACHE_ROOT` | 覆盖统一缓存根目录 |
+| `WIKI_IMAGE_ROOTS` | 追加已有图片目录，按系统路径分隔符分隔（Windows `;`，其他系统 `:`） |
+| `ANIMESTUDIO_PATH` / `ANIMESTUDIO_MAP` | 覆盖 AnimeStudio 目录 / 资源索引文件 |
+| `GENSHIN_RESOURCE_ROOT` / `DOTNET_HOST_PATH` | 覆盖资源块根目录 / .NET 主程序 |
+
+环境变量高于配置字段；未设置的字段使用配置值或默认值。旧的九种资源缓存环境变量仍被转换为 `resources.caches` 后传入上游，不再让各导出器自行寻找相邻源码目录。
+
+## 资源准备与导出
+
+`npm run pipeline -- doctor` 只检查路径与包是否可用，不触发解析或提取；完整的文件哈希和快照完整性由 `export` 的上游准备阶段检查。
+
+`npm run pipeline -- export all` 导出全部栏目；也可选择 `characters`、`weapons`、`outfits`、`npcs`、`tasks`、`archives`、`misc`、`maps`。原有 `gen:*` 命令同样读取统一配置。所有图片请求写到本次导出的 `common/image-requests.json`，局部导出只包含本次栏目请求。
+
+`npm run pipeline -- images` 预览图片需求，不启动 AnimeStudio；加 `--apply` 才读取资源索引并提取精确同名的所有首选候选。图片保留来源报告，提取目录直接成为通用图片读取入口，不再需要导入到 `src/images`。完成后再次导出相应栏目，生成有效图片链接。缺失名称会列出并返回状态 2；不会冒充完整提取。
+
+`npm run pipeline -- lua --plan FILE` 预览已有精确 Lua 提取清单；加 `--apply` 才提取到 `cache.resources/lua`，不会改动显式配置的已有 `luaRoot` 输入目录。清单包含资源工具的 `entries`（精确 Source、Offset、字符串 PathID 等），提取器校验 Lua 字节签名。此命令不声称能从全部资源中自动发现所有任务 Lua；完整覆盖仍需经过上游核验，已有可靠 Lua 输入可直接引用。默认 `luaRoot` 指向该缓存根目录；若配置了旧输入，应在验证新提取覆盖率后再明确切换。
+
+`npm run pipeline -- resources --kind KIND --plan FILE --apply` 通过 `genshin-db.resources` 调用 GenshinData-scripts 的公开资源准备接口，不直接导入其私有源码文件。省略 `--apply` 只预览。计划中省略 `output`，程序分配新工作目录；计划的文件路径按计划文件位置解析，Prefab 路径仍是 Unity 资源标识。
+
+支持的主要顺序：
+
+1. `worldAreas`、`mapAreaConfigs`、`mapIcons` 可分别准备；共同的源目录、AnimeStudio 和资源索引由统一配置注入。
+2. `mapBase` 自动使用已有上游场景发现流程；`mapFog` 需要计划中的明确 `sceneIds`，底图缓存从已登记结果取得。
+3. `mapAtlas` 使用已登记 MapArea 缓存，默认带图片。低层 `maps` / `mapEntries` 仍支持明确的研究计划，不从对象顺序猜布局。
+4. `miliastra`、`profileFrames` 需要计划的 `index` 和 `mapFile`（已核验资源索引二进制及图片映射 JSON），不是取第一个同名资源。`tcgPortraits`、`graeaeImages` 也可准备精确图片计划。
+5. `levelTags` 需要 `rawReportFile` 指向已核验的原始提取报告；不自动选择未知资源。
+
+成功准备后，适用的缓存路径原子登记到 `cache.resources/prepared.json`；以后导出自动传递对应路径。该文件按源目录及资源索引位置区分，不存游戏语义。显式配置的 `resources.caches` 和环境变量优先于自动登记；如要以后跟随新结果，应移除对应旧覆盖项。支持键：`miliastra`、`profileFrames`、`maps`、`mapIcons`、`worldAreas`、`mapAreaConfigs`、`mapBase`、`mapFog`、`levelTags`。
+
+源数据、Lua 或资源输入发生变化时，导出快照的身份检查会决定复用或重建；资源提取仍是明确执行的准备步骤，不会在 npm 安装、模块导入或普通查询时运行 AnimeStudio。输入版本不受支持、来源失效或必需缓存缺失时停止，不能用旧缓存静默替代。普通图片目录由维护者选择匹配当前资源版本的输入；更换资源版本时需重新提取并检查缺图。
+
+本地 Wiki 设置 `WIKI_DATA_ROOT` 为相同 `output.data` 后直接读取生成 JSON 和图片，无需把文件再复制到另一仓库。生产站点使用独立的数据目录，并通过以下上传流程发布。
+
+## 上传与发布
+
+上传是明确的管理操作，不随 `export` 或 npm 安装自动执行。默认 `npm run upload` 只执行已有普通内容检查、地图检查和文件清单/哈希准备；加 `-- --apply` 才访问服务端并发布。也可运行 `npm run pipeline -- upload --apply --config FILE`。
+
+```json
+{
+  "version": 1,
+  "output": {"data": "./data"},
+  "upload": {
+    "url": "https://wiki.example/api/admin/data",
+    "tokenEnv": "WIKI_UPLOAD_TOKEN",
+    "timeoutMs": 1800000
+  }
+}
+```
+
+`WIKI_UPLOAD_URL` 可以覆盖 `upload.url`。`tokenEnv` 指定客户端读取令牌的环境变量名，默认 `WIKI_UPLOAD_TOKEN`；配置文件不接受令牌内容。Wiki 服务端始终通过私有环境变量 `WIKI_UPLOAD_TOKEN` 读取令牌。使用密码学随机的 32 字节令牌，并编码为 64 位小写十六进制；两端设置同一值。可在自己的终端运行 `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"` 生成，随后通过部署平台的秘密变量设置。不要提交到仓库或粘贴进公开日志。轮换时更新两端环境并重启相应进程。
+
+客户端强制校验 HTTPS 证书；仅 `localhost`、`127.0.0.1`、`[::1]` 可用 HTTP 本机测试。不跟随重定向，不在 URL 放令牌，不接受账号密码、查询参数或片段。服务端使用专用 Bearer 令牌而非浏览器 Cookie，未配置有效令牌时接口关闭。该入口具备整站发布权限，建议放在管理网络/VPN或反向代理 IP 白名单后，由代理终止 HTTPS；不要把它当作公众文件上传接口。
+
+流程为：读取带鉴权的 `GET /api/admin/data` 状态和限额 → `POST /api/admin/data` 流式上传 → 核验服务端返回的版本哈希、文件数、总字节数。POST 携带获取状态时的版本号，其他发布已先完成时拒绝覆盖。断线或收据不匹配时，客户端不会宣称成功；应先查询状态再决定重试。
+
+传输格式由 `@inteyvat-wiki/wiki-contracts/upload` 维护：版本标记、4 字节清单长度、UTF-8 JSON 清单、逐文件原始字节及 32 字节清单 SHA-256 尾标。它是专用流式格式，不是 ZIP/TAR，不支持压缩、符号链接或任意落盘路径。清单包含每个文件的安全相对路径、长度和 SHA-256；仅发送 `common`、`en`、`zh_hans` 内的 JSON 和 `images` 内的 PNG。其他文件、链接、越界路径、大小写重复路径、缺少必需索引、坏哈希、截断或尾随数据均应被拒绝。
+
+客户端在校验后扫描并逐文件哈希，在传输中再次核对，并在发送尾标前确认源目录未改变。因此应上传已完成的导出目录，不要同时生成到同一目录。单文件和整体内存分开控制：图片流式发送，不将整套数据读入内存。默认上限为 250000 个文件、单文件 256 MiB、数据 20 GiB、清单 64 MiB；服务端可降低限额。若请求超过服务端或代理限制会失败，不会自动跳过文件或改为部分覆盖。
+
+本版仅支持完整发布：中英文、全部内容分类、地图索引都需存在。不上传上游缓存、Lua、资源块、AnimeStudio、源码或凭据。上传不是源数据重新生成，也不能补齐原导出已经缺失的内容；完整的语义/图像核验仍由导出回归负责。
+
+本地回归使用合成数据：`npm run check` 包含客户端上传测试；Wiki 的 `npm run test:upload` 检查服务端鉴权、流式接收和发布失败保护。Wiki 构建后，可在 wiki-data 运行 `npm run check:upload:integration -- --server-entry <Wiki/.output/server/index.mjs>` 验证真实构建服务与客户端的接口兼容性。此命令仅启动临时本机服务，使用随机测试令牌和独立临时目录，不访问正式数据或远程站点。
+
+服务端把新版本放在独立的发布存储中，校验通过后原子切换当前版本指针。旧版本保留，失败的临时上传只清理自身目录。首次上传后，站点读取受管理版本，而非继续读取原始 `WIKI_DATA_ROOT` 下正在编辑的文件；后续改动需再次上传发布。发布存储不会写进 wiki-data 导出目录。旧版本的保留/恢复及代理请求大小、超时配置见 Wiki/server 的部署说明；本命令不负责删除历史版本。
 
 快照不完整或损坏会报错，不会静默补读旧数据。单独运行依赖数据的检查脚本时，应使用对应 npm 命令，或先加载 `node --import tsx --import ./scripts/data_bootstrap.mts`。
 
@@ -46,14 +145,14 @@
 | 仓库 / 包 | 职责 | 直接使用方 |
 | --- | --- | --- |
 | resource-tools / `@inteyvat-wiki/resource-tools` | 显式调用本机 AnimeStudio，读取资源索引、提取图片/Lua/二进制内容/Unity 原始对象，验证与记录来源；不解释游戏语义 | GenshinData-scripts；wiki-data 的图片导入及图片选择 |
-| GenshinData-scripts | 游戏表与 Lua 的语义解析、版本历史、完整记录快照；少量源数据特判 | genshin-db |
-| genshin-db | 固定快照的查询索引和公开查询接口 | wiki-data |
+| GenshinData-scripts / `@inteyvat-wiki/genshin-data-scripts` | 游戏表与 Lua 的语义解析、版本历史、完整记录快照；少量源数据特判 | genshin-db |
+| genshin-db / `@inteyvat-wiki/genshin-db` | 固定快照的查询索引和公开查询接口 | wiki-data |
 | wiki-contracts / `@inteyvat-wiki/wiki-contracts` | 已转换的导出文档、页面响应、对话及轻量校验；不包含原始枚举或数据 | wiki-data、Wiki（含 server 子模块） |
-| wiki-data | 人工维护导出目录、手动枚举映射、文本转义及展示数据转换 | 直接上传生成文件给 Wiki 服务端 |
+| wiki-data | 人工维护导出目录、手动枚举映射、文本转义及展示数据转换 | Wiki 读取共享导出目录或专用管理接口发布的完整版本 |
 
-目前使用本地 `file:` npm 依赖，以下文件夹应位于同一级：`Inteyvat-Wiki-resource-tools`、`Inteyvat-Wiki-contracts`、`GenshinData-scripts`、`genshin-db`、`Inteyvat-Wiki-data`、`Inteyvat-Wiki`。共享定义包源码工作区先执行 `npm install`、`npm run build`，修改后重新构建；资源工具的源码工作区需先运行一次 `npm run build:helper`（维护者需要 .NET SDK）。两个包的发布 tarball 均包含构建产物，安装时不编译。依次在上游、查询库、wiki-data 和 Wiki 执行 `npm install`。Wiki 的 server 仍由主仓库统一安装依赖，并非单独 npm 应用。
+包依赖已改为四个组织包的精确版本，不再使用 `file:../仓库`。维护者打包公共定义与资源工具时分别构建 TypeScript 产物和自有 .NET 桥接程序；普通消费方安装已打包文件，不需要源码仓库或 .NET SDK。Wiki 的 server 仍由主仓库统一安装依赖，并非单独 npm 应用。
 
-两个新包均有明确的发布文件白名单，不包含游戏资源、生成数据、缓存、AnimeStudio 二进制文件或安装时提取动作。独立 tarball 可通过 npm 安装；将来发布版本后可把消费方 `file:` 替换成明确版本号并更新锁文件。本轮不自动发布 npm 包。
+四个包均有发布文件白名单，不包含游戏资源、生成数据、缓存、AnimeStudio 二进制文件或安装时提取动作。本轮只准备发布结构和本地验证，没有发布 npm 版本。首次发布前用 `packages:local` 打包并通过仅监听本机的临时只读注册服务安装；不修改依赖为本地链接、不改写清单、不手动拷贝数据。正式发布后可正常使用 npm 注册服务。GDS/db 的发布保护和许可检查仍需单独处理。
 
 `resource-tools` 只负责提取字节；Lua 的静态解析、字幕语义仍由 GenshinData-scripts 负责。Wiki 的类别、ID、图片用途、命名和原始键映射仍由 wiki-data 维护，不能因工具通用化而下放到前端。共享包不从上游自动生成可接受的类别。
 

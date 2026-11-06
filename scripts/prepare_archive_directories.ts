@@ -10,7 +10,7 @@ if (process.argv[2] === '--patch') {
     const plan = JSON.parse(fs.readFileSync(plan_file, 'utf8'));
     const rows = plan[category].filter((row: any) => row.type === type).slice(offset, offset + 400);
     const marker = `        // #endregion ${type}`;
-    console.log(`*** Begin Patch\n*** Update File: D:/Inteyvat-Wiki-data/src/data/${category}.js\n@@\n-${marker}\n${rows.map((row: any) => '+' + row.line).join('\n')}\n+${marker}\n*** End Patch`);
+    console.log(`*** Begin Patch\n*** Update File: ${path.resolve('src/data', category + '.js').replaceAll('\\', '/')}\n@@\n-${marker}\n${rows.map((row: any) => '+' + row.line).join('\n')}\n+${marker}\n*** End Patch`);
 } else {
     const plan: Record<string, any[]> = {};
     for (const category of Object.keys(archive_directories) as DirectoryCategory[]) {

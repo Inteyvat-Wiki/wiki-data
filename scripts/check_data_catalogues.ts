@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import genshindb from 'genshin-db';
+import genshindb from '@inteyvat-wiki/genshin-db';
 import { ArchiveData, MiscData } from '../src/utils/data';
 import { get_archive_export, set_archive_output } from '../src/utils/archive';
 import { get_misc_export, set_misc_output } from '../src/misc';

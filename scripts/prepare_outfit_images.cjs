@@ -4,10 +4,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const { readAssetMap, selectImageEntries, extractResources, importResourceImages } = require('@inteyvat-wiki/resource-tools');
-const root = path.resolve(__dirname, '..');
+const {loadConfig} = require('../config/pipeline.cjs');
 
 function main(args) {
-    const options = { studio: 'C:/Apps/AnimeStudio', manifest: path.join(root, 'data/common/outfit/assets.json') };
+    const config = loadConfig();
+    const options = { studio: config.resources.studio, map: config.resources.assetMap, manifest: path.join(config.output.data, 'common/outfit/assets.json') };
     const flags = { '--work': 'work', '--map': 'map', '--studio': 'studio', '--manifest': 'manifest', '--output': 'output' };
     let extract = false;
     for (let i = 0; i < args.length; i++) {
@@ -15,7 +16,7 @@ function main(args) {
         assert(Object.hasOwn(flags, args[i]) && args[i + 1] && !args[i + 1].startsWith('--'), `Unknown/incomplete option: ${args[i]}`);
         options[flags[args[i]]] = args[++i];
     }
-    assert(options.work && options.map, 'Specify --work NEW_DIRECTORY --map ASSET_MAP [--extract --output NEW_IMAGE_DIRECTORY]');
+    assert(options.work && options.map && options.studio, 'Specify --work NEW_DIRECTORY and configure resources.studio/resources.assetMap [--extract --output NEW_IMAGE_DIRECTORY]');
     assert(!extract || options.output, '--extract requires --output');
     const work = path.resolve(options.work), manifest = path.resolve(options.manifest);
     assert(!fs.existsSync(work), 'Use a new work directory');
@@ -24,7 +25,7 @@ function main(args) {
     assert(assets.every(asset => typeof asset.name === 'string' && typeof asset.id === 'string' && ['icon','card','splash'].includes(asset.kind)));
     const names = [...new Set(assets.map(asset => asset.name))];
     fs.mkdirSync(work, {recursive:true});
-    const mapped = readAssetMap({studio:options.studio,map:options.map,output:path.join(work,'asset-map.json'),names});
+    const mapped = readAssetMap({studio:options.studio,map:options.map,output:path.join(work,'asset-map.json'),names,dotnet:config.resources.dotnet});
     const entries = names.flatMap(name => selectImageEntries(mapped.entries.filter(entry => entry.Name === name)));
     const found = names.filter(name => entries.some(entry => entry.Name === name));
     const missing = names.filter(name => !found.includes(name));

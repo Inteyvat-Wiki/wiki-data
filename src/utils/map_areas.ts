@@ -1,4 +1,4 @@
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import type { MapArea, MapAreaPolygon } from '@inteyvat-wiki/wiki-contracts/map';
 
 function object(value: unknown, allowed: string[], context: string): Record<string, unknown> {

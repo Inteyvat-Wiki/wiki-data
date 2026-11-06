@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { get_output_root } from './output';
+import { pipeline_config } from './config';
 import { readPngHeader, preferImage } from '@inteyvat-wiki/resource-tools';
 
 export const prefer_image = preferImage;
@@ -13,24 +14,29 @@ export class ImageStore {
     private index?: Map<string, string>;
     private copied = new Map<string, string>();
     readonly failures = new Set<string>();
-    constructor(private source: string, private defaultOutput: string | (() => string)) {}
+    readonly requests = new Set<string>();
+    constructor(private source: string | string[], private defaultOutput: string | (() => string)) {}
     private resolve(reference: string) {
         if (!this.index) {
             this.index = new Map();
-            for (const relative of fs.readdirSync(this.source, { recursive: true }) as string[]) {
-                if (!/\.png$/i.test(relative)) continue;
-                const file = path.join(this.source, relative), name = path.parse(relative).name;
-                try {
-                    readPngHeader(file);
-                    const previous = this.index.get(name);
-                    if (!previous || prefer_image(file, previous)) this.index.set(name, file);
-                } catch { this.failures.add(file); }
+            for (const source of typeof this.source === 'string' ? [this.source] : this.source) {
+                if (!fs.existsSync(source)) continue;
+                for (const relative of fs.readdirSync(source, { recursive: true }) as string[]) {
+                    if (!/\.png$/i.test(relative)) continue;
+                    const file = path.join(source, relative), name = path.parse(relative).name;
+                    try {
+                        readPngHeader(file);
+                        const previous = this.index.get(name);
+                        if (!previous || prefer_image(file, previous)) this.index.set(name, file);
+                    } catch { this.failures.add(file); }
+                }
             }
         }
         return this.index.get(image_basename(reference));
     }
     fromName(reference: string | undefined, relative: string, output?: string): string | null {
         if (!reference) { this.failures.add(relative); return null; }
+        this.requests.add(image_basename(reference));
         const file = this.resolve(reference);
         if (!file) { this.failures.add(reference); return null; }
         return this.fromPath(file, relative, output);
@@ -56,4 +62,9 @@ export class ImageStore {
         } catch { this.failures.add(file); return null; }
     }
 }
-export const images = new ImageStore(path.resolve(__dirname, '../images'), get_output_root);
+export const images = new ImageStore(pipeline_config.resources.imageRoots, get_output_root);
+export function write_image_requests() {
+    const target = path.join(get_output_root(), 'common/image-requests.json');
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, JSON.stringify({ schema: 1, names: [...images.requests].sort() }, null, 2) + '\n');
+}

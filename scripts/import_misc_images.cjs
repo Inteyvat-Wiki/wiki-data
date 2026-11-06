@@ -4,15 +4,17 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const {imageName, crc32, validatePng, importResourceImages} = require('@inteyvat-wiki/resource-tools');
-const ROOT = path.resolve(__dirname, '..');
+const {loadConfig} = require('../config/pipeline.cjs');
 const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const json = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
 
-function runImport({root = ROOT, temporary, outputName = 'misc-7.1-reextract', apply = false} = {}) {
+function runImport({root, temporary, outputName = 'misc-import', apply = false} = {}) {
+    const config = loadConfig();
     assert(temporary && path.isAbsolute(temporary), 'An absolute extraction work directory is required');
     assert(/^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*$/.test(outputName), 'Invalid output folder name');
-    const manifestPath = path.join(root, 'data/common/misc/assets.json');
-    const output = path.join(root, 'src/images', outputName);
+    const dataRoot = root ? path.join(root, 'data') : config.output.data;
+    const manifestPath = path.join(dataRoot, 'common/misc/assets.json');
+    const output = path.join(root ? path.join(root, 'src/images') : path.join(config.cache.resources, 'images'), outputName);
     assert(fs.existsSync(manifestPath), 'Awaiting data/common/misc/assets.json; no import performed');
     if (apply) assert(!fs.existsSync(output), 'Use a new output folder; selected output already exists');
     const reportFile = path.join(temporary, apply ? 'misc-images-import-report.json' : 'misc-images-import-dry-run-report.json');
@@ -31,7 +33,7 @@ function runImport({root = ROOT, temporary, outputName = 'misc-7.1-reextract', a
         const diagnostic = {id: asset.id, reference: asset.name};
         if (parsed.reason) { diagnostics.push({...diagnostic, reason: parsed.reason}); continue; }
         if (!records.has(asset.id)) {
-            const file = path.join(root, 'data/zh_hans/misc/items', asset.id + '.json');
+            const file = path.join(dataRoot, 'zh_hans/misc/items', asset.id + '.json');
             records.set(asset.id, fs.existsSync(file) ? json(file) : null);
         }
         const record = records.get(asset.id);
@@ -77,6 +79,6 @@ if (require.main === module) {
         const work = args.indexOf('--work'), output = args.indexOf('--output-name');
         assert(work >= 0 && args[work + 1], 'Usage: node scripts/import_misc_images.cjs --work ABSOLUTE_DIR [--output-name NAME] [--apply]');
         console.log(JSON.stringify(runImport({temporary: path.resolve(args[work + 1]),
-            outputName: output >= 0 ? args[output + 1] : 'misc-7.1-reextract', apply: args.includes('--apply')}), null, 2));
+            outputName: output >= 0 ? args[output + 1] : 'misc-import', apply: args.includes('--apply')}), null, 2));
     } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

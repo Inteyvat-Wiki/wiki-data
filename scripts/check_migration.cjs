@@ -13,8 +13,9 @@ const report = { output, runs: {}, files: {}, differences: [], differenceCount: 
 // intended additions; every pre-existing map/image still participates in equality.
 const addedMapCatalogues = new Set(['zh_hans/map/catalogue.json', 'en/map/catalogue.json']);
 report.validatedAdditions = [];
-const snapshot = require('genshin-db').openSnapshot({ cacheRoot: process.env.WIKI_DATA_CACHE || process.env.GENSHIN_DATA_CACHE,
-    snapshotId: process.env.WIKI_DATA_SNAPSHOT, indexCacheRoot: process.env.WIKI_DATA_INDEX_CACHE || process.env.GENSHIN_DB_CACHE });
+const config = require('../config/pipeline.cjs').loadConfig();
+const snapshot = require('@inteyvat-wiki/genshin-db').openSnapshot({ cacheRoot: config.cache.exports,
+    snapshotId: config.query.snapshot, indexCacheRoot: config.cache.indexes });
 const manifest = snapshot.manifest();
 report.source = { snapshotId: snapshot.snapshotId, source: manifest.plan.source, history: manifest.plan.history };
 function run(backend) {

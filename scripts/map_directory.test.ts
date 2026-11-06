@@ -5,10 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import { map_directory_entries, select_map_directory, selected_map_scenes } from '../src/utils/map_directory';
 import { build_map_scenes } from '../src/map_scenes';
 import { add_map_mask_groups } from '../src/utils/map_mask_groups';
+import { ConvertRaw } from '../src/utils/convert_raw';
 import type { MapScene } from '@inteyvat-wiki/wiki-contracts/map';
 const record = (kind:string, id:string, data:Record<string,unknown>):MapRecord => ({schema:1,kind:kind as MapRecord['kind'],id,name:'Original',description:'',texts:[],relations:[],data,source:{file:'test',id:'1',fields:[],hashes:[]},diagnostics:[]});
 const directory = () => ({schema:1,scenes:{chosen:{source:'scene-3',labels:[] as string[],places:['point-3-1'],areas:['world-area-1','world-area-2'],maskGroups:{}}}});
@@ -19,6 +20,24 @@ const fixtures = () => {
     return [record('scene','scene-3',{scene_id:3}), record('resource','base',{category:'base-tile',scene_id:3}),
         record('point','point-3-1',{scene_id:3,position:{x:1,z:2}}), parent, child];
 };
+test('directory-selected client outline projects x/z once and omits extraction and height fields', () => {
+    const points = [{ x: 10, y: 500, z: -16 }, { x: 5, z: 30 }, { x: -1, z: 2 }];
+    const polygon = { points, minimum: { x: -1, z: -16 }, maximum: { x: 10, z: 30 },
+        source: { decoder: 'simple-polygon-7.2-v1' }, area_type: 'POLYGON_AREA_TYPE_OUTSIDE' };
+    const limit = record('limit_region', 'limit-region-1', { scene_id: 3, geometry_status: 'client-simple-polygon', polygons: [polygon] });
+    const value = directory(); Object.assign(value.scenes.chosen, { boundary: limit.id });
+    const records = [...fixtures(), limit];
+    assert.throws(() => select_map_directory(records, value), /Invalid fixed map boundary/);
+    const region = ConvertRaw.get_map_limit_outline(limit);
+    assert.deepEqual(region, { id: 'boundary-1', label: '', kind: 'playable-boundary', evidence: 'native',
+        extent: 'outside', rings: [[{ x: 10, y: -16 }, { x: 5, y: 30 }, { x: -1, y: 2 }]] });
+    limit.data.scene_id = 5;
+    assert.throws(() => select_map_directory(records, value), /Invalid fixed map boundary/);
+    limit.data.scene_id = 3; limit.data.geometry_status = 'exact-resource-name';
+    assert.throws(() => select_map_directory(records, value), /Invalid fixed map boundary/);
+    limit.data.geometry_status = 'client-simple-polygon'; Object.assign(points[0]!, { futureField: true });
+    assert.throws(() => ConvertRaw.get_map_limit_outline(limit), /Unmapped/);
+});
 test('explicit map directory rejects stale, duplicate, cross-scene and orphaned selections', () => {
     const records = fixtures();
     assert.equal(select_map_directory(records,directory()).size,1);

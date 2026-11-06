@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { MapRecord, Language } from 'genshin-db';
+import type { MapRecord, Language } from '@inteyvat-wiki/genshin-db';
 import genshindb from './utils/genshin';
 import type { Lang } from './utils/i18n';
 import { convert_map_catalogue } from './utils/map_catalogue';

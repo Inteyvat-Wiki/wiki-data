@@ -5,13 +5,13 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 function check(body, environment = {}) {
     const script = `const assert=require('node:assert/strict');
-        const entry=require.resolve('genshin-db'); require(entry);
-        let prepared=0, opened=0, created=0, legacy=0;
+        const entry=require.resolve('@inteyvat-wiki/genshin-db'); require(entry);
+        let prepared=0, opened=0, created=0, legacy=0, preparedOptions;
         const snapshot={snapshotId:'a'.repeat(64),catalog:()=>moduleApi.wiki_source_folders.flatMap(folder=>
             (folder==='interactions'?['Shared']:['ChineseSimplified','English']).map(language=>({folder,language,count:1})))};
         const stable={characters:()=>({name:'snapshot'}),setOptions:()=>{}};
         require.cache[entry].exports={Language:{English:'English'},
-            prepare:async()=>{prepared++;return snapshot},openSnapshot:()=>{opened++;return snapshot},
+            prepare:async options=>{prepared++;preparedOptions=options;return snapshot},openSnapshot:()=>{opened++;return snapshot},
             createClient:()=>{created++;return stable},useProvider:()=>{legacy++},characters:()=>({name:'legacy'})};
         const moduleApi=require('./src/utils/genshin.ts');
         (async()=>{${body}})().catch(error=>{console.error(error);process.exitCode=1});`;
@@ -36,8 +36,10 @@ test('incomplete snapshots fail without silent legacy fallback', () => check(`
 test('legacy comparison is explicit and invalid backend names are rejected', () => {
     check(`await moduleApi.initialize_genshin();assert.equal(legacy,1);assert.equal(prepared,0);
         assert.equal(moduleApi.default.characters('test').name,'legacy');`, { WIKI_DATA_BACKEND: 'legacy' });
-    check(`await assert.rejects(moduleApi.initialize_genshin(),/Unknown WIKI_DATA_BACKEND/);
-        assert.equal(prepared,0);assert.equal(opened,0);`, { WIKI_DATA_BACKEND: 'typo' });
+    execFileSync(process.execPath, ['--import', 'tsx', '-e', `require('node:assert/strict').throws(
+        ()=>require('./src/utils/genshin.ts'), /Unknown WIKI_DATA_BACKEND/);`], {
+        cwd: root, env: {...process.env, WIKI_DATA_BACKEND: 'typo'},
+    });
 });
 
 test('a map-only client validates only its requested folders and cannot silently expand', () => check(`
@@ -47,3 +49,12 @@ test('a map-only client validates only its requested folders and cannot silently
     await assert.rejects(moduleApi.initialize_genshin(),/smaller selection/);
     await assert.rejects(moduleApi.initialize_genshin({folders:['unregistered']}),/Invalid/);
 `));
+
+test('resolved resource inputs and history configuration reach the public preparation API', () => check(`
+    await moduleApi.initialize_genshin();
+    assert.equal(preparedOptions.sourceRoot, ${JSON.stringify(path.resolve(root, 'synthetic-source'))});
+    assert.equal(preparedOptions.luaRoot, ${JSON.stringify(path.resolve(root, 'synthetic-lua'))});
+    assert.equal(preparedOptions.resourceCaches.mapBase, ${JSON.stringify(path.resolve(root, 'synthetic-base.json'))});
+    assert.deepEqual(preparedOptions.historyRefs, ['refs/tags/1.0', 'HEAD']);
+`, {GENSHIN_DATA_SOURCE: 'synthetic-source', GENSHIN_LUA_PATH: 'synthetic-lua', MAP_BASE_RESOURCE_CACHE: 'synthetic-base.json',
+    GENSHIN_HISTORY_REFS: 'refs/tags/1.0,HEAD'}));

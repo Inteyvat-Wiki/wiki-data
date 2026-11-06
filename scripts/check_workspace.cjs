@@ -4,27 +4,28 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
+const local = require('./local_packages.cjs');
 const root = path.resolve(__dirname, '..');
-const steps = [
-    ['Inteyvat-Wiki-contracts', 'test'], // Also builds the contracts package.
-    ['Inteyvat-Wiki-contracts', 'test:types'],
-    ['Inteyvat-Wiki-resource-tools', 'build:helper'], // Tests require a current compiled bridge.
-    ['Inteyvat-Wiki-resource-tools', 'test'],
-    ['GenshinData-scripts', 'test:unit'],
-    ['genshin-db', 'test:unit'],
-    ['Inteyvat-Wiki-data', 'check'],
-    ['Inteyvat-Wiki', 'check'],
-    ['Inteyvat-Wiki-data', 'check:packages'],
-].map(([folder, script]) => ({
-    folder, script, cwd: folder === 'Inteyvat-Wiki-data' ? root : path.resolve(root, '..', folder),
-}));
+function buildSteps(repositories, wiki) {
+    const { NAMES } = local;
+    const locations = Object.fromEntries(repositories.map(item => [item.name, item.directory]));
+    locations['wiki-data'] = root;
+    locations['inteyvat-wiki'] = wiki;
+    const packageArgs = repositories.flatMap(item => ['--source', `${item.name}=${item.directory}`]);
+    return [
+        [NAMES.contracts, 'test'], [NAMES.contracts, 'test:types'],
+        [NAMES.tools, 'build:helper'], [NAMES.tools, 'test'],
+        [NAMES.provider, 'test:unit'], [NAMES.db, 'test:unit'],
+        ['wiki-data', 'check'], ['inteyvat-wiki', 'check'], ['wiki-data', 'check:packages'],
+    ].map(([folder, script]) => ({ folder, script, cwd: locations[folder], args: script === 'check:packages' ? packageArgs : [] }));
+}
 
 function label(step) {
     return `${step.folder}: npm run ${step.script}`;
 }
 
 function preflight(plan) {
-    if (Number(process.versions.node.split('.')[0]) < 24) throw new Error('Use Node.js 24 or newer (CI uses Node.js 24).');
+    if (Number(process.versions.node.split('.')[0]) < 24) throw new Error('Use Node.js 24 or newer for maintainer checks.');
     const npm = process.env.npm_execpath;
     if (!npm || !path.isAbsolute(npm) || !fs.existsSync(npm)) {
         throw new Error('npm_execpath is missing or invalid. Start this runner with npm run check:workspace.');
@@ -34,7 +35,7 @@ function preflight(plan) {
         let manifest = manifests.get(step.cwd);
         if (!manifest) {
             const file = path.join(step.cwd, 'package.json');
-            if (!fs.existsSync(file)) throw new Error(`Missing sibling checkout: ${file}. See docs/engineering-checks.md.`);
+            if (!fs.existsSync(file)) throw new Error(`Missing configured checkout: ${file}. Supply --source or --wiki.`);
             manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
             manifests.set(step.cwd, manifest);
             const dependencies = { ...manifest.dependencies, ...manifest.devDependencies };
@@ -46,24 +47,41 @@ function preflight(plan) {
             throw new Error(`Missing script "${step.script}" in ${step.cwd}/package.json. Check out the coordinated changes; no fallback to source-data tests is allowed.`);
         }
     }
-    const server = path.resolve(root, '../Inteyvat-Wiki/server/utils/page.ts');
+    const server = path.join(plan.find(step => step.folder === 'inteyvat-wiki').cwd, 'server/utils/page.ts');
     if (!fs.existsSync(server)) throw new Error(`Wiki server submodule is missing: ${server}. Initialize Wiki submodules recursively before running checks.`);
     return npm;
 }
 
 function main() {
     const args = process.argv.slice(2);
-    if (args.some(arg => !['--help', '--skip-packages'].includes(arg))) {
-        throw new Error('Usage: npm run check:workspace -- [--skip-packages | --help]');
-    }
     if (args.includes('--help')) {
-        console.log('Usage: npm run check:workspace -- [--skip-packages]');
-        console.log('Requires Node.js 24+, .NET 8 SDK, Git, installed sibling dependencies, and Wiki server submodules.');
+        console.log('Usage: npm run check:workspace -- [--skip-packages] [--config FILE] [--source NAME=PATH ...] [--wiki PATH]');
+        console.log('Requires Node.js 24+, .NET 8 SDK, Git, installed repository dependencies, and Wiki server submodules.');
+        console.log('Uses the packages:local packaging.repositories config (including inteyvat-wiki for Wiki), or explicit paths/npm discovery.');
+        console.log('Config paths are relative to the config file; no sibling paths are assumed.');
         console.log('Default: build packages, run synthetic/type checks, then isolated real-tarball integration.');
         console.log('--skip-packages skips only the last integration check, not the builds required by unit tests.');
         console.log('No live source tests or formal-export checks are selected. No workspace dependencies are installed.');
         return;
     }
+    let wiki;
+    const packageArgs = [];
+    for (let i = 0; i < args.length; i++) {
+        if (args[i] === '--skip-packages') continue;
+        if (args[i] === '--wiki') {
+            if (!args[i + 1] || args[i + 1].startsWith('--')) throw new Error('Missing --wiki path');
+            wiki = path.resolve(args[++i]);
+        } else packageArgs.push(args[i]);
+    }
+    const options = local.parseOptions(packageArgs);
+    if (options.mode || options.archives || options.consumers.length) throw new Error('Use --source/--config for workspace source checkouts');
+    const configFile = options.config || process.env.INTEYVAT_PACKAGE_CONFIG;
+    const configuredWiki = configFile && local.readJSON(path.resolve(configFile)).packaging?.repositories?.['inteyvat-wiki'];
+    wiki ||= configuredWiki && path.resolve(path.dirname(path.resolve(configFile)), configuredWiki);
+    wiki ||= local.discoverSource('inteyvat-wiki');
+    if (!wiki) throw new Error('Cannot discover Wiki. Supply --wiki PATH or packaging.repositories["inteyvat-wiki"].');
+    if (local.readJSON(path.join(wiki, 'package.json')).name !== 'inteyvat-wiki') throw new Error(`Wrong Wiki repository: ${wiki}`);
+    const steps = buildSteps(local.repositories(options), wiki);
     const plan = args.includes('--skip-packages') ? steps.slice(0, -1) : steps;
     console.log('[SCOPE] Synthetic fixtures, types, and package builds; live source tests and formal-export checks are NOT RUN.');
     if (plan.length !== steps.length) console.log(`[SKIP] ${label(steps.at(-1))} (--skip-packages)`);
@@ -79,7 +97,7 @@ function main() {
     for (const [index, step] of plan.entries()) {
         console.log(`\n[RUN ${index + 1}/${plan.length}] ${label(step)}`);
         const started = Date.now();
-        const result = spawnSync(process.execPath, [npm, 'run', step.script], {
+        const result = spawnSync(process.execPath, [npm, 'run', step.script, ...(step.args.length ? ['--', ...step.args] : [])], {
             cwd: step.cwd, env: process.env, stdio: 'inherit', shell: false, windowsHide: true,
         });
         const elapsed = ((Date.now() - started) / 1000).toFixed(1);
@@ -96,7 +114,8 @@ function main() {
     console.log(`\n[PASS] ${plan.length}/${plan.length} selected workspace checks passed. Live source tests and formal-export checks were NOT RUN.`);
 }
 
-try {
+module.exports = { buildSteps, preflight };
+if (require.main === module) try {
     main();
 } catch (error) {
     console.error(`[FAIL] ${error.message}`);

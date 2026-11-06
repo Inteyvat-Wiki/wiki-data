@@ -1,8 +1,8 @@
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import type { MapScene } from '@inteyvat-wiki/wiki-contracts/map';
 
 export interface MapDirectoryEntry {
-    id: string; source: string; sceneId: number; title?: { zh_hans: string; en: string }; boundary?: string;
+    id: string; source: string; sceneId: number; title?: { zh_hans: string; en: string }; boundary?: string; boundaryParts?: number;
     places: Set<string>; labels: Set<string>; areas: Set<string>; maskGroups: Record<string, string[]>;
 }
 export type MapSelection = Map<number, MapDirectoryEntry>;
@@ -62,6 +62,7 @@ export function select_map_directory(records: MapRecord[], value: unknown): MapS
             const boundary = byId.get(entry.boundary);
             if (!boundary || boundary.kind !== 'resource' || boundary.data.category !== 'native-boundary' || boundary.data.scene_id !== entry.sceneId)
                 throw new Error(`Missing or mismatched fixed map boundary: ${entry.id}/${entry.boundary}`);
+            if (Array.isArray(boundary.data.parts)) entry.boundaryParts = boundary.data.parts.length;
         }
         for (const id of Object.values(entry.maskGroups).flat()) {
             const record = byId.get(id);
@@ -83,9 +84,16 @@ export function selected_map_scenes(scenes: MapScene[], selection: MapSelection)
     return [...selection.values()].map(entry => {
         const scene = scenes.find(scene => scene.id === entry.id);
         if (!scene || !scene.overlays.some(overlay => overlay.kind === 'base' && overlay.evidence === 'native')) throw new Error(`Selected scene has no converted base: ${entry.id}`);
-        if (entry.boundary && (!scene.overlays.some(overlay => overlay.id === `${entry.boundary}-mask` && !overlay.condition)
-            || !scene.regions.some(region => region.id === `${entry.boundary}-rim` && region.mesh && !region.condition)))
-            throw new Error(`Fixed map boundary was not exported: ${entry.id}`);
+        if (entry.boundary) {
+            const regions = scene.regions.filter(region => region.kind === 'playable-boundary' && !region.condition);
+            const active = regions[0];
+            const valid = active?.id === `${entry.boundary}-rim` && active.mesh
+                    && scene.overlays.some(overlay => overlay.id === `${entry.boundary}-mask` && !overlay.condition);
+            const parts = scene.overlays.filter(overlay => overlay.id.startsWith(`${entry.boundary}-part-`));
+            const partsValid = entry.boundaryParts && !regions.length && parts.length === entry.boundaryParts
+                && parts.every((part,index) => part.id === `${entry.boundary}-part-${index}` && !part.condition && part.kind === 'boundary');
+            if (!partsValid && (regions.length !== 1 || !valid)) throw new Error(`Fixed map boundary was not exported: ${entry.id}`);
+        }
         for (const [sources, values] of [[entry.places, scene.markers.filter(marker => marker.kind !== 'label')],
             [entry.labels, scene.markers.filter(marker => marker.kind === 'label')], [entry.areas, scene.areas || []]] as const) {
             const actual = new Set(values.map(value => value.id));

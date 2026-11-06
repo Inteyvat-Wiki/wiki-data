@@ -4,16 +4,36 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import { evaluateMapPredicate, isMapScene } from '@inteyvat-wiki/wiki-contracts/map';
 import { reference_choices, reference_predicate } from '../src/utils/map_conditions';
 import { build_map_scenes, map_edge_style } from '../src/map_scenes';
-import { compose_boundary_pixels, convert_native_boundary } from '../src/utils/map_boundary';
+import { compose_boundary_pixels, convert_native_boundary, convert_sprite_boundary } from '../src/utils/map_boundary';
 import { map_icon_exporter, map_layer_marker_icons } from '../src/utils/map_icons';
 import { ConvertRaw } from '../src/utils/convert_raw';
 import { add_map_mask_conditions } from '../src/utils/map_mask_conditions';
 import { add_map_layer_conditions } from '../src/utils/map_layer_conditions';
 import { PNG } from 'pngjs';
+test('sprite boundaries preserve native alpha, blend, order and orientation without forwarding source fields', () => {
+    const folder=fs.mkdtempSync(path.join(os.tmpdir(),'map-sprite-boundary-')), file=path.join(folder,'native.png');
+    const png=new PNG({width:1,height:1});png.data.set([255,80,0,100]);const bytes=PNG.sync.write(png);fs.writeFileSync(file,bytes);
+    try {
+        const boundary=record('resource','resource-boundary-example',{category:'native-boundary',status:'static-serialized-state',
+            shader_profile:'native-sprite-boundary-v1',scene_id:5,limit_region_id:51001,parts:[{
+                id:'map-resource-raw',image_file:file,image_sha256:createHash('sha256').update(bytes).digest('hex'),color:[1,1,1,.5],blend:'additive',order:0,
+                display_geometry:{space:'world-xz',profile:'client-map-origin-v1',corners:[{x:0,y:8},{x:0,y:0},{x:4,y:0},{x:4,y:8}]},
+                source:{file:'raw.bin',bytes:240,sha256:'a'.repeat(64)}}]});
+        const result=convert_sprite_boundary(boundary,'enkanomiya',()=>'/images/boundary.png');
+        assert.deepEqual(result[0],{id:'resource-boundary-example-part-0',image:'/images/boundary.png',label:'',kind:'boundary',evidence:'native',
+            opacity:.5,blend:'additive',zIndex:100000,bounds:[{x:0,y:0},{x:4,y:8}],corners:[{x:4,y:8},{x:4,y:0},{x:0,y:0},{x:0,y:8}]});
+        assert.doesNotMatch(JSON.stringify(result),/image_file|raw.bin|limit_region|shader_profile/);
+        const changed=structuredClone(boundary);(changed.data.parts as any[])[0].newRawField=true;
+        assert.throws(()=>ConvertRaw.get_map_boundary_parts(changed),/Unmapped/);
+        (changed.data.parts as any[])[0]= {...(boundary.data.parts as any[])[0],order:1};
+        assert.throws(()=>ConvertRaw.get_map_boundary_parts(changed),/order/);
+        fs.writeFileSync(file,'changed');assert.throws(()=>convert_sprite_boundary(boundary,'enkanomiya',()=>'/images/boundary.png'),/changed after snapshot/);
+    } finally {fs.unlinkSync(file);fs.rmdirSync(folder);}
+});
 const conditions = { '安眠处': {'安眠处:0':{description:null},'安眠处:1':{description:null,default:true}},
     '真正的安眠处': {'真正的安眠处:0':{description:null},'真正的安眠处:1':{description:null,default:true}},
     '阶段': {'阶段:0':{description:null},'阶段:1':{description:null},'阶段:2':{description:null}} };

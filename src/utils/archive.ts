@@ -1,5 +1,5 @@
 import path from 'node:path';
-import type { ArchiveRecord, ArchiveSourceTalk } from 'genshin-db';
+import type { ArchiveRecord, ArchiveSourceTalk } from '@inteyvat-wiki/genshin-db';
 import type { Lang } from '~/utils/i18n';
 import { create_page } from '~/utils/page';
 import { get_source_dialog, get_talk_dialogs } from '~/utils/dialogue';

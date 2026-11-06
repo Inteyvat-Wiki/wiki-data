@@ -3,6 +3,7 @@ import { gen_outfit } from '../src/outfit';
 import { initialize_genshin } from '../src/utils/genshin';
 import { get_output_root, set_output_root } from '../src/utils/output';
 import { ConvertRaw } from '../src/utils/convert_raw';
+import { write_image_requests } from '../src/utils/images';
 
 async function main() {
     const output = path.resolve(process.argv[2] || get_output_root());
@@ -12,5 +13,6 @@ async function main() {
     console.log(`Outfits exported to ${output}`);
     const missing = ConvertRaw.get_failed_images_list();
     if (missing.length) console.warn(`Missing outfit images: ${missing.join('|')}`);
+    write_image_requests();
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

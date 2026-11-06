@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import genshindb from 'genshin-db';
+import genshindb from '@inteyvat-wiki/genshin-db';
 import { archive_directories, directory_entries, directory_id, directory_aliases, valid_directory_id, select_directory_records, type DirectoryCategory } from '../src/utils/archive_directory';
 import { get_archive_excluded_ids } from '../src/utils/archive';
 import { convert_misc_records } from '../src/misc';

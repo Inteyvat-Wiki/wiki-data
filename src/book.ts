@@ -1,5 +1,5 @@
 import { create_page, export_category, grouped_entries } from '~/utils/page';
-import type { Book as RawBook } from 'genshin-db';
+import type { Book as RawBook } from '@inteyvat-wiki/genshin-db';
 
 import { BookData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";

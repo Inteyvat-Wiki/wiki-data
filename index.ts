@@ -26,6 +26,8 @@ import { gen_outfit } from '~/outfit';
 import path from 'node:path';
 import { initialize_genshin } from '~/utils/genshin';
 import { set_output_root, get_output_root } from '~/utils/output';
+import { pipeline_config } from '~/utils/config';
+import { write_image_requests } from '~/utils/images';
 
 const languages: Lang[] = ['zh_hans', 'en'];
 
@@ -61,7 +63,8 @@ async function main() {
 
     fs.writeFileSync(path.join(output, 'common/menu.json'), JSON.stringify(get_menu(), null, 4), 'utf-8');
 
-    await cp('./assets', output, { recursive: true, force: true });
+    await cp(pipeline_config.output.assets, output, { recursive: true, force: true });
+    write_image_requests();
 
     console.log(ConvertRaw.get_failed_images_list().join('|'));
 }

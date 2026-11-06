@@ -1,5 +1,5 @@
 import { create_page, export_category, typed_entries } from '~/utils/page';
-import type { Animal, Enemy } from 'genshin-db';
+import type { Animal, Enemy } from '@inteyvat-wiki/genshin-db';
 
 import { LivingBeingData } from "~/utils/data";
 import { ConvertRaw } from "~/utils/convert_raw";

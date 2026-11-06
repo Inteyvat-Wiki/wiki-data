@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import type { Language, MapRecord } from 'genshin-db';
+import type { Language, MapRecord } from '@inteyvat-wiki/genshin-db';
 import { isMapScene, isMapSceneIndex, type MapScene, type MapSceneIndex, type MapCoordinate, type MapOverlay, type MapPredicate } from '@inteyvat-wiki/wiki-contracts/map';
 import genshindb from './utils/genshin';
 import { images } from './utils/images';
-import { checked_map_image, convert_native_boundary } from './utils/map_boundary';
+import { checked_map_image, convert_native_boundary, convert_sprite_boundary } from './utils/map_boundary';
 import { render_outside_fog } from './utils/map_fog';
 import { map_icon_exporter, map_layer_marker_icons } from './utils/map_icons';
 import { ConvertRaw } from './utils/convert_raw';
@@ -156,8 +156,12 @@ export function build_map_scenes(records: MapRecord[], lang: Locale,
                 : 'Outer fog follows the union of native masks’ 0.5 contours with a pure black background and cyan-green outline; this static all-areas-open style does not simulate native clouds, edge distortion, unlocking or animation.');
         } else if (record.kind === 'resource' && data.category === 'native-boundary') {
             if ((selection || directory).get(data.scene_id)?.boundary !== record.id) continue;
-            const map = scene(data.scene_id), boundary = convert_native_boundary(record, map.id, copyImage);
-            map.overlays.push(boundary.overlay); map.regions.push(boundary.region);
+            const map = scene(data.scene_id);
+            if (data.parts !== undefined) map.overlays.push(...convert_sprite_boundary(record, map.id, copyImage));
+            else {
+                const boundary = convert_native_boundary(record, map.id, copyImage);
+                map.overlays.push(boundary.overlay); map.regions.push(boundary.region);
+            }
         } else if (record.kind === 'floor') {
             if (typeof data.scene_id !== 'number') continue;
             const map=scene(data.scene_id);
@@ -208,9 +212,12 @@ export function build_map_scenes(records: MapRecord[], lang: Locale,
             else condition = { op: 'unknown', reason: zh ? '源配置未给出完整显示条件' : 'The complete visibility condition is unspecified' };
             const layerId = data.floor_id ? `floor-${data.floor_id}` : undefined;
             const pointKind = ConvertRaw.get_map_point_marker_kind(data.point_class);
+            const iconRecord = byId.get(record.relations.find(relation => relation.role === 'map_icon' && relation.category === 'maps')?.id || '');
+            const minZoom = ConvertRaw.get_map_icon_min_zoom(iconRecord?.data.layer);
             const marker: MapScene['markers'][number] = { id: record.id, recordId: record.id, label: record.name,
                 description: record.description,
                 position, kind: isViewpoint ? 'viewpoint' : isNpc ? 'npc' : isPlace ? 'label' : pointKind || 'point',
+                ...(minZoom !== undefined ? { minZoom } : {}),
                 ...(isPlace && record.name ? { labelMinZoom: -2 } : {}), ...(layerId ? { layerId } : {}), ...(condition ? { condition } : {}) };
             const icon = exportIcon(record);
             if (icon) marker.icon = icon;

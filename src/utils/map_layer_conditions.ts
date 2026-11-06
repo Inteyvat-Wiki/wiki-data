@@ -1,4 +1,4 @@
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import type { MapMaskConditions, MapScene } from '@inteyvat-wiki/wiki-contracts/map';
 import type { TaskStepCondition, TaskStepReference } from '../types/task';
 import { escape_map_text, map_id } from './map_catalogue';

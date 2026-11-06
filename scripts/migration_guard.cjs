@@ -2,8 +2,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { fileURLToPath } = require('node:url');
-const legacy = path.resolve(path.dirname(require.resolve('genshin-db')), 'data').toLowerCase() + path.sep;
-const raw = process.env.GENSHIN_DATA_SOURCE && path.resolve(process.env.GENSHIN_DATA_SOURCE).toLowerCase() + path.sep;
+const legacy = path.resolve(path.dirname(require.resolve('@inteyvat-wiki/genshin-db')), 'data').toLowerCase() + path.sep;
+const source = require('../config/pipeline.cjs').loadConfig().source.root;
+const raw = source && source.toLowerCase() + path.sep;
 const manualMaps = [path.resolve(__dirname, '../src/map-data'), path.resolve(__dirname, '../../Inteyvat-Wiki-map-data')]
     .map(root => root.toLowerCase() + path.sep);
 function check(file) {

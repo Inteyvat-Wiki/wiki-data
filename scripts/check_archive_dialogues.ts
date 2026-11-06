@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import genshindb from 'genshin-db';
+import genshindb from '@inteyvat-wiki/genshin-db';
 import { convert_archive_talk } from '../src/utils/archive';
 import { get_task_conditions } from '../src/utils/task_condition';
 

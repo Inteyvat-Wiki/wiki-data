@@ -6,13 +6,15 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const {spawnSync} = require('node:child_process');
 const {imageName, selectImageEntries, assetMapXml, readAssetMap} = require('@inteyvat-wiki/resource-tools');
-const ROOT = path.resolve(__dirname, '..');
+const {loadConfig} = require('../config/pipeline.cjs');
 const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const writeJson = (file, value) => fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n', {flag:'wx'});
-function prepareMiscImages({root = ROOT, workDirectory, studio = 'C:/Apps/AnimeStudio',
-    map = 'C:/Apps/AnimeStudio/Maps/genshin_7.1.map', dotnet, readMap = readAssetMap} = {}) {
+function prepareMiscImages({root, workDirectory, studio,
+    map, dotnet, readMap = readAssetMap} = {}) {
+    const config = loadConfig();
+    studio ||= config.resources.studio; map ||= config.resources.assetMap; dotnet ||= config.resources.dotnet;
     assert(workDirectory, 'A new work directory is required');
-    const work = path.resolve(workDirectory), manifestPath = path.join(root, 'data/common/misc/assets.json');
+    const work = path.resolve(workDirectory), manifestPath = path.join(root ? path.join(root, 'data') : config.output.data, 'common/misc/assets.json');
     if (!fs.existsSync(manifestPath)) return {status:'awaiting_manifest',manifest:manifestPath,extraction_started:false};
     const manifestBytes = fs.readFileSync(manifestPath), manifestHash = sha256(manifestBytes);
     const manifest = JSON.parse(manifestBytes.toString('utf8').replace(/^\uFEFF/,''));
@@ -35,6 +37,7 @@ function prepareMiscImages({root = ROOT, workDirectory, studio = 'C:/Apps/AnimeS
         const parent = path.dirname(cursor); if (parent === cursor) break; cursor = parent;
     }
     fs.mkdirSync(work, {recursive:true});
+    if (requests.size && readMap === readAssetMap) assert(studio && map, 'Configure resources.studio and resources.assetMap');
     const mapped = requests.size ? readMap({studio,map,output:mapOutput,names:[...requests.keys()],dotnet}) : {entries:[]};
     const wanted = new Map([...requests.keys()].map(name=>[name,[]]));
     for (const entry of mapped.entries) if (wanted.has(entry.Name)) wanted.get(entry.Name).push(entry);
@@ -108,7 +111,9 @@ if (require.main === module) {
         }
         if (self) selfTest();
         else if (check) {
-            const result = spawnSync(path.join(options.studio || 'C:/Apps/AnimeStudio','AnimeStudio.CLI.exe'),['--help'],{stdio:'inherit',windowsHide:true,shell:false,timeout:30000});
+            const studio = options.studio || loadConfig().resources.studio;
+            assert(studio, 'Configure resources.studio');
+            const result = spawnSync(path.join(studio,'AnimeStudio.CLI.exe'),['--help'],{stdio:'inherit',windowsHide:true,shell:false,timeout:30000});
             if (result.error) throw result.error; assert.equal(result.status,0,'AnimeStudio CLI help failed');
         } else console.log(JSON.stringify(prepareMiscImages(options),null,2));
     } catch (error) {console.error(error.message);process.exitCode=1;}

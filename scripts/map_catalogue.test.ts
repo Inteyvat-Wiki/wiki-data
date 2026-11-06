@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ConvertRaw } from '../src/utils/convert_raw';
-import type { MapRecord } from 'genshin-db';
+import type { MapRecord } from '@inteyvat-wiki/genshin-db';
 import { convert_map_catalogue, convert_map_record } from '../src/utils/map_catalogue';
 import { map_dungeon_pages } from '../src/utils/map_dungeon_links';
 

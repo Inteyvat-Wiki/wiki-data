@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "source": {
+        "root": "../game-data",
+        "historyRefs": ["HEAD"]
+    },
+    "resources": {
+        "studio": "../tools/AnimeStudio",
+        "assetMap": "../inputs/game.map",
+        "root": "../inputs/blocks",
+        "game": "GI"
+    },
+    "output": {
+        "data": "./data"
+    }
+}

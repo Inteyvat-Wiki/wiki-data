@@ -45,7 +45,7 @@ const git = (...args) => execFileSync('git', ['-c', `safe.directory=${source.rep
 git('init', '-q'); git('add', '.');
 git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'Package fixture');
 (async () => {
-    const provider = require('genshindata-scripts'), db = require('genshin-db');
+    const provider = require('@inteyvat-wiki/genshin-data-scripts'), db = require('@inteyvat-wiki/genshin-db');
     const options = { sourceRoot: source, cacheRoot: path.join(root, 'data-cache'), folders: ['windgliders'], languages: ['CHS', 'EN'], versions: false, log: line => console.error(line) };
     const snapshot = await provider.prepare(options);
     assert.equal(snapshot.verify(), true);
