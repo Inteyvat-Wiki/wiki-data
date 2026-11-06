@@ -45,3 +45,11 @@ test('deployment helpers can be imported without connecting, installing or activ
     for (const file of ['linux-build.cjs', 'linux-activate.cjs', 'linux-upload-bundle.cjs', 'verify-public.cjs'])
         assert.equal(typeof require('./' + file).main, 'function');
 });
+
+test('remote uploader reports fixed validation messages without echoing arbitrary response content', () => {
+    const {publicError} = require('./linux-upload-bundle.cjs');
+    assert.equal(publicError(JSON.stringify({message: 'Missing or invalid dataset image'})), ' (Missing or invalid dataset image)');
+    assert.equal(publicError(JSON.stringify({message: 'secret-token-or-path'})), '');
+    assert.equal(publicError(JSON.stringify({message: 'File checksum mismatch', data: 'secret-token-or-path'})), ' (File checksum mismatch)');
+    assert.equal(publicError('not JSON'), '');
+});

@@ -5,6 +5,18 @@ const assert = require('node:assert/strict');
 const http = require('node:http');
 const {pipeline} = require('node:stream');
 
+function publicError(body) {
+    // Only known, fixed server messages may be logged. Never echo arbitrary
+    // response bodies, headers, paths, or credentials on an error response.
+    const allowed = new Set(['Missing or invalid dataset image', 'Invalid UTF-8 JSON',
+        'Invalid PNG header', 'Invalid PNG header or ending', 'File checksum mismatch',
+        'Invalid dataset structure', 'Truncated upload', 'Unexpected upload bytes',
+        'Upload timed out', 'Upload connection interrupted', 'Dataset publication failed',
+        'Another upload is in progress', 'Base release changed']);
+    try { const message = JSON.parse(body).message; return allowed.has(message) ? ` (${message})` : ''; }
+    catch { return ''; }
+}
+
 async function main(args = process.argv.slice(2)) {
     assert.equal(args.length, 2, 'Usage: linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256');
     const [filename, expected] = args;
@@ -29,7 +41,7 @@ async function main(args = process.argv.slice(2)) {
             response.on('data', part => { body += part; if (body.length > 65536) response.destroy(new Error('Excessive response')); });
             response.on('error', reject);
             response.on('end', () => {
-                if (response.statusCode !== 200) return reject(new Error(`Upload failed: HTTP ${response.statusCode}`));
+                if (response.statusCode !== 200) return reject(new Error(`Upload failed: HTTP ${response.statusCode}${publicError(body)}`));
                 try { resolve(JSON.parse(body)); } catch { reject(new Error('Invalid upload response')); }
             });
         });
@@ -45,5 +57,5 @@ async function main(args = process.argv.slice(2)) {
     assert.equal(result.releaseId, expected, 'Server published a different release');
     console.log(JSON.stringify(result));
 }
-module.exports = {main};
+module.exports = {main, publicError};
 if (require.main === module) main().catch(error => {console.error(error.message); process.exitCode = 1;});
