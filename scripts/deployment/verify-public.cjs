@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {createHash} = require('node:crypto');
 const {CONTENT_CATEGORIES} = require('@inteyvat-wiki/wiki-contracts/registry');
+const {isUploadPath} = require('@inteyvat-wiki/wiki-contracts/upload');
 
 const ROUTES = Object.freeze({character: 'characters', weapon: 'weapons', artifact: 'artifacts', book: 'books',
     material: 'materials', readable: 'readables', living_being: 'living-beings', geography: 'geographies',
@@ -13,10 +14,27 @@ const ROUTES = Object.freeze({character: 'characters', weapon: 'weapons', artifa
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
+function missingImagePaths(report, root) {
+    assert(report.allowMissingImages === true && /^[a-f0-9]{64}$/.test(report.releaseId)
+        && fs.realpathSync(report.source) === root && Array.isArray(report.missingImages), 'Invalid missing-image report');
+    const images = new Set();
+    for (const entry of report.missingImages) {
+        assert(typeof entry.image === 'string' && entry.image.startsWith('images/') && isUploadPath(entry.image)
+            && typeof entry.source === 'string' && entry.source.endsWith('.json') && isUploadPath(entry.source), 'Invalid missing-image path');
+        assert(!fs.existsSync(path.join(root, entry.image)), 'Previously missing image now exists; regenerate the report');
+        assert(fs.existsSync(path.join(root, entry.source)), 'Missing reference source');
+        images.add(entry.image);
+    }
+    assert.equal(images.size, report.missingImageCount);
+    return [...images].sort();
+}
+
 async function main(args = process.argv.slice(2)) {
     const sample = args.length === 3 && args[2] === '--test-only';
-    assert(args.length === 2 || sample, 'Usage: verify-public.cjs BASE_URL EXPORT_ROOT [--test-only]');
+    const missingReport = args.length === 4 && args[2] === '--missing-images-report';
+    assert(args.length === 2 || sample || missingReport, 'Usage: verify-public.cjs BASE_URL EXPORT_ROOT [--test-only | --missing-images-report REPORT]');
     const base = new URL(args[0]), root = fs.realpathSync(args[1]);
+    const missing = missingReport ? missingImagePaths(read(args[3]), root) : [];
     assert(['http:', 'https:'].includes(base.protocol) && !base.username && !base.password && !base.search && !base.hash && base.pathname === '/', 'Use a credential-free origin');
     assert.deepEqual(Object.keys(ROUTES).sort(), [...CONTENT_CATEGORIES].sort());
     if (sample) {
@@ -80,7 +98,12 @@ async function main(args = process.argv.slice(2)) {
     for (const route of ['/api/admin/data', '/api/admin/data?status=1']) {
         const response = await request(route, 404); await response.body.cancel();
     }
-    console.log(JSON.stringify({origin: base.origin, exportRoot: root, scope: sample ? 'real-sample-only' : 'complete-export', checked: checks.length, checks}, null, 2));
+    // Only the exact, locally confirmed missing files may return 404; all ordinary checks stay strict.
+    for (const image of missing) {
+        const response = await request('/' + image, 404); await response.body.cancel();
+    }
+    console.log(JSON.stringify({origin: base.origin, exportRoot: root, scope: sample ? 'real-sample-only' : 'complete-export',
+        expectedMissingImages: missing.length, checked: checks.length, checks}, null, 2));
 }
-module.exports = {main};
+module.exports = {main, missingImagePaths};
 if (require.main === module) main().catch(error => {console.error(error.message); process.exitCode = 1;});

@@ -41,6 +41,28 @@ test('service binds loopback and public nginx never forwards bearer credentials 
     assert.match(site, /proxy_set_header Authorization "";/);
 });
 
+test('deployment missing-image exception is explicit, reported and limited to exact absent PNG paths', async t => {
+    const {missingImagePaths} = require('./verify-public.cjs');
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wiki-missing-image-test-'));
+    t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+    const fixture = writeUploadFixture(path.join(root, 'export'));
+    const image = 'images/not-present.png', source = 'common/asset-probe.json';
+    fixture.write(source, {image: '/' + image});
+    const output = path.join(root, 'data.bundle');
+    await assert.rejects(bundleExport([fixture.root, output]), /Missing or invalid dataset image/);
+    await assert.rejects(bundleExport([fixture.root, output, '--typo']), /Usage/);
+    await bundleExport([fixture.root, output, '--allow-missing-images']);
+    const report = JSON.parse(fs.readFileSync(output + '.json'));
+    assert.equal(report.missingImageCount, 1);
+    assert.deepEqual(report.missingImages, [{source, image}]);
+    assert.deepEqual(missingImagePaths(report, fs.realpathSync(fixture.root)), [image]);
+    assert.throws(() => missingImagePaths({...report, allowMissingImages: false}, fixture.root));
+    assert.throws(() => missingImagePaths({...report, missingImages: [{source, image: 'images/../outside.png'}]}, fixture.root));
+    assert.throws(() => missingImagePaths({...report, missingImageCount: 2}, fixture.root));
+    fs.writeFileSync(path.join(fixture.root, image), 'now present');
+    assert.throws(() => missingImagePaths(report, fixture.root), /now exists/);
+});
+
 test('deployment helpers can be imported without connecting, installing or activating', () => {
     for (const file of ['linux-build.cjs', 'linux-activate.cjs', 'linux-upload-bundle.cjs', 'verify-public.cjs'])
         assert.equal(typeof require('./' + file).main, 'function');

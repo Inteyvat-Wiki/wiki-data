@@ -12,13 +12,14 @@ function publicError(body) {
         'Invalid PNG header', 'Invalid PNG header or ending', 'File checksum mismatch',
         'Invalid dataset structure', 'Truncated upload', 'Unexpected upload bytes',
         'Upload timed out', 'Upload connection interrupted', 'Dataset publication failed',
-        'Another upload is in progress', 'Base release changed']);
+        'Another upload is in progress', 'Base release changed', 'Missing image override is disabled', 'Invalid missing image override']);
     try { const message = JSON.parse(body).message; return allowed.has(message) ? ` (${message})` : ''; }
     catch { return ''; }
 }
 
 async function main(args = process.argv.slice(2)) {
-    assert.equal(args.length, 2, 'Usage: linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256');
+    const allowMissingImages = args.length === 3 && args[2] === '--allow-missing-images';
+    assert(args.length === 2 || allowMissingImages, 'Usage: linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256 [--allow-missing-images]');
     const [filename, expected] = args;
     assert(/^[a-f0-9]{64}$/.test(expected), 'Expected release SHA-256 is required');
     assert(fs.statSync(filename).isFile() && !fs.lstatSync(filename).isSymbolicLink(), 'Regular bundle file required');
@@ -35,6 +36,7 @@ async function main(args = process.argv.slice(2)) {
             'content-type': 'application/vnd.inteyvat-wiki.data-bundle',
             'content-length': fs.statSync(filename).size,
             'x-wiki-base-release': current.releaseId || 'none',
+            ...(allowMissingImages ? {'x-wiki-allow-missing-images': '1'} : {}),
         }}, response => {
             let body = '';
             response.setEncoding('utf8');

@@ -49,6 +49,16 @@ node linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256
 转发器只访问远程 `127.0.0.1:4780`，先获取当前 releaseId 再提交完整数据包；服务端原有鉴权、流校验、并发检测及原子切换仍全部生效。
 连接中断时先查询服务端状态，不依据客户端报错就认定发布失败或覆盖冲突。传输包和服务器已发布版本不是同一个文件集合，不删除唯一副本。
 
+### 明确允许缺图的测试
+
+正常上传仍要求所有图片引用都有对应文件。只有经确认的缺图部署测试，才给 `bundle-export.cjs` 和 `linux-upload-bundle.cjs` 追加 `--allow-missing-images`。
+打包报告会保留 `missingImages`（来源 JSON 与图片路径）和去重后的 `missingImageCount`，不修改 JSON、补占位图或删除原有链接。
+服务端同时需要临时环境变量 `WIKI_UPLOAD_ALLOW_MISSING_IMAGES=1`；上传器仅在传入该参数时发送 `x-wiki-allow-missing-images: 1`，单独开启任意一侧都不能放过缺图。
+非法路径、损坏 JSON/PNG、校验和、身份验证和原子发布仍严格检查。这是部署工具的显式例外，不接入日常 `npm run upload` 配置。
+
+发布完成后移除临时服务端环境变量并重启，已发布内容仍可读取。验证器追加 `--missing-images-report BUNDLE.json`，逐一确认报告中确实在本地缺失的图片返回 404；其他请求仍须正常成功。
+若复用之前已经传输的数据包，应先重新验证完整本地导出并确认清单 releaseId 一致，再生成此次的缺图报告，不凭旧统计跳过检查。
+
 ## 范围
 
 现有完整导出作为部署基线，不等于它由本轮沙箱重新生成。沙箱样本、工具下载、全量重建及版本历史的验证范围应分别记录。

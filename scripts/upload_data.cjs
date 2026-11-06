@@ -56,7 +56,7 @@ async function openInput(entry) {
     }
     return file;
 }
-function validateImageReferences(value, files, filename) {
+function validateImageReferences(value, files, filename, missingImages) {
     const pending = [value];
     while (pending.length) {
         const entry = pending.pop();
@@ -64,8 +64,9 @@ function validateImageReferences(value, files, filename) {
             // Match the server's upload boundary, including inline HTML images.
             for (const match of entry.matchAll(/\/images\/[^\s<>"'\[\](){}]+/g)) {
                 const image = match[0].slice(1);
-                if (!contract.isUploadPath(image) || !files.has(image))
+                if (!contract.isUploadPath(image) || (!files.has(image) && !missingImages))
                     throw new Error(`Missing or invalid dataset image in ${filename}: ${image}`);
+                if (!files.has(image)) missingImages.push({source: filename, image});
             }
         } else if (Array.isArray(entry)) {
             for (const child of entry) pending.push(child);
@@ -74,7 +75,7 @@ function validateImageReferences(value, files, filename) {
         }
     }
 }
-async function hashInput(entry, files) {
+async function hashInput(entry, files, missingImages) {
     const file = await openInput(entry), hash = crypto.createHash('sha256');
     const json = entry.path.endsWith('.json') ? [] : undefined;
     let size = 0;
@@ -90,7 +91,7 @@ async function hashInput(entry, files) {
             let value;
             try { value = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(Buffer.concat(json))); }
             catch { throw new Error(`Invalid UTF-8 JSON in upload input: ${entry.path}`); }
-            validateImageReferences(value, files, entry.path);
+            validateImageReferences(value, files, entry.path, missingImages);
         }
         return hash.digest('hex');
     } finally { await file.close(); }
@@ -103,7 +104,9 @@ function validateDataset(root) {
     });
     if (checked.error || checked.status !== 0) throw new Error('Map export validation failed; run npm run check:maps:export -- <output> for details');
 }
-async function buildManifest(directory, limits = contract.DEFAULT_UPLOAD_LIMITS) {
+async function buildManifest(directory, limits = contract.DEFAULT_UPLOAD_LIMITS, options = {}) {
+    // Deployment diagnostics only. Normal publish() never enables this exception.
+    const missingImages = options.allowMissingImages === true ? [] : undefined;
     const root = path.resolve(directory), entries = inventory(root);
     if (!entries.length || entries.length > limits.maxFiles) throw new Error('Upload file count exceeds the protocol limit');
     const files = [], manifest = {schema: 1, files, totalBytes: 0}, names = new Set(entries.map(entry => entry.path));
@@ -111,13 +114,14 @@ async function buildManifest(directory, limits = contract.DEFAULT_UPLOAD_LIMITS)
         if (entry.stat.size <= 0 || entry.stat.size > limits.maxFileBytes) throw new Error(`Invalid/excessive upload file size: ${entry.path}`);
         manifest.totalBytes += entry.stat.size;
         if (!Number.isSafeInteger(manifest.totalBytes) || manifest.totalBytes > limits.maxTotalBytes) throw new Error('Upload total size exceeds the protocol limit');
-        files.push({path: entry.path, size: entry.stat.size, sha256: await hashInput(entry, names)});
+        files.push({path: entry.path, size: entry.stat.size, sha256: await hashInput(entry, names, missingImages)});
     }
     const error = contract.getUploadManifestError(manifest, limits);
     if (error) throw new Error(`Invalid upload manifest: ${error}`);
     const manifestBytes = Buffer.from(JSON.stringify(manifest));
     if (manifestBytes.length > limits.maxManifestBytes) throw new Error('Upload manifest is too large');
-    const plan = {root, entries, manifest, manifestBytes, releaseId: crypto.createHash('sha256').update(manifestBytes).digest('hex')};
+    const plan = {root, entries, manifest, manifestBytes, releaseId: crypto.createHash('sha256').update(manifestBytes).digest('hex'),
+        missingImages: missingImages || []};
     verifyInventory(plan);
     return plan;
 }

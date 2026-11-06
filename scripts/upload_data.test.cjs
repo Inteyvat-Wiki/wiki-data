@@ -84,6 +84,23 @@ test('changed input, forbidden files, incomplete export and symlinks fail before
     fs.symlinkSync(path.join(f.root, 'images'), path.join(f.root, 'link'), process.platform === 'win32' ? 'junction' : 'dir');
     await assert.rejects(buildManifest(f.root), /Symlink/);
 });
+
+test('explicit diagnostic manifest reports missing images without changing bytes or allowing invalid paths', async t => {
+    const f = fixture(t);
+    const reference = '/images/not-present.png';
+    f.write('common/asset-probe.json', {html: `<img src="${reference}">`, nested: [reference]});
+    await assert.rejects(buildManifest(f.root), /Missing or invalid dataset image/);
+    const plan = await buildManifest(f.root, undefined, {allowMissingImages: true});
+    assert.deepEqual(plan.missingImages, [1, 2].map(() => ({source: 'common/asset-probe.json', image: reference.slice(1)})));
+    assert(!plan.manifest.files.some(file => file.path === reference.slice(1)));
+    assert.equal(plan.releaseId, crypto.createHash('sha256').update(plan.manifestBytes).digest('hex'));
+    for (const invalid of ['/images/../outside.png', '/images/invalid.svg']) {
+        f.write('common/asset-probe.json', {image: invalid});
+        await assert.rejects(buildManifest(f.root, undefined, {allowMissingImages: true}), /Missing or invalid dataset image/);
+    }
+    fs.writeFileSync(path.join(f.root, 'common/asset-probe.json'), Buffer.from([0xff]));
+    await assert.rejects(buildManifest(f.root, undefined, {allowMissingImages: true}), /Invalid UTF-8 JSON/);
+});
 test('a file edited after it was streamed prevents the final commit trailer', async t => {
     const f = fixture(t), plan = await buildManifest(f.root), chunks = [];
     const secondFileStarts = Buffer.byteLength(contract.DATA_UPLOAD_MAGIC) + 4 + plan.manifestBytes.length + plan.manifest.files[0].size;
