@@ -84,6 +84,14 @@ test('remote uploader requires an explicit valid missing-image acknowledgement',
         assert.throws(() => missingImageCount(value), /did not confirm/);
 });
 
+test('public map catalogue expectation excludes non-text records without reordering localized entries', () => {
+    const {visibleMapItems} = require('./verify-public.cjs');
+    const items = [{label: '', description: ''}, {label: 'Name', description: ''},
+        {label: '', description: 'Description'}, {label: '', description: '', texts: [{text: 'Hidden auxiliary text'}]}];
+    assert.deepEqual(visibleMapItems(items), items.slice(1, 3));
+    assert.equal(items.length, 4);
+});
+
 test('exhaustive detail check covers both locales and does not accept missing or malformed details', async t => {
     const {requests, verify} = require('./verify-details.cjs');
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wiki-detail-check-'));

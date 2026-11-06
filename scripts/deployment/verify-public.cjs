@@ -13,6 +13,8 @@ const ROUTES = Object.freeze({character: 'characters', weapon: 'weapons', artifa
     serenitea: 'archive/serenitea', tcg: 'archive/tcg', miliastra: 'archive/miliastra', misc: 'misc', outfit: 'outfits'});
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+// Matches the existing public catalogue's text-only visibility rule.
+const visibleMapItems = items => items.filter(item => Boolean(item.label) || Boolean(item.description));
 
 function missingImagePaths(report, root) {
     assert(report.allowMissingImages === true && /^[a-f0-9]{64}$/.test(report.releaseId)
@@ -71,7 +73,15 @@ async function main(args = process.argv.slice(2)) {
         }
         const catalogue = await json(`/api/map/catalogue?lang=${lang}`);
         const expectedCatalogue = read(path.join(root, lang, 'map/catalogue.json'));
-        assert(catalogue.schema === 1 && catalogue.total === expectedCatalogue.items.length);
+        const visibleItems = visibleMapItems(expectedCatalogue.items);
+        assert(catalogue.schema === 1 && catalogue.total === visibleItems.length);
+        assert.deepEqual(catalogue.items, visibleItems.slice(0, 40));
+        if (visibleItems.length > 40) {
+            const offset = visibleItems.length - 40;
+            const lastPage = await json(`/api/map/catalogue?lang=${lang}&offset=${offset}`);
+            assert(lastPage.total === visibleItems.length && lastPage.offset === offset);
+            assert.deepEqual(lastPage.items, visibleItems.slice(offset));
+        }
         if (!sample) assert(catalogue.total > 0 && catalogue.items.length > 0);
         else assert.equal(catalogue.items.length, 0);
     }
@@ -105,5 +115,5 @@ async function main(args = process.argv.slice(2)) {
     console.log(JSON.stringify({origin: base.origin, exportRoot: root, scope: sample ? 'real-sample-only' : 'complete-export',
         expectedMissingImages: missing.length, checked: checks.length, checks}, null, 2));
 }
-module.exports = {main, missingImagePaths};
+module.exports = {main, missingImagePaths, visibleMapItems};
 if (require.main === module) main().catch(error => {console.error(error.message); process.exitCode = 1;});
