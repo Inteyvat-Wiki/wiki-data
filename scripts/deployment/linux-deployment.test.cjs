@@ -32,6 +32,7 @@ test('service binds loopback and public nginx never forwards bearer credentials 
     const site = fs.readFileSync(path.join(__dirname, 'inteyvat-wiki.nginx.conf'), 'utf8');
     assert.match(unit, /NITRO_HOST=127\.0\.0\.1/);
     assert.match(unit, /NITRO_PORT=4780/);
+    assert.match(unit, /UV_THREADPOOL_SIZE=32/);
     assert.match(unit, /ReadWritePaths=\/var\/lib\/inteyvat-wiki/);
     assert.match(unit, /User=inteyvat-wiki/);
     assert.match(site, /listen 14780;/);

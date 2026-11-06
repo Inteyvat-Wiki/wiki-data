@@ -26,6 +26,7 @@ node linux-activate.cjs /srv/inteyvat-wiki/releases/NEW_RUN/wiki /srv/inteyvat-w
 该入口创建无登录权限的专用服务用户、systemd 单元和独立 Nginx 站点，不覆盖同名但内容不同的配置或既有活动版本。
 首次生成的上传密钥仅存在 `/etc/inteyvat-wiki/environment`（root:root，0600），不打印、不加入 Git、不传给构建器。
 数据基准为 `/var/lib/inteyvat-wiki/data`；发布状态在其同级 `data.publish`，两者都属于持久化存储。
+服务为最多 32 个并发落盘任务配置相同大小的 Node 文件 I/O 线程池；仍须等待所有文件与子目录同步、关闭成功后才切换版本，不关闭 fsync 或放宽上传时限。
 防火墙是否开放 14780 由部署操作人另行确认；4780 不向公网开放。已有 Nginx 站点不变。
 
 ## 通过 SSH 发布

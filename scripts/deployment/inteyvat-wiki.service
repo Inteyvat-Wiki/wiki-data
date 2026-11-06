@@ -12,6 +12,7 @@ Environment=NITRO_HOST=127.0.0.1
 Environment=NITRO_PORT=4780
 Environment=WIKI_DATA_ROOT=/var/lib/inteyvat-wiki/data
 Environment=WIKI_UPLOAD_EXTEND_NODE_TIMEOUT=1
+Environment=UV_THREADPOOL_SIZE=32
 EnvironmentFile=/etc/inteyvat-wiki/environment
 ExecStart=/srv/inteyvat-wiki/runtime/node/bin/node /srv/inteyvat-wiki/current/.output/server/index.mjs
 Restart=on-failure
