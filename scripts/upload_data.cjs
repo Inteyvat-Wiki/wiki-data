@@ -146,6 +146,10 @@ function request(url, {method, token, headers = {}, body, timeoutMs = 1800000}) 
         req.setTimeout(Math.min(timeoutMs, 60000), () => { finish(new Error('Upload connection timed out')); req.destroy(); });
         timer = setTimeout(() => { finish(new Error('Upload exceeded its total timeout')); req.destroy(); }, timeoutMs);
         if (body) {
+            // The complete request may still need substantial validation/fsync on
+            // the server. Keep the absolute deadline, not a network-idle deadline,
+            // while waiting for the commit receipt after all bytes were sent.
+            req.once('finish', () => req.setTimeout(0));
             source = Readable.from(body);
             source.on('error', error => { finish(error); req.destroy(); });
             source.pipe(req);

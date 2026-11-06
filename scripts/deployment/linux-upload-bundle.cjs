@@ -34,6 +34,9 @@ async function main(args = process.argv.slice(2)) {
             });
         });
         request.setTimeout(120000, () => request.destroy(new Error('Upload idle timeout')));
+        // Final server validation and durable commit do not produce network bytes.
+        // They remain bounded by the total deadline below.
+        request.once('finish', () => request.setTimeout(0));
         const deadline = setTimeout(() => request.destroy(new Error('Upload total timeout')), 35 * 60 * 1000);
         request.on('close', () => clearTimeout(deadline));
         request.on('error', reject);

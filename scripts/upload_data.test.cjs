@@ -123,6 +123,28 @@ test('authenticated status + streaming POST use expected release and verify exac
     assert.equal(result.releaseId, plan.releaseId); assert.deepEqual(methods, ['GET', 'POST']);
     assert.equal(total, Buffer.byteLength(contract.DATA_UPLOAD_MAGIC) + 4 + plan.manifestBytes.length + plan.manifest.totalBytes + 32);
 });
+test('completed POST disables network idle timeout but retains the absolute deadline', async t => {
+    const f = fixture(t), plan = await buildManifest(f.root), deadlines = [];
+    const original = http.request;
+    t.mock.method(http, 'request', function (...args) {
+        const request = original.apply(this, args), setTimeout = request.setTimeout;
+        request.setTimeout = function (ms, callback) {
+            deadlines.push([args[1].method, ms]);
+            return setTimeout.call(this, ms, callback);
+        };
+        return request;
+    });
+    let completed = false;
+    const url = await server(t, (req, res) => {
+        if (req.method === 'GET') response(res, {schema: 1, releaseId: null, limits: contract.DEFAULT_UPLOAD_LIMITS});
+        else { req.resume(); req.on('end', () => {completed = true;}); }
+    });
+    await assert.rejects(uploadPlan(plan, {url, timeoutMs: 400}, {WIKI_UPLOAD_TOKEN: token}), /total timeout/);
+    assert(completed, 'The full request arrived before the bounded wait for a receipt');
+    assert.deepEqual(deadlines.filter(([method]) => method === 'POST').map(([, ms]) => ms), [400, 0]);
+    assert(!deadlines.some(([method, ms]) => method === 'GET' && ms === 0));
+});
+
 test('HTTP rejection/redirect is not followed, and response errors never echo secrets', async t => {
     const f = fixture(t), plan = await buildManifest(f.root);
     for (const status of [401, 302, 409]) {

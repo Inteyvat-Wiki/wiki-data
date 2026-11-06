@@ -54,3 +54,7 @@ node linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256
 本流程不安装 Docker、不新增 GitHub Actions、不将游戏数据上传 GitHub/npm，也不修改其他服务的端口。
 
 回归：`node --test scripts/deployment/linux-deployment.test.cjs`。
+
+发布后可执行只读验证：`node scripts/deployment/verify-public.cjs http://HOST:14780/ EXPORT_ROOT`。
+它对比中英全部栏目列表、地图场景、代表性角色/武器/风之翼接口与图片字节，并确认公网管理接口被屏蔽。
+这里只核验 HTTP 与导出内容，不替代浏览器中的布局和交互测试。

@@ -41,6 +41,6 @@ test('service binds loopback and public nginx never forwards bearer credentials 
 });
 
 test('deployment helpers can be imported without connecting, installing or activating', () => {
-    for (const file of ['linux-build.cjs', 'linux-activate.cjs', 'linux-upload-bundle.cjs'])
+    for (const file of ['linux-build.cjs', 'linux-activate.cjs', 'linux-upload-bundle.cjs', 'verify-public.cjs'])
         assert.equal(typeof require('./' + file).main, 'function');
 });
