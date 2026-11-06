@@ -16,6 +16,12 @@ const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Matches the existing public catalogue's text-only visibility rule.
 const visibleMapItems = items => items.filter(item => Boolean(item.label) || Boolean(item.description));
 
+function exampleIcon(value) {
+    if (value === '' || value === null || value === undefined) return null;
+    assert(typeof value === 'string' && value.startsWith('/images/') && isUploadPath(value.slice(1)), 'Invalid example image path');
+    return value;
+}
+
 function missingImagePaths(report, root) {
     assert(report.allowMissingImages === true && /^[a-f0-9]{64}$/.test(report.releaseId)
         && fs.realpathSync(report.source) === root && Array.isArray(report.missingImages), 'Invalid missing-image report');
@@ -43,7 +49,7 @@ async function main(args = process.argv.slice(2)) {
         const provenance = read(root + '.provenance.json');
         assert(provenance.scope === 'real-windglider-deployment-sample' && provenance.productionReady === false);
     }
-    const checks = [];
+    const checks = [], examplesWithoutImage = [];
     async function request(route, status = 200, options = {}) {
         const response = await fetch(new URL(route, base), {redirect: 'error', signal: AbortSignal.timeout(60000), ...options});
         assert.equal(response.status, status, `Unexpected HTTP response: ${route}`);
@@ -94,16 +100,21 @@ async function main(args = process.argv.slice(2)) {
             assert(typeof object.name === 'string' && object.name.length > 0, `Missing example: ${category}/${id}/${lang}`);
         }
         const source = read(path.join(root, 'zh_hans', category, 'items', id + '.json'));
-        assert(typeof source.icon === 'string' && source.icon.startsWith('/images/'));
-        assert(!source.icon.includes('..') && !source.icon.includes('\\'));
-        const image = await request(source.icon);
+        // An exporter may explicitly omit an unavailable icon. This is different
+        // from a nonempty URL pointing to a missing file and is recorded separately.
+        const icon = exampleIcon(source.icon);
+        if (icon === null) {
+            examplesWithoutImage.push({category, id});
+            continue;
+        }
+        const image = await request(icon);
         assert.equal(image.headers.get('content-type'), 'image/png');
-        assert.equal(digest(Buffer.from(await image.arrayBuffer())), digest(fs.readFileSync(path.join(root, source.icon.slice(1)))), 'Published image differs from the verified export');
-        const head = await request(source.icon, 200, {method: 'HEAD'});
+        assert.equal(digest(Buffer.from(await image.arrayBuffer())), digest(fs.readFileSync(path.join(root, icon.slice(1)))), 'Published image differs from the verified export');
+        const head = await request(icon, 200, {method: 'HEAD'});
         assert(Number(head.headers.get('content-length')) > 0);
         const etag = head.headers.get('etag');
         assert(etag);
-        await request(source.icon, 304, {headers: {'if-none-match': etag}});
+        await request(icon, 304, {headers: {'if-none-match': etag}});
     }
     for (const route of ['/api/admin/data', '/api/admin/data?status=1']) {
         const response = await request(route, 404); await response.body.cancel();
@@ -113,7 +124,7 @@ async function main(args = process.argv.slice(2)) {
         const response = await request('/' + image, 404); await response.body.cancel();
     }
     console.log(JSON.stringify({origin: base.origin, exportRoot: root, scope: sample ? 'real-sample-only' : 'complete-export',
-        expectedMissingImages: missing.length, checked: checks.length, checks}, null, 2));
+        expectedMissingImages: missing.length, examplesWithoutImage, checked: checks.length, checks}, null, 2));
 }
-module.exports = {main, missingImagePaths, visibleMapItems};
+module.exports = {main, missingImagePaths, visibleMapItems, exampleIcon};
 if (require.main === module) main().catch(error => {console.error(error.message); process.exitCode = 1;});

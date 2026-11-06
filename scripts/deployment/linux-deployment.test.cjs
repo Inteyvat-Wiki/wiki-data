@@ -92,6 +92,14 @@ test('public map catalogue expectation excludes non-text records without reorder
     assert.equal(items.length, 4);
 });
 
+test('public image checks distinguish omitted icons from invalid nonempty references', () => {
+    const {exampleIcon} = require('./verify-public.cjs');
+    for (const value of ['', null, undefined]) assert.equal(exampleIcon(value), null);
+    assert.equal(exampleIcon('/images/test.png'), '/images/test.png');
+    for (const value of [0, {}, '/images/../outside.png', 'https://example.invalid/image.png', '/images/test.svg'])
+        assert.throws(() => exampleIcon(value), /Invalid example image path/);
+});
+
 test('exhaustive detail check covers both locales and does not accept missing or malformed details', async t => {
     const {requests, verify} = require('./verify-details.cjs');
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wiki-detail-check-'));
