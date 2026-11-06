@@ -17,6 +17,12 @@ function publicError(body) {
     catch { return ''; }
 }
 
+function missingImageCount(value) {
+    assert(typeof value === 'string' && /^(0|[1-9][0-9]*)$/.test(value)
+        && Number.isSafeInteger(Number(value)), 'Server did not confirm the missing-image exception');
+    return Number(value);
+}
+
 async function main(args = process.argv.slice(2)) {
     const allowMissingImages = args.length === 3 && args[2] === '--allow-missing-images';
     assert(args.length === 2 || allowMissingImages, 'Usage: linux-upload-bundle.cjs BUNDLE EXPECTED_RELEASE_SHA256 [--allow-missing-images]');
@@ -44,7 +50,11 @@ async function main(args = process.argv.slice(2)) {
             response.on('error', reject);
             response.on('end', () => {
                 if (response.statusCode !== 200) return reject(new Error(`Upload failed: HTTP ${response.statusCode}${publicError(body)}`));
-                try { resolve(JSON.parse(body)); } catch { reject(new Error('Invalid upload response')); }
+                try {
+                    const receipt = JSON.parse(body);
+                    if (allowMissingImages) receipt.missingImageCount = missingImageCount(response.headers['x-wiki-missing-image-count']);
+                    resolve(receipt);
+                } catch { reject(new Error('Invalid upload response or missing-image acknowledgement; inspect server status before retrying')); }
             });
         });
         request.setTimeout(120000, () => request.destroy(new Error('Upload idle timeout')));
@@ -59,5 +69,5 @@ async function main(args = process.argv.slice(2)) {
     assert.equal(result.releaseId, expected, 'Server published a different release');
     console.log(JSON.stringify(result));
 }
-module.exports = {main, publicError};
+module.exports = {main, publicError, missingImageCount};
 if (require.main === module) main().catch(error => {console.error(error.message); process.exitCode = 1;});

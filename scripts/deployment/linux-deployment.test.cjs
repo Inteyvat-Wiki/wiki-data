@@ -76,6 +76,14 @@ test('remote uploader reports fixed validation messages without echoing arbitrar
     assert.equal(publicError('not JSON'), '');
 });
 
+test('remote uploader requires an explicit valid missing-image acknowledgement', () => {
+    const {missingImageCount} = require('./linux-upload-bundle.cjs');
+    assert.equal(missingImageCount('0'), 0);
+    assert.equal(missingImageCount('20'), 20);
+    for (const value of [undefined, '', '-1', '1.5', ['20'], '9007199254740992', 'secret'])
+        assert.throws(() => missingImageCount(value), /did not confirm/);
+});
+
 test('test-only sample adapter preserves verified bytes, rejects failed/tampered runs and leaves other categories empty', t => {
     // Synthetic unit fixture ONLY: never used for the real deployment run.
     const {main: sampleRelease} = require('./sample-release.cjs');
