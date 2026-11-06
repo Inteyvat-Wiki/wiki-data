@@ -156,7 +156,7 @@ node scripts/deployment/sandbox.cjs stop --run D:/DeploymentRuns/sandbox-本轮�
 
 `exec` 每轮只执行一次；失败不在同一环境重试，诊断后创建新轮次。宿主退出不会自动停止沙箱，因此终止任务时仍需显式 `stop`。没有自动递归清理功能，不会删除旧轮次。
 
-引导以隐藏窗口 `Start-Process -PassThru` 启动 Node，再用 `$process.WaitForExit()` 只等待主 Node，随后检查退出码和报告；不使用会等待后代进程的 `Start-Process -Wait`。这用于处理已观察到的“结果已写出但 exec 未返回”现象：构建服务（如 VBCSCompiler）存活是待下一轮干净运行核实的原因推断，不是已证实根因。不终止全局 dotnet；残留进程由本轮自己的沙箱 `stop` 销毁。
+引导以隐藏窗口 `Start-Process -PassThru` 启动 Node，先保留进程句柄（PowerShell 5.1 否则可能丢失退出码），再用 `$process.WaitForExit()` 只等待主 Node；不使用会等待后代进程的 `Start-Process -Wait`。宿主和小样发布入口同时要求启动器退出码为 0、导出报告通过，缺一不可。不终止全局 dotnet；残留构建进程由本轮自己的沙箱 `stop` 销毁。
 
 ## 输出与权限边界
 

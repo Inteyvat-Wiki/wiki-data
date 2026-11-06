@@ -104,6 +104,8 @@ try {
     $env:INTEYVAT_SANDBOX_RUN = $run.id
     $process = Start-Process -FilePath $nodeExe -ArgumentList "$inputRoot\sandbox-guest.cjs" -WorkingDirectory $workRoot -WindowStyle Hidden -PassThru `
         -RedirectStandardOutput "$outputRoot\logs\guest.stdout.log" -RedirectStandardError "$outputRoot\logs\guest.stderr.log"
+    # PowerShell 5.1 must retain the handle before waiting to preserve ExitCode.
+    $null = $process.Handle
     # Wait only for Node, not persistent build-server descendants; own-sandbox stop disposes of those.
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) { throw "Guest deployment failed ($($process.ExitCode)); inspect guest logs" }

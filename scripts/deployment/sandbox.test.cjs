@@ -151,6 +151,7 @@ test('VC++ uses guest System verification before builds; bootstrap waits only fo
     assert(!/installVcRedist|VC_redist|\/install/.test(hostSource), 'Host must only dispatch the guest, never install VC++');
     const start = ps.slice(ps.indexOf('$process = Start-Process'), ps.indexOf('$process.WaitForExit()'));
     assert.match(start, /-WindowStyle Hidden -PassThru/); assert(!/-Wait\b/.test(start));
+    assert.match(start, /\$null = \$process\.Handle/);
     assert.match(ps, /\$process\.WaitForExit\(\)\s+if \(\$process\.ExitCode -ne 0\)/);
     assert(ps.indexOf('Guest did not produce a result') > ps.indexOf('$process.WaitForExit()'));
 });
@@ -460,12 +461,40 @@ test('execution requires matching guest report and rejects replay', async t => {
         if (args[0] === 'exec') {
             assert(args.includes('System'));
             common.writeJSON(path.join(state.directory, 'output/result.json'), {id: state.id, lockSha256: state.lockSha256, status: 'passed'});
+            return {ExitCode: 0};
         }
         return fake.call(args);
     };
     assert.equal((await host.execute(state.directory, call)).status, 'passed');
     await assert.rejects(host.execute(state.directory, call), /One execution/);
     await host.stop(state.directory, fake.call);
+});
+
+test('launcher failure or missing exit code cannot be hidden by a passed guest report', async t => {
+    for (const reply of [{ExitCode: 1}, {}, {ExitCode: null}]) {
+        const {file, directory} = manifest(t), fake = mockWSB();
+        const state = await host.start(file, directory, fake.call);
+        await assert.rejects(host.execute(state.directory, async args => {
+            if (args[0] !== 'exec') return fake.call(args);
+            common.writeJSON(path.join(state.directory, 'output/result.json'), {id: state.id, lockSha256: state.lockSha256, status: 'passed'});
+            return reply;
+        }), /launcher failed/);
+        await host.stop(state.directory, fake.call);
+    }
+});
+
+test('Windows PowerShell 5.1 preserves real Node exit codes after waiting', {skip: process.platform !== 'win32'}, t => {
+    const directory = temporary(t), quote = value => "'" + value.replaceAll("'", "''") + "'";
+    fs.mkdirSync(path.join(directory, 'logs'));
+    const ps = fs.readFileSync(path.join(__dirname, 'bootstrap-sandbox.ps1'), 'utf8');
+    const launch = ps.slice(ps.indexOf('$process = Start-Process'), ps.indexOf('    if ($process.ExitCode -ne 0)'));
+    for (const expected of [0, 7]) {
+        fs.writeFileSync(path.join(directory, 'sandbox-guest.cjs'), `setTimeout(() => process.exit(${expected}), 200);`);
+        const code = `$ErrorActionPreference = 'Stop'\n$inputRoot = ${quote(directory)}\n$outputRoot = ${quote(directory)}\n$workRoot = ${quote(directory)}\n$nodeExe = ${quote(process.execPath)}\n${launch}\nif ($null -eq $process.ExitCode -or $process.ExitCode -ne ${expected}) { throw 'Node exit code was lost' }\nWrite-Output 'Exit verified'`;
+        const result = execFileSync('C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', code],
+            {encoding: 'utf8', windowsHide: true, timeout: 10000});
+        assert.match(result, /Exit verified/);
+    }
 });
 
 test('bootstrap/guest never publish or upload and disables host clipboard redirection', () => {

@@ -20,6 +20,7 @@ function main(args = process.argv.slice(2)) {
     assert(!destination.startsWith(run + path.sep), 'Test export must be outside the sandbox run');
     const result = read(path.join(run, 'output/result.json'));
     const state = read(path.join(run, 'host-state.json'));
+    assert.equal(read(path.join(run, 'exec-response.json')).ExitCode, 0, 'A successful guest launcher exit is required');
     assert(result.schema === 1 && result.status === 'passed' && result.mode === 'smoke' && result.productionReady === false,
         'A passed real sandbox smoke run is required; diagnostic/synthetic output is not accepted');
     assert.equal(result.id, state.id); assert.equal(result.lockSha256, state.lockSha256);
@@ -28,7 +29,7 @@ function main(args = process.argv.slice(2)) {
     const files = inventory(source), expected = new Map(outputs.map(file => [file.path, file]));
     assert.equal(expected.size, outputs.length); assert.equal(files.length, outputs.length);
     for (const file of files) {
-        assert(/^(?:common\/outfit\/ids\.json|(?:en|zh_hans)\/outfit\/(?:pages\.json|items\/[a-z0-9_.-]+\.json)|images\/outfit\/[^\\]+\.png)$/.test(file.path),
+        assert(/^(?:common\/image-requests\.json|common\/outfit\/(?:ids|assets)\.json|(?:en|zh_hans)\/outfit\/(?:pages\.json|items\/[a-z0-9_.-]+\.json)|images\/outfit\/[^\\]+\.png)$/.test(file.path),
             `Unexpected sample file: ${file.path}`);
         assert.equal(file.stat.size, expected.get(file.path)?.bytes);
         assert.equal(hash(fs.readFileSync(file.file)), expected.get(file.path)?.sha256);

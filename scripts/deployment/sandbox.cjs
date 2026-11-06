@@ -143,6 +143,7 @@ async function execute(directory, call = wsb) {
     const command = `C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File ${GUEST.input}\\bootstrap-sandbox.ps1`;
     const reply = await call(['exec', '--id', state.id, '--run-as', 'System', '--command', command]);
     writeJSON(path.join(directory, 'exec-response.json'), reply);
+    assert.equal(reply.ExitCode, 0, 'Guest launcher failed or returned no exit code; inspect the bootstrap log');
     // CLI exit status alone is insufficient; it might only confirm process creation.
     const result = readJSON(path.join(output, 'result.json'));
     assert.equal(result.id, state.id, 'Guest result identity mismatch');

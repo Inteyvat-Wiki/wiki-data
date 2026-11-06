@@ -71,11 +71,17 @@ test('test-only sample adapter preserves verified bytes, rejects failed/tampered
     write('input/lock.json', {});
     const lockSha256 = createHash('sha256').update(fs.readFileSync(path.join(run, 'input/lock.json'))).digest('hex');
     write('host-state.json', {id, lockSha256});
+    write('exec-response.json', {ExitCode: 0});
     const result = {schema: 1, id, lockSha256, mode: 'smoke', productionReady: false, status: 'failed', versions: false};
     write('output/result.json', result);
     assert.throws(() => sampleRelease([run, path.join(root, 'failed'), '--test-only']), /passed real/);
     assert.throws(() => sampleRelease([run, path.join(root, 'implicit')]), /test-only/);
     result.status = 'passed'; write('output/result.json', result);
+    write('exec-response.json', {ExitCode: 1});
+    assert.throws(() => sampleRelease([run, path.join(root, 'launcher-failed'), '--test-only']), /successful guest launcher/);
+    write('exec-response.json', {ExitCode: 0});
+    write('output/data/common/image-requests.json', {schema: 1, names: ['fixture-image']});
+    write('output/data/common/outfit/assets.json', [{id, name: 'fixture-image', kind: 'icon'}]);
     write('output/data/common/outfit/ids.json', [id]);
     for (const lang of ['en', 'zh_hans']) {
         write(`output/data/${lang}/outfit/items/${id}.json`, item);
